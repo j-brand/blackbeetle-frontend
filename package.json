@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "@nuxt/image": "^0.6.2",
+    "@nuxtjs/tailwindcss": "^5.0.2",
+    "@types/google.maps": "^3.48.8",
+    "nuxt": "^3.0.0-rc.1",
+    "sass": "^1.49.11",
+    "sass-loader": "^10.2.1"
+  },
+  "dependencies": {
+    "@googlemaps/js-api-loader": "^1.14.2",
+    "lightgallery": "^2.4.0",
+    "swiper": "^8.1.4"
+  }
+}

@@ -1,0 +1,25 @@
+$themeColor: theme("colors.bb-lighter");
+$colors: (
+  "white": #ffffff,
+  "black": #000000,
+) !default;
+
+@import "swiper/scss";
+@import "swiper/scss/navigation";
+@import "swiper/scss/pagination";
+
+
+:root {
+  --swiper-navigation-size: 2rem;
+}
+.swiper-pagination-bullet {
+  border: 2px solid rgb(65, 65, 65);
+  background: theme("colors.bb-lighter");
+  width: 13px;
+  height: 13px;
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  pointer-events: visible;
+}

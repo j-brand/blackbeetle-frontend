@@ -1,0 +1,124 @@
+<template>
+  <div class="swiper-container w-full h-auto overflow-hidden relative" ref="swiperEle">
+    <div class="swiper-wrapper" ref="galleryEle">
+      <div class="swiper-slide w-full" v-for="(image, index) in post.images" :key="index">
+        <img :src="$getImgPath(image, '_aswipe')" loading="lazy" />
+        <span class="hidden" :id="'caption_' + index">{{ image.description }}</span>
+      </div>
+    </div>
+
+    <div class="swiper-pagination"></div>
+
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { Post } from "@/types";
+
+
+//Lightgallery Imports
+import lightGallery from "lightgallery";
+import lgThumbnail from "lightgallery/plugins/thumbnail";
+import lgZoom from "lightgallery/plugins/zoom";
+import lgAutoplay from "lightgallery/plugins/autoplay";
+import lgFullscreen from "lightgallery/plugins/fullscreen";
+import "lightgallery/scss/lightgallery.scss";
+import "lightgallery/scss/lg-thumbnail.scss";
+import "lightgallery/scss/lg-autoplay.scss";
+import "lightgallery/scss/lg-zoom.scss";
+import "lightgallery/scss/lg-fullscreen.scss";
+
+// Swiper Js Imports
+import Swiper, { Navigation, Pagination } from "swiper";
+import { PropType } from "vue";
+
+const { $getImgPath } = useNuxtApp();
+
+const galleryEle = ref<HTMLElement | null>(null);
+const swiperEle = ref<HTMLElement | any>(null);
+const swiperRef = ref();
+
+const props = defineProps({
+  post: {
+    type: Object as PropType<Post>,
+    required: true,
+  },
+});
+
+function initGallery() {
+  const dynamicEl = [...galleryEle.value.getElementsByClassName("swiper-slide")].map((slide: HTMLImageElement) => {
+    return {
+      src: slide.getElementsByTagName("img")[0].src,
+      thumb: slide.getElementsByTagName("img")[0].src,
+      subHtml: slide.getElementsByTagName("span")[0].innerText,
+    };
+  });
+  const popup = lightGallery(galleryEle.value, {
+    dynamic: true,
+    plugins: [lgZoom, lgThumbnail, lgAutoplay, lgFullscreen],
+    dynamicEl,
+  });
+
+  [...galleryEle.value.getElementsByClassName("swiper-slide")].map((slide, index) => {
+    slide.addEventListener("click", () => {
+      popup.openGallery(index);
+    });
+  });
+
+  galleryEle.value.addEventListener("lgAfterSlide", (event: any) => {
+    swiperRef.value.slideTo(event.detail.index);
+  });
+
+  galleryEle.value.addEventListener("lgBeforeOpen", () => {
+    document.body.style.overflow = "hidden";
+  });
+
+  galleryEle.value.addEventListener("lgAfterClose", () => {
+    document.body.style.overflow = "auto";
+  });
+}
+
+function initSwiper() {
+  swiperRef.value = new Swiper(swiperEle.value, {
+    modules: [Navigation, Pagination],
+    autoHeight: true,
+    slidesPerView: 1,
+    pagination: {
+      el: ".swiper-pagination",
+      dynamicBullets: true,
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+}
+
+onMounted(() => {
+  initSwiper();
+  initGallery();
+});
+</script>
+
+<style lang="scss">
+/* .swiper-button-next,
+.swiper-button-prev {
+  height: 100%;
+  top: 1.5rem;
+  width: 50px;
+  &:focus {
+    outline: none;
+  }
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+.swiper-button-prev {
+  left: 0;
+} */
+</style>

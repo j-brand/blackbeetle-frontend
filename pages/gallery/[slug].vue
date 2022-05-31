@@ -27,18 +27,26 @@
 //Lighgallery Imports (Style, Plugins)
 import Lightgallery from "lightgallery/vue";
 import lgZoom from "lightgallery/plugins/zoom";
+import lgThumbnail from "lightgallery/plugins/thumbnail";
 import "lightgallery/scss/lightgallery.scss";
 
 const route = useRoute();
 
 const { $formatDate, $getImgPath, $albumRepository } = useNuxtApp();
-const albumData = await useAsyncData("album", () => $albumRepository.show(route.params.slug));
-const album = await albumData.data.value;
 
-const plugins = [lgZoom];
+const { data: album } = await useAsyncData("album", () => $albumRepository.show(route.params.slug));
 
+useHead({
+  title: album.value.title,
+  meta: [
+    { name: "description", content: album.value.description },
+    { name: "og:title", content: `Blackbeetle - ${album.value.title}` },
+    { name: "og:description", content: album.value.description },
+    { name: "og:image", content: $getImgPath(album.value.title_image, "_aslider") },
+  ],
+});
 
-
+const plugins = [lgZoom, lgThumbnail];
 </script>
 
 <style lang="scss" scoped>

@@ -7,29 +7,36 @@
         </span>
       </button>
     </div>
-
     <header class="w-full flex flex-row-reverse absolute justify-between items-center duration-500 h-14 z-30 bg-bb-lighter" :class="navOpen ? 'mt-96' : 'mt-0'">
-      <a href="/" alt="home" class="mx-auto">
+      <ClientOnly>
+        <ThemeSwitch class="left-0 top-4 lg:top-5 fixed lg:absolute z-10 ml-4" />
+      </ClientOnly>
+      <NuxtLink to="/" alt="home" class="mx-auto">
         <div id="logo-wrapper" class="w-24 left-0 right-0 z-10 logo-wrapper relative lg:absolute">
-          <img class="bg-bb-lighter rounded-full p-3" src="/img/bb-logo.png" alt="Blackbeetle Logo" />
+          <img v-if="colorMode.value == 'light'" class="bg-bb-lighter rounded-full p-3" src="/img/bb-logo.png" alt="Blackbeetle Logo" />
+          <img v-if="colorMode.value == 'dark'" class="bg-bb-charcoal-dark rounded-full p-3" src="/img/bb-logo_light.png" alt="Blackbeetle Logo" />
         </div>
-      </a>
+      </NuxtLink>
 
-      <nav :class="navOpen ? 'h-96' : 'h-0'" class="duration-500 w-full overflow-hidden fixed bg-bb-lighter top-0 lg:h-auto lg:relative lg:overflow-x-visible">
-        <div class="relative text-center text-bb-charcole top-1/4 lg:flex lg:justify-end">
-          <NuxtLink to="/" exact class="block w-full py-4 px-3 lg:w-auto lg:pb-5 lg:pt-6 lg:pr-6 text-xl lg:text-base uppercase font-medium">Home</NuxtLink>
-          <NuxtLink to="/about" class="block w-full py-4 px-3 lg:w-auto lg:pb-5 lg:pt-6 lg:pr-6 text-xl lg:text-base uppercase font-medium">About</NuxtLink>
-          <NuxtLink to="/blog" class="block w-full py-4 px-3 lg:w-auto lg:pb-5 lg:pt-6 lg:pr-6 text-xl lg:text-base uppercase font-medium">Blog</NuxtLink>
-          <NuxtLink to="/gallery" class="block w-full py-4 px-3 lg:w-auto lg:pb-5 lg:pt-6 lg:pr-10 text-xl lg:text-base uppercase font-medium">Gallery</NuxtLink>
+      <nav
+        :class="navOpen ? 'h-96' : 'h-0'"
+        class="duration-500 lg:duration-[0ms] w-full overflow-hidden fixed bg-bb-lighter dark:bg-bb-charcoal-dark top-0 lg:h-auto lg:relative lg:overflow-x-visible"
+      >
+        <div class="relative text-center text-bb-charcoal top-1/4 lg:flex lg:justify-end">
+          <NuxtLink to="/" exact class="nav-item lg:pr-6">Home</NuxtLink>
+          <NuxtLink to="/about" class="nav-item lg:pt-6 lg:pr-6">About</NuxtLink>
+          <NuxtLink to="/blog" class="nav-item lg:pt-6 lg:pr-6">Blog</NuxtLink>
+          <NuxtLink to="/gallery" class="nav-item lg:pt-6 lg:pr-10">Gallery</NuxtLink>
         </div>
       </nav>
     </header>
-    <div :class="navOpen ? 'h-116' : 'h-20'" class="shadow-dummy duration-500 w-20 lg:w-22 left-0 right-0 mx-auto absolute bg-bb-lighter rounded-full"></div>
+    <div :class="navOpen ? 'h-116' : 'h-20'" class="shadow-dummy duration-500 lg:duration-[0ms] w-20 lg:w-22 left-0 right-0 mx-auto absolute bg-bb-lighter dark:bg-bb-charcoal-dark rounded-full"></div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const navOpen = useState("navOpen", () => false);
+const colorMode = useColorMode(); 
 
 function toggleNav() {
   navOpen.value = !navOpen.value;
@@ -56,6 +63,7 @@ function toggleNav() {
     background: theme("colors.bb-lighter");
     z-index: -1;
   }
+
   &::after {
     position: absolute;
     content: "";
@@ -65,6 +73,9 @@ function toggleNav() {
     top: 0;
     border-radius: 50%;
   }
+}
+.dark .logo-wrapper::before {
+  background: theme("colors.bb-charcoal-dark");
 }
 header {
   box-shadow: 0px 0px 11px 2px rgba(0, 0, 0, 0.1);
@@ -121,7 +132,7 @@ header {
 .hamburger-inner::after {
   width: 30px;
   height: 3px;
-  background-color: theme("colors.bb-charcole");
+  background-color: theme("colors.bb-charcoal");
   border-radius: 4px;
   position: absolute;
   transition-property: transform;
@@ -173,7 +184,7 @@ header {
 }
 .router-link-active {
   border: none;
-  color: #333333;
+  //color: #333333;
   text-overflow: clip;
   letter-spacing: 3px;
   text-shadow: -1px 0 1px #1ef2f1, 1px 0 1px #f6050a;

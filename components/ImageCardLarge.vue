@@ -3,15 +3,16 @@
     <template v-if="type == 'album'">
       <div class="absolute flex justify-between top-0 w-full p-5 text-shadow-lg z-10">
         <span>{{ $formatDate(resource.start_date, true) }} - {{ $formatDate(resource.end_date, true) }}</span>
-        <div>
-          <p class="imageCount">{{ resource.images_count }}</p>
+        <div class="flex">
+          <IconImages fill="#EAE7DC" /><span class="ml-2 leading-none">{{ resource.images_count }}</span>
         </div>
       </div>
     </template>
     <template v-else-if="type == 'story'">
       <div class="absolute flex justify-end top-0 w-full p-5 text-shadow-lg z-10">
-        <div>
-          <p class="postCount">{{ resource.posts_count }}</p>
+        <div class="flex">
+          <IconPosts fill="#EAE7DC" />
+          <span class="ml-2 leading-none">{{ resource.posts_count }}</span>
         </div>
       </div>
     </template>
@@ -19,33 +20,17 @@
       <h1 class="text-2xl md:text-3xl font-bold uppercase text-shadow-lg" v-html="resource.title"></h1>
       <span class="text-lg text-shadow-lg hidden md:block lg:w-2/5" v-html="$getExcerpt(resource.description, 150)"></span>
     </div>
-    <img class="vignette" :height="500" :width="1000" :src="$getImgPath(resource.title_image, '_aslider')" loading="lazy" />
+    <img class="vignette" height="500" width="1000" :src="$getImgPath(resource.title_image, '_aslider')" loading="lazy" />
   </div>
 </template>
 
 <script setup>
-const props = defineProps(['resource','type'])
-
+const props = defineProps(["resource", "type"]);
 
 const { $formatDate, $getImgPath, $getExcerpt } = useNuxtApp();
 </script>
 
 <style lang="scss" scoped>
-.imageCount::before,
-.postCount::before {
-  content: "";
-  display: block;
-  width: 24px;
-  height: 24px;
-  margin-top: -6px;
-  float: left;
-}
-.postCount::before {
-  background: url("/img/icon_posts.svg") no-repeat top left;
-}
-.imageCount::before {
-  background: url("/img/icon_images.svg") no-repeat top left;
-}
 .zoom-in {
   img {
     transition: all 0.3s ease-in-out;

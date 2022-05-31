@@ -3,6 +3,16 @@
 
 import { Album, Story } from "@/types/";
 
+function handleErrors(response) {
+  if (!response.ok) {
+    return response.text().then((text) => {
+      throw new Error(text);
+    });
+  } else {
+    return response.json();
+  }
+}
+
 export default (resource) => ({
   index(): Promise<Album[] | Story[]> {
     return fetch(`${useRuntimeConfig().public.apiBase}${resource}`).then((response) => {
@@ -22,16 +32,30 @@ export const story = () => ({
       return response.json();
     });
   },
-  
+
   show(slug: string | string[], order: string, pagination?: number): Promise<any> {
-    
     let page = null;
     if (pagination) {
       page = `?page=${pagination}`;
     }
-console.log(`${useRuntimeConfig().public.apiBase}/story/${slug}/${order}${page ? page : ""}`);
+
     return fetch(`${useRuntimeConfig().public.apiBase}/story/${slug}/${order}${page ? page : ""}`).then((data) => {
       return data.json();
     });
+  },
+
+  subscribe(payload): Promise<any> {
+    return fetch(`${useRuntimeConfig().public.apiBase}/newsletter/subscribe`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => handleErrors(response))
+      .catch((err: Error) => {
+        return Promise.resolve({ data: JSON.parse(err.message) });
+      });
   },
 });

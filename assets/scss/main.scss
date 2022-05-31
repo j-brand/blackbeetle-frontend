@@ -2,7 +2,11 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+//Darkmode styles
+@import "./dark";
+
 @import "./swiper";
 
 @import "./fonts";
+@import "./inputs";
 @import "./custom";

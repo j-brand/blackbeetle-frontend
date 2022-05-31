@@ -1,12 +1,14 @@
 <template>
-<div>
-
-  <h1 class="text-2xl font-bold pt-28">{{ date }}</h1>
-</div>
+  <div class="w-full h-full min-h-screen flex justify-center items-center">
+    <Head>
+      <Meta name="description" content="Ein Spiel für jeden der drauf sinnt, wie er seiner Welt entrinnt." />
+    </Head>
+  </div>
 </template>
 
 <script setup lang="ts">
-const { $formatDate } = useNuxtApp();
-
-const date = $formatDate("12-3-2022");
+  useHead({
+    title: 'Home',
+    
+  })
 </script>

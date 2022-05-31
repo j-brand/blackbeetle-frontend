@@ -1,6 +1,7 @@
-module.exports = {
+export default {
   mode: "jit",
-  content: ["./layouts/**/*.{tsx,vue,ts}", "./pages/**/*.{tsx,vue,ts}", "./components/**/*.{tsx,vue,ts}"],
+  darkMode: "class",
+  content: ["./layouts/**/*.{tsx,vue,ts}", "./pages/**/*.{tsx,vue,ts}", "./components/**/*.{tsx,vue,ts}", `plugins/**/*.{js,ts}`, `App.{js,ts,vue}`, `app.{js,ts,vue}`],
   theme: {
     extend: {
       screens: {
@@ -13,7 +14,9 @@ module.exports = {
         "bb-lighter": "#EAE7DC",
         "bb-light": "#D8C3A5",
         "bb-black": "#8E8D8A",
-        "bb-charcole": "#373737",
+        "bb-charcoal": "#373737",
+        "bb-charcoal-dark": "#2F2F2F",
+        "bb-charcoal-darker": "#292929",
         "bb-light-red": "#E98074",
         "bb-red": "#E85A4F",
       },

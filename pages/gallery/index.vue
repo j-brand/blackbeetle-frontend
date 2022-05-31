@@ -12,4 +12,9 @@ const { $albumRepository } = useNuxtApp();
 //const albums = await useAsyncData("albums", () => $albumRepository.index());
 
 const albums = await useAsyncData("albums", () => $fetch("/api/album"));
+
+useHead({
+  title: "Galerie",
+});
+
 </script>

@@ -2,14 +2,20 @@ import { defineNuxtConfig } from "nuxt";
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
   css: ["@/assets/scss/main.scss"],
-  buildModules: ["@nuxtjs/tailwindcss"],
+  colorMode: {
+    classSuffix: "",
+  },
   runtimeConfig: {
     publicUrl: "",
     public: {
-      apiBase: "", // Or a default value
+      apiBase: "",
       backendUrl: "",
       googleApiKey: "",
     },
-  }
+  },
+  tailwindcss: {
+    exposeConfig: true,
+  },
 });

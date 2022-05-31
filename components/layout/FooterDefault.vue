@@ -1,14 +1,14 @@
 <template>
-  <footer>
-    <div class="bg-bb-charcole opacity-75 w-full py-2"></div>
-    <div class="bg-bb-charcole w-full text-bb-lighter py-1">
+  <footer class="">
+    <div class="bg-bb-charcoal dark:bg-bb-light opacity-75 w-full py-2"></div>
+    <div class="bg-bb-charcoal dark:bg-bb-light w-full text-bb-lighter dark:text-bb-charcoal py-1">
       <div class="container flex items-center justify-between flex-col md:flex-row py-3 px-5 mx-auto">
         <div class="flex flex-row justify-between">
           <div class="flex flex-col md:flex-row items-center py-1">
-            <span class="text-base font-sans-secondary h-7 leading-7">© 2022 BLACKBEETLE</span>
-            <span class="md:ml-4 h-7 leading-7"
+            <span class="text-base font-sans-secondary h-7 leading-7 dark:text-bb-charcoal ">© 2022 BLACKBEETLE</span>
+            <span class="md:ml-4 h-7 leading-7 dark:text-bb-charcoal "
               >Made with &#128150; and interest by
-              <span class="text-bb-red h-7 leading-7">Johannes Brand</span>
+              <span class="text-bb-red h-7 leading-7 dark:text-bb-red">Johannes Brand</span>
             </span>
           </div>
         </div>
@@ -21,9 +21,3 @@
     </div>
   </footer>
 </template>
-
-<script lang="ts">
-export default {
-  name: "FooterDefault",
-};
-</script>

@@ -1,10 +1,9 @@
-import createRepository,{story} from "~/services/api.service";
+import { story, album } from "~/services/api.service";
 
 export default defineNuxtPlugin(() => {
-
   return {
     provide: {
-      albumRepository: createRepository("/album"),
+      albumRepository: album(),
       storyRepository: story(),
     },
   };

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-bb-lighter">
+  <div class="bg-bb-lighter dark:bg-bb-charcoal-dark">
     <div class="lg:hidden z-50 absolute top-0 right-0">
       <button @click="toggleNav()" :class="navOpen ? 'is-active' : ''" class="hamburger block hamburger--spin" type="button">
         <span class="hamburger-box">
@@ -7,20 +7,25 @@
         </span>
       </button>
     </div>
-    <header class="w-full flex flex-row-reverse absolute justify-between items-center duration-500 h-14 z-30 bg-bb-lighter" :class="navOpen ? 'mt-96' : 'mt-0'">
-      <ClientOnly>
-        <ThemeSwitch class="left-0 top-4 lg:top-5 fixed lg:absolute z-10 ml-4" />
-      </ClientOnly>
+    <ClientOnly>
+      <ThemeSwitch class="left-0 top-4 lg:top-5 absolute z-[100] ml-4" />
+    </ClientOnly>
+    <header
+      class="w-full flex flex-row-reverse absolute justify-between items-center transition-[margin] ease-in-out duration-500 h-14 z-30 bg-bb-lighter dark:bg-bb-charcoal-dark"
+      :class="navOpen ? 'mt-96' : 'mt-0'"
+    >
       <NuxtLink to="/" alt="home" class="mx-auto">
         <div id="logo-wrapper" class="w-24 left-0 right-0 z-10 logo-wrapper relative lg:absolute">
-          <img v-if="colorMode.value == 'light'" class="bg-bb-lighter rounded-full p-3" src="/img/bb-logo.png" alt="Blackbeetle Logo" />
-          <img v-if="colorMode.value == 'dark'" class="bg-bb-charcoal-dark rounded-full p-3" src="/img/bb-logo_light.png" alt="Blackbeetle Logo" />
+          <client-only>
+            <nuxt-img v-if="colorMode.value == 'light'" class="bg-bb-lighter rounded-full p-3" src="/img/bb-logo.png" loading="lazy" alt="Blackbeetle Logo" />
+            <nuxt-img v-if="colorMode.value == 'dark'" class="bg-bb-charcoal-dark rounded-full p-3" src="/img/bb-logo_light.png" loading="lazy" alt="Blackbeetle Logo" />
+          </client-only>
         </div>
       </NuxtLink>
 
       <nav
         :class="navOpen ? 'h-96' : 'h-0'"
-        class="duration-500 lg:duration-[0ms] w-full overflow-hidden fixed bg-bb-lighter dark:bg-bb-charcoal-dark top-0 lg:h-auto lg:relative lg:overflow-x-visible"
+        class="duration-500 ease-in-out transition-[height] lg:duration-[0ms] w-full overflow-hidden fixed bg-bb-lighter dark:bg-bb-charcoal-dark top-0 lg:h-auto lg:relative lg:overflow-x-visible"
       >
         <div class="relative text-center text-bb-charcoal top-1/4 lg:flex lg:justify-end">
           <NuxtLink to="/" exact class="nav-item lg:pr-6">Home</NuxtLink>
@@ -30,16 +35,25 @@
         </div>
       </nav>
     </header>
-    <div :class="navOpen ? 'h-116' : 'h-20'" class="shadow-dummy duration-500 lg:duration-[0ms] w-20 lg:w-22 left-0 right-0 mx-auto absolute bg-bb-lighter dark:bg-bb-charcoal-dark rounded-full"></div>
+    <div
+      :class="navOpen ? 'h-116' : 'h-20'"
+      class="shadow-dummy transition-[height] ease-in-out duration-500 lg:duration-[0ms] w-20 lg:w-22 left-0 right-0 mx-auto absolute bg-bb-lighter dark:bg-bb-charcoal-dark rounded-full"
+    ></div>
   </div>
 </template>
 
 <script setup lang="ts">
 const navOpen = useState("navOpen", () => false);
-const colorMode = useColorMode(); 
+const colorMode = useColorMode();
 
 function toggleNav() {
   navOpen.value = !navOpen.value;
+
+  if (navOpen.value == true) {
+    document.body.style.overflowY = "hidden";
+  } else {
+    document.body.style.overflowY = "scroll";
+  }
 }
 </script>
 
@@ -138,6 +152,13 @@ header {
   transition-property: transform;
   transition-duration: 0.15s;
   transition-timing-function: ease;
+}
+.dark {
+  .hamburger-inner,
+  .hamburger-inner::before,
+  .hamburger-inner::after {
+    background-color: theme("colors.bb-light");
+  }
 }
 .hamburger-inner::before,
 .hamburger-inner::after {

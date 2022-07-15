@@ -13,9 +13,9 @@
     </div>
 
     <div class="container mx-auto">
-      <lightgallery id="lightgallery" v-if="album" :settings="{ speed: 500, plugins: plugins }">
-        <a v-for="(img, index) in album.images" :key="index" :href="$getImgPath(img, '_large')" :data-sub-html="'#caption_' + index">
-          <img :height="img.height" :width="img.width" :src="$getImgPath(img, '_thn')" loading="lazy" />
+      <lightgallery class="columns-4 gap-5" id="lightgallery" v-if="album" :settings="{ speed: 500, plugins: plugins }">
+        <a v-for="(img, index) in album.images" :key="index" :href="$getImgPath(img, '_large')" class="mb-5 block" :data-sub-html="'#caption_' + index">
+          <nuxt-img class="rounded-md" :src="$getImgPath(img, '_thn')" loading="lazy" />
           <div class="hidden" :id="'caption_' + index">{{ img.description }}</div>
         </a>
       </lightgallery>
@@ -29,6 +29,7 @@ import Lightgallery from "lightgallery/vue";
 import lgZoom from "lightgallery/plugins/zoom";
 import lgThumbnail from "lightgallery/plugins/thumbnail";
 import "lightgallery/scss/lightgallery.scss";
+import { Album } from "~~/types";
 
 const route = useRoute();
 
@@ -48,13 +49,3 @@ useHead({
 
 const plugins = [lgZoom, lgThumbnail];
 </script>
-
-<style lang="scss" scoped>
-#lightgallery {
-  columns: 4 200px;
-  column-gap: 1rem;
-  a img {
-    margin-bottom: 1rem;
-  }
-}
-</style>

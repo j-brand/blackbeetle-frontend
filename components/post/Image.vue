@@ -32,7 +32,7 @@ import "lightgallery/scss/lg-fullscreen.scss";
 
 // Swiper Js Imports
 import Swiper, { Navigation, Pagination } from "swiper";
-import { PropType } from "vue";
+import { PropType } from "vue"; 
 
 const { $getImgPath } = useNuxtApp();
 

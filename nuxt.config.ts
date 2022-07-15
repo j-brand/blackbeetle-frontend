@@ -2,7 +2,8 @@ import { defineNuxtConfig } from "nuxt";
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
+  target:"static",
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@nuxt/image-edge"],
   css: ["@/assets/scss/main.scss"],
   colorMode: {
     classSuffix: "",
@@ -17,5 +18,14 @@ export default defineNuxtConfig({
   },
   tailwindcss: {
     exposeConfig: true,
+  },
+  image: {
+    domains: [process.env.NUXT_PUBLIC_URL],
+    screens: {
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+    },
   },
 });

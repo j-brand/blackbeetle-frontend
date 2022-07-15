@@ -1,6 +1,3 @@
-// Provide nuxt-axios instance to use same configuration across the whole project
-// I've used typical CRUD method names and actions here
-
 import { Album, Story } from "@/types/";
 
 function handleErrors(response) {
@@ -19,12 +16,33 @@ export default (resource) => ({
       return response.json();
     });
   },
-  show(slug: string | string[], order?: string): Promise<any> {
+  show(slug: string | string[], order?: string): Promise<Album> {
     return fetch(`${useRuntimeConfig().public.apiBase}${resource}/${slug}${order ? "/" + order : ""}`).then((data) => {
       return data.json();
     });
   },
 });
+
+/*
+ALBUM
+*/
+
+export const album = () => ({
+  index(): Promise<Album[]> {
+    return fetch(`${useRuntimeConfig().public.apiBase}/album`).then((response) => {
+      return response.json();
+    });
+  },
+  show(slug: string | string[], order?: string): Promise<Album> {
+    return fetch(`${useRuntimeConfig().public.apiBase}/album/${slug}${order ? "/" + order : ""}`).then((data) => {
+      return data.json();
+    });
+  },
+});
+
+/*
+STORY
+*/
 
 export const story = () => ({
   index(): Promise<Album[] | Story[]> {
@@ -33,7 +51,7 @@ export const story = () => ({
     });
   },
 
-  show(slug: string | string[], order: string, pagination?: number): Promise<any> {
+  show(slug: string | string[], order: string, pagination?: number): Promise<Story> {
     let page = null;
     if (pagination) {
       page = `?page=${pagination}`;

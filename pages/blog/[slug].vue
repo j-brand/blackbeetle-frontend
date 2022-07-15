@@ -13,33 +13,29 @@
         <button
           type="button"
           id="subscribe"
-          class="hover:bg-bb-charcoal rounded-lg border border-solid border-bb-charcoal transition duration-200 pt-1 pb-1 px-4 mr-3"
+          class="hover:bg-bb-charcoal dark:hover:bg-bb-light rounded-lg border border-solid border-bb-charcoal dark:border-bb-light transition duration-200 pt-1 pb-1 px-4 mr-3"
           href="#"
           v-on:click="showSub = !showSub"
-          @mouseover="mailColor = $tailwind.colors['bb-lighter']"
-          @mouseleave="mailColor = $tailwind.colors['bb-charcoal']"
         >
-          <IconMail :fill="mailColor" class="transition duration-200" />
+          <IconMail class="transition duration-200" />
         </button>
 
         <button
           type="button"
           v-on:click="toggleOrder()"
-          class="hover:bg-bb-charcoal hover:text-bb-lighter rounded-lg border border-solid border-bb-charcoal px-4 py-3 text-lg transition duration-200 flex flex-row"
+          class="hover:bg-bb-charcoal dark:hover:bg-bb-light hover:text-bb-lighter dark:hover:text-bb-charcoal dark:text-bb-light rounded-lg border border-solid border-bb-charcoal dark:border-bb-light px-4 py-3 text-lg transition duration-200 flex flex-row"
           href="#"
           id="toggle-order"
-          @mouseover="historyColor = $tailwind.colors['bb-lighter']"
-          @mouseleave="historyColor = $tailwind.colors['bb-charcoal']"
         >
-          <IconHistory @toggleHistory="true" :fill="historyColor" class="transition duration-200 mr-2 mt-[2px] leading-none" />
-          <span> Sortierung umkehren</span>
+          <IconHistory class="transition duration-200 mr-2 mt-[2px] leading-none" />
+          Sortierung umkehren
         </button>
       </div>
     </div>
     <Pagination v-if="story.posts.current_page > 1" :offset="3" :pagination="story.posts" @paginate="changePage" class="mt-44 mb-10" />
 
     <template v-for="(post, index) in story.posts.data" :key="index">
-      <hr class="w-1/4 my-10 mx-auto border-bb-charcoal h-px" v-if="index != story.posts.length - 1 && index != 0" />
+      <hr class="w-1/4 my-10 mx-auto border-bb-charcoal dark:border-bb-light h-px" v-if="index != story.posts.length - 1 && index != 0" />
       <PostHtml v-if="post.type == 'html'" :post="post" />
       <PostImage v-if="post.type == 'image'" :post="post" class="md:rounded-md" />
       <PostMap v-if="post.type == 'map'" :post="post" class="rounded-md" />
@@ -65,7 +61,6 @@ const historyColor = ref(false);
 const mailColor = ref(false);
 
 const { data: story, pending, refresh, error } = await useAsyncData("story", () => $storyRepository.show(route.params.slug, getOrder(), getPagination()));
-
 
 function changePage(page: number) {
   window.scrollTo(0, 0);
@@ -107,3 +102,25 @@ onMounted(() => {
   loading.value = false;
 });
 </script>
+
+<style lang="scss">
+.dark {
+  #toggle-order,
+  #subscribe {
+    &:hover {
+      svg {
+        fill: theme("colors.bb-charcoal");
+      }
+    }
+  }
+}
+#toggle-order,
+#subscribe {
+  svg {
+    fill: theme("colors.bb-charcoal");
+  }
+  &:hover svg {
+    fill: theme("colors.bb-lighter");
+  }
+}
+</style>

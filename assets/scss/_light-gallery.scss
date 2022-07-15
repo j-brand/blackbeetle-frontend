@@ -1,0 +1,40 @@
+/*LIGHT GALLERY CHANGES*/
+
+.lg-next:before,
+.lg-prev:after {
+  font-family: swiper-icons !important;
+  content: "next" !important;
+  font-size: xx-large;
+}
+.lg-next:before {
+  content: "next" !important;
+}
+.lg-prev:after {
+  content: "prev" !important;
+}
+
+.lg-prev,
+.lg-next {
+  @screen lg {
+    background-color: transparent !important;
+  }
+}
+
+.lg-icon,
+.lg-sub-html {
+  color: theme("colors.bb-light") !important;
+  font-family: SuperGroteskWeb !important;
+}
+
+.lg-backdrop,
+.lg-thumb-outer {
+  background-color: theme("colors.bb-charcoal") !important;
+}
+
+.lg-thumb-item {
+  border-color: theme("colors.bb-light") !important;
+
+  &.active {
+    border-color: theme("colors.bb-red") !important;
+  }
+}

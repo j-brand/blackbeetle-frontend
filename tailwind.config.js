@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   mode: "jit",
   darkMode: "class",
   content: ["./layouts/**/*.{tsx,vue,ts}", "./pages/**/*.{tsx,vue,ts}", "./components/**/*.{tsx,vue,ts}", `plugins/**/*.{js,ts}`, `App.{js,ts,vue}`, `app.{js,ts,vue}`],
@@ -81,3 +81,4 @@ export default {
   },
   plugins: [],
 };
+

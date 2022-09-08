@@ -28,10 +28,10 @@
         class="duration-500 ease-in-out transition-[height] lg:duration-[0ms] w-full overflow-hidden fixed bg-bb-lighter dark:bg-bb-charcoal-dark top-0 lg:h-auto lg:relative lg:overflow-x-visible"
       >
         <div class="relative text-center text-bb-charcoal top-1/4 lg:flex lg:justify-end">
-          <NuxtLink to="/" exact class="nav-item lg:pr-6">Home</NuxtLink>
-          <NuxtLink to="/about" class="nav-item lg:pt-6 lg:pr-6">About</NuxtLink>
-          <NuxtLink to="/blog" class="nav-item lg:pt-6 lg:pr-6">Blog</NuxtLink>
-          <NuxtLink to="/gallery" class="nav-item lg:pt-6 lg:pr-10">Gallery</NuxtLink>
+          <NuxtLink @click.native="closeNav" to="/" exact class="nav-item lg:pr-6">Home</NuxtLink>
+          <NuxtLink @click.native="closeNav" to="/about" class="nav-item lg:pt-6 lg:pr-6">About</NuxtLink>
+          <NuxtLink @click.native="closeNav" to="/blog" class="nav-item lg:pt-6 lg:pr-6">Blog</NuxtLink>
+          <NuxtLink @click.native="closeNav" to="/gallery" class="nav-item lg:pt-6 lg:pr-10">Gallery</NuxtLink>
         </div>
       </nav>
     </header>
@@ -54,6 +54,11 @@ function toggleNav() {
   } else {
     document.body.style.overflowY = "scroll";
   }
+}
+
+function closeNav() {
+  navOpen.value = false;
+  document.body.style.overflowY = "scroll";
 }
 </script>
 

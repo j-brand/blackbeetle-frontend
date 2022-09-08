@@ -1,7 +1,7 @@
 module.exports = {
   mode: "jit",
   darkMode: "class",
-  content: ["./layouts/**/*.{tsx,vue,ts}", "./pages/**/*.{tsx,vue,ts}", "./components/**/*.{tsx,vue,ts}", `plugins/**/*.{js,ts}`, `App.{js,ts,vue}`, `app.{js,ts,vue}`],
+  content: [`components/**/*.{vue,js}`, `layouts/**/*.vue`, `pages/**/*.vue`, `composables/**/*.{js,ts}`, `plugins/**/*.{js,ts}`, `App.{js,ts,vue}`, `app.{js,ts,vue}`],
   theme: {
     extend: {
       screens: {
@@ -77,8 +77,8 @@ module.exports = {
     fontFamily: {
       sans: ["SuperGroteskWeb", "Helvetica Neue", "Arial", "Roboto", "sans-serif"],
       "sans-secondary": ["Roboto", "Helvetica Neue", "Arial", "sans-serif"],
+      mono: ["Roboto"],
     },
   },
   plugins: [],
 };
-

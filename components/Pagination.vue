@@ -12,7 +12,7 @@
       <div v-for="(page, index) in pages" :key="index" class="px-2 mx-1">
         <a
           href="#"
-          :class="isCurrentPage(page) ? ' bg-bb-charcoal dark:bg-bb-light bg-opacity-75 rounded-md px-page py-1 text-bb-lighter dark:text-bb-charcoal' : 'hover:underline dark:text-bb-light'"
+          :class="isCurrentPage(page) ? ' bg-bb-charcoal dark:bg-bb-light bg-opacity-75 rounded-md px-page py-1 text-bb-lighter dark:text-bb-charcoal font-bold' : 'hover:underline dark:text-bb-light'"
           @click.prevent="changePage(page)"
         >
           {{ page }}

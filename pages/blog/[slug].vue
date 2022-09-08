@@ -35,8 +35,8 @@
     <Pagination v-if="story.posts.current_page > 1" :offset="3" :pagination="story.posts" @paginate="changePage" class="mt-44 mb-10" />
 
     <template v-for="(post, index) in story.posts.data" :key="index">
-      <hr class="w-1/4 my-10 mx-auto border-bb-charcoal dark:border-bb-light h-px" v-if="index != story.posts.length - 1 && index != 0" />
-      <PostHtml v-if="post.type == 'html'" :post="post" />
+      <hr class="w-1/4 my-10 mx-auto border-bb-charcoal dark:border-bb-light h-px" v-if="index != story.posts.data.length && index != 0" />
+      <PostHtml v-if="post.type === 'html'" :post="post" />
       <PostImage v-if="post.type == 'image'" :post="post" class="md:rounded-md" />
       <PostMap v-if="post.type == 'map'" :post="post" class="rounded-md" />
       <PostVideo v-if="post.type == 'video'" :post="post" class="rounded-md" />
@@ -49,24 +49,18 @@
 </template>
 
 <script setup lang="ts">
-const route = useRoute();
-const { $storyRepository, $tailwind, $getImgPath } = useNuxtApp();
-
-const order = useCookie(route.params.slug.toString());
+import { apiService } from "~~/lib/api.service";
+import { Story } from "~~/types";
 
 const showSub = ref(false);
 const loading = ref(true);
 const pagination = ref(1);
-const historyColor = ref(false);
-const mailColor = ref(false);
+const route = useRoute();
+const order = useCookie(route.params.slug.toString());
 
-const { data: story, pending, refresh, error } = await useAsyncData("story", () => $storyRepository.show(route.params.slug, getOrder(), getPagination()));
+const { data: story, pending, refresh, error } = await useAsyncData("story", () => apiService.getStoryBySlug<Story>("/story", route.params.slug as string, getOrder(), getPagination()));
 
-function changePage(page: number) {
-  window.scrollTo(0, 0);
-  pagination.value = page;
-  refresh();
-}
+  const { $getImgPath } = useNuxtApp();
 
 useHead({
   title: story.value.title,
@@ -78,13 +72,19 @@ useHead({
   ],
 });
 
+function changePage(page: number) {
+  window.scrollTo(0, 0);
+  pagination.value = page;
+  refresh();
+}
+
 function getOrder(): string {
   return order.value ? order.value : "asc";
 }
 
 function getPagination(): number | null {
-  if (route.query.page != null) {
-    return parseInt(route.query.page);
+  if (route.query != null) {
+    return parseInt(route.query.page as string);
   }
   return null;
 }
@@ -107,6 +107,9 @@ onMounted(() => {
 .dark {
   #toggle-order,
   #subscribe {
+    svg {
+      fill: theme("colors.bb-light");
+    }
     &:hover {
       svg {
         fill: theme("colors.bb-charcoal");

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <main class="relative h-full min-h-screen">
     <Head>
       <Meta name="viewport" content="width=device-width, initial-scale=1" />
       <Meta charset="UTF-8" />
@@ -7,12 +7,12 @@
       <Link v-if="!preferDark" rel="icon" type="image/png" href="/img/fav/favicon-dark.ico" />
     </Head>
     <LayoutNavigationDefault />
-    <slot />
+    <slot class="pb-20"/>
     <LayoutFooterDefault />
     <transition name="fade">
       <CookieNotice v-if="!cookieAccept" />
     </transition>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts">

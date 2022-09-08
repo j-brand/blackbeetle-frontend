@@ -1,9 +1,9 @@
-import * as tsConfig  from "@/tailwind.config";
+import tsConfig from "#tailwind-config";
 
 export default defineNuxtPlugin(() => {
   return {
     provide: {
-      tailwind: tsConfig.default.theme.extend,
+      tailwind: tsConfig.theme,
     },
   };
 });

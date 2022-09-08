@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer class="absolute bottom-0 left-0 right-0">
     <div class="bg-bb-charcoal dark:bg-[#4d4d4d] opacity-75 w-full py-2"></div>
     <div class="bg-bb-charcoal dark:bg-bb-charcoal-darker w-full text-bb-lighter py-1">
       <div class="container flex items-center justify-between flex-col md:flex-row py-3 px-5 mx-auto">

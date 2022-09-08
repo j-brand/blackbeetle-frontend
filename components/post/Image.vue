@@ -1,5 +1,5 @@
 <template>
-  <div class="swiper-container w-full h-auto overflow-hidden relative" ref="swiperEle">
+  <div class="swiper-container w-full h-auto overflow-hidden relative cursor-pointer" ref="swiperEle">
     <div class="swiper-wrapper" ref="galleryEle">
       <div class="swiper-slide w-full" v-for="(image, index) in post.images" :key="index">
         <img :src="$getImgPath(image, '_aswipe')" loading="lazy" />
@@ -20,10 +20,10 @@ import { Post } from "@/types";
 
 //Lightgallery Imports
 import lightGallery from "lightgallery";
-import lgThumbnail from "lightgallery/plugins/thumbnail";
-import lgZoom from "lightgallery/plugins/zoom";
-import lgAutoplay from "lightgallery/plugins/autoplay";
-import lgFullscreen from "lightgallery/plugins/fullscreen";
+import lgThumbnail from "lightgallery/plugins/thumbnail/lg-thumbnail.umd.js";
+import lgZoom from "lightgallery/plugins/zoom/lg-zoom.umd.js";
+import lgAutoplay from "lightgallery/plugins/autoplay/lg-autoplay.umd.js";
+import lgFullscreen from "lightgallery/plugins/fullscreen/lg-fullscreen.umd.js";
 import "lightgallery/scss/lightgallery.scss";
 import "lightgallery/scss/lg-thumbnail.scss";
 import "lightgallery/scss/lg-autoplay.scss";
@@ -104,7 +104,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-/* .swiper-button-next,
+.swiper-button-next,
 .swiper-button-prev {
   height: 100%;
   top: 1.5rem;
@@ -120,5 +120,5 @@ onMounted(() => {
 
 .swiper-button-prev {
   left: 0;
-} */
+}
 </style>

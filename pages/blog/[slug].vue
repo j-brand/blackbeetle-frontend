@@ -6,7 +6,7 @@
     <div class="mb-5">
       <div v-if="pagination == 1" class="flex flex-col justify-center min-h-screen mx-5 lg:mx-0">
         <h1 class="text-4xl text-center uppercase tracking-widest font-semibold">{{ story.title }}</h1>
-        <span class="text-2xl text-center mt-10" v-html="story.description"></span>
+        <p class="text-2xl text-center mt-10" v-html="story.description"></p>
         <StoryImage :storySlug="story.slug" />
       </div>
       <div class="flex flex-row justify-end mx-5 lg:mx-0">
@@ -60,7 +60,7 @@ const order = useCookie(route.params.slug.toString());
 
 const { data: story, pending, refresh, error } = await useAsyncData("story", () => apiService.getStoryBySlug<Story>("/story", route.params.slug as string, getOrder(), getPagination()));
 
-  const { $getImgPath } = useNuxtApp();
+const { $getImgPath } = useNuxtApp();
 
 useHead({
   title: story.value.title,
@@ -99,6 +99,7 @@ function toggleOrder() {
 }
 
 onMounted(() => {
+  refreshNuxtData("story");
   loading.value = false;
 });
 </script>

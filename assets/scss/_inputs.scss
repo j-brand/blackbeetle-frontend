@@ -11,23 +11,21 @@
   -webkit-appearance: none;
 }
 [type="checkbox"] + label::before {
-  width: 25px;
-  height: 25px;
+  width: 18px;
+  height: 18px;
   background-color: theme("colors.bb-charcoal");
   border: 1px solid theme("colors.bb-lighter");
-  border-radius: 8px;
   display: block;
+  border-radius: 5px;
   content: "";
   float: left;
   margin-right: 10px;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   z-index: 5;
   position: relative;
-  transform: translateY(-5px);
 }
 [type="checkbox"]:checked + label::before {
   box-shadow: inset 0px 0px 0px 5px theme("colors.bb-charcoal");
-  border-radius: 8px;
   background-color: theme("colors.bb-lighter");
 }
 /* END CHECKBOX*/

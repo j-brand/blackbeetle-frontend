@@ -4,10 +4,7 @@ import { defineNuxtConfig } from "nuxt";
 export default defineNuxtConfig({
   target: "static",
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@nuxt/image-edge"],
-/*   build: {
-    transpile: ["lightgallery"],
-  }, */
-  css: ["@/assets/scss/main.scss"],
+  css: ["@/assets/scss/main.scss", "vue-toastification/src/scss/index.scss"],
   colorMode: {
     classSuffix: "",
   },

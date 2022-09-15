@@ -8,6 +8,9 @@ body {
   padding: 0;
 }
 
+a{
+  @apply decoration-bb-charcoal dark:decoration-bb-light;
+}
 /* main {
   min-height: calc(100vh - #{$footer-height-small});
   @screen md {
@@ -101,5 +104,31 @@ img[lazy="loaded"] {
 
   .text-shadow-none {
     text-shadow: none;
+  }
+}
+
+/* Button laoding Spinner */
+
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  &:before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: transparent;
+    animation: spinner 0.8s linear infinite;
   }
 }

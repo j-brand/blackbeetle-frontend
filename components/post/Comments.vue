@@ -6,7 +6,7 @@
       </button>
       <button>
         <IconComment @click="toggleComments" class="cursor-pointer mb-5 w-6 h-6 dark:fill-bb-light" v-if="comments.length > 0" />
-        <span class="absolute top-[-10px] right-[-14px] px-[6px] pb-[0px] pt-[1px] text-[0.7rem] font-mono rounded-full border border-bb-charcoal dark:border-bb-light bg-white dark:bg-bb-charcoal">{{ comments.length }}</span>
+        <span class="absolute top-[-10px] right-[-14px] px-[6px] pb-[0px] pt-[1px] text-[0.7rem] font-mono rounded-full border dark:text-bb-light border-bb-charcoal dark:border-bb-light bg-white dark:bg-bb-charcoal">{{ comments.length }}</span>
       </button>
     </div>
 

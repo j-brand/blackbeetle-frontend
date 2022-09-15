@@ -52,4 +52,8 @@ useHead({
 });
 
 const plugins = [lgZoom, lgThumbnail];
+
+onMounted(() => {
+  refreshNuxtData("album");
+});
 </script>

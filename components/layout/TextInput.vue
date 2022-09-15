@@ -1,32 +1,34 @@
 <template>
   <label :for="label">
-    {{ label }} <small class="text-bb-light-red text-sm" v-if="error">{{ error }}</small>
+    <small class="dark:text-bb-light">{{ label }}</small> <small class="text-bb-light-red text-sm" v-if="errors[type]">{{ errors[type] }}</small>
     <input
       :type="type"
-      class="border border-bb-charcoal rounded-md w-full mb-2 py-1 pl-2 text-bb-charcoal"
+      :id="useSlugify(label)"
+      class="border border-bb-charcoal rounded-md w-full mb-2 py-1 pl-2 text-bb-charcoal bg-bb-light dark:bg-bb-charcoal dark:border-bb-light dark:text-bb-light"
       @keyup="validateInput"
-      @blue="validateInput"
+      @blur="validateInput"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-      autocomplete="off"
-      v-model="input"
-      :id="label"
+      :value="modelValue"
+      :autocomplete="type === 'email' ? 'email' : 'off'"
     />
   </label>
 </template>
 
 <script setup lang="ts">
+
 const props = defineProps({
+  modelValue: { type: String, required: true, defaul: "" },
   type: { type: String, required: false, default: "text" },
   label: { type: String, required: false, default: "" },
 });
 
-const { validateTextField, errors } = useFormValidation();
-
-const input = ref("");
-const error = ref("");
+const { validateTextField, validateEmailField, errors } = useFormValidation();
 
 const validateInput = () => {
-  validateTextField("text", input.value);
-  error.value = errors[props.type];
+  if (props.type === "email") {
+    validateEmailField("email", props.modelValue);
+  } else {
+    validateTextField("text", props.modelValue);
+  }
 };
 </script>

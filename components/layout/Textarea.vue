@@ -2,9 +2,9 @@
   <label :for="label">
     {{ label }} <small class="text-bb-light-red text-sm" v-if="error">{{ error }}</small>
     <textarea
-      :id="label"
+      :id="useSlugify(label)"
       :value="modelValue"
-      class="border border-bb-charcoal rounded-md w-full mb-2 pl-2 text-bb-charcoal"
+      class="border border-bb-charcoal rounded-md w-full mb-2 pl-2 text-bb-charcoal dark:bg-bb-charcoal dark:text-bb-light dark:border-bb-light"
       @keyup="validateInput"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       autocomplete="off"
@@ -25,7 +25,6 @@ const props = defineProps({
 
 const { validateTextField, errors } = useFormValidation();
 
-const input = ref("");
 const error = ref("");
 const validateInput = () => {
   validateTextField(props.type, props.modelValue);

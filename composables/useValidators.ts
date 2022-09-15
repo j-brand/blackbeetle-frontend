@@ -1,6 +1,6 @@
 export default function useValidators() {
   const isEmpty = (fieldName, fieldValue) => {
-    return !fieldValue ? " - Das " + fieldName + " feld ist erforderlich." : "";
+    return !fieldValue ? " - Das " + fieldName + " Feld ist erforderlich." : "";
   };
 
   const minLength = (fieldName, fieldValue, min) => {
@@ -9,7 +9,11 @@ export default function useValidators() {
 
   const isEmail = (fieldName, fieldValue) => {
     let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return !re.test(fieldValue) ? "Die eingabe ist keine gülitige E-Mail-Adresse " + fieldName + " " : "";
+    return !re.test(fieldValue) ? " - Die Eingabe ist keine gültige E-Mail-Adresse" : "";
   };
-  return { isEmpty, minLength, isEmail };
+
+  const isRequired = (fieldName, fieldValue) => {
+    return !fieldValue ? "Dieses Feld wird benötigt" : "";
+  };
+  return { isEmpty, minLength, isEmail, isRequired };
 }

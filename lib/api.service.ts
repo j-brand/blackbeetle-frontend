@@ -38,8 +38,8 @@ export const apiService = {
       .then((response: Resource) => {
         return response;
       })
-      .catch((err: FetchError) => {
-        return Promise.reject({ data: err.data.errors });
+      .catch((err:FetchError) => {
+        return Promise.reject({ data: err.data.message });
       });
   },
 };

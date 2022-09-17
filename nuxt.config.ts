@@ -13,6 +13,9 @@ export default defineNuxtConfig({
       googleApiKey: "",
     },
   },
+  build: {
+    transpile: ["@googlemaps/js-api-loader"],
+  },
   tailwindcss: {
     exposeConfig: true,
   },

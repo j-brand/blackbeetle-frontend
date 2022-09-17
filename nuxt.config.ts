@@ -20,7 +20,6 @@ export default defineNuxtConfig({
     exposeConfig: true,
   },
   image: {
-    //domains: [process.env.NUXT_PUBLIC_URL],
     screens: {
       sm: 640,
       md: 768,

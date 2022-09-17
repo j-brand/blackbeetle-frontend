@@ -3,8 +3,10 @@
   "scripts": {
     "dev": "nuxi dev",
     "build": "nuxi build",
+    "build:dev": "nuxi build --dotenv .env.dev",
     "start": "node .output/server/index.mjs",
-    "generate": "nuxi generate"
+    "generate": "nuxi generate",
+    "generate:dev": "nuxi generate --dotenv .env.dev"
   },
   "devDependencies": {
     "@nuxt/image-edge": "1.0.0-27706054.395f7ae",

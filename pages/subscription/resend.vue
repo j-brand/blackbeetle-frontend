@@ -9,7 +9,7 @@
         <div class="mt-3">
           <LayoutTextInput label="E-Mail-Adresse" type="email" v-model="fields.email" />
         </div>
-        <LayoutButton type="submit" classes="mt-3" :loading="isLoading" :disabled="isDisabled"> abschicken </LayoutButton>
+        <LayoutButton type="submit" classes="btn-light mt-3" :loading="isLoading" :disabled="isDisabled"> abschicken </LayoutButton>
       </form>
     </div>
   </div>

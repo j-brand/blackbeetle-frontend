@@ -32,7 +32,7 @@
               />
             </div>
           </div>
-          <LayoutButton type="submit" :loading="isLoading" :disabled="isDisabled">abschicken</LayoutButton>
+          <LayoutButton type="submit" classes="btn-dark" :loading="isLoading" :disabled="isDisabled">abschicken</LayoutButton>
         </form>
 
       </client-only>

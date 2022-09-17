@@ -30,7 +30,7 @@ import "@/assets/scss/_emoji-picker.scss";
 
 const { $formatDate } = useNuxtApp();
 const commentsOpen = ref<boolean>(false);
-const emit = defineEmits(["newComment"]);
+const emit = defineEmits(["openModal"]);
 
 const props = defineProps({
   comments: {

@@ -21,7 +21,7 @@
           </div>
           <br />
 
-          <LayoutButton type="submit" classes="mt-4 w-full md:w-auto" :loading="isLoading" :disabled="isDisabled">senden</LayoutButton>
+          <LayoutButton type="submit" classes="btn-dark mt-4 w-full md:w-auto" :loading="isLoading" :disabled="isDisabled">senden</LayoutButton>
         </form>
       </div>
       <button @click="$emit('close', true)" class="top-4 right-4 absolute"><IconClose :fill="$tailwind.colors['bb-light']" /></button>
@@ -31,6 +31,9 @@
 
 <script setup lang="ts">
 import { apiService } from "~~/lib/api.service";
+import { useToast } from "vue-toastification/dist/index.mjs";
+
+const toast = useToast();
 
 const props = defineProps({
   storyID: { type: Number },
@@ -58,12 +61,15 @@ async function sendSubscription() {
   };
   const res = await apiService
     .post<any>("/newsletter", payload)
-    .then(() => {
+    .then((response) => {
+      toast.success(response.message, { timeout: 10000 });
       isLoading.value = false;
       emit("close");
     })
     .catch((err) => {
-      console.log(err);
+      toast.warning(err.data);
+      isLoading.value = false;
+      emit("close");
     });
 }
 

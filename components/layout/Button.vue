@@ -1,7 +1,7 @@
 <template>
   <button
-    class="relative px-4 py-1 border border-solid rounded-lg border-bb-charcoal hover:bg-bb-charcoal hover:text-bb-light dark:border-bb-light dark:bg-bb-charcoal dark:text-bb-light dark:hover:bg-bb-light dark:hover:text-bb-charcoal transition duration-200 dark:disabled:border-gray-500 disabled:bg-gray-200 disabled:text-gray-500 dark:disabled:bg-bb-charcoal"
-    :class="[classes , loading ? 'spinner before:border-bb-charcoal before:dark:border-bb-light before:border-solid before:border-2' : '']"
+    class="relative px-4 py-1 border border-solid rounded-lg transition duration-200 "
+    :class="[classes, loading ? 'spinner before:border-bb-charcoal before:dark:border-bb-light before:border-solid before:border-2' : '']"
     :disabled="disabled"
   >
     <span :class="[{ 'opacity-0': loading }, disabled ? 'dark:text-gray-500' : '']">
@@ -19,6 +19,13 @@ const props = defineProps({
 </script>
 
 <style lang="scss" scoped>
+.btn-dark {
+  @apply bg-bb-charcoal text-bb-light  border-bb-light  hover:bg-bb-light hover:text-bb-charcoal-dark disabled:bg-gray-200 disabled:text-gray-500;
+}
+.btn-light {
+  @apply border-bb-charcoal hover:bg-bb-charcoal hover:text-bb-light dark:border-bb-light dark:bg-bb-charcoal dark:text-bb-light dark:hover:bg-bb-light dark:hover:text-bb-charcoal disabled:bg-gray-200 disabled:text-gray-500 dark:disabled:border-gray-500 dark:disabled:bg-bb-charcoal;
+}
+
 @keyframes spinner {
   to {
     transform: rotate(360deg);

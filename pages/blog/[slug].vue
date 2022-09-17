@@ -43,7 +43,7 @@
     </template>
     <Pagination :offset="3" :pagination="story.posts" @paginate="changePage" class="mt-10" />
     <transition name="fade">
-      <StoryNotificationSubscription class="fixed w-full h-full left-0 top-0" v-if="showSub" :storyID="story.id" @close="showSub = !showSub"></StoryNotificationSubscription>
+      <ModalStorySubsription class="fixed w-full h-full left-0 top-0" v-if="showSub" :storyID="story.id" @close="showSub = !showSub"></ModalStorySubsription>
     </transition>
   </div>
 </template>

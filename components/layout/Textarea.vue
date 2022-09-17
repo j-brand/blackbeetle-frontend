@@ -1,6 +1,6 @@
 <template>
   <label :for="label">
-    {{ label }} <small class="text-bb-light-red text-sm" v-if="error">{{ error }}</small>
+    <small class="dark:text-bb-light">{{ label }}</small><small class="text-bb-light-red text-sm" v-if="error">{{ error }}</small>
     <textarea
       :id="useSlugify(label)"
       :value="modelValue"

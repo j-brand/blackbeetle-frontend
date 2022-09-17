@@ -1,12 +1,12 @@
 <template>
   <div class="z-50 fixed top-0 left-0 h-full w-full flex justify-center items-center">
     <div @click="$emit('close')" class="fixed top-0 w-full h-full bg-bb-charcoal blur-md opacity-40"></div>
-    <div class="bg-bb-charcoal text-bb-lighter p-10 max-w-screen-md rounded-lg dark:border dark:border-bb-light md:mx-auto mx-5 relative">
+    <div class="bg-bb-charcoal p-10 max-w-screen-md rounded-lg dark:border dark:border-bb-light md:mx-auto mx-5 relative">
       <client-only>
-        <h4 class="font-bold mt-3 mb-1">Schreib uns gerne einen Kommentar.</h4>
+        <h4 class="font-bold mt-3 mb-1 text-bb-light">Schreib uns gerne einen Kommentar.</h4>
         <form @submit.prevent="sendComment" novalidate>
           <div class="text-sm">
-            <LayoutTextInput label="Name" type="text" v-model="fields.name" />
+            <LayoutTextInput class="text-bb-light" label="Name" type="text" v-model="fields.name" />
           </div>
 
           <div class="flex hidden">
@@ -17,10 +17,10 @@
           </div>
 
           <div class="relative text-sm">
-            <LayoutTextarea label="Nachricht" v-model="fields.content" />
+            <LayoutTextarea class="text-bb-light" label="Nachricht" v-model="fields.content" />
             <div class="absolute bottom-12 right-10">
               <button @click="toggleEmojiPicker" class="cursor-pointer absolute" type="button">
-                <IconEmoji />
+                <IconEmoji class="bb-icon"/>
               </button>
               <EmojiPicker
                 class="absolute transform translate-x-[-290px] lg:translate-x-8 z-50"

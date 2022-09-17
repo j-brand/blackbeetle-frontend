@@ -6,7 +6,9 @@
     </div>
     <article v-html="post.content" class="text-lg md:text-xl html-post"></article>
     <PostComments v-if="post.comments.length > 0" :comments="post.comments" @open-Modal="commentModal = true" />
-    <CommentModal v-if="commentModal" :post_id="post.id" @new="addNewComment" @close="commentModal = false" />
+    <transition name="fade">
+      <ModalPostComment v-if="commentModal" :post_id="post.id" @new="addNewComment" @close="commentModal = false" />
+    </transition>
   </div>
 </template>
 

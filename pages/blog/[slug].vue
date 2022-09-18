@@ -50,7 +50,7 @@
 
 <script setup lang="ts">
 import { apiService } from "~~/lib/api.service";
-import { Story } from "~~/types";
+import { IStory } from "@/types";
 
 const showSub = ref(false);
 const loading = ref(true);
@@ -58,9 +58,9 @@ const pagination = ref(1);
 const route = useRoute();
 const order = useCookie(route.params.slug.toString());
 
-const { data: story, pending, refresh, error } = await useAsyncData("story", () => apiService.getStoryBySlug<Story>("/story", route.params.slug as string, getOrder(), getPagination()));
+const { data: story, pending, refresh, error } = await useAsyncData("story", () => apiService.getStoryBySlug<IStory>("/story", route.params.slug as string, getOrder(), getPagination()));
 
-const { $getImgPath } = useNuxtApp();
+const { getImgPath } = useHelper();
 
 useHead({
   title: story.value.title,
@@ -68,7 +68,7 @@ useHead({
     { name: "description", content: story.value.description },
     { name: "og:title", content: `Blackbeetle - ${story.value.title}` },
     { name: "og:description", content: story.value.description },
-    { name: "og:image", content: $getImgPath(story.value.title_image, "_aslider") },
+    { name: "og:image", content: getImgPath(story.value.title_image, "_aslider") },
   ],
 });
 

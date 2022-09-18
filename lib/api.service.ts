@@ -1,17 +1,4 @@
 import { FetchError } from "ohmyfetch";
-import { PagedPosts } from "~~/types";
-
-function handleErrors(response) {
-  console.log(response.ok);
-  if (!response.ok) {
-    console.log(response);
-    return response.text().then((text) => {
-      throw new Error(text);
-    });
-  } else {
-    return response.json();
-  }
-}
 
 export const apiService = {
   async get<Result>(endpoint: string, order?: string): Promise<Result> {

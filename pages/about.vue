@@ -7,9 +7,7 @@
         Keine waschechten Berliner zwar, aber lang genug im Großstadtdschungel gefangen gewesen, um nach ein paar Jahren für eine Weile das Weite zu suchen.
         <br /><br />
 
-        <!--         <nuxt-picture :imgAttrs="{ class: 'rounded-md' }" format="png" src="/img/Johannes_Isabell.jpg" loading="lazy" alt="Johannes und Isabell bei den zwölf Aposteln" />
- -->
-        <nuxt-img class="rounded-md" format="webp" src="/default.jpeg" loading="lazy" alt="Johannes und Isabell bei den zwölf Aposteln" />
+        <img class="rounded-md" src="/default.jpeg" loading="lazy" alt="Johannes und Isabell bei den zwölf Aposteln" />
 
         <br />Wir haben beschlossen, unseren Alltag für ein ganzes Jahr hinter uns zu lassen. Unsere Reise führt uns nach Indien, ins magische Dreieck von Delhi über Agra nach Jaipur. Von da aus geht
         es für zehn lange Monate nach Australien. Wir starten in Melbourne und werden die gesamte Ostküste entlang nach Norden fahren, wo wir dann von Cairns aus nach Indonesien fliegen. Nachdem wir

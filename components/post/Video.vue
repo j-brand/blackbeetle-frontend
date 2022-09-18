@@ -6,10 +6,10 @@
 </template>
 
 <script setup lang="ts">
-import { Post } from "@/types";
+import { IPost } from "@/types";
 import { computed, PropType } from "vue";
 const props = defineProps({
-  post: { type: Object as PropType<Post>, required: true },
+  post: { type: Object as PropType<IPost>, required: true },
 });
 
 const path = computed(() => {

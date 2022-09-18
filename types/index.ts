@@ -1,18 +1,18 @@
-export interface Album {
+export interface IAlbum {
   id: number;
   title: string;
   slug: string;
   description: string;
-  title_image: Image;
+  title_image: IImage;
   start_date: string;
   end_date: string;
   images_count: number;
-  images: Image[];
+  images: IImage[];
 }
 
-export type Albums = Array<Album>;
+export type IAlbums = Array<IAlbum>;
 
-export interface Image {
+export interface IImage {
   title: string;
   description: string;
   path: string;
@@ -20,32 +20,32 @@ export interface Image {
   height: string;
   width: string;
 }
-export interface Story {
+export interface IStory {
   id: number;
   title: string;
   description: string;
   path: string;
   slug: string;
-  title_image: Image;
+  title_image: IImage;
   created_at: Date;
   posts_count: number;
-  posts?: PagedPosts;
+  posts?: IPagedPosts;
 }
-export type Stories = Array<Story>;
+export type Stories = Array<IStory>;
 
-export interface Post {
+export interface IPost {
   id: number;
   title: string;
   content: string;
   type: string;
   date: string;
-  images?: Image[];
+  images?: IImage[];
   comments?: IComment[];
 }
 
-export interface PagedPosts {
+export interface IPagedPosts {
   current_page: number;
-  data: Post[];
+  data: IPost[];
   first_page_url: string;
   from: number;
   last_page: number;

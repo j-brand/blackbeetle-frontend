@@ -2,7 +2,7 @@
   <div class="swiper-container w-full h-auto overflow-hidden relative cursor-pointer" ref="swiperEle">
     <div class="swiper-wrapper" ref="galleryEle">
       <div class="swiper-slide w-full" v-for="(image, index) in post.images" :key="index">
-        <img :src="$getImgPath(image, '_aswipe')" loading="lazy" />
+        <img :src="getImgPath(image, '_aswipe')" loading="lazy" />
         <span class="hidden" :id="'caption_' + index">{{ image.description }}</span>
       </div>
     </div>
@@ -15,8 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { Post } from "@/types";
-
+import { IPost } from "@/types";
 
 //Lightgallery Imports
 import lightGallery from "lightgallery";
@@ -32,9 +31,9 @@ import "lightgallery/scss/lg-fullscreen.scss";
 
 // Swiper Js Imports
 import Swiper, { Navigation, Pagination } from "swiper";
-import { PropType } from "vue"; 
+import { PropType } from "vue";
 
-const { $getImgPath } = useNuxtApp();
+const { getImgPath } = useHelper();
 
 const galleryEle = ref<HTMLElement | null>(null);
 const swiperEle = ref<HTMLElement | any>(null);
@@ -42,7 +41,7 @@ const swiperRef = ref();
 
 const props = defineProps({
   post: {
-    type: Object as PropType<Post>,
+    type: Object as PropType<IPost>,
     required: true,
   },
 });

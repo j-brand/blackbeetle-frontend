@@ -17,8 +17,8 @@
       <NuxtLink to="/" alt="home" class="mx-auto">
         <div id="logo-wrapper" class="w-24 left-0 right-0 z-10 logo-wrapper relative lg:absolute">
           <client-only>
-            <nuxt-img v-if="colorMode.value == 'light'" class="bg-bb-lighter rounded-full p-3" src="/img/bb-logo.png" loading="lazy" alt="Blackbeetle Logo" />
-            <nuxt-img v-if="colorMode.value == 'dark'" class="bg-bb-charcoal-dark rounded-full p-3" src="/img/bb-logo_light.png" loading="lazy" alt="Blackbeetle Logo" />
+            <img v-if="colorMode.value == 'light'" class="bg-bb-lighter rounded-full p-3" src="/img/bb-logo.png" loading="lazy" alt="Blackbeetle Logo" />
+            <img v-if="colorMode.value == 'dark'" class="bg-bb-charcoal-dark rounded-full p-3" src="/img/bb-logo_light.png" loading="lazy" alt="Blackbeetle Logo" />
           </client-only>
         </div>
       </NuxtLink>

@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   target: "static",
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@nuxt/image-edge"],
-  css: ["@/assets/scss/main.scss", "vue-toastification/src/scss/index.scss"],
+  css: ["@/assets/scss/main.scss"],
   colorMode: {
     classSuffix: "",
   },

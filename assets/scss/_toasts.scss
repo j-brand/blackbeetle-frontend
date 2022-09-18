@@ -1,0 +1,22 @@
+.Vue-Toastification__container.top-right.bb-toast {
+  top: 5em;
+}
+
+$vt-color-default: theme("colors.bb-charcoal");
+$vt-text-color-default: theme("colors.bb-light");
+
+$vt-color-error: theme("colors.bb-red");
+$vt-text-color-error: #fff !default;
+.Vue-Toastification__toast--default {
+  @apply border border-bb-light;
+}
+
+$vt-font-family: theme("fontFamily.sans") !default;
+
+@import "vue-toastification/src/scss/_variables";
+@import "vue-toastification/src/scss/_toastContainer";
+@import "vue-toastification/src/scss/_toast";
+@import "vue-toastification/src/scss/_closeButton";
+@import "vue-toastification/src/scss/_progressBar";
+@import "vue-toastification/src/scss/_icon";
+@import "vue-toastification/src/scss/animations/_bounce";

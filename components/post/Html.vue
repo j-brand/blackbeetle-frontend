@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col rounded-lg px-5 lg:p-0">
-    <div class="flex flex-col md:flex-row justify-between mb-2">
-      <p class="md:order-2 text-right md:text-md">{{ formatDate(post.date) }}</p>
+    <div class="flex flex-col justify-between mb-2">
+      <p class="text-right md:text-md">{{ formatDate(post.date) }}</p>
       <h2 class="text-2xl font-semibold">{{ post.title }}</h2>
     </div>
     <article v-html="post.content" class="text-lg md:text-xl html-post"></article>

@@ -41,7 +41,7 @@ async function updateSubscription(change) {
   await apiService
     .post<any>("/subscription", payload)
     .then((response) => {
-      toast.success(response.message);
+      toast(response.message);
     })
     .catch((err) => {
       toast.error("Leider ist etwas schief gelaufen.");

@@ -62,7 +62,7 @@ async function sendSubscription() {
   const res = await apiService
     .post<any>("/newsletter", payload)
     .then((response) => {
-      toast.success(response.message, { timeout: 10000 });
+      toast(response.message, { timeout: 10000 });
       isLoading.value = false;
       emit("close");
     })

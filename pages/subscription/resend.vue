@@ -37,7 +37,7 @@ async function onSubmit() {
     .post<any>("/resend-verification", payload)
     .then((response) => {
       fields.email = "";
-      toast.success(response.message);
+      toast(response.message);
 
       isLoading.value = false;
     })

@@ -3,7 +3,7 @@
     <small class="dark:text-bb-light">{{ label }}</small> <small class="text-bb-light-red text-sm" v-if="errors[type]">{{ errors[type] }}</small>
     <input
       :type="type"
-      :id="useSlugify(label)"
+      :id="slugify(label)"
       class="border border-bb-charcoal rounded-md w-full mb-2 py-1 pl-2 text-bb-charcoal dark:bg-bb-charcoal dark:border-bb-light dark:text-bb-light"
       @keyup="validateInput"
       @blur="validateInput"
@@ -23,6 +23,7 @@ const props = defineProps({
 });
 
 const { validateTextField, validateEmailField, errors } = useFormValidation();
+const { slugify } = useHelper();
 
 const validateInput = () => {
   if (props.type === "email") {

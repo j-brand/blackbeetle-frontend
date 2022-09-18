@@ -3,7 +3,7 @@
     <div class="pl-7" v-if="errors.checkbox">
       <small class="text-bb-light-red text-sm">{{ errors.checkbox }}</small>
     </div>
-    <input type="checkbox" :id="useSlugify(label)" class="" @change="onChange" :checked="modelValue" />
+    <input type="checkbox" :id="slugify(label)" class="" @change="onChange" :checked="modelValue" />
     <label :for="label">
       <slot />
     </label>
@@ -20,6 +20,7 @@ const props = defineProps({
 
 const emit = defineEmits(["update:modelValue"]);
 const { validateCheckbox, errors } = useFormValidation();
+const { slugify } = useHelper();
 
 function onChange(event) {
   validateInput(event.target.checked);

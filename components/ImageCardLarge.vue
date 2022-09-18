@@ -2,7 +2,7 @@
   <div class="relative text-bb-lighter overflow-hidden rounded-md zoom-in vignette">
     <template v-if="type == 'album'">
       <div class="absolute flex justify-between top-0 w-full p-5 text-shadow-lg z-10">
-        <span>{{ $formatDate(resource.start_date, true) }} - {{ $formatDate(resource.end_date, true) }}</span>
+        <span>{{ formatDate(resource.start_date, true) }} - {{ formatDate(resource.end_date, true) }}</span>
         <div class="flex">
           <IconImages fill="#EAE7DC" /><span class="ml-2 leading-none">{{ resource.images_count }}</span>
         </div>
@@ -18,16 +18,17 @@
     </template>
     <div class="absolute bottom-0 w-full p-5 md:px-10 z-10 card-content">
       <h1 class="text-2xl md:text-3xl font-bold uppercase text-shadow-lg" v-html="resource.title"></h1>
-      <span class="text-lg text-shadow-lg hidden md:block lg:w-2/5" v-html="$getExcerpt(resource.description, 150)"></span>
+      <span class="text-lg text-shadow-lg hidden md:block lg:w-2/5" v-html="getExcerpt(resource.description, 150)"></span>
     </div>
-    <nuxt-img class="vignette" :src="$getImgPath(resource.title_image, '_aslider')" loading="lazy"  sizes="sm:640px md:768px lg:1024px xl:1280px" />
+    <nuxt-img class="vignette" :src="getImgPath(resource.title_image, '_aslider')" loading="lazy"  sizes="sm:640px md:768px lg:1024px xl:1280px" />
   </div>
 </template>
 
 <script setup>
 const props = defineProps(["resource", "type"]);
 
-const { $formatDate, $getImgPath, $getExcerpt } = useNuxtApp();
+const {formatDate, getImgPath, getExcerpt } = useHelper();
+
 </script>
 
 <style lang="scss" scoped>

@@ -17,7 +17,6 @@
 
 <script setup lang="ts">
 const cookieAccept = useCookie("cAccept");
-const colorMode = useColorMode();
 const preferDark = ref(false);
 
 if (process.client) {
@@ -25,6 +24,9 @@ if (process.client) {
 }
 
 useHead({
+  htmlAttrs: {
+    lang: 'de',
+  },
   titleTemplate: "Blackbeetle - %s",
 });
 </script>

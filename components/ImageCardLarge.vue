@@ -20,7 +20,7 @@
       <h1 class="text-2xl md:text-3xl font-bold uppercase text-shadow-lg" v-html="resource.title"></h1>
       <span class="text-lg text-shadow-lg hidden md:block lg:w-2/5" v-html="getExcerpt(resource.description, 150)"></span>
     </div>
-    <nuxt-img class="vignette" :src="getImgPath(resource.title_image, '_aslider')" loading="lazy"  sizes="sm:640px md:768px lg:1024px xl:1280px" />
+    <nuxt-img class="vignette" :src="getImgPath(resource.title_image, '_aslider')" loading="lazy"  sizes="sm:640px md:768px lg:1024px xl:1280px" :alt="resource.title"/>
   </div>
 </template>
 

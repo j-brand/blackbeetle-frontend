@@ -8,7 +8,7 @@
             <span class="text-base font-sans-secondary h-7 leading-7">© 2022 BLACKBEETLE</span>
             <span class="h-7 leading-7"
               >Made with &#128150; and interest by
-              <span class="text-bb-red h-7 leading-7">Johannes Brand</span>
+              <span class="text-bb-red h-7  leading-7">Johannes Brand</span>
             </span>
           </div>
         </div>

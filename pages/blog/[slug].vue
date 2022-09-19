@@ -13,6 +13,7 @@
         <button
           type="button"
           id="subscribe"
+          aria-label="subscribe"
           class="hover:bg-bb-charcoal dark:hover:bg-bb-light rounded-lg border border-solid border-bb-charcoal dark:border-bb-light transition duration-200 pt-1 pb-1 px-4 mr-3"
           href="#"
           v-on:click="showSub = !showSub"
@@ -23,6 +24,7 @@
         <button
           type="button"
           v-on:click="toggleOrder()"
+          aria-label="reverse post order "
           class="hover:bg-bb-charcoal dark:hover:bg-bb-light hover:text-bb-lighter dark:hover:text-bb-charcoal dark:text-bb-light rounded-lg border border-solid border-bb-charcoal dark:border-bb-light px-4 py-3 text-lg transition duration-200 flex flex-row"
           href="#"
           id="toggle-order"
@@ -98,9 +100,13 @@ function toggleOrder() {
   refresh();
 }
 
+function deactivateLoading() {
+  loading.value = false;
+}
+
 onMounted(() => {
   refreshNuxtData("story");
-  loading.value = false;
+  setTimeout(deactivateLoading, 2000);
 });
 </script>
 

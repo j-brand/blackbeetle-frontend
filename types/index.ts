@@ -31,7 +31,7 @@ export interface IStory {
   posts_count: number;
   posts?: IPagedPosts;
 }
-export type Stories = Array<IStory>;
+export type IStories = Array<IStory>;
 
 export interface IPost {
   id: number;

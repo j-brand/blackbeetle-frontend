@@ -58,6 +58,7 @@ function initGallery() {
     dynamic: true,
     plugins: [lgZoom, lgThumbnail, lgAutoplay, lgFullscreen],
     dynamicEl,
+    licenseKey: useRuntimeConfig().public.lgLicenseKey,
   });
 
   [...galleryEle.value.getElementsByClassName("swiper-slide")].map((slide, index) => {

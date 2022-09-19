@@ -14,7 +14,7 @@
 
     <div class="container mx-auto">
       <client-only>
-        <lightgallery class="lg:columns-4 gap-5" id="lightgallery" v-if="album" :settings="{ speed: 500, plugins: plugins }">
+        <lightgallery class="lg:columns-4 gap-5" id="lightgallery" v-if="album" :settings="{ speed: 500, plugins: plugins, licenseKey: useRuntimeConfig().public.lgLicenseKey }">
           <a v-for="(img, index) in album.images" :key="index" :href="getImgPath(img, '_large')" class="mb-5 block" :data-sub-html="'#caption_' + index">
             <nuxt-img class="lg:rounded-md" :src="getImgPath(img, '_thn')" loading="lazy" placeholder />
             <div class="hidden" :id="'caption_' + index">{{ img.description }}</div>
@@ -50,7 +50,6 @@ useHead({
     { name: "og:image", content: getImgPath(album.value.title_image, "_aslider") },
   ],
 });
-
 const plugins = [lgZoom, lgThumbnail];
 
 onMounted(() => {

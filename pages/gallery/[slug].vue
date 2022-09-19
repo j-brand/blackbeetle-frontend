@@ -1,7 +1,7 @@
 <template>
   <div class="pt-40">
     <div v-if="album" class="container mx-auto mb-24 px-5 md:px-0 lg:px-0 flex flex-col justify-between">
-      <span class="text-lg flex justify-end mb-10 md:mb-0">
+      <span class="text-lg flex justify-end mb-10 md:mb-0 dark:text-bb-light">
         {{ formatDate(album.start_date, true) }} -
         {{ formatDate(album.end_date, true) }}
       </span>

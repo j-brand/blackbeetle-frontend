@@ -11,6 +11,7 @@ export default defineNuxtConfig({
       apiBase: "",
       backendUrl: "",
       googleApiKey: "",
+      lgLicenseKey: "",
     },
   },
   build: {

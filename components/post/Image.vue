@@ -38,6 +38,7 @@ const { getImgPath } = useHelper();
 const galleryEle = ref<HTMLElement | null>(null);
 const swiperEle = ref<HTMLElement | any>(null);
 const swiperRef = ref();
+const gallery = ref(null);
 
 const props = defineProps({
   post: {
@@ -54,15 +55,16 @@ function initGallery() {
       subHtml: slide.getElementsByTagName("span")[0].innerText,
     };
   });
-  const popup = lightGallery(galleryEle.value, {
+  gallery.value = lightGallery(galleryEle.value, {
     dynamic: true,
     plugins: [lgZoom, lgThumbnail, lgAutoplay, lgFullscreen],
     dynamicEl,
+    licenseKey: useRuntimeConfig().public.lgLicenseKey,
   });
 
   [...galleryEle.value.getElementsByClassName("swiper-slide")].map((slide, index) => {
     slide.addEventListener("click", () => {
-      popup.openGallery(index);
+      gallery.value.openGallery(index);
     });
   });
 
@@ -74,9 +76,13 @@ function initGallery() {
     document.body.style.overflow = "hidden";
   });
 
-  galleryEle.value.addEventListener("lgAfterClose", () => {
+  galleryEle.value.addEventListener("lgAfterClose", (event: any) => {
     document.body.style.overflow = "auto";
   });
+}
+
+function destroyGallery() {
+  gallery.value.destroy();
 }
 
 function initSwiper() {
@@ -99,6 +105,10 @@ function initSwiper() {
 onMounted(() => {
   initSwiper();
   initGallery();
+});
+
+onUnmounted(() => {
+  destroyGallery();
 });
 </script>
 

@@ -1,7 +1,7 @@
 <template>
-  <div class="pt-40">
-    <div v-if="album" class="container mx-auto mb-24 px-5 md:px-0 lg:px-0 flex flex-col justify-between">
-      <span class="text-lg flex justify-end mb-10 md:mb-0 dark:text-bb-light">
+  <div class="pt-40 pb-48">
+    <div v-if="album" class="container mx-auto mb-16 px-5 md:px-0 lg:px-0 flex flex-col justify-between">
+      <span class="text-lg flex justify-end mb-2 md:mb-0 dark:text-bb-light">
         {{ formatDate(album.start_date, true) }} -
         {{ formatDate(album.end_date, true) }}
       </span>
@@ -14,7 +14,7 @@
 
     <div class="container mx-auto">
       <client-only>
-        <lightgallery class="lg:columns-4 gap-5" id="lightgallery" v-if="album" :settings="{ speed: 500, plugins: plugins, licenseKey: useRuntimeConfig().public.lgLicenseKey }">
+        <lightgallery class="md:columns-3 lg:columns-4 gap-5" id="lightgallery" v-if="album" :settings="{ speed: 500, plugins: plugins, licenseKey: useRuntimeConfig().public.lgLicenseKey }">
           <a v-for="(img, index) in album.images" :key="index" :href="getImgPath(img, '_large')" class="mb-5 block" :data-sub-html="'#caption_' + index">
             <nuxt-img class="lg:rounded-md" :src="getImgPath(img, '_thn')" loading="lazy" placeholder />
             <div class="hidden" :id="'caption_' + index">{{ img.description }}</div>

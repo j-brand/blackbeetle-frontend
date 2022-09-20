@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-md mx-auto flex flex-col justify-between pb-40" v-if="story">
+  <div class="max-w-screen-md mx-auto flex flex-col justify-between pb-60" v-if="story">
     <transition name="fade">
       <Loader v-if="pending || loading" />
     </transition>

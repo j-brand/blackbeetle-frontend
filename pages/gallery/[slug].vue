@@ -30,7 +30,10 @@
 import Lightgallery from "lightgallery/vue/LightGalleryVue.umd.js";
 import lgThumbnail from "lightgallery/plugins/thumbnail/lg-thumbnail.umd.js";
 import lgZoom from "lightgallery/plugins/zoom/lg-zoom.umd.js";
+
 import "lightgallery/scss/lightgallery.scss";
+import "lightgallery/scss/lg-thumbnail.scss";
+import "lightgallery/scss/lg-zoom.scss";
 
 import { IAlbum } from "~~/types";
 import { apiService } from "~~/lib/api.service";

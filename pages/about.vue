@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-screen-md px-4 pt-40">
+  <div class="container mx-auto max-w-screen-md px-4 pt-40 pb-60">
     <div>
       <h1 class="uppercase text-4xl anaglyph font-semibold mb-4">Blackbeetle</h1>
       <h2 class="font-medium md:text-2xl mb-4">Wenn Großstadtkinder das Weite suchen.</h2>

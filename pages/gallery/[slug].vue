@@ -30,10 +30,12 @@
 import Lightgallery from "lightgallery/vue/LightGalleryVue.umd.js";
 import lgThumbnail from "lightgallery/plugins/thumbnail/lg-thumbnail.umd.js";
 import lgZoom from "lightgallery/plugins/zoom/lg-zoom.umd.js";
+import lgFullscreen from "lightgallery/plugins/fullscreen/lg-fullscreen.umd.js";
 
 import "lightgallery/scss/lightgallery.scss";
 import "lightgallery/scss/lg-thumbnail.scss";
 import "lightgallery/scss/lg-zoom.scss";
+import "lightgallery/scss/lg-fullscreen.scss";
 
 import { IAlbum } from "~~/types";
 import { apiService } from "~~/lib/api.service";
@@ -53,7 +55,7 @@ useHead({
     { name: "og:image", content: getImgPath(album.value.title_image, "_aslider") },
   ],
 });
-const plugins = [lgZoom, lgThumbnail];
+const plugins = [lgZoom, lgThumbnail,lgFullscreen];
 
 onMounted(() => {
   refreshNuxtData("album");

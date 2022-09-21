@@ -7,7 +7,7 @@
       <Link v-if="!preferDark" rel="icon" type="image/png" href="/img/fav/favicon-dark.ico" />
     </Head>
     <LayoutNavigationDefault />
-    <slot class="pb-20"/>
+    <slot/>
     <LayoutFooterDefault />
     <transition name="fade">
       <CookieNotice v-if="!cookieAccept" />

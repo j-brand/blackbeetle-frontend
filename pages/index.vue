@@ -3,13 +3,13 @@
     <Head>
       <Meta name="description" content="Ein Spiel für jeden der drauf sinnt, wie er seiner Welt entrinnt." />
     </Head>
+
+    <Alice class="w-full mb-16" />
   </div>
 </template>
 
 <script setup lang="ts">
-
 useHead({
   title: "Home",
 });
-
 </script>

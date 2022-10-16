@@ -1,6 +1,5 @@
 <template></template>
 <script setup lang="ts">
-
 import { PropType } from "vue";
 import { ILatLng, IMap } from "~~/types/gmap";
 
@@ -27,14 +26,19 @@ function addInfoWindow() {
   const infowindow = new google.maps.InfoWindow({
     content: infoWindowContent,
   });
+
   marker.addListener("mouseover", function () {
     infowindow.open(props.map, marker);
   });
+
   marker.addListener("mouseout", function () {
     infowindow.close();
   });
 }
-if (props.label) {
-  addInfoWindow();
-}
+
+onMounted(() => {
+  if (props.label) {
+    addInfoWindow();
+  }
+});
 </script>

@@ -1,5 +1,4 @@
 export default defineNuxtConfig({
-  target: "static",
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@nuxt/image-edge"],
   css: ["@/assets/scss/main.scss"],
   colorMode: {

@@ -1,8 +1,7 @@
 <template>
   <main class="relative h-full min-h-screen">
     <Head>
-      <Meta name="viewport" content="width=device-width, initial-scale=1" />
-      <Meta charset="UTF-8" />
+      <Meta name="description" content="Ein Spiel für jeden der drauf sinnt, wie er seiner Welt entrinnt." />
       <Link v-if="preferDark" rel="icon" type="image/png" href="/img/fav/favicon-light.ico" />
       <Link v-if="!preferDark" rel="icon" type="image/png" href="/img/fav/favicon-dark.ico" />
     </Head>

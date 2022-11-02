@@ -1,6 +1,6 @@
 <template>
   <label :for="label">
-    <small class="dark:text-bb-light">{{ label }}</small> <small class="text-bb-light-red text-sm" v-if="errors[type]">{{ errors[type] }}</small>
+    <smalspanl class="dark:text-bb-light text-sm">{{ label }}</smalspanl> <span class="text-bb-light-red text-sm" v-if="errors[label]">{{ errors[label] }}</span>
     <input
       :type="type"
       :id="slugify(label)"
@@ -27,9 +27,9 @@ const { slugify } = useHelper();
 
 const validateInput = () => {
   if (props.type === "email") {
-    validateEmailField("email", props.modelValue);
+    validateEmailField(props.label, props.modelValue);
   } else {
-    validateTextField("text", props.modelValue);
+    validateTextField(props.label, props.modelValue);
   }
 };
 </script>

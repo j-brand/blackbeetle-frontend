@@ -1,6 +1,6 @@
 export default function useValidators() {
   const isEmpty = (fieldName, fieldValue) => {
-    return !fieldValue ? " - Das " + fieldName + " Feld ist erforderlich." : "";
+    return !fieldValue ? " - Dieses Feld darf nicht leer sein." : "";
   };
 
   const minLength = (fieldName, fieldValue, min) => {

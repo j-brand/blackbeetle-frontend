@@ -1,6 +1,6 @@
 <template>
   <label :for="label">
-    <small class="dark:text-bb-light">{{ label }}</small><small class="text-bb-light-red text-sm" v-if="error">{{ error }}</small>
+    <span class="dark:text-bb-light text-sm">{{ label }}</span><span class="text-bb-light-red text-sm" v-if="errors[label]">{{ errors[label] }}</span>
     <textarea
       :id="slugify(label)"
       :value="modelValue"
@@ -28,6 +28,6 @@ const { slugify } = useHelper();
 
 const error = ref("");
 const validateInput = () => {
-  validateTextField(props.type, props.modelValue);
+  validateTextField(props.label, props.modelValue);
 };
 </script>

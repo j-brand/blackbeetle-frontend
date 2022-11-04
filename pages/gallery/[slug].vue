@@ -14,9 +14,14 @@
 
     <div class="container mx-auto">
       <client-only>
-        <lightgallery class="md:columns-3 lg:columns-4 gap-5" id="lightgallery" v-if="album" :settings="{ speed: 500, plugins: plugins, licenseKey: useRuntimeConfig().public.lgLicenseKey }">
-          <a v-for="(img, index) in album.images" :key="index" :href="getImgPath(img, '_large')" class="mb-5 block" :data-sub-html="'#caption_' + index">
-            <layout-lazy-image class="lg:rounded-md" :src="getImgPath(img, '_thn')" :width="img.width" :height="img.height" :blur="true" />
+        <lightgallery
+          class="md:columns-3 lg:columns-4 gap-5"
+          id="lightgallery"
+          v-if="album"
+          :settings="{ speed: 500, plugins: plugins, licenseKey: useRuntimeConfig().public.lgLicenseKey, zoomFromOrigin: true }"
+        >
+          <a v-for="(img, index) in album.images" :key="index" :href="getImgPath(img, '_large')" class="mb-5 block" :data-sub-html="'#caption_' + index" :data-lg-size="getLgSizes(img)">
+            <nuxt-img class="lg:rounded-md" :src="getImgPath(img, '_thn')" loading="lazy" placeholder :width="img.width" :height="img.height" />
             <div class="hidden" :id="'caption_' + index">{{ img.description }}</div>
           </a>
         </lightgallery>
@@ -37,7 +42,7 @@ import "lightgallery/scss/lg-thumbnail.scss";
 import "lightgallery/scss/lg-zoom.scss";
 import "lightgallery/scss/lg-fullscreen.scss";
 
-import { IAlbum } from "~~/types";
+import { IAlbum, IImage } from "~~/types";
 import { apiService } from "~~/lib/api.service";
 
 const route = useRoute();
@@ -56,6 +61,10 @@ useHead({
   ],
 });
 const plugins = [lgZoom, lgThumbnail, lgFullscreen];
+
+function getLgSizes(img: IImage) {
+  return `${img.width}-${img.height}`;
+}
 
 onMounted(() => {
   refreshNuxtData("album");

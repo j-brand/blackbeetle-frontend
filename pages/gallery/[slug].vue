@@ -14,7 +14,7 @@
 
     <div class="container mx-auto">
       <div class="md:columns-3 lg:columns-4 gap-5" ref="gallery" v-if="album">
-        <a class="mb-5 block" v-for="(img, index) in album.images" :key="img.path" :href="getImgPath(img, '_large')" :data-thumb="getImgPath(img, '_thn')">
+        <a class="mb-5 block" v-for="(img, index) in album.images" :key="index" :href="getImgPath(img, '_large')" :data-thumb="getImgPath(img, '_thn')">
           <layout-lazy-image class="lg:rounded-md" :src="getImgPath(img, '_large')" :width="img.width" :height="img.height" :blur="true" :alt="img.title" />
           <span class="hidden" :id="'caption_' + index">{{ img.description }}</span>
         </a>
@@ -38,14 +38,13 @@ import "lightgallery/scss/lg-fullscreen.scss";
 import { IAlbum } from "~~/types";
 import { apiService } from "~~/lib/api.service";
 
-//const galleryEle = ref<HTMLElement | null>(null);
 const gallery = ref(null);
 
 const route = useRoute();
 
 const { formatDate, getImgPath } = useHelper();
 
-const { data: album } = await useAsyncData("album", () => apiService.getBySlug<IAlbum>("/album", route.params.slug as string));
+const { data: album } = await useAsyncData(() => apiService.getBySlug<IAlbum>("/album", route.params.slug as string));
 
 useHead({
   title: album.value.title,

@@ -60,7 +60,7 @@ const pagination = ref(1);
 const route = useRoute();
 const order = useCookie(route.params.slug.toString());
 
-const { data: story, pending, refresh, error } = await useAsyncData("story", () => apiService.getStoryBySlug<IStory>("/story", route.params.slug as string, getOrder(), getPagination()));
+const { data: story, pending, refresh, error } = await useAsyncData(`story-${route.params.slug}`, () => apiService.getStoryBySlug<IStory>("/story", route.params.slug as string, getOrder(), getPagination()));
 
 const { getImgPath } = useHelper();
 

@@ -13,26 +13,19 @@
     </div>
 
     <div class="container mx-auto">
-      <client-only>
-        <lightgallery
-          class="md:columns-3 lg:columns-4 gap-5"
-          id="lightgallery"
-          v-if="album"
-          :settings="{ speed: 500, plugins: plugins, licenseKey: useRuntimeConfig().public.lgLicenseKey, zoomFromOrigin: true }"
-        >
-          <a v-for="(img, index) in album.images" :key="index" :href="getImgPath(img, '_large')" class="mb-5 block" :data-sub-html="'#caption_' + index" :data-lg-size="getLgSizes(img)">
-            <nuxt-img class="lg:rounded-md" :src="getImgPath(img, '_thn')" loading="lazy" placeholder :width="img.width" :height="img.height" />
-            <div class="hidden" :id="'caption_' + index">{{ img.description }}</div>
-          </a>
-        </lightgallery>
-      </client-only>
+      <div class="md:columns-3 lg:columns-4 gap-5" ref="gallery" v-if="album">
+        <a class="mb-5 block" v-for="(img, index) in album.images" :key="index" :href="getImgPath(img, '_large')" :data-thumb="getImgPath(img, '_thn')">
+          <layout-lazy-image class="lg:rounded-md" :src="getImgPath(img, '_large')" :width="img.width" :height="img.height" :blur="true" :alt="img.title" />
+          <span class="hidden" :id="'caption_' + index">{{ img.description }}</span>
+        </a>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 //Lighgallery Imports (Style, Plugins)
-import Lightgallery from "lightgallery/vue/LightGalleryVue.umd.js";
+import lightGallery from "lightgallery";
 import lgThumbnail from "lightgallery/plugins/thumbnail/lg-thumbnail.umd.js";
 import lgZoom from "lightgallery/plugins/zoom/lg-zoom.umd.js";
 import lgFullscreen from "lightgallery/plugins/fullscreen/lg-fullscreen.umd.js";
@@ -42,8 +35,11 @@ import "lightgallery/scss/lg-thumbnail.scss";
 import "lightgallery/scss/lg-zoom.scss";
 import "lightgallery/scss/lg-fullscreen.scss";
 
-import { IAlbum, IImage } from "~~/types";
+import { IAlbum } from "~~/types";
 import { apiService } from "~~/lib/api.service";
+
+//const galleryEle = ref<HTMLElement | null>(null);
+const gallery = ref(null);
 
 const route = useRoute();
 
@@ -60,13 +56,16 @@ useHead({
     { name: "og:image", content: getImgPath(album.value.title_image, "_aslider") },
   ],
 });
-const plugins = [lgZoom, lgThumbnail, lgFullscreen];
 
-function getLgSizes(img: IImage) {
-  return `${img.width}-${img.height}`;
+function initGallery() {
+  lightGallery(gallery.value, {
+    exThumbImage: "data-thumb",
+    plugins: [lgZoom, lgThumbnail, lgFullscreen],
+    licenseKey: useRuntimeConfig().public.lgLicenseKey,
+  });
 }
 
 onMounted(() => {
-  refreshNuxtData("album");
+  initGallery();
 });
 </script>

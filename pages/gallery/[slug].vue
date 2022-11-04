@@ -67,5 +67,6 @@ function initGallery() {
 
 onMounted(() => {
   initGallery();
+  refreshNuxtData("album");
 });
 </script>

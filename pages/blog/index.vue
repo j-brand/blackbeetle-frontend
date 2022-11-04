@@ -1,5 +1,5 @@
 <template>
-  <div v-if="stories" class="flex flex-col justify-center items-center pt-40 pb-52 gap-2">
+  <div v-if="stories" class="flex flex-col justify-center items-center pt-40 pb-52 gap-2 container mx-auto">
     <NuxtLink :to="`/blog/${story.slug}`" v-for="story in stories" :key="story.id" class="mb-6 px-5 lg:px-0">
       <ImageCardLarge :resource="story" :type="'story'" />
     </NuxtLink>

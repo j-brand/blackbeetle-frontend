@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     },
   },
   build: {
-    transpile: ["@googlemaps/js-api-loader"],
+    transpile: ["@googlemaps/js-api-loader","lazysizes"],
   },
   tailwindcss: {
     exposeConfig: true,

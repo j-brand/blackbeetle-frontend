@@ -15,7 +15,6 @@
               <input type="text" id="subject" v-model="bot" class="border border-bb-charcoal rounded-md w-full mb-2 py-1 pl-2" placeholder="Name" />
             </label>
           </div>
-
           <div class="relative text-sm">
             <LayoutTextarea class="text-bb-light" label="Nachricht" v-model="fields.content" />
             <div class="absolute bottom-12 right-10">

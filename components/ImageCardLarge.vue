@@ -20,15 +20,21 @@
       <h1 class="text-2xl md:text-3xl font-bold uppercase text-shadow-lg" v-html="resource.title"></h1>
       <span class="text-lg text-shadow-lg hidden md:block lg:w-2/5" v-html="getExcerpt(resource.description, 150)"></span>
     </div>
-    <nuxt-img class="vignette" :src="getImgPath(resource.title_image, '_aslider')" loading="lazy"  sizes="sm:640px md:768px lg:1024px xl:1280px" :alt="resource.title"/>
+    <layout-lazy-image
+      class="vignette"
+      :src="getImgPath(resource.title_image, '_aslider')"
+      :width="resource.title_image.width"
+      :height="resource.title_image.height"
+      :blur="true"
+      :alt="resource.title"
+    />
   </div>
 </template>
 
 <script setup>
 const props = defineProps(["resource", "type"]);
 
-const {formatDate, getImgPath, getExcerpt } = useHelper();
-
+const { formatDate, getImgPath, getExcerpt } = useHelper();
 </script>
 
 <style lang="scss" scoped>

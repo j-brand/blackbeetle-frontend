@@ -16,7 +16,7 @@
       <client-only>
         <lightgallery class="md:columns-3 lg:columns-4 gap-5" id="lightgallery" v-if="album" :settings="{ speed: 500, plugins: plugins, licenseKey: useRuntimeConfig().public.lgLicenseKey }">
           <a v-for="(img, index) in album.images" :key="index" :href="getImgPath(img, '_large')" class="mb-5 block" :data-sub-html="'#caption_' + index">
-            <nuxt-img class="lg:rounded-md" :src="getImgPath(img, '_thn')" loading="lazy" placeholder />
+            <layout-lazy-image class="lg:rounded-md" :src="getImgPath(img, '_thn')" :width="img.width" :height="img.height" :blur="true" />
             <div class="hidden" :id="'caption_' + index">{{ img.description }}</div>
           </a>
         </lightgallery>
@@ -55,7 +55,7 @@ useHead({
     { name: "og:image", content: getImgPath(album.value.title_image, "_aslider") },
   ],
 });
-const plugins = [lgZoom, lgThumbnail,lgFullscreen];
+const plugins = [lgZoom, lgThumbnail, lgFullscreen];
 
 onMounted(() => {
   refreshNuxtData("album");

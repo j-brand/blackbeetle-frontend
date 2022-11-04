@@ -44,7 +44,7 @@ const route = useRoute();
 
 const { formatDate, getImgPath } = useHelper();
 
-const { data: album } = await useAsyncData('',() => apiService.getBySlug<IAlbum>("/album", route.params.slug as string));
+const { data: album } = await useAsyncData(() => apiService.getBySlug<IAlbum>("/album", route.params.slug as string));
 
 useHead({
   title: album.value.title,

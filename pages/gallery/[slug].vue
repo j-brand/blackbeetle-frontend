@@ -1,6 +1,6 @@
 <template>
   <div class="pt-40 pb-48">
-    <div v-if="album" class="container mx-auto mb-16 px-5 md:px-0 lg:px-0 flex flex-col justify-between">
+    <div v-if="album" class=" max-w-screen-md mx-auto mb-16 px-5 md:px-0 lg:px-0 flex flex-col justify-between">
       <span class="text-lg flex justify-end mb-2 md:mb-0 dark:text-bb-light">
         {{ formatDate(album.start_date, true) }} -
         {{ formatDate(album.end_date, true) }}
@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <div class="container mx-auto">
+    <div class=" max-w-screen-md mx-auto">
       <div class="md:columns-3 lg:columns-4 gap-5" ref="gallery" v-if="album">
         <a class="mb-5 block" v-for="(img, index) in album.images" :key="index" :href="getImgPath(img, '_large')" :data-thumb="getImgPath(img, '_thn')" :data-sub-html="img.description">
           <layout-lazy-image class="lg:rounded-md" :src="getImgPath(img, '_large')" :width="img.width" :height="img.height" :blur="true" :alt="img.title" />

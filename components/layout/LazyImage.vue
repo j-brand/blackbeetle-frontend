@@ -1,5 +1,5 @@
 <template>
-  <img data-sizes="auto" :data-src="src" :src="blur ? lazySrc() : null" class="lazyload blur-up" loading="lazy" />
+  <img :data-src="src" :src="lazySrc()" class="lazyload blur-up" />
 </template>
 
 <script setup lang="ts">

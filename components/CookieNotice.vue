@@ -1,6 +1,6 @@
 <template>
   <div v-show="hide" class="w-full h-4/5 fixed bottom-0 gradient z-50">
-    <div class="mx-auto max-w-screen-md flex flex-col justify-end h-full pb-10">
+    <div class="mx-auto max-w-screen-md flex flex-col justify-end h-full pb-10 px-5">
       <h2 class="text-lg text-bb-light underline">Cookiehinweis</h2>
       <span class="text-bb-light"
         >Diese Seite verwendet Cookies, um Ihnen (dem Benutzer) ein besseres Nutzererlebnis bieten zu können, bzw. die korrekte Funktionsweise der Seite zu garantieren. Welche Informationen in diesen

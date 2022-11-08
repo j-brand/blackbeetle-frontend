@@ -8,18 +8,12 @@ body {
   padding: 0;
 }
 
-a{
-  @apply decoration-bb-charcoal dark:decoration-bb-light;
+body {
+  background-color: theme("colors.bb-white");
 }
-/* main {
-  min-height: calc(100vh - #{$footer-height-small});
-  @screen md {
-    min-height: calc(100vh - #{$footer-height});
-  }
-} */
 
-.nav-item {
-  @apply block w-full py-4 px-3 lg:w-auto lg:pb-5 lg:pt-6 text-xl lg:text-base uppercase font-medium dark:text-bb-light;
+a {
+  @apply decoration-bb-charcoal dark:decoration-bb-light;
 }
 
 button:focus,
@@ -40,7 +34,10 @@ video:focus {
   -o-text-overflow: clip;
   text-overflow: clip;
   letter-spacing: 3px;
-  text-shadow: -3px 0 1px #1ef2f1, 3px 0 1px #f6050a;
+  text-shadow: 0.5px -0.5px 1px #c6b091, 1px -1px 1px #b49f81, 1.5px -1.5px 1px #a28f73, 2px -2px 1px #918169, 2.5px -2.5px 1px #7f7362, 3px -3px 1px #70675b;
+}
+.dark .anaglyph {
+  text-shadow: 0.5px -0.5px 1px #70675b, 1px -1px 1px #7f7362, 1.5px -1.5px 1px #918169, 2px -2px 1px #a28f73, 2.5px -2.5px 1px #b49f81, 3px -3px 1px #c6b091;
 }
 
 /*LAZYLOAD IMAGE BLUR*/
@@ -133,6 +130,6 @@ img[lazy="loaded"] {
   }
 }
 /* ICONS */
-.bb-icon{
-    @apply fill-bb-charcoal;
+.bb-icon {
+  @apply fill-bb-charcoal;
 }

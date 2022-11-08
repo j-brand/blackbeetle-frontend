@@ -1,0 +1,51 @@
+.pattern-bg {
+  background-image: radial-gradient(
+      closest-side,
+      transparent 0%,
+      transparent 75%,
+      #ede8e0 76%,
+      #7f7362 85%,
+      #e0d4c3 86%,
+      #d8c3a5 94%,
+      #ffffff 95%,
+      #ffffff 103%,
+      #a28f73 104%,
+      #c6b091 112%,
+      #a28f73 113%,
+      #b49f81 121%,
+      #ffffff 122%,
+      #ffffff 130%,
+      #e0ead7 131%,
+      #e0ead7 140%
+    ),
+    radial-gradient(
+      closest-side,
+      transparent 0%,
+      transparent 75%,
+      #ede8e0 76%,
+      #7f7362 85%,
+      #e0d4c3 86%,
+      #d8c3a5 94%,
+      #ffffff 95%,
+      #ffffff 103%,
+      #a28f73 104%,
+      #c6b091 112%,
+      #a28f73 113%,
+      #b49f81 121%,
+      #ffffff 122%,
+      #ffffff 130%,
+      #e0ead7 131%,
+      #e0ead7 140%
+    );
+  background-size: 110px 110px;
+  background-color: #d8c3a5;
+  background-position: 0 0, 55px 55px;
+  opacity: 0.035;
+  box-shadow: inset 8rem 0 10rem -5rem theme("colors.bb-lighter"), inset -8rem 0 10rem -5rem theme("colors.bb-lighter"), inset 0 12rem 10rem -5rem theme("colors.bb-lighter"),
+    inset 0 -16rem 10rem -5rem theme("colors.bb-lighter");
+  z-index: -1;
+}
+.dark .pattern-bg {
+  box-shadow: inset 8rem 0 10rem -5rem theme("colors.bb-charcoal"), inset -8rem 0 10rem -5rem theme("colors.bb-charcoal"), inset 0 12rem 10rem -5rem theme("colors.bb-charcoal"),
+    inset 0 -16rem 10rem -5rem theme("colors.bb-charcoal");
+}

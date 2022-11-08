@@ -27,11 +27,11 @@
         :class="navOpen ? 'h-96' : 'h-0'"
         class="duration-500 ease-in-out transition-[height] lg:duration-[0ms] w-full overflow-hidden fixed bg-bb-lighter dark:bg-bb-charcoal-dark top-0 lg:h-auto lg:relative lg:overflow-x-visible"
       >
-        <div class="relative text-center text-bb-charcoal top-1/4 lg:flex lg:justify-end">
-          <NuxtLink @click.native="closeNav" to="/" exact class="nav-item lg:pr-6">Home</NuxtLink>
-          <NuxtLink @click.native="closeNav" to="/about" class="nav-item lg:pt-6 lg:pr-6">About</NuxtLink>
-          <NuxtLink @click.native="closeNav" to="/blog" class="nav-item lg:pt-6 lg:pr-6">Blog</NuxtLink>
-          <NuxtLink @click.native="closeNav" to="/gallery" class="nav-item lg:pt-6 lg:pr-10">Gallery</NuxtLink>
+        <div class="relative text-center text-bb-charcoal top-1/4 lg:flex lg:justify-end lg:pr-5">
+          <NuxtLink @click.native="closeNav" to="/" exact class="nav-item nest">Nest</NuxtLink>
+          <NuxtLink @click.native="closeNav" to="/about" class="nav-item">Über</NuxtLink>
+          <NuxtLink @click.native="closeNav" to="/blog" class="nav-item">Geschichten</NuxtLink>
+          <NuxtLink @click.native="closeNav" to="/gallery" class="nav-item">Galerie</NuxtLink>
         </div>
       </nav>
     </header>
@@ -208,11 +208,6 @@ header {
     }
   }
 }
-.router-link-active {
-  border: none;
-  //color: #333333;
-  text-overflow: clip;
-  letter-spacing: 3px;
-  text-shadow: -1px 0 1px #1ef2f1, 1px 0 1px #f6050a;
-}
+
+
 </style>

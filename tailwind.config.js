@@ -11,6 +11,7 @@ module.exports = {
         xl: "1280px",
       },
       colors: {
+        "bb-white": "#EAE7E3",
         "bb-lighter": "#EAE7DC",
         "bb-light": "#D8C3A5",
         "bb-black": "#8E8D8A",

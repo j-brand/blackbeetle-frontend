@@ -6,6 +6,8 @@
       <Link v-if="!preferDark" rel="icon" type="image/png" href="/img/fav/favicon-dark.ico" />
     </Head>
     <LayoutNavigationDefault />
+    <div class="pattern-bg absolute w-full h-full"></div>
+
     <slot/>
     <LayoutFooterDefault />
     <transition name="fade">

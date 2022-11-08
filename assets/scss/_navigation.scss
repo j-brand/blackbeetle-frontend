@@ -1,0 +1,40 @@
+nav {
+  .nav-item {
+    @apply block w-full py-4 px-5 lg:w-auto lg:pb-5 lg:pt-6 text-xl lg:text-base uppercase font-medium dark:text-bb-light tracking-wide;
+    transition: text-shadow 0.2s ease;
+    &.router-link-active {
+      border: none;
+      color: theme("colors.bb-lighter");
+
+      text-shadow: -1px -1px 0 theme("colors.bb-charcoal"), 1px 1px 0 theme("colors.bb-charcoal");
+
+      &.nest {
+        text-shadow: -1px -1px 0 theme("colors.bb-charcoal-darker"), 1px 1px 0 theme("colors.bb-charcoal-darker"), -1px 1px 0 theme("colors.bb-charcoal-darker"),
+          1px -1px 0 theme("colors.bb-charcoal-darker");
+        background: url("/img/nest.svg") no-repeat center;
+        background-size: auto 90%;
+        color: theme("colors.bb-lighter");
+        @screen lg {
+          background-size: 80%;
+        }
+      }
+    }
+  }
+}
+
+.dark nav {
+  .router-link-active {
+    color: theme("colors.bb-charcoal-darker");
+    text-shadow: -1px -1px 0 theme("colors.bb-light"), 1px 1px 0 theme("colors.bb-light");
+    &.nest {
+      background: url("/img/nest_light.svg") no-repeat center;
+      background-size: auto 90%;
+      text-shadow: -1px -1px 0 theme("colors.bb-light"), 1px 1px 0 theme("colors.bb-light"), -1px 1px 0 theme("colors.bb-light"), 1px -1px 0 theme("colors.bb-light");
+      color: theme("colors.bb-charcoal");
+
+      @screen lg {
+        background-size: 80%;
+      }
+    }
+  }
+}

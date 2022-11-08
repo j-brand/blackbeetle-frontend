@@ -1,5 +1,5 @@
 <template>
-  <div v-if="albums" class="flex flex-col items-center gap-3 pt-40 pb-40 max-w-screen-md mx-auto">
+  <div v-if="albums" class="flex flex-col items-center gap-3 pt-32 md:pt-40 pb-40 max-w-screen-md mx-auto">
     <NuxtLink :to="`/gallery/${album.slug}`" v-for="album in albums" :key="album.id" class="mb-6 px-5 lg:px-0">
       <ImageCardLarge :resource="album" :type="'album'" />
     </NuxtLink>

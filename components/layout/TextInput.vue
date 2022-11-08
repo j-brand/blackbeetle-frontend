@@ -4,7 +4,7 @@
     <input
       :type="type"
       :id="slugify(label)"
-      class="border border-bb-charcoal rounded-md w-full mb-2 py-1 pl-2 text-bb-charcoal dark:bg-bb-charcoal dark:border-bb-light dark:text-bb-light"
+      class="border border-bb-charcoal rounded-md w-full mb-2 py-1 pl-2 text-bb-charcoal bg-bb-white dark:bg-bb-charcoal dark:border-bb-light dark:text-bb-light"
       @keyup="validateInput"
       @blur="validateInput"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"

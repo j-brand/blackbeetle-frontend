@@ -34,3 +34,4 @@ const content = computed(() => {
   return JSON.parse(props.post.content);
 });
 </script>
+ 

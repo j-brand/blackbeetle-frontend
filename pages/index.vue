@@ -1,6 +1,6 @@
 <template>
   <div class="w-full h-full min-h-screen flex justify-center items-start md:items-center">
-    <Alice class="w-full" />
+    <Alice class="w-full md:transform md:scale-90 mt-10 mb-32"/>
     <img v-if="colorMode.value == 'light'" src="/img/eggs.svg" alt="Eier" class="absolute right-0 bottom-[178px] md:bottom-[108px] h-10 md:h-16" />
     <img v-if="colorMode.value == 'dark'" src="/img/eggs_dark.svg" alt="Eier" class="absolute right-0 bottom-[178px] md:bottom-[108px] h-10 md:h-16" />
   </div>

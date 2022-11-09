@@ -2,7 +2,7 @@
   <div class="swiper-container w-full h-auto overflow-hidden relative cursor-pointer" ref="swiperEle">
     <div class="swiper-wrapper" ref="galleryEle">
       <div class="swiper-slide w-full" v-for="(image, index) in post.images" :key="index">
-        <img :src="getImgPath(image, '_aswipe')" loading="lazy" />
+        <img :data-large="getImgPath(image, '_large')" :src="getImgPath(image, '_aswipe')" loading="lazy" />
         <span class="hidden" :id="'caption_' + index">{{ image.description }}</span>
       </div>
     </div>
@@ -50,7 +50,7 @@ const props = defineProps({
 function initGallery() {
   const dynamicEl = [...galleryEle.value.getElementsByClassName("swiper-slide")].map((slide: HTMLImageElement) => {
     return {
-      src: slide.getElementsByTagName("img")[0].src,
+      src: slide.getElementsByTagName("img")[0].getAttribute('data-large'),
       thumb: slide.getElementsByTagName("img")[0].src,
       subHtml: slide.getElementsByTagName("span")[0].innerText,
     };

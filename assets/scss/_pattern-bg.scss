@@ -37,15 +37,31 @@
       #e0ead7 131%,
       #e0ead7 140%
     );
-  background-size: 110px 110px;
+  background-size: 60px 60px;
   background-color: #d8c3a5;
-  background-position: 0 0, 55px 55px;
-  opacity: 0.035;
-  box-shadow: inset 8rem 0 10rem -5rem theme("colors.bb-lighter"), inset -8rem 0 10rem -5rem theme("colors.bb-lighter"), inset 0 12rem 10rem -5rem theme("colors.bb-lighter"),
+  background-position: 0 0, 30px 30px;
+  opacity: 0.05;
+
+  box-shadow: inset 2rem 0 10rem -4rem theme("colors.bb-lighter"), inset -2rem 0 10rem -4rem theme("colors.bb-lighter"), inset 0 10rem 10rem -4rem theme("colors.bb-lighter"),
     inset 0 -16rem 10rem -5rem theme("colors.bb-lighter");
+  @screen lg {
+    box-shadow: inset 8rem 0 10rem -5rem theme("colors.bb-lighter"), inset -8rem 0 10rem -5rem theme("colors.bb-lighter"), inset 0 12rem 10rem -5rem theme("colors.bb-lighter"),
+      inset 0 -16rem 10rem -5rem theme("colors.bb-lighter");
+  }
+
   z-index: -1;
+  @screen lg {
+    background-size: 110px 110px;
+    background-position: 0 0, 55px 55px;
+  }
 }
 .dark .pattern-bg {
-  box-shadow: inset 8rem 0 10rem -5rem theme("colors.bb-charcoal"), inset -8rem 0 10rem -5rem theme("colors.bb-charcoal"), inset 0 12rem 10rem -5rem theme("colors.bb-charcoal"),
+  opacity: 0.035;
+
+  box-shadow: inset 2rem 0 10rem -4rem theme("colors.bb-charcoal"), inset -2rem 0 10rem -4rem theme("colors.bb-charcoal"), inset 0 10rem 10rem -4rem theme("colors.bb-charcoal"),
     inset 0 -16rem 10rem -5rem theme("colors.bb-charcoal");
+  @screen lg {
+    box-shadow: inset 8rem 0 10rem -5rem theme("colors.bb-charcoal"), inset -8rem 0 10rem -5rem theme("colors.bb-charcoal"), inset 0 12rem 10rem -5rem theme("colors.bb-charcoal"),
+      inset 0 -16rem 10rem -5rem theme("colors.bb-charcoal");
+  }
 }

@@ -69,7 +69,7 @@ export default {
   transform: translateY(50px);
   padding-top: 35rem;
   @screen md {
-    padding-top: 52rem;
+    padding-top: 40rem;
     width: 450px;
   }
   #img_center {

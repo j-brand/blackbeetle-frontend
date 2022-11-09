@@ -76,7 +76,7 @@ nav {
   padding-top: 1.4rem;
   margin: 0 auto;
   border-radius: 50%;
-  /*   &::before {
+    &::before {
     position: absolute;
     content: "";
     width: 150%;
@@ -85,7 +85,7 @@ nav {
     top: 0;
     background: theme("colors.bb-lighter");
     z-index: -1;
-  } */
+  }
 
   &::after {
     position: absolute;

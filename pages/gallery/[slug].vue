@@ -15,10 +15,10 @@
     <div class=" max-w-screen-md mx-auto">
       <div class="md:columns-3 lg:columns-4 gap-5" ref="gallery" v-if="album">
         <a class="mb-5 block" v-for="(img, index) in album.images" :key="index" :href="getImgPath(img, '_large')" :data-thumb="getImgPath(img, '_thn')" :data-sub-html="img.description">
-          <layout-lazy-image class="lg:rounded-md" :src="getImgPath(img, '_large')" :width="img.width" :height="img.height" :blur="true" :alt="img.title" />
+          <layout-lazy-image class="lg:rounded-md" :src="getImgPath(img, '_thn')" :width="img.width" :height="img.height" :blur="true" :alt="img.title" />
         </a>
       </div>
-    </div>
+    </div> 
   </div>
 </template>
 

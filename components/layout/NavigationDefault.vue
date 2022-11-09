@@ -11,7 +11,7 @@
       <ThemeSwitch class="left-0 top-4 lg:top-5 absolute z-[100] ml-4" />
     </ClientOnly>
     <header
-      class="w-full flex flex-row-reverse absolute justify-between items-center transition-[margin] ease-in-out duration-500 h-14 z-30 bg-bb-lighter dark:bg-bb-charcoal-dark"
+      class="w-full flex flex-row-reverse absolute justify-between items-center transi2 h-14 z-30 bg-bb-lighter dark:bg-bb-charcoal-dark"
       :class="navOpen ? 'mt-96' : 'mt-0'"
     >
       <NuxtLink to="/" alt="home" class="mx-auto">
@@ -25,7 +25,7 @@
 
       <nav
         :class="navOpen ? 'h-96' : 'h-0'"
-        class="duration-500 ease-in-out transition-[height] lg:duration-[0ms] w-full overflow-hidden fixed bg-bb-lighter dark:bg-bb-charcoal-dark top-0 lg:h-auto lg:relative lg:overflow-x-visible"
+        class="transi w-full overflow-hidden fixed bg-bb-lighter dark:bg-bb-charcoal-dark top-0 lg:h-auto lg:relative lg:overflow-x-visible"
       >
         <div class="relative text-center text-bb-charcoal top-1/4 lg:flex lg:justify-end lg:pr-5">
           <NuxtLink @click.native="closeNav" to="/" exact class="nav-item nest">Nest</NuxtLink>
@@ -37,7 +37,7 @@
     </header>
     <div
       :class="navOpen ? 'h-116' : 'h-20'"
-      class="shadow-dummy transition-[height] ease-in-out duration-500 lg:duration-[0ms] w-20 lg:w-22 left-0 right-0 mx-auto absolute bg-bb-lighter dark:bg-bb-charcoal-dark rounded-full"
+      class="shadow-dummy transi w-20 lg:w-22 left-0 right-0 mx-auto absolute bg-bb-lighter dark:bg-bb-charcoal-dark rounded-full"
     ></div>
   </div>
 </template>
@@ -211,5 +211,12 @@ header {
       }
     }
   }
+}
+
+.transi{
+  transition: height 500ms ease-in-out;
+}
+.transi2{
+  transition: margin 500ms ease-in-out;
 }
 </style>

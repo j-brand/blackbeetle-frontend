@@ -18,9 +18,9 @@
           <NuxtLink to="/imprint" class="ml-4 opacity-70 hover:opacity-100 decoration-bb-lighter hover:underline">Impressum</NuxtLink>
         </div>
         <div class="flex flex-row gap-3">
-          <NuxtLink to="mailto:contact@blackbeetle.de" class="opacity-70 hover:opacity-100"><IconMail :fill="$tailwind.colors['bb-lighter']" /></NuxtLink>
-          <NuxtLink to="https://github.com/j-brand" target="_blank" class="opacity-70 hover:opacity-100"><IconGithub :fill="$tailwind.colors['bb-lighter']" /></NuxtLink>
-          <NuxtLink to="https://www.linkedin.com/in/j-brand-a82a46210/" target="_blank" class="opacity-70 hover:opacity-100"><IconLinkedIn :fill="$tailwind.colors['bb-lighter']" /></NuxtLink>
+          <NuxtLink to="mailto:contact@blackbeetle.de" class="opacity-70 hover:opacity-100" aria-label="schreib mir eine Nachricht"><IconMail :fill="$tailwind.colors['bb-lighter']" /></NuxtLink>
+          <NuxtLink to="https://github.com/j-brand" target="_blank" class="opacity-70 hover:opacity-100" aria-label="Github Profil"><IconGithub :fill="$tailwind.colors['bb-lighter']" /></NuxtLink>
+          <NuxtLink to="https://www.linkedin.com/in/j-brand-a82a46210/" target="_blank" class="opacity-70 hover:opacity-100" aria-label="LinkedIn Profil"><IconLinkedIn :fill="$tailwind.colors['bb-lighter']" /></NuxtLink>
         </div>
       </div>
     </div>

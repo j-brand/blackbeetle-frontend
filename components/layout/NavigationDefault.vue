@@ -1,7 +1,7 @@
 <template>
   <header class="bg-bb-lighter dark:bg-bb-charcoal-dark">
     <div class="lg:hidden z-50 absolute top-0 right-0">
-      <button @click="toggleNav()" :class="navOpen ? 'is-active' : ''" class="hamburger block hamburger--spin" type="button">
+      <button @click="toggleNav()" :class="navOpen ? 'is-active' : ''" class="hamburger block hamburger--spin" type="button" aria-label="Menü">
         <span class="hamburger-box">
           <span class="hamburger-inner"></span>
         </span>

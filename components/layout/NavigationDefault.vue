@@ -20,8 +20,8 @@
       <div class="logo-wrapper">
         <NuxtLink to="/" alt="home" class="mx-auto z-10">
           <client-only>
-            <img v-if="colorMode.value == 'light'" class="h-[4.2rem] mt-6" src="/img/bb-logo.png" loading="lazy" alt="Blackbeetle Logo" />
-            <img v-if="colorMode.value == 'dark'" class="h-[4.2rem] mt-6" src="/img/bb-logo_light.png" loading="lazy" alt="Blackbeetle Logo" />
+            <img v-if="colorMode.value == 'light'" class="mt-6" src="/img/bb-logo.png" height="70" width="70" alt="Blackbeetle Logo" />
+            <img v-if="colorMode.value == 'dark'" class="mt-6" src="/img/bb-logo_light.png" height="70" width="70" alt="Blackbeetle Logo" />
           </client-only>
         </NuxtLink>
       </div>

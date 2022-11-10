@@ -1,5 +1,5 @@
 <template>
-  <main class="relative h-full min-h-screen">
+  <main class="relative h-full min-h-screen overflow-hidden">
     <Head>
       <Meta name="description" content="Ein Spiel für jeden der drauf sinnt, wie er seiner Welt entrinnt." />
       <Link v-if="preferDark" rel="icon" type="image/png" href="/img/fav/favicon-light.ico" />

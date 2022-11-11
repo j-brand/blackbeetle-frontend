@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto max-w-screen-md pt-40 pb-24 px-5 lg:px-0 break-words overflow-x-hidden md:overflow-x-visible ">
-    <h1 class="text-3xl font-medium mb-5">Datenschutzerklärung</h1>
+  <div class="container mx-auto max-w-screen-md break-words overflow-x-hidden md:overflow-x-visible ">
+    <h1 class="text-4xl anaglyph font-semibold mb-5 uppercase">Datenschutzerklärung</h1>
 
     <p class="mb-3 mt-5 text-lg">
       <strong>Benennung der verantwortlichen Stelle</strong>

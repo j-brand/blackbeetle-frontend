@@ -8,7 +8,9 @@
     <LayoutNavigationDefault />
     <div class="pattern-bg absolute w-full h-full"></div>
 
-    <slot/>
+    <div class="pt-32 pb-48 px-3 md:pt-36 lg:px-0">
+      <slot />
+    </div>
     <LayoutFooterDefault />
     <transition name="fade">
       <CookieNotice v-if="!cookieAccept" />
@@ -26,7 +28,7 @@ if (process.client) {
 
 useHead({
   htmlAttrs: {
-    lang: 'de',
+    lang: "de",
   },
   titleTemplate: "Blackbeetle - %s",
 });

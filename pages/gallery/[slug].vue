@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-40 pb-48">
+  <div>
     <div v-if="album" class=" max-w-screen-md mx-auto mb-16 px-5 md:px-0 lg:px-0 flex flex-col justify-between">
       <span class="text-lg flex justify-end mb-2 md:mb-0 dark:text-bb-light">
         {{ formatDate(album.start_date, true) }} -

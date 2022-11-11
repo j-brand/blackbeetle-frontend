@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto max-w-screen-md min-h-full pt-40 pb-24 px-5 lg:px-0">
-    <h1 class="text-3xl font-medium mb-5">Impressum</h1>
+  <div class="container mx-auto max-w-screen-md min-h-full">
+    <h1 class="text-4xl anaglyph font-semibold mb-5 uppercase">Impressum</h1>
 
     <p>Diese Seite wird betrieben von Johannes Brand<br /></p>
 

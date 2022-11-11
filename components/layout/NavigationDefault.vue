@@ -17,8 +17,8 @@
         <NuxtLink @click.native="closeNav" to="/blog" class="nav-item">Geschichten</NuxtLink>
         <NuxtLink @click.native="closeNav" to="/gallery" class="nav-item">Galerie</NuxtLink>
       </nav>
-      <div class="logo-wrapper">
-        <NuxtLink to="/" alt="home" class="mx-auto z-10">
+      <div id="logo-wrapper">
+        <NuxtLink to="/" alt="home" id="bb-logo-link" class="mx-auto z-10">
           <client-only>
             <img v-if="colorMode.value == 'light'" class="mt-6" src="/img/bb-logo.png" height="70" width="70" alt="Blackbeetle Logo" />
             <img v-if="colorMode.value == 'dark'" class="mt-6" src="/img/bb-logo_light.png" height="70" width="70" alt="Blackbeetle Logo" />

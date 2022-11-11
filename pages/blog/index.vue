@@ -1,6 +1,6 @@
 <template>
-  <div v-if="stories" class="flex flex-col justify-center items-center pt-32 md:pt-40 pb-52 gap-2 max-w-screen-md mx-auto overflow-y-hidden">
-    <NuxtLink :to="`/blog/${story.slug}`" v-for="story in stories" :key="story.id" class="mb-6 px-5 lg:px-0">
+  <div v-if="stories" class="flex flex-col justify-center items-center gap-2 max-w-screen-md mx-auto overflow-y-hidden">
+    <NuxtLink :to="`/blog/${story.slug}`" v-for="story in stories" :key="story.id" class="mb-6">
       <ImageCardLarge :resource="story" :type="'story'" />
     </NuxtLink>
   </div>

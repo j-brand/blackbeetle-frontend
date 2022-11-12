@@ -1,131 +1,139 @@
 <template>
-  <div class="py-20">
-    <div id="countdown" class="countdown flex flex-col justify-center items-center lg:flex-row">
-      <div class="bloc-time days">
-        <span class="count-title">Tage</span>
+  <div id="countdown" class="countdown flex flex-col justify-center items-center lg:flex-row lg:pt-20">
+    <div class="bloc-time days">
+      <span class="count-title">Tage</span>
 
-        <div class="figure hours hours-1" ref="daysone">
-          <span class="top">0</span>
-          <span class="top-back">
-            <span>0</span>
-          </span>
-          <span class="bottom">0</span>
-          <span class="bottom-back">
-            <span>0</span>
-          </span>
-        </div>
-
-        <div class="figure hours hours-2" ref="daystwo">
-          <span class="top">0</span>
-          <span class="top-back">
-            <span>0</span>
-          </span>
-          <span class="bottom">0</span>
-          <span class="bottom-back">
-            <span>0</span>
-          </span>
-        </div>
-      </div>
-      <div class="bloc-time hours">
-        <span class="count-title">Stunden</span>
-
-        <div class="figure hours hours-1" ref="hoursone">
-          <span class="top">0</span>
-          <span class="top-back">
-            <span>0</span>
-          </span>
-          <span class="bottom">0</span>
-          <span class="bottom-back">
-            <span>0</span>
-          </span>
-        </div>
-
-        <div class="figure hours hours-2" ref="hourstwo">
-          <span class="top">0</span>
-          <span class="top-back">
-            <span>0</span>
-          </span>
-          <span class="bottom">0</span>
-          <span class="bottom-back">
-            <span>0</span>
-          </span>
-        </div>
+      <div class="figure hours hours-1" ref="daysone">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
       </div>
 
-      <div class="bloc-time min">
-        <span class="count-title">Minuten</span>
+      <div class="figure hours hours-2" ref="daystwo">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
+      </div>
+    </div>
+    <div class="bloc-time hours">
+      <span class="count-title">Stunden</span>
 
-        <div class="figure min min-1" ref="minutesone">
-          <span class="top">0</span>
-          <span class="top-back">
-            <span>0</span>
-          </span>
-          <span class="bottom">0</span>
-          <span class="bottom-back">
-            <span>0</span>
-          </span>
-        </div>
-
-        <div class="figure min min-2" ref="minutestwo">
-          <span class="top">0</span>
-          <span class="top-back">
-            <span>0</span>
-          </span>
-          <span class="bottom">0</span>
-          <span class="bottom-back">
-            <span>0</span>
-          </span>
-        </div>
+      <div class="figure hours hours-1" ref="hoursone">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
       </div>
 
-      <div class="bloc-time sec">
-        <span class="count-title">Sekunden</span>
+      <div class="figure hours hours-2" ref="hourstwo">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
+      </div>
+    </div>
 
-        <div class="figure sec sec-1" ref="secondsone">
-          <span class="top">0</span>
-          <span class="top-back">
-            <span>0</span>
-          </span>
-          <span class="bottom">0</span>
-          <span class="bottom-back">
-            <span>0</span>
-          </span>
-        </div>
+    <div class="bloc-time min">
+      <span class="count-title">Minuten</span>
 
-        <div class="figure sec sec-2" ref="secondstwo">
-          <span class="top">0</span>
-          <span class="top-back">
-            <span>0</span>
-          </span>
-          <span class="bottom">0</span>
-          <span class="bottom-back">
-            <span>0</span>
-          </span>
-        </div>
+      <div class="figure min min-1" ref="minutesone">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
+      </div>
+
+      <div class="figure min min-2" ref="minutestwo">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
+      </div>
+    </div>
+
+    <div class="bloc-time sec">
+      <span class="count-title">Sekunden</span>
+
+      <div class="figure sec sec-1" ref="secondsone">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
+      </div>
+
+      <div class="figure sec sec-2" ref="secondstwo">
+        <span class="top">0</span>
+        <span class="top-back">
+          <span>0</span>
+        </span>
+        <span class="bottom">0</span>
+        <span class="bottom-back">
+          <span>0</span>
+        </span>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useTimer } from "vue-timer-hook";
 import { gsap, Quart } from "gsap";
 
 const secondsone = ref<HTMLDivElement>();
 const secondstwo = ref<HTMLDivElement>();
 
+const secOne = ref(0);
+const secTwo = ref(0);
+
 const minutesone = ref<HTMLDivElement>();
 const minutestwo = ref<HTMLDivElement>();
+
+const minOne = ref(0);
+const minTwo = ref(0);
 
 const hoursone = ref<HTMLDivElement>();
 const hourstwo = ref<HTMLDivElement>();
 
+const houOne = ref(0);
+const houTwo = ref(0);
+
 const daysone = ref<HTMLDivElement>();
 const daystwo = ref<HTMLDivElement>();
 
+const dayOne = ref(0);
+const dayTwo = ref(0);
+
 const times = new Date("January 4, 2023 15:15:00");
-times.setSeconds(times.getSeconds());
-const timer = useTimer(times.getTime());
+var from = times.getTime();
 
 function animate(el: HTMLDivElement, value: number) {
   const top = el.getElementsByClassName("top")[0];
@@ -155,72 +163,67 @@ function animate(el: HTMLDivElement, value: number) {
   });
 }
 
-function setStartValues() {
-  animate(secondsone.value!, Math.floor(timer.seconds.value / 10));
-  animate(secondstwo.value!, timer.seconds.value % 10);
+function setValues() {
+  var now = new Date().getTime();
+  var timeleft = from - now;
+  var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
 
-  animate(minutesone.value!, Math.floor(timer.minutes.value / 10));
-  animate(minutestwo.value!, timer.minutes.value % 10);
+  secOne.value = Math.floor(seconds / 10);
+  secTwo.value = seconds % 10;
 
-  animate(hoursone.value!, Math.floor(timer.hours.value / 10));
-  animate(hourstwo.value!, timer.hours.value % 10);
+  minOne.value = Math.floor(minutes / 10);
+  minTwo.value = minutes % 10;
 
-  animate(daysone.value!, Math.floor(timer.days.value / 10));
-  animate(daystwo.value!, timer.days.value % 10);
+  houOne.value = Math.floor(hours / 10);
+  houTwo.value = hours % 10;
+
+  dayOne.value = Math.floor(days / 10);
+  dayTwo.value = days % 10;
 }
 
 onMounted(() => {
-  setStartValues();
+  watch(secOne, (value) => {
+    animate(secondsone.value!, value);
+  });
 
-  watchEffect(async () => {
-    if (timer.isExpired.value) {
-      console.warn("IsExpired");
-    }
+  watch(secTwo, (value) => {
+    animate(secondstwo.value!, value);
   });
-  watch(timer.seconds, (newValue, oldValue) => {
-    if (Math.floor(oldValue / 10) !== Math.floor(newValue / 10)) {
-      animate(secondsone.value!, Math.floor(newValue / 10));
-      animate(secondstwo.value!, newValue % 10);
-    } else {
-      animate(secondstwo.value!, newValue % 10);
-    }
+
+  watch(minOne, (value) => {
+    animate(minutesone.value!, value);
   });
-  watch(timer.minutes, (newValue, oldValue) => {
-    if (Math.floor(oldValue / 10) !== Math.floor(newValue / 10)) {
-      animate(minutesone.value!, Math.floor(newValue / 10));
-      animate(minutestwo.value!, newValue % 10);
-    } else {
-      animate(minutestwo.value!, newValue % 10);
-    }
+
+  watch(minTwo, (value) => {
+    animate(minutestwo.value!, value);
   });
-  watch(timer.hours, (newValue, oldValue) => {
-    if (Math.floor(oldValue / 10) !== Math.floor(newValue / 10)) {
-      animate(hoursone.value!, Math.floor(newValue / 10));
-      animate(hourstwo.value!, newValue % 10);
-    } else {
-      animate(hourstwo.value!, newValue % 10);
-    }
+
+  watch(houOne, (value) => {
+    animate(hoursone.value!, value);
   });
-  watch(timer.days, (newValue, oldValue) => {
-    if (Math.floor(oldValue / 10) !== Math.floor(newValue / 10)) {
-      animate(daysone.value!, Math.floor(newValue / 10));
-      animate(daystwo.value!, newValue % 10);
-    } else {
-      animate(daystwo.value!, newValue % 10);
-    }
+
+  watch(houTwo, (value) => {
+    animate(hourstwo.value!, value);
   });
+
+  watch(dayOne, (value) => {
+    animate(daysone.value!, value);
+  });
+
+  watch(dayTwo, (value) => {
+    animate(daystwo.value!, value);
+  });
+
+  setInterval(() => {
+    setValues();
+  }, 1000);
 });
 </script>
 
 <style scoped lang="scss">
-@font-face {
-  font-family: "Brass";
-  font-weight: 400;
-  font-display: swap;
-  src: url("brass_mono.otf") format("opentype");
-  font-display: swap;
-}
-
 a {
   text-decoration: none;
   color: #1a1a1a;
@@ -247,8 +250,15 @@ $lato: "Lato";
     display: block;
     margin-bottom: 15px;
     font-size: 1.4rem;
-    color: #1a1a1a;
     text-transform: uppercase;
+    @apply text-bb-charcoal dark:text-bb-light;
+  }
+
+  .figure,
+  .top,
+  .bottom-back,
+  .top-back {
+    @apply bg-bb-white dark:bg-bb-lighter;
   }
 
   .figure {
@@ -257,7 +267,6 @@ $lato: "Lato";
     height: 110px;
     width: 100px;
     margin-right: 10px;
-    background-color: #fff;
     border-radius: 8px;
     box-shadow: (0 3px 4px 0 rgba(0, 0, 0, 0.2), inset 2px 4px 0 0 rgba(255, 255, 255, 0.08));
 
@@ -274,7 +283,7 @@ $lato: "Lato";
       line-height: 1.2;
       font-family: Brass;
       font-weight: 700;
-      color: #de4848;
+      color: theme("colors.bb-red");
     }
 
     .top,
@@ -293,7 +302,6 @@ $lato: "Lato";
 
     .top {
       z-index: 3;
-      background-color: #f7f7f7;
       transform-origin: 50% 100%;
       -webkit-transform-origin: 50% 100%;
       border-top-left-radius: 10px;
@@ -321,7 +329,7 @@ $lato: "Lato";
       top: 0;
       height: 50%;
       overflow: hidden;
-      background-color: #f7f7f7;
+
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
 
@@ -344,7 +352,6 @@ $lato: "Lato";
     .top-back {
       z-index: 4;
       bottom: 0;
-      background-color: #fff;
       -webkit-transform-origin: 50% 0;
       transform-origin: 50% 0;
       transform: (perspective(200px) rotateX(180deg));

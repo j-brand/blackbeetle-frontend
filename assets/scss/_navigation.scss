@@ -1,4 +1,4 @@
-nav {
+nav.main-nav {
   @apply w-full pt-14 text-center flex flex-col bg-bb-lighter dark:bg-bb-charcoal-dark;
   @screen lg {
     @apply absolute pt-1 right-0 bottom-0 justify-end flex-row z-10 mr-10 bg-transparent dark:bg-transparent;
@@ -26,7 +26,7 @@ nav {
   }
 }
 
-.dark nav {
+.dark nav.main-nav {
   .router-link-active {
     color: theme("colors.bb-charcoal-darker");
     text-shadow: -1px -1px 0 theme("colors.bb-light"), 1px 1px 0 theme("colors.bb-light");

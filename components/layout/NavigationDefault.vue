@@ -11,7 +11,7 @@
       <ThemeSwitch class="left-0 top-4 lg:top-5 absolute z-[100] ml-4" />
     </ClientOnly>
     <div :class="navOpen ? 'nav-open' : ''" class="nav-mobile w-full relative flex flex-col justify-between items-center h-14 z-30 bg-bb-lighter dark:bg-bb-charcoal-dark">
-      <nav>
+      <nav class="main-nav">
         <NuxtLink @click.native="closeNav" to="/" exact class="nav-item nest">Nest</NuxtLink>
         <NuxtLink @click.native="closeNav" to="/about" class="nav-item">Über</NuxtLink>
         <NuxtLink @click.native="closeNav" to="/blog" class="nav-item">Geschichten</NuxtLink>

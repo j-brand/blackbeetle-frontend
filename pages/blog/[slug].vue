@@ -1,15 +1,16 @@
 <template>
-  <div class="max-w-screen-md mx-auto flex flex-col justify-between pb-60" v-if="story">
+  <div class="max-w-screen-md mx-auto flex flex-col justify-between" v-if="story">
     <transition name="fade">
       <Loader v-if="pending || loading" />
     </transition>
     <div class="mb-5">
-      <div v-if="pagination == 1" class="flex flex-col justify-center min-h-screen mx-5 lg:mx-0">
+      <Pagination v-if="story.posts.current_page > 1" :offset="3" :pagination="story.posts" @paginate="changePage" class="my-14 relative flex justify-center" />
+      <div v-if="getPagination() == 1" class="flex flex-col justify-center min-h-1/2-screen mx-5 lg:mx-0">
         <h1 class="text-4xl text-center uppercase tracking-widest font-semibold">{{ story.title }}</h1>
         <p class="text-2xl text-center mt-10" v-html="story.description"></p>
         <StoryImage :storySlug="story.slug" />
       </div>
-      <div class="flex flex-row justify-end mx-5 lg:mx-0">
+      <div v-if="getPagination() == 1" class="flex flex-row justify-end mx-5 lg:mx-0">
         <button
           type="button"
           id="subscribe"
@@ -34,7 +35,6 @@
         </button>
       </div>
     </div>
-    <Pagination v-if="story.posts.current_page > 1" :offset="3" :pagination="story.posts" @paginate="changePage" class="mt-44 mb-10" />
 
     <template v-for="(post, index) in story.posts.data" :key="index">
       <hr class="w-1/4 my-10 mx-auto border-bb-charcoal dark:border-bb-light h-px" v-if="index != story.posts.data.length && index != 0" />
@@ -43,7 +43,7 @@
       <PostMap v-if="post.type == 'map'" :post="post" class="rounded-md" />
       <PostVideo v-if="post.type == 'video'" :post="post" class="rounded-md" />
     </template>
-    <Pagination :offset="3" :pagination="story.posts" @paginate="changePage" class="mt-10" />
+    <Pagination :offset="3" :pagination="story.posts" @paginate="changePage" class="my-14 relative flex justify-center" />
     <transition name="fade">
       <ModalStorySubsription class="fixed w-full h-full left-0 top-0" v-if="showSub" :storyID="story.id" @close="showSub = !showSub"></ModalStorySubsription>
     </transition>
@@ -60,7 +60,12 @@ const pagination = ref(1);
 const route = useRoute();
 const order = useCookie(route.params.slug.toString());
 
-const { data: story, pending, refresh, error } = await useAsyncData(`story-${route.params.slug}`, () => apiService.getStoryBySlug<IStory>("/story", route.params.slug as string, getOrder(), getPagination()));
+const {
+  data: story,
+  pending,
+  refresh,
+  error,
+} = await useAsyncData(`story-${route.params.slug}`, () => apiService.getStoryBySlug<IStory>("/story", route.params.slug as string, getOrder(), getPagination()));
 
 const { getImgPath } = useHelper();
 

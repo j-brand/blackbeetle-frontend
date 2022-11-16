@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode", "@nuxt/image-edge"],
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
   css: ["@/assets/scss/main.scss"],
   colorMode: {
     classSuffix: "",
@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     },
   },
   build: {
-    transpile: ["@googlemaps/js-api-loader","lazysizes"],
+    transpile: ["@googlemaps/js-api-loader", "lazysizes"],
   },
   tailwindcss: {
     exposeConfig: true,

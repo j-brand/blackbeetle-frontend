@@ -13,5 +13,6 @@ import { IAlbums } from "~~/types";
 const { data: albums } = await useAsyncData("albums", () => apiService.get<IAlbums>("/album"));
 useHead({
   title: "Galerie",
+  meta: [{ description: "Ich habe noch nie ein Foto gemacht, wie ich es beabsichtigt hatte. Sie sind immer schlechter oder besser. - Diane Arbus" }],
 });
 </script>

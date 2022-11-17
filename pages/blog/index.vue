@@ -13,6 +13,7 @@ import { IStories } from "~~/types";
 const { data: stories } = await useAsyncData("stories", () => apiService.get<IStories>("/story"));
 
 useHead({
-  title: "Blog",
+  title: "Geschichten",
+  meta: [{ description: "Storytelling is not something we do. Storytelling is who we are. - Carmine Gallo" }],
 });
 </script>

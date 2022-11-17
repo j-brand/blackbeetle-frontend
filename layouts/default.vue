@@ -27,9 +27,11 @@ if (process.client) {
 }
 
 useHead({
+  titleTemplate: (titleChunk) => {
+    return titleChunk ? `Blackbeetle - ${titleChunk}` : "Blackbeetle";
+  },
   htmlAttrs: {
     lang: "de",
   },
-  titleTemplate: "Blackbeetle - %s",
 });
 </script>

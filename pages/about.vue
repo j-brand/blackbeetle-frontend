@@ -23,6 +23,6 @@
 <script setup lang="ts">
 useHead({
   title: "Über",
-  meta: [{ description: "Ich bin nicht verrückt. Meine Realität ist einfach anders als Deine.  - Der Hutmacher" }],
+  meta: [{ name:"description", content: "Ich bin nicht verrückt. Meine Realität ist einfach anders als Deine.  - Der Hutmacher" }],
 });
 </script>

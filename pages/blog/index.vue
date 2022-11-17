@@ -14,6 +14,6 @@ const { data: stories } = await useAsyncData("stories", () => apiService.get<ISt
 
 useHead({
   title: "Geschichten",
-  meta: [{ description: "Storytelling is not something we do. Storytelling is who we are. - Carmine Gallo" }],
+  meta: [{ name:"description", content: "Storytelling is not something we do. Storytelling is who we are. - Carmine Gallo" }],
 });
 </script>

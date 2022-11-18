@@ -1,6 +1,12 @@
 export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
   css: ["@/assets/scss/main.scss"],
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: { overrideBrowserslist: ["last 3 versions", "> 1%"] },
+    },
+  },
   colorMode: {
     classSuffix: "",
   },
@@ -18,13 +24,5 @@ export default defineNuxtConfig({
   },
   tailwindcss: {
     exposeConfig: true,
-  },
-  image: {
-    screens: {
-      sm: 640,
-      md: 768,
-      lg: 1024,
-      xl: 1280,
-    },
   },
 });

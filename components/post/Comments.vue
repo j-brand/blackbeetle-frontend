@@ -12,9 +12,8 @@
         >
       </button>
     </div>
-
-    <Transition>
-      <div v-if="commentsOpen" class="comment-box overflow-hidden" >
+    <transition name="expand">
+      <div v-show="commentsOpen" class="" ref="com">
         <article class="mb-5" v-for="comment in comments" :key="comment.id">
           <div class="flex justify-between mb-2">
             <h5 class="text-md font-bold">{{ comment.name }}</h5>
@@ -23,7 +22,7 @@
           <p>{{ comment.content }}</p>
         </article>
       </div>
-    </Transition>
+    </transition>
   </div>
 </template>
 
@@ -34,7 +33,8 @@ import { PropType } from "vue";
 import "@/assets/scss/_emoji-picker.scss";
 
 const { formatDate } = useHelper();
-const commentsOpen = ref<boolean>(false);
+const com = ref<HTMLDivElement>();
+const commentsOpen = ref<boolean>(true);
 const emit = defineEmits(["openModal"]);
 
 const props = defineProps({
@@ -44,37 +44,37 @@ const props = defineProps({
   },
 });
 
+let height = ref();
+
 function toggleComments() {
   commentsOpen.value = !commentsOpen.value;
 }
+
+onMounted(() => {
+  height.value = `${com?.value?.getBoundingClientRect().height}px`;
+  commentsOpen.value = false;
+});
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 textarea {
   @apply rounded-md pt-2;
 }
-/* 
-.comment-box {
-  transition: max-height 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
-  max-height: 0px;
-  &.open {
-    max-height: 800px;
-    overflow-y: auto;
-    padding-right: 10px;
-  }
-} */
 
-
-/* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active {
-  transition: max-height 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
-  max-height: 0px;
-
+.expand-leave-active,
+.expand-enter-active {
+  transition: all 300ms ease-in-out;
+  overflow: hidden;
 }
 
-.v-enter-from,
-.v-leave-to {
-  max-height: 800px;
+.expand-enter-to,
+.expand-leave-from {
+  height: v-bind(height);
+}
+
+.expand-enter-from,
+.expand-leave-to {
+  opacity: 0;
+  height: 0;
 }
 </style>

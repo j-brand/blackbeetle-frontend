@@ -10,7 +10,7 @@
         <p class="text-2xl text-center mt-10" v-html="story.description"></p>
         <StoryImage :storySlug="story.slug" />
       </div>
-      <div v-if="getPagination() == 1" class="flex flex-row justify-end mx-5 lg:mx-0">
+      <div v-if="getPagination() == 1" class="flex flex-row justify-end">
         <button
           type="button"
           id="subscribe"
@@ -89,11 +89,11 @@ function getOrder(): string {
   return order.value ? order.value : "asc";
 }
 
-function getPagination(): number | null {
-  if (route.query != null) {
+function getPagination(): number {
+  if (route.query != null && route.query.page != null) {
     return parseInt(route.query.page as string);
   }
-  return null;
+  return 1;
 }
 
 function toggleOrder() {

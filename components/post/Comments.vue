@@ -13,15 +13,17 @@
       </button>
     </div>
 
-    <div class="overflow-hidden duration-500 ease-in-out transition-[max-height]" :class="commentsOpen ? 'max-h-[300rem]' : ' max-h-0'">
-      <article class="mb-5" v-for="comment in comments" :key="comment.id">
-        <div class="flex justify-between mb-2">
-          <h5 class="text-md font-bold">{{ comment.name }}</h5>
-          <span>{{ formatDate(comment.created_at, true) }}</span>
-        </div>
-        <p>{{ comment.content }}</p>
-      </article>
-    </div>
+    <Transition>
+      <div v-if="commentsOpen" class="comment-box overflow-hidden" >
+        <article class="mb-5" v-for="comment in comments" :key="comment.id">
+          <div class="flex justify-between mb-2">
+            <h5 class="text-md font-bold">{{ comment.name }}</h5>
+            <span>{{ formatDate(comment.created_at, true) }}</span>
+          </div>
+          <p>{{ comment.content }}</p>
+        </article>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -50,5 +52,29 @@ function toggleComments() {
 <style lang="scss">
 textarea {
   @apply rounded-md pt-2;
+}
+/* 
+.comment-box {
+  transition: max-height 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  max-height: 0px;
+  &.open {
+    max-height: 800px;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+} */
+
+
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: max-height 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
+  max-height: 0px;
+
+}
+
+.v-enter-from,
+.v-leave-to {
+  max-height: 800px;
 }
 </style>

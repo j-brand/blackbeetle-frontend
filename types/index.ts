@@ -66,3 +66,8 @@ export interface IComment {
   content: string;
   created_at: Date;
 }
+
+export interface IOption {
+  name: string;
+  content: string;
+}

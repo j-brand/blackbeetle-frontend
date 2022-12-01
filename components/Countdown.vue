@@ -132,8 +132,12 @@ const daystwo = ref<HTMLDivElement>();
 const dayOne = ref(0);
 const dayTwo = ref(0);
 
-const times = new Date("January 4, 2023 15:15:00");
-var from = times.getTime();
+const props = defineProps({
+  dateString: { type: String, required: true },
+});
+
+const endTime = new Date(props.dateString);
+var from = endTime.getTime();
 
 function animate(el: HTMLDivElement, value: number) {
   const top = el.getElementsByClassName("top")[0];

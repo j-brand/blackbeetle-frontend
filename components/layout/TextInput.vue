@@ -1,6 +1,6 @@
 <template>
   <label :for="label">
-    <smalspanl class="dark:text-bb-light text-sm">{{ label }}</smalspanl> <span class="text-bb-light-red text-sm" v-if="errors[label]">{{ errors[label] }}</span>
+    <small class="dark:text-bb-light text-sm">{{ label }}</small> <span class="text-bb-light-red text-sm" v-if="errors[label]">{{ errors[label] }}</span>
     <input
       :type="type"
       :id="slugify(label)"

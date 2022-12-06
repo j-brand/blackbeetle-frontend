@@ -1,7 +1,10 @@
-export default function useDetectOutsideClick(component, callback:Function) {
-  if (!component) return;
+
+
+
+export default function useDetectOutsideClick(element, callback: Function) {
+  if (!element) return;
   const listener = (event) => {
-    if (event.target !== component.value && event.composedPath().includes(component.value)) {
+    if (event.target !== element.value && event.composedPath().includes(element.value)) {
       return;
     }
     if (typeof callback === "function") {

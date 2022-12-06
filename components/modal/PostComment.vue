@@ -17,9 +17,9 @@
           </div>
           <div class="relative text-sm">
             <LayoutTextarea class="text-bb-light" label="Nachricht" v-model="fields.content" />
-            <div class="absolute bottom-12 right-10">
+            <div class="absolute bottom-12 right-10" ref="picker">
               <button @click="toggleEmojiPicker" class="cursor-pointer absolute" type="button">
-                <IconEmoji class="bb-icon"/>
+                <IconEmoji class="bb-icon" />
               </button>
               <EmojiPicker
                 class="absolute transform translate-x-[-290px] lg:translate-x-8 z-50"
@@ -33,7 +33,6 @@
           </div>
           <LayoutButton type="submit" classes="btn-dark" :loading="isLoading" :disabled="isDisabled">abschicken</LayoutButton>
         </form>
-
       </client-only>
       <button @click="$emit('close', true)" class="top-4 right-4 absolute"><IconClose :fill="$tailwind.colors['bb-lighter']" /></button>
     </div>
@@ -57,10 +56,16 @@ const { $tailwind } = useNuxtApp();
 
 const bot = ref(null);
 const isLoading = ref(false);
-const fields = reactive({ name: "", content: ""});
-
+const fields = reactive({ name: "", content: "" });
+const picker = ref();
 const { errors } = useFormValidation();
 const { isDisabled } = useButtonState(fields, errors);
+
+useDetectOutsideClick(picker, () => {
+  if (showEmojiPicker.value) {
+    showEmojiPicker.value = false;
+  }
+});
 
 //const message = ref({ name: "", content: "" });
 const emit = defineEmits(["new", "close"]);

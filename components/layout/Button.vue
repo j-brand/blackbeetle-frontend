@@ -1,7 +1,7 @@
 <template>
   <button
-    class="relative px-4 py-1 border border-solid rounded-lg transition duration-200 "
-    :class="[classes, loading ? 'spinner before:border-bb-charcoal before:dark:border-bb-light before:border-solid before:border-2' : '']"
+    class="relative px-4 py-1 border border-solid rounded-lg transition duration-200"
+    :class="[classes, loading ? 'spinner before:border-bb-light hover:before:border-bb-charcoal before:dark:border-bb-light before:border-solid before:border-2' : '']"
     :disabled="disabled"
   >
     <span :class="[{ 'opacity-0': loading }, disabled ? 'dark:text-gray-500' : '']">

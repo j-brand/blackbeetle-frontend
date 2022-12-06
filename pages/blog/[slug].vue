@@ -43,7 +43,7 @@
       <PostMap v-if="post.type == 'map'" :post="post" class="rounded-md" />
       <PostVideo v-if="post.type == 'video'" :post="post" class="rounded-md" />
     </template>
-    <Pagination :offset="3" :pagination="story.posts" @paginate="changePage" class="my-14 relative flex justify-center" />
+    <Pagination :offset="3" v-if="story.posts.data.length > 5" :pagination="story.posts" @paginate="changePage" class="my-14 relative flex justify-center" />
     <transition name="fade">
       <ModalStorySubsription class="fixed w-full h-full left-0 top-0" v-if="showSub" :storyID="story.id" @close="showSub = !showSub"></ModalStorySubsription>
     </transition>

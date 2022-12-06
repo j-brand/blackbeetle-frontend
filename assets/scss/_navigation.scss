@@ -1,3 +1,4 @@
+
 nav.main-nav {
   @apply w-full pt-14 text-center flex flex-col bg-bb-lighter dark:bg-bb-charcoal-dark;
   @screen lg {
@@ -49,7 +50,7 @@ nav.main-nav {
 
   &::before {
     content: "";
-    @apply absolute top-0 bottom-0 left-0 right-0 bg-bb-lighter dark:bg-bb-charcoal-dark;
+    @apply absolute left-0 right-0 bg-bb-lighter dark:bg-bb-charcoal-dark min-h-[125px];
     --mask: linear-gradient(to left top, red, red) 0 -60px / 100% no-repeat, radial-gradient(50px at 50% 10%, #000 99%, #0000 100%) bottom/150px 70px no-repeat;
     mask: var(--mask);
   }

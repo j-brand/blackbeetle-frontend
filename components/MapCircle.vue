@@ -12,7 +12,7 @@
         <GoogleMapBounds :coordinates="[content]" :map="map"></GoogleMapBounds>
       </GoogleMap>
     </div>
-    <NuxtLink to="/blog/the-journey" class="-translate-y-9">
+    <NuxtLink to="/blog/back-again" class="-translate-y-9">
       <LayoutButton class="btn-dark py-2"
         ><span class="flex flex-row">SCHAU ES DIR AN <IconArrow /></span>
       </LayoutButton>

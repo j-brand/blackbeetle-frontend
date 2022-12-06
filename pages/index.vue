@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-const countdownDate = "January 4, 2022 15:15:00";
+const countdownDate = "January 4, 2023 15:15:00";
 
 const showCountdown = new Date(countdownDate) > new Date();
 

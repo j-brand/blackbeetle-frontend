@@ -36,7 +36,7 @@
       </div>
     </div>
 
-    <template v-for="(post, index) in story.posts.data" :key="index">
+    <template v-for="(post, index) in story.posts.data" :key="post.id">
       <hr class="w-1/4 my-10 mx-auto border-bb-charcoal dark:border-bb-light h-px" v-if="index != story.posts.data.length && index != 0" />
       <PostHtml v-if="post.type === 'html'" :post="post" />
       <PostImage v-if="post.type == 'image'" :post="post" class="md:rounded-md" />

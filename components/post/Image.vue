@@ -1,10 +1,11 @@
 <template>
   <div class="swiper-container w-full h-auto overflow-hidden relative cursor-pointer" ref="swiperEle">
     <div class="swiper-wrapper" ref="galleryEle">
-      <div class="swiper-slide w-full " v-for="(image, index) in post.images">
-        <div class="flex justify-center bg-bb-charcoal bg-opacity-40">
+      <div class="swiper-slide w-full" v-for="(image, index) in post.images">
+        <div class="flex justify-center bg-bb-charcoal bg-opacity-40 min-h-[500px]">
           <img class="max-h-[580px]" :data-large="getImgPath(image, '_large')" :src="getImgPath(image, '_aswipe')" loading="lazy" />
           <span class="hidden" :id="'caption_' + index">{{ image.description }}</span>
+          <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
         </div>
       </div>
     </div>
@@ -32,7 +33,8 @@ import "lightgallery/scss/lg-zoom.scss";
 import "lightgallery/scss/lg-fullscreen.scss";
 
 // Swiper Js Imports
-import Swiper, { Navigation, Pagination } from "swiper";
+import Swiper from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 import { PropType } from "vue";
 
 const { getImgPath } = useHelper();
@@ -95,6 +97,7 @@ function initSwiper() {
   swiperRef.value = new Swiper(swiperEle.value, {
     modules: [Navigation, Pagination],
     autoHeight: true,
+    watchSlidesProgress:true,
     slidesPerView: 1,
     initialSlide: 0,
     pagination: {

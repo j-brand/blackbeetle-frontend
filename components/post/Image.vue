@@ -2,8 +2,8 @@
   <div class="swiper-container w-full h-auto overflow-hidden relative cursor-pointer" ref="swiperEle">
     <div class="swiper-wrapper" ref="galleryEle">
       <div class="swiper-slide w-full" v-for="(image, index) in post.images">
-        <div class="flex justify-center bg-bb-charcoal bg-opacity-40 min-h-[276px] md:min-h-[500px]">
-          <img class="md:max-h-[580px]" :data-large="getImgPath(image, '_large')" :src="getImgPath(image, '_aswipe')" loading="lazy" />
+        <div class="flex justify-center bg-bb-charcoal bg-opacity-40">
+          <img :data-large="getImgPath(image, '_large')" :src="getImgPath(image, '_aswipe')" loading="lazy" :height="image.height" :width="image.width" />
           <span class="hidden" :id="'caption_' + index">{{ image.description }}</span>
           <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
         </div>
@@ -97,7 +97,7 @@ function initSwiper() {
   swiperRef.value = new Swiper(swiperEle.value, {
     modules: [Navigation, Pagination],
     autoHeight: true,
-    watchSlidesProgress:true,
+    watchSlidesProgress: true,
     slidesPerView: 1,
     initialSlide: 0,
     pagination: {

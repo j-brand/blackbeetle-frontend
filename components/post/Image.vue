@@ -1,9 +1,11 @@
 <template>
   <div class="swiper-container w-full h-auto overflow-hidden relative cursor-pointer" ref="swiperEle">
     <div class="swiper-wrapper" ref="galleryEle">
-      <div class="swiper-slide w-full" v-for="(image, index) in post.images" :key="index">
-        <img :data-large="getImgPath(image, '_large')" :src="getImgPath(image, '_aswipe')" loading="lazy" />
-        <span class="hidden" :id="'caption_' + index">{{ image.description }}</span>
+      <div class="swiper-slide w-full " v-for="(image, index) in post.images">
+        <div class="flex justify-center bg-bb-charcoal bg-opacity-40">
+          <img class="max-h-[580px]" :data-large="getImgPath(image, '_large')" :src="getImgPath(image, '_aswipe')" loading="lazy" />
+          <span class="hidden" :id="'caption_' + index">{{ image.description }}</span>
+        </div>
       </div>
     </div>
 
@@ -37,7 +39,7 @@ const { getImgPath } = useHelper();
 
 const galleryEle = ref<HTMLElement | null>(null);
 const swiperEle = ref<HTMLElement | any>(null);
-const swiperRef = ref();
+const swiperRef = ref(null);
 const gallery = ref(null);
 
 const props = defineProps({
@@ -50,7 +52,7 @@ const props = defineProps({
 function initGallery() {
   const dynamicEl = [...galleryEle.value.getElementsByClassName("swiper-slide")].map((slide: HTMLImageElement) => {
     return {
-      src: slide.getElementsByTagName("img")[0].getAttribute('data-large'),
+      src: slide.getElementsByTagName("img")[0].getAttribute("data-large"),
       thumb: slide.getElementsByTagName("img")[0].src,
       subHtml: slide.getElementsByTagName("span")[0].innerText,
     };
@@ -85,11 +87,16 @@ function destroyGallery() {
   gallery.value.destroy();
 }
 
+function refreshGallery() {
+  gallery.value.refresh();
+}
+
 function initSwiper() {
   swiperRef.value = new Swiper(swiperEle.value, {
     modules: [Navigation, Pagination],
     autoHeight: true,
     slidesPerView: 1,
+    initialSlide: 0,
     pagination: {
       el: ".swiper-pagination",
       dynamicBullets: true,

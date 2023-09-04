@@ -97,10 +97,10 @@ function getPagination(): number {
 }
 
 function toggleOrder() {
-  if (order.value === "asc") {
-    order.value = "desc";
-  } else {
+  if (order.value === "desc") {
     order.value = "asc";
+  } else {
+    order.value = "desc";
   }
   refresh();
 }

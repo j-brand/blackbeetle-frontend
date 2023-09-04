@@ -5,7 +5,7 @@
       <div class="container flex items-center justify-between flex-col md:flex-row py-3 px-5 mx-auto">
         <div class="flex flex-row">
           <div class="flex flex-col items-center md:items-start py-1">
-            <span class="text-base font-sans-secondary h-7 leading-7">© 2022 BLACKBEETLE</span>
+            <span class="text-base font-sans-secondary h-7 leading-7">© 2023 BLACKBEETLE</span>
             <span class="h-7 leading-7"
               >Made with &#128150; and interest by
               <span class="text-bb-red h-7  leading-7">Johannes Brand</span>

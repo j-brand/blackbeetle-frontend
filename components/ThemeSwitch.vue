@@ -7,12 +7,17 @@
 
 <script setup lang="ts">
 const colorMode = useColorMode();
+const colorCookie = useCookie("colorMode");
+
 
 function toggleDarkMode() {
   if (colorMode.value !== "dark") {
     colorMode.preference = "dark";
+    colorCookie.value = "dark"
   } else {
     colorMode.preference = "light";
+    colorCookie.value = "light"
+
   }
 }
 </script>

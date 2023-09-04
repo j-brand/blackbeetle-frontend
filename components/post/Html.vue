@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col rounded-lg lg:p-0">
+  <div class="flex flex-col rounded-lg px-2 lg:p-0">
     <div class="flex flex-col justify-between mb-2">
       <p class="text-right md:text-md">{{ formatDate(post.date) }}</p>
       <h2 class="text-2xl font-semibold">{{ post.title }}</h2>

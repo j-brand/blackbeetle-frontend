@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col rounded-lg pt-4">
+  <div class="flex flex-col rounded-lg pt-4 pr-5">
     <div class="relative flex justify-end">
       <button type="button" class="dark:color-bb-lighter">
         <IconPen class="cursor-pointer mb-5 w-6 h-6 mr-3 dark:fill-bb-light" @click="emit('openModal')" />

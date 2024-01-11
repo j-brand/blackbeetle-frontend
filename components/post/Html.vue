@@ -29,3 +29,10 @@ function addNewComment(comment: IComment) {
   props.post.comments.push(comment);
 }
 </script>
+
+<style lang="scss">
+a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+</style>

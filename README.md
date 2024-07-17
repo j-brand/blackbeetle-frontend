@@ -36,6 +36,6 @@ This part of the project has probably changed the most. As part of the Laravel a
 - for more infos check out the package.json
 
 
-### Featrues to come
+### Features to come
 
-- Update Nuxt and other Depenencies
+- Update Nuxt and other Dependencies

@@ -6,3 +6,7 @@ nuxt.d.ts
 .env
 .env.dev
 .env.prod
+.direnv/
+.envrc
+flake.nix
+flake.lock

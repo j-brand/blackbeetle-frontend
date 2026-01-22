@@ -7,10 +7,12 @@
       </text>
     </svg>
     <div class="h-96 w-96 rounded-full overflow-hidden border-5 border-bb-charcoal">
-      <GoogleMap v-if="location" class="w-full h-112" :zoom="4" v-slot="{ map }">
-        <GoogleMapMarker :position="content.position" :label="content.info" :map="map"></GoogleMapMarker>
-        <GoogleMapBounds :coordinates="[content]" :map="map"></GoogleMapBounds>
-      </GoogleMap>
+      <ClientOnly>
+        <GoogleMap v-if="location" class="w-full h-112" :zoom="4" v-slot="{ map }">
+          <GoogleMapMarker :position="content.position" :label="content.info" />
+          <GoogleMapBounds :coordinates="[content]" :map="map" />
+        </GoogleMap>
+      </ClientOnly>
     </div>
     <NuxtLink to="/blog/back-again" class="-translate-y-9">
       <LayoutButton class="btn-dark py-2"
@@ -22,7 +24,7 @@
 
 <script setup lang="ts">
 import { apiService } from "~~/lib/api.service";
-import { IOption } from "~~/types";
+import type { IOption } from "~~/types";
 
 const { data: location } = await useAsyncData("location", () => apiService.get<IOption>("/option/my_location"));
 
@@ -31,7 +33,7 @@ const content = computed(() => {
 });
 </script>
 
-<style lang="scss">
+<style>
 .spin {
   animation: 15s linear 0s infinite spin_cw;
 }

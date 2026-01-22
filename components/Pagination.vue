@@ -83,7 +83,7 @@ async function navigate(page) {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .pagination {
   margin-top: 40px;
 }

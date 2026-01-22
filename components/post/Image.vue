@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { IPost } from "@/types";
+import type { IPost } from "@/types";
 
 //Lightgallery Imports
 import lightGallery from "lightgallery";
@@ -35,7 +35,7 @@ import "lightgallery/scss/lg-fullscreen.scss";
 // Swiper Js Imports
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
-import { PropType } from "vue";
+import type { PropType } from "vue";
 
 const { getImgPath } = useHelper();
 
@@ -122,15 +122,16 @@ onUnmounted(() => {
 });
 </script>
 
-<style lang="scss">
+<style>
 .swiper-button-next,
 .swiper-button-prev {
   height: 100%;
   top: 1.5rem;
   width: 50px;
-  &:focus {
-    outline: none;
-  }
+}
+.swiper-button-next:focus,
+.swiper-button-prev:focus {
+  outline: none;
 }
 
 .swiper-button-next {

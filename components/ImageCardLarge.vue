@@ -37,14 +37,12 @@ const props = defineProps(["resource", "type"]);
 const { formatDate, getImgPath, getExcerpt } = useHelper();
 </script>
 
-<style lang="scss" scoped>
-.zoom-in {
-  img {
-    transition: all 0.3s ease-in-out;
-  }
-  &:hover img {
-    transform: scale(1.05);
-  }
+<style scoped>
+.zoom-in img {
+  transition: all 0.3s ease-in-out;
+}
+.zoom-in:hover img {
+  transform: scale(1.05);
 }
 .card-content {
   background: linear-gradient(hsl(0 0% 0% / 0), hsl(0 0% 10% / 1));
@@ -53,13 +51,11 @@ const { formatDate, getImgPath, getExcerpt } = useHelper();
   -webkit-box-shadow: inset 0px 0px 85px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: inset 0px 0px 85px rgba(0, 0, 0, 0.4);
   box-shadow: inset 0px 0px 85px rgba(0, 0, 0, 0.4);
-
   line-height: 0; /* ensure no space between bottom */
-
   display: inline-block; /* don't go wider than image */
-  img {
-    position: relative;
-    z-index: -1; /* position beneath */
-  }
+}
+.vignette img {
+  position: relative;
+  z-index: -1; /* position beneath */
 }
 </style>

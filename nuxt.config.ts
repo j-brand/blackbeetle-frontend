@@ -1,12 +1,10 @@
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
-  css: ["@/assets/scss/main.scss"],
-  postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: { overrideBrowserslist: ["last 3 versions", "> 1%"] },
-    },
+  compatibilityDate: "2025-01-22",
+  future: {
+    compatibilityVersion: 4,
   },
+  modules: ["@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
+  css: ["@/assets/css/main.css"],
   colorMode: {
     classSuffix: "",
   },
@@ -15,14 +13,14 @@ export default defineNuxtConfig({
     public: {
       apiBase: "",
       backendUrl: "",
-      googleApiKey: "",
       lgLicenseKey: "",
     },
   },
-  build: {
-    transpile: ["@googlemaps/js-api-loader", "lazysizes"],
-  },
   tailwindcss: {
-    exposeConfig: true,
+    cssPath: "@/assets/css/main.css",
+  },
+  sourcemap: {
+    server: false,
+    client: false,
   },
 });

@@ -40,11 +40,11 @@
 </template>
 
 <script setup lang="ts">
-import { IComment } from "@/types";
+import type { IComment } from "@/types";
 
 import EmojiPicker from "vue3-emoji-picker";
 import { apiService } from "~~/lib/api.service";
-import "@/assets/scss/_emoji-picker.scss";
+import "@/assets/css/emoji-picker.css";
 
 const showEmojiPicker = ref<boolean>(false);
 

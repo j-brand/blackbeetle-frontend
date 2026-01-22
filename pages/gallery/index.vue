@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { apiService } from "~~/lib/api.service";
-import { IAlbums } from "~~/types";
+import type { IAlbums } from "~~/types";
 
 const { data: albums } = await useAsyncData("albums", () => apiService.get<IAlbums>("/album"));
 useHead({

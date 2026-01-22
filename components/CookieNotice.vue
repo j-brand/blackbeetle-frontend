@@ -24,7 +24,7 @@ function accept() {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .gradient {
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.4), rgba(26, 26, 26, 0.8), #1a1a1a);
 }

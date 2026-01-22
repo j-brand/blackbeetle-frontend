@@ -3,13 +3,13 @@
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
-
 :root {
   --swiper-navigation-size: 2rem;
 }
+
 .swiper-pagination-bullet {
-  border: 2px solid rgb(65, 65, 65);
-  background: theme("colors.bb-lighter");
+  border: 2px solid var(--color-bb-charcoal);
+  background: var(--color-bb-lighter);
   width: 13px;
   height: 13px;
 }

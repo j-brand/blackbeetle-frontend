@@ -1,44 +1,20 @@
-<template></template>
+<template>
+  <LMarker :lat-lng="latLng">
+    <LPopup v-if="label">{{ label }}</LPopup>
+  </LMarker>
+</template>
+
 <script setup lang="ts">
-import { PropType } from "vue";
-import { ILatLng, IMap } from "~~/types/gmap";
+import { LMarker, LPopup } from "@vue-leaflet/vue-leaflet";
+import type { LatLngExpression } from "leaflet";
 
 const props = defineProps({
-  map: {
-    type: Object as PropType<IMap>,
-    required: true,
-  },
   position: {
-    type: Object as PropType<ILatLng>,
+    type: Object as () => { lat: number; lng: number },
     required: true,
   },
   label: { type: String },
 });
 
-const marker = new google.maps.Marker({
-  map: props.map,
-  position: props.position,
-});
-
-function addInfoWindow() {
-  const infoWindowContent = `<div class="bg-white text-black"><span class="p-2">${props.label}</span></div>`;
-
-  const infowindow = new google.maps.InfoWindow({
-    content: infoWindowContent,
-  });
-
-  marker.addListener("mouseover", function () {
-    infowindow.open(props.map, marker);
-  });
-
-  marker.addListener("mouseout", function () {
-    infowindow.close();
-  });
-}
-
-onMounted(() => {
-  if (props.label) {
-    addInfoWindow();
-  }
-});
+const latLng = computed<LatLngExpression>(() => [props.position.lat, props.position.lng]);
 </script>

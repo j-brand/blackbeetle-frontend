@@ -18,8 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { IPost } from "@/types";
-import { computed, PropType } from "vue";
+import type { IPost } from "@/types";
+import { computed } from "vue";
+import type { PropType } from "vue";
 
 const props = defineProps({
   post: { type: Object as PropType<IPost>, required: true },

@@ -1,32 +1,28 @@
-import { FetchError } from "ohmyfetch";
+import type { FetchError } from "ofetch";
 
 export const apiService = {
   async get<Result>(endpoint: string, order?: string): Promise<Result> {
-    return await $fetch(`${useRuntimeConfig().public.apiBase}${endpoint}`, { parseResponse: JSON.parse });
+    return await $fetch<Result>(`${useRuntimeConfig().public.apiBase}${endpoint}`);
   },
 
   async getBySlug<Result>(endpoint: string, slug: string): Promise<Result> {
-    return await $fetch(`${useRuntimeConfig().public.apiBase}${endpoint}/${slug}`, { parseResponse: JSON.parse });
+    return await $fetch<Result>(`${useRuntimeConfig().public.apiBase}${endpoint}/${slug}`);
   },
+
   async getStoryBySlug<Results>(endpoint: string, slug = "", order?: string | string[], pagination?: number): Promise<Results> {
-    let page = null;
-    if (pagination) {
-      page = `?page=${pagination}`;
-    }
-    return await $fetch(`${useRuntimeConfig().public.apiBase}${endpoint}/${slug}/${order}${page ? page : ""}`, { parseResponse: JSON.parse });
+    const page = pagination ? `?page=${pagination}` : "";
+    return await $fetch<Results>(`${useRuntimeConfig().public.apiBase}${endpoint}/${slug}/${order}${page}`);
   },
 
   async post<Resource>(endpoint: string, payload: any): Promise<Resource> {
-    return await $fetch(`${useRuntimeConfig().public.apiBase}${endpoint}`, {
-      method: "POST",
-      body: JSON.stringify(payload),
-      parseResponse: JSON.parse,
-    })
-      .then((response: Resource) => {
-        return response;
-      })
-      .catch((err:FetchError) => {
-        return Promise.reject({ data: err.data.message });
+    try {
+      return await $fetch<Resource>(`${useRuntimeConfig().public.apiBase}${endpoint}`, {
+        method: "POST",
+        body: payload,
       });
+    } catch (err) {
+      const fetchError = err as FetchError;
+      return Promise.reject({ data: fetchError.data?.message });
+    }
   },
 };

@@ -1,10 +1,10 @@
-import { Loader } from '@googlemaps/js-api-loader';
+import type { Map, Marker, LatLng, LatLngExpression, MarkerOptions } from "leaflet";
 
+// Leaflet type aliases for compatibility
+type IMarker = Marker;
+type IMarkerOptions = MarkerOptions;
+type IMap = Map;
+type ILatLng = LatLng;
+type ILatLngExpression = LatLngExpression;
 
-type IMarker = google.maps.Marker;
-type IMarkerOptions = google.maps.MarkerOptions;
-type IGoogleMapsAPI = typeof google.maps;
-type IMap = google.maps.Map;
-type ILatLng = google.maps.LatLng;
-
-export { IMarker, ILatLng, IMarkerOptions, IGoogleMapsAPI, IMap };
+export type { IMarker, ILatLng, ILatLngExpression, IMarkerOptions, IMap };

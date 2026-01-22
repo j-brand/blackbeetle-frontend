@@ -13,8 +13,8 @@
 [type="checkbox"] + label::before {
   width: 18px;
   height: 18px;
-  background-color: theme("colors.bb-charcoal");
-  border: 1px solid theme("colors.bb-lighter");
+  background-color: var(--color-bb-charcoal);
+  border: 1px solid var(--color-bb-lighter);
   display: block;
   border-radius: 5px;
   content: "";
@@ -25,7 +25,7 @@
   position: relative;
 }
 [type="checkbox"]:checked + label::before {
-  box-shadow: inset 0px 0px 0px 5px theme("colors.bb-charcoal");
-  background-color: theme("colors.bb-lighter");
+  box-shadow: inset 0px 0px 0px 5px var(--color-bb-charcoal);
+  background-color: var(--color-bb-lighter);
 }
 /* END CHECKBOX*/

@@ -1,53 +1,49 @@
 <template>
-  <div v-bind="$attrs" ref="mapRef"></div>
-  <template v-if="Boolean(map)">
-    <slot :map="map" />
-  </template>
+  <div v-bind="$attrs" class="leaflet-map-container">
+    <LMap
+      ref="mapRef"
+      :zoom="zoom"
+      :use-global-leaflet="false"
+      @ready="onMapReady"
+    >
+      <LTileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        layer-type="base"
+        name="OpenStreetMap"
+      />
+      <slot v-if="map" :map="map" />
+    </LMap>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { Loader } from "@googlemaps/js-api-loader";
-import { IGoogleMapsAPI, IMap } from "@/types/gmap";
-import { mapStyles } from "@/conf/gmap-style";
+import "leaflet/dist/leaflet.css";
+import { LMap, LTileLayer } from "@vue-leaflet/vue-leaflet";
+import type { Map as LeafletMap } from "leaflet";
 
 const props = defineProps({
-  zoom: Number,
-  apiKey: String,
+  zoom: { type: Number, default: 4 },
 });
 
-const mapRef = ref<HTMLElement | null>(null);
-const map = ref<IMap | null>(null);
-const api = ref<IGoogleMapsAPI | null>(null);
-const loader = new Loader({
-  apiKey: useRuntimeConfig().public.googleApiKey,
-  version: "weekly",
-});
+const mapRef = ref<InstanceType<typeof LMap> | null>(null);
+const map = ref<LeafletMap | null>(null);
 
-function initMap() {
-  const { Map } = (api.value = google.maps);
-  map.value = new Map(mapRef.value as HTMLElement, {
-    zoom: props.zoom,
-    clickableIcons: false,
-    streetViewControl: false,
-    gestureHandling: "cooperative",
-    mapTypeControl: false,
-    fullscreenControl: false,
-    zoomControl: false,
-  });
-
-  const style = new google.maps.StyledMapType(mapStyles, { name: "Styled Map" });
-
-  map.value.mapTypes.set("styled_map", style);
-  map.value.setMapTypeId("styled_map");
+function onMapReady(mapInstance: LeafletMap) {
+  map.value = mapInstance;
 }
 
-function initLoader() {
-  if (!window.google) {
-    loader.load().then(() => initMap());
-  } else {
-    initMap();
-  }
-}
-
-onMounted(initLoader);
+defineExpose({ map });
 </script>
+
+<style scoped>
+.leaflet-map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.leaflet-map-container :deep(.leaflet-container) {
+  width: 100%;
+  height: 100%;
+}
+</style>

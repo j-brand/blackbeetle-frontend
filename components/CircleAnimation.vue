@@ -62,4 +62,4 @@ onMounted(() => {
   anime.running.length = 0;
 }); */
 </script>
-<style lang="scss" scoped></style>
+<style scoped></style>

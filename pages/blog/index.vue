@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { apiService } from "~~/lib/api.service";
-import { IStories } from "~~/types";
+import type { IStories } from "~~/types";
 
 const { data: stories } = await useAsyncData("stories", () => apiService.get<IStories>("/story"));
 

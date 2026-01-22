@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import { apiService } from "~~/lib/api.service";
-import { IStory } from "@/types";
+import type { IStory } from "@/types";
 
 const showSub = ref(false);
 const loading = ref(true);
@@ -115,27 +115,21 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss">
-.dark {
-  #toggle-order,
-  #subscribe {
-    svg {
-      fill: theme("colors.bb-light");
-    }
-    &:hover {
-      svg {
-        fill: theme("colors.bb-charcoal");
-      }
-    }
-  }
+<style>
+.dark #toggle-order svg,
+.dark #subscribe svg {
+  fill: var(--color-bb-light);
 }
-#toggle-order,
-#subscribe {
-  svg {
-    fill: theme("colors.bb-charcoal");
-  }
-  &:hover svg {
-    fill: theme("colors.bb-lighter");
-  }
+.dark #toggle-order:hover svg,
+.dark #subscribe:hover svg {
+  fill: var(--color-bb-charcoal);
+}
+#toggle-order svg,
+#subscribe svg {
+  fill: var(--color-bb-charcoal);
+}
+#toggle-order:hover svg,
+#subscribe:hover svg {
+  fill: var(--color-bb-lighter);
 }
 </style>

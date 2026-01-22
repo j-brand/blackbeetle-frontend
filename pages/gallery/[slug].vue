@@ -34,7 +34,7 @@ import "lightgallery/scss/lg-thumbnail.scss";
 import "lightgallery/scss/lg-zoom.scss";
 import "lightgallery/scss/lg-fullscreen.scss";
 
-import { IAlbum } from "~~/types";
+import type { IAlbum } from "~~/types";
 import { apiService } from "~~/lib/api.service";
 
 const gallery = ref(null);

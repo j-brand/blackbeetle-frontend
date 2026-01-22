@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* Custom theme configuration (migrated from tailwind.config.js) */
+@theme {
+  /* Colors */
+  --color-bb-white: #EAE7E3;
+  --color-bb-lighter: #EAE7DC;
+  --color-bb-light: #D8C3A5;
+  --color-bb-black: #8E8D8A;
+  --color-bb-charcoal: #373737;
+  --color-bb-charcoal-dark: #2F2F2F;
+  --color-bb-charcoal-darker: #292929;
+  --color-bb-light-red: #E98074;
+  --color-bb-red: #E85A4F;
+
+  /* Font families */
+  --font-sans: "SuperGroteskWeb", "Helvetica Neue", "Arial", "Roboto", sans-serif;
+  --font-sans-secondary: "Roboto", "Helvetica Neue", "Arial", sans-serif;
+  --font-mono: "Roboto";
+
+  /* Custom spacing */
+  --spacing-page: 0.55rem;
+  --spacing-22: 5.5rem;
+  --spacing-76: 22rem;
+  --spacing-112: 28rem;
+  --spacing-116: 29rem;
+  --spacing-125: 31.25rem;
+}
+
+/* Custom CSS imports - processed by PostCSS/Tailwind */
+@import "./dark.css";
+@import "./swiper.css";
+@import "./light-gallery.css";
+@import "./toasts.css";
+@import "./fonts.css";
+@import "./inputs.css";
+@import "./pattern-bg.css";
+@import "./navigation.css";
+@import "./custom.css";
+@import "./emoji-picker.css";

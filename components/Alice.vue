@@ -60,7 +60,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style>
 #alice {
   backface-visibility: hidden;
   perspective: 1000px;
@@ -68,101 +68,91 @@ export default {
   overflow: visible;
   transform: translateY(50px);
   padding-top: 35rem;
-  @screen md {
+}
+@media (min-width: 768px) {
+  #alice {
     padding-top: 40rem;
     width: 450px;
   }
-  #img_center {
-    animation-name: rotate;
-    animation-iteration-count: infinite;
-    animation-timing-function: linear;
-    transform-origin: center;
-    animation-duration: 15s;
-    animation-direction: reverse;
-    margin: auto;
-  }
-  #alice-image:hover {
-    animation: shake 0.5s;
-    animation-iteration-count: infinite;
-  }
-  #circles {
-    overflow: visible;
-    position: absolute;
-    margin: auto;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    circle {
-      &:hover + g {
-        transform-origin: center;
-      }
-    }
-    g {
-      transition-duration: 500ms;
-      transition-timing-function: ease-in-out;
-      transform-origin: center;
-      overflow: hidden;
-      pointer-events: none;
-      text {
-        animation-name: rotate;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-        margin: auto;
-        transform-origin: center;
-        font-family: "Helvetica Neue", Arial;
-        font-weight: bold;
-      }
-    }
-  }
+}
+#alice #img_center {
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform-origin: center;
+  animation-duration: 15s;
+  animation-direction: reverse;
+  margin: auto;
+}
+#alice #alice-image:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+#alice #circles {
+  overflow: visible;
+  position: absolute;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+#alice #circles circle:hover + g {
+  transform-origin: center;
+}
+#alice #circles g {
+  transition-duration: 500ms;
+  transition-timing-function: ease-in-out;
+  transform-origin: center;
+  overflow: hidden;
+  pointer-events: none;
+}
+#alice #circles g text {
+  animation-name: rotate;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  margin: auto;
+  transform-origin: center;
+  font-family: "Helvetica Neue", Arial;
+  font-weight: bold;
 }
 .dark #circles g text {
-  color: theme("colors.bb-light");
+  color: var(--color-bb-light);
 }
-#c1 {
-  & + g text {
-    animation-duration: 8s;
-    font-size: 2.5rem;
-  }
-  &:hover + g {
-    transform: scale(0.4);
-  }
+#c1 + g text {
+  animation-duration: 8s;
+  font-size: 2.5rem;
 }
-#c2 {
-  & + g text {
-    animation-duration: 15s;
-    font-size: 1.2rem;
-  }
-  &:hover + g {
-    transform: scale(1.8);
-  }
+#c1:hover + g {
+  transform: scale(0.4);
 }
-#c3 {
-  & + g text {
-    animation-duration: 6s;
-    font-size: 2.8rem;
-  }
-  &:hover + g {
-    transform: scale(2);
-  }
+#c2 + g text {
+  animation-duration: 15s;
+  font-size: 1.2rem;
 }
-#c4 {
-  & + g text {
-    animation-duration: 10s;
-    font-size: 1.4rem;
-  }
-  &:hover + g {
-    transform: scale(2.5);
-  }
+#c2:hover + g {
+  transform: scale(1.8);
 }
-#c5 {
-  & + g text {
-    animation-duration: 7s;
-    font-size: 0.9rem;
-  }
-  &:hover + g {
-    transform: scale(3.8);
-  }
+#c3 + g text {
+  animation-duration: 6s;
+  font-size: 2.8rem;
+}
+#c3:hover + g {
+  transform: scale(2);
+}
+#c4 + g text {
+  animation-duration: 10s;
+  font-size: 1.4rem;
+}
+#c4:hover + g {
+  transform: scale(2.5);
+}
+#c5 + g text {
+  animation-duration: 7s;
+  font-size: 0.9rem;
+}
+#c5:hover + g {
+  transform: scale(3.8);
 }
 @keyframes rotate {
   from {

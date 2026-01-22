@@ -27,10 +27,10 @@
 </template>
 
 <script setup lang="ts">
-import { IComment } from "@/types";
-import { PropType } from "vue";
+import type { IComment } from "@/types";
+import type { PropType } from "vue";
 
-import "@/assets/scss/_emoji-picker.scss";
+import "@/assets/css/emoji-picker.css";
 
 const { formatDate } = useHelper();
 const com = ref<HTMLDivElement>();
@@ -56,9 +56,11 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+@reference "@/assets/css/main.css";
+
 textarea {
-  @apply rounded-md pt-2;
+  @apply rounded-sm pt-2;
 }
 
 .expand-leave-active,

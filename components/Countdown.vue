@@ -227,148 +227,141 @@ onMounted(() => {
 });
 </script>
 
-<style scoped lang="scss">
+<style scoped>
+@reference "@/assets/css/main.css";
+
 a {
   text-decoration: none;
   color: #1a1a1a;
 }
 
-// Variables
-$lato: "Lato";
-
-// Countdown
-.countdown {
-  .bloc-time {
-    @screen lg {
-      margin-right: 45px;
-    }
-    float: left;
-    text-align: center;
-    margin-bottom: 1rem;
-    &:last-child {
-      margin-right: 0;
-    }
+/* Countdown */
+.countdown .bloc-time {
+  float: left;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+@media (width >= 1024px) {
+  .countdown .bloc-time {
+    margin-right: 45px;
   }
+}
+.countdown .bloc-time:last-child {
+  margin-right: 0;
+}
 
-  .count-title {
-    display: block;
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-    text-transform: uppercase;
-    @apply text-bb-charcoal dark:text-bb-light;
-  }
+.countdown .count-title {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  @apply text-bb-charcoal dark:text-bb-light;
+}
 
-  .figure,
-  .top,
-  .bottom-back,
-  .top-back {
-    @apply bg-bb-white dark:bg-bb-lighter;
-  }
+.countdown .figure,
+.countdown .top,
+.countdown .bottom-back,
+.countdown .top-back {
+  @apply bg-bb-white dark:bg-bb-lighter;
+}
 
-  .figure {
-    position: relative;
-    float: left;
-    height: 110px;
-    width: 100px;
-    margin-right: 10px;
-    border-radius: 8px;
-    box-shadow: (0 3px 4px 0 rgba(0, 0, 0, 0.2), inset 2px 4px 0 0 rgba(255, 255, 255, 0.08));
+.countdown .figure {
+  position: relative;
+  float: left;
+  height: 110px;
+  width: 100px;
+  margin-right: 10px;
+  border-radius: 8px;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.2), inset 2px 4px 0 0 rgba(255, 255, 255, 0.08);
+}
+.countdown .figure:last-child {
+  margin-right: 0;
+}
 
-    &:last-child {
-      margin-right: 0;
-    }
+.countdown .figure > span {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  font-size: 6.3rem;
+  line-height: 1.2;
+  font-family: Brass;
+  font-weight: 700;
+  color: var(--color-bb-red);
+}
 
-    > span {
-      position: absolute;
-      left: 0;
-      right: 0;
-      margin: auto;
-      font-size: 6.3rem;
-      line-height: 1.2;
-      font-family: Brass;
-      font-weight: 700;
-      color: theme("colors.bb-red");
-    }
+.countdown .figure .top::after,
+.countdown .figure .bottom-back::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
 
-    .top,
-    .bottom-back {
-      &:after {
-        content: "";
-        position: absolute;
-        z-index: -1;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 100%;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      }
-    }
+.countdown .figure .top {
+  z-index: 3;
+  transform-origin: 50% 100%;
+  -webkit-transform-origin: 50% 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  transform: perspective(200px);
+}
 
-    .top {
-      z-index: 3;
-      transform-origin: 50% 100%;
-      -webkit-transform-origin: 50% 100%;
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-      transform: perspective(200px);
-    }
+.countdown .figure .bottom {
+  z-index: 1;
+}
+.countdown .figure .bottom::before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: rgba(0, 0, 0, 0.02);
+}
 
-    .bottom {
-      z-index: 1;
+.countdown .figure .bottom-back {
+  z-index: 2;
+  top: 0;
+  height: 50%;
+  overflow: hidden;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.countdown .figure .bottom-back span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
 
-      &:before {
-        content: "";
-        position: absolute;
-        display: block;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 50%;
-        background-color: rgba(0, 0, 0, 0.02);
-      }
-    }
+.countdown .figure .top,
+.countdown .figure .top-back {
+  height: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
 
-    .bottom-back {
-      z-index: 2;
-      top: 0;
-      height: 50%;
-      overflow: hidden;
-
-      border-top-left-radius: 10px;
-      border-top-right-radius: 10px;
-
-      span {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        margin: auto;
-      }
-    }
-
-    .top,
-    .top-back {
-      height: 50%;
-      overflow: hidden;
-      backface-visibility: hidden;
-    }
-
-    .top-back {
-      z-index: 4;
-      bottom: 0;
-      -webkit-transform-origin: 50% 0;
-      transform-origin: 50% 0;
-      transform: (perspective(200px) rotateX(180deg));
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      span {
-        position: absolute;
-        top: -100%;
-        left: 0;
-        right: 0;
-        margin: auto;
-      }
-    }
-  }
+.countdown .figure .top-back {
+  z-index: 4;
+  bottom: 0;
+  -webkit-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  transform: perspective(200px) rotateX(180deg);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.countdown .figure .top-back span {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 </style>

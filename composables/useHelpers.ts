@@ -1,4 +1,4 @@
-import { IImage } from "@/types";
+import type { IImage } from "@/types";
 
 export function useHelper() {
   function slugify(str: string): string {

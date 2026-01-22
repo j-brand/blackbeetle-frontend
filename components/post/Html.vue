@@ -13,8 +13,8 @@
 </template>
 
 <script setup lang="ts">
-import { IPost, IComment } from "@/types";
-import { PropType } from "vue";
+import type { IPost, IComment } from "@/types";
+import type { PropType } from "vue";
 
 const props = defineProps({
   post: {
@@ -30,7 +30,7 @@ function addNewComment(comment: IComment) {
 }
 </script>
 
-<style lang="scss">
+<style>
 a {
   text-decoration: underline;
   text-underline-offset: 2px;

@@ -1,0 +1,27 @@
+{
+  "servers": {
+    "nuxt": {
+      "type": "http",
+      "url": "https://nuxt.com/mcp"
+    },
+    "tailwindcss Docs": {
+      "type": "sse",
+      "url": "https://gitmcp.io/tailwindlabs/tailwindcss"
+    },
+    "Vue Docs": {
+      "type": "sse",
+      "url": "https://gitmcp.io/vuejs/core"
+    },
+    "TypeScript Docs": {
+      "type": "sse",
+      "url": "https://gitmcp.io/microsoft/typescript"
+    },
+    "ESLint": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "@eslint/mcp@latest"
+      ]
+    }
+  }
+}

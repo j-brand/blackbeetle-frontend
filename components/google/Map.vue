@@ -26,7 +26,6 @@ const props = defineProps({
   zoom: { type: Number, default: 4 },
 });
 
-const mapRef = ref<InstanceType<typeof LMap> | null>(null);
 const map = ref<LeafletMap | null>(null);
 
 function onMapReady(mapInstance: LeafletMap) {

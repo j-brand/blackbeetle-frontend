@@ -140,15 +140,18 @@ const endTime = new Date(props.dateString);
 var from = endTime.getTime();
 
 function animate(el: HTMLDivElement, value: number) {
-  const top = el.getElementsByClassName("top")[0];
-  const bottom = el.getElementsByClassName("bottom")[0];
-  const topBack = el.getElementsByClassName("top-back")[0];
-  const bottomBack = el.getElementsByClassName("bottom-back")[0];
+  const top = el.getElementsByClassName("top")[0] as HTMLElement;
+  const bottom = el.getElementsByClassName("bottom")[0] as HTMLElement;
+  const topBack = el.getElementsByClassName("top-back")[0] as HTMLElement;
+  const bottomBack = el.getElementsByClassName("bottom-back")[0] as HTMLElement;
 
-  topBack.getElementsByTagName("span")[0].innerHTML = String(value);
-  bottomBack.getElementsByTagName("span")[0].innerHTML = String(value);
+  const topBackSpan = topBack.getElementsByTagName("span")[0];
+  const bottomBackSpan = bottomBack.getElementsByTagName("span")[0];
+  if (topBackSpan) topBackSpan.innerHTML = String(value);
+  if (bottomBackSpan) bottomBackSpan.innerHTML = String(value);
 
-  gsap.to(top, 0.8, {
+  gsap.to(top, {
+    duration: 0.8,
     rotationX: "-180deg",
     transformPerspective: 300,
     ease: Quart.easeOut,
@@ -159,7 +162,8 @@ function animate(el: HTMLDivElement, value: number) {
     },
   });
 
-  gsap.to(topBack, 0.8, {
+  gsap.to(topBack, {
+    duration: 0.8,
     rotationX: 0,
     transformPerspective: 300,
     ease: Quart.easeOut,

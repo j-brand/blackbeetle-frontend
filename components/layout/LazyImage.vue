@@ -31,7 +31,10 @@ const placeholderSrc = computed(() => {
     return props.lowsrc;
   }
   const split = props.src.split(".");
-  split[split.length - 2] = split[split.length - 2].concat("_lazy");
+  if (split.length >= 2) {
+    const idx = split.length - 2;
+    split[idx] = (split[idx] ?? "") + "_lazy";
+  }
   return split.join(".");
 });
 

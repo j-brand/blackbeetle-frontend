@@ -57,11 +57,11 @@ const pages = computed(() => {
   return pages;
 });
 
-function isCurrentPage(page) {
+function isCurrentPage(page: number): boolean {
   return props.pagination.current_page === page;
 }
 
-async function changePage(page) {
+async function changePage(page: number) {
   if (page > props.pagination.last_page) {
     page = props.pagination.last_page;
   }
@@ -73,9 +73,10 @@ async function changePage(page) {
   });
 }
 
-async function navigate(page) {
+async function navigate(page: number) {
+  const slug = 'slug' in route.params ? String(route.params.slug) : '';
   return navigateTo({
-    path: route.params.slug,
+    path: slug,
     query: {
       page: page,
     },

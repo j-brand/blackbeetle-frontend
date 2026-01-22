@@ -35,28 +35,29 @@ import "lightgallery/scss/lg-fullscreen.scss";
 // Swiper Js Imports
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
-import type { PropType } from "vue";
 
 const { getImgPath } = useHelper();
 
 const galleryEle = ref<HTMLElement | null>(null);
-const swiperEle = ref<HTMLElement | any>(null);
-const swiperRef = ref(null);
-const gallery = ref(null);
+const swiperEle = ref<HTMLElement | null>(null);
+const swiperRef = ref<Swiper | null>(null);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const gallery = ref<ReturnType<typeof lightGallery> | null>(null);
 
-const props = defineProps({
-  post: {
-    type: Object as PropType<IPost>,
-    required: true,
-  },
-});
+const props = defineProps<{
+  post: IPost;
+}>();
 
 function initGallery() {
-  const dynamicEl = [...galleryEle.value.getElementsByClassName("swiper-slide")].map((slide: HTMLImageElement) => {
+  if (!galleryEle.value) return;
+  
+  const dynamicEl = [...galleryEle.value.getElementsByClassName("swiper-slide")].map((slide) => {
+    const img = slide.getElementsByTagName("img")[0];
+    const span = slide.getElementsByTagName("span")[0];
     return {
-      src: slide.getElementsByTagName("img")[0].getAttribute("data-large"),
-      thumb: slide.getElementsByTagName("img")[0].src,
-      subHtml: slide.getElementsByTagName("span")[0].innerText,
+      src: img?.getAttribute("data-large") || "",
+      thumb: img?.src || "",
+      subHtml: span?.innerText || "",
     };
   });
   gallery.value = lightGallery(galleryEle.value, {
@@ -66,34 +67,33 @@ function initGallery() {
     licenseKey: useRuntimeConfig().public.lgLicenseKey,
   });
 
-  [...galleryEle.value.getElementsByClassName("swiper-slide")].map((slide, index) => {
+  [...galleryEle.value.getElementsByClassName("swiper-slide")].forEach((slide, index) => {
     slide.addEventListener("click", () => {
-      gallery.value.openGallery(index);
+      gallery.value?.openGallery(index);
     });
   });
 
-  galleryEle.value.addEventListener("lgAfterSlide", (event: any) => {
-    swiperRef.value.slideTo(event.detail.index);
+  galleryEle.value.addEventListener("lgAfterSlide", (event) => {
+    const detail = (event as CustomEvent).detail;
+    swiperRef.value?.slideTo(detail.index);
   });
 
   galleryEle.value.addEventListener("lgBeforeOpen", () => {
     document.body.style.overflow = "hidden";
   });
 
-  galleryEle.value.addEventListener("lgAfterClose", (event: any) => {
+  galleryEle.value.addEventListener("lgAfterClose", () => {
     document.body.style.overflow = "auto";
   });
 }
 
 function destroyGallery() {
-  gallery.value.destroy();
-}
-
-function refreshGallery() {
-  gallery.value.refresh();
+  gallery.value?.destroy();
 }
 
 function initSwiper() {
+  if (!swiperEle.value) return;
+  
   swiperRef.value = new Swiper(swiperEle.value, {
     modules: [Navigation, Pagination],
     autoHeight: true,

@@ -5,7 +5,7 @@
       <h2 class="text-2xl font-semibold">{{ post.title }}</h2>
     </div>
     <article v-html="post.content" class="text-lg md:text-xl html-post"></article>
-    <PostComments v-if="post.comments.length > 0" :comments="post.comments" @open-Modal="commentModal = true" />
+    <PostComments v-if="post.comments && post.comments.length > 0" :comments="post.comments" @open-Modal="commentModal = true" />
     <transition name="fade">
       <ModalPostComment v-if="commentModal" :post_id="post.id" @new="addNewComment" @close="commentModal = false" />
     </transition>
@@ -14,19 +14,18 @@
 
 <script setup lang="ts">
 import type { IPost, IComment } from "@/types";
-import type { PropType } from "vue";
 
-const props = defineProps({
-  post: {
-    type: Object as PropType<IPost>,
-    required: true,
-  },
-});
+const props = defineProps<{
+  post: IPost;
+}>();
+
 const commentModal = ref<boolean>(false);
 const { formatDate } = useHelper();
 
 function addNewComment(comment: IComment) {
-  props.post.comments.push(comment);
+  if (props.post.comments) {
+    props.post.comments.push(comment);
+  }
 }
 </script>
 

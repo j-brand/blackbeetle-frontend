@@ -4,7 +4,7 @@
       <Loader v-if="pending || loading" />
     </transition>
     <div class="mb-5">
-      <Pagination v-if="story.posts.current_page > 1" :offset="3" :pagination="story.posts" @paginate="changePage" class="my-14 relative flex justify-center" />
+      <Pagination v-if="story.posts && story.posts.current_page > 1" :offset="3" :pagination="story.posts" @paginate="changePage" class="my-14 relative flex justify-center" />
       <div v-if="getPagination() == 1" class="flex flex-col justify-center min-h-1/2-screen mx-5 lg:mx-0">
         <h1 class="text-4xl text-center uppercase tracking-widest font-semibold">{{ story.title }}</h1>
         <p class="text-2xl text-center mt-10" v-html="story.description"></p>
@@ -36,14 +36,14 @@
       </div>
     </div>
 
-    <template v-for="(post, index) in story.posts.data" :key="post.id">
-      <hr class="w-1/4 my-10 mx-auto border-bb-charcoal dark:border-bb-light h-px" v-if="index != story.posts.data.length && index != 0" />
+    <template v-for="(post, index) in story.posts?.data" :key="post.id">
+      <hr class="w-1/4 my-10 mx-auto border-bb-charcoal dark:border-bb-light h-px" v-if="story.posts && index != story.posts.data.length && index != 0" />
       <PostHtml v-if="post.type === 'html'" :post="post" />
       <PostImage v-if="post.type == 'image'" :post="post" class="md:rounded-md" />
       <PostMap v-if="post.type == 'map'" :post="post" class="rounded-md" />
       <PostVideo v-if="post.type == 'video'" :post="post" class="rounded-md" />
     </template>
-    <Pagination :offset="3" :pagination="story.posts" @paginate="changePage" class="my-14 relative flex justify-center" />
+    <Pagination v-if="story.posts" :offset="3" :pagination="story.posts" @paginate="changePage" class="my-14 relative flex justify-center" />
     <transition name="fade">
       <ModalStorySubsription class="fixed w-full h-full left-0 top-0" v-if="showSub" :storyID="story.id" @close="showSub = !showSub"></ModalStorySubsription>
     </transition>
@@ -58,24 +58,24 @@ const showSub = ref(false);
 const loading = ref(true);
 const pagination = ref(1);
 const route = useRoute();
-const order = useCookie(route.params.slug.toString());
+const slug = 'slug' in route.params ? String(route.params.slug) : '';
+const order = useCookie(slug);
 
 const {
   data: story,
   pending,
   refresh,
-  error,
-} = await useAsyncData(`story-${route.params.slug}`, () => apiService.getStoryBySlug<IStory>("/story", route.params.slug as string, getOrder(), getPagination()));
+} = await useAsyncData(`story-${slug}`, () => apiService.getStoryBySlug<IStory>("/story", slug, getOrder(), getPagination()));
 
 const { getImgPath } = useHelper();
 
 useHead({
-  title: story.value.title,
+  title: story.value?.title ?? "",
   meta: [
-    { name: "description", content: story.value.description },
-    { name: "og:title", content: `Blackbeetle - ${story.value.title}` },
-    { name: "og:description", content: story.value.description },
-    { name: "og:image", content: getImgPath(story.value.title_image, "_aslider") },
+    { name: "description", content: story.value?.description ?? "" },
+    { name: "og:title", content: `Blackbeetle - ${story.value?.title ?? ""}` },
+    { name: "og:description", content: story.value?.description ?? "" },
+    { name: "og:image", content: story.value?.title_image ? getImgPath(story.value.title_image, "_aslider") : "" },
   ],
 });
 

@@ -1,25 +1,20 @@
 import useValidators from "./useValidators";
 
-type inputError = {
-  email?: string;
-  text?: string;
-  checkbox?: string;
-};
-
-const errors = reactive<inputError>({});
+type InputError = Record<string, string>;
 
 export default function useFormValidation() {
-  const { isEmpty, minLength, isEmail, isRequired } = useValidators();
+  const errors = reactive<InputError>({});
+  const { isEmpty, isEmail, isRequired } = useValidators();
 
-  const validateTextField = (fieldName, fieldValue) => {
+  const validateTextField = (fieldName: string, fieldValue: string): void => {
     errors[fieldName] = !fieldValue ? isEmpty(fieldName, fieldValue) : "";
   };
 
-  const validateEmailField = (fieldName, fieldValue) => {
+  const validateEmailField = (fieldName: string, fieldValue: string): void => {
     errors[fieldName] = !fieldValue ? isEmpty(fieldName, fieldValue) : isEmail(fieldName, fieldValue);
   };
 
-  const validateCheckbox = (fieldName, fieldValue) => {
+  const validateCheckbox = (fieldName: string, fieldValue: boolean): void => {
     errors[fieldName] = !fieldValue ? isRequired(fieldName, fieldValue) : "";
   };
 

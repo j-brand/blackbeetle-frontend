@@ -6,25 +6,40 @@
     "dev": "HOST=0.0.0.0 nuxi dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "typecheck": "nuxi typecheck"
   },
   "devDependencies": {
+    "@nuxt/eslint": "^1.12.1",
+    "@nuxt/test-utils": "^3.23.0",
     "@nuxtjs/color-mode": "^4.0.0",
     "@nuxtjs/tailwindcss": "^7.0.0-beta.1",
+    "@types/animejs": "^3.1.13",
     "@types/leaflet": "^1.9.15",
+    "@vue/test-utils": "^2.4.6",
+    "happy-dom": "^20.3.4",
     "nuxt": "^4.2.2",
     "postcss": "^8.5.3",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "vitest": "^3.2.4",
+    "vue-tsc": "^3.2.2"
   },
   "dependencies": {
+    "@nuxt/fonts": "^0.13.0",
+    "@nuxt/image": "^2.0.0",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "animejs": "^3.2.2",
     "gsap": "^3.12.7",
     "leaflet": "^1.9.4",
     "lightgallery": "^2.8.2",
     "swiper": "^12.0.0",
-    "vue-toastification": "^2.0.0-rc.5",
+    "vue-sonner": "^2.0.9",
     "vue3-emoji-picker": "^1.1.8"
   }
 }

@@ -3,35 +3,32 @@
 <script setup lang="ts">
 import type { Map as LeafletMap, LatLngBoundsExpression } from "leaflet";
 
-const props = defineProps({
-  map: {
-    type: Object as () => LeafletMap,
-    required: true,
-  },
-  coordinates: {
-    type: Array as () => Array<{ position: { lat: number; lng: number } }>,
-    required: true,
-  },
-});
+interface MapBoundsProps {
+  // Accept any object since Vue's scoped slots don't preserve exact types
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  map: any;
+  coordinates: Array<{ position: { lat: number; lng: number } }>;
+}
 
-onMounted(() => {
-  if (props.map && props.coordinates.length > 0) {
-    const bounds: LatLngBoundsExpression = props.coordinates.map(
+const props = defineProps<MapBoundsProps>();
+
+function fitBounds(mapInstance: LeafletMap, coords: typeof props.coordinates) {
+  if (mapInstance && coords.length > 0) {
+    const bounds: LatLngBoundsExpression = coords.map(
       (marker) => [marker.position.lat, marker.position.lng] as [number, number]
     );
-    props.map.fitBounds(bounds, { padding: [50, 50] });
+    mapInstance.fitBounds(bounds, { padding: [50, 50] });
   }
+}
+
+onMounted(() => {
+  fitBounds(props.map as LeafletMap, props.coordinates);
 });
 
 watch(
   () => props.coordinates,
   (newCoords) => {
-    if (props.map && newCoords.length > 0) {
-      const bounds: LatLngBoundsExpression = newCoords.map(
-        (marker) => [marker.position.lat, marker.position.lng] as [number, number]
-      );
-      props.map.fitBounds(bounds, { padding: [50, 50] });
-    }
+    fitBounds(props.map as LeafletMap, newCoords);
   },
   { deep: true }
 );

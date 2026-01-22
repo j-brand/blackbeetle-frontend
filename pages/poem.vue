@@ -47,56 +47,89 @@
 
 <script setup lang="ts">
 import anime from "animejs/lib/anime.es.js";
-const canvasEl = ref<HTMLElement | any>(null);
+
+interface Particule {
+  x: number;
+  y: number;
+  color: string;
+  radius: number;
+  endPos: { x: number; y: number };
+  draw: () => void;
+}
+
+interface Circle {
+  x: number;
+  y: number;
+  color: string;
+  radius: number;
+  alpha: number;
+  lineWidth: number;
+  draw: () => void;
+}
+
+const canvasEl = ref<HTMLCanvasElement | null>(null);
 
 useHead({
   title: "Poem",
 });
 
 if (process.client) {
-  const centerX = ref(document.getElementById("fireworks").width);
-  const centerY = ref(document.getElementById("fireworks").height);
+  const fireworksEl = document.getElementById("fireworks") as HTMLCanvasElement | null;
+  const centerX = ref(fireworksEl?.width ?? window.innerWidth);
+  const centerY = ref(fireworksEl?.height ?? window.innerHeight);
   const numberOfParticules = 30;
   const colors = ["#FF1461", "#18FF92", "#5A87FF", "#FBF38C"];
   const pointerX = ref(0);
   const pointerY = ref(0);
 
   const ctx = computed(() => {
-    return canvasEl.value.getContext("2d");
+    return canvasEl.value?.getContext("2d") ?? null;
   });
 
   function setCanvasSize() {
+    if (!canvasEl.value) return;
+    
     canvasEl.value.width = document.body.offsetWidth;
     canvasEl.value.height = document.body.scrollHeight;
 
     canvasEl.value.style.width = document.body.offsetWidth + "px";
     canvasEl.value.style.height = document.body.scrollHeight + "px";
 
-    canvasEl.value.getContext("2d").scale(2, 2);
+    canvasEl.value.getContext("2d")?.scale(2, 2);
   }
 
-  function updateCoords(e) {
-    pointerX.value = e.clientX || e.touches[0].clientX;
-    pointerY.value = e.clientY || e.touches[0].clientY;
+  function updateCoords(e: MouseEvent | TouchEvent) {
+    if ("touches" in e) {
+      pointerX.value = e.touches[0]?.clientX ?? 0;
+      pointerY.value = e.touches[0]?.clientY ?? 0;
+    } else {
+      pointerX.value = e.clientX;
+      pointerY.value = e.clientY;
+    }
   }
 
-  function setParticuleDirection(p) {
+  function setParticuleDirection(p: { x: number; y: number }) {
     const angle = (anime.random(0, 360) * Math.PI) / 180;
     const value = anime.random(50, 180);
-    const radius = [-1, 1][anime.random(0, 1)] * value;
+    const directions = [-1, 1];
+    const radius = (directions[anime.random(0, 1)] ?? 1) * value;
     return {
       x: p.x + radius * Math.cos(angle),
       y: p.y + radius * Math.sin(angle),
     };
   }
-  function createParticule(x, y): any {
-    const p: any = {};
-    p.x = x;
-    p.y = y;
-    p.color = colors[anime.random(0, colors.length - 1)];
-    p.radius = anime.random(16, 32);
+  function createParticule(x: number, y: number): Particule {
+    const p: Particule = {
+      x,
+      y,
+      color: colors[anime.random(0, colors.length - 1)] ?? "#FF1461",
+      radius: anime.random(16, 32),
+      endPos: { x: 0, y: 0 },
+      draw: () => {},
+    };
     p.endPos = setParticuleDirection(p);
     p.draw = function () {
+      if (!ctx.value) return;
       ctx.value.beginPath();
       ctx.value.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true);
       ctx.value.fillStyle = p.color;
@@ -104,15 +137,18 @@ if (process.client) {
     };
     return p;
   }
-  function createCircle(x, y) {
-    const p: any = {};
-    p.x = x;
-    p.y = y;
-    p.color = "#FFF";
-    p.radius = 0.1;
-    p.alpha = 0.5;
-    p.lineWidth = 6;
+  function createCircle(x: number, y: number): Circle {
+    const p: Circle = {
+      x,
+      y,
+      color: "#FFF",
+      radius: 0.1,
+      alpha: 0.5,
+      lineWidth: 6,
+      draw: () => {},
+    };
     p.draw = function () {
+      if (!ctx.value) return;
       ctx.value.globalAlpha = p.alpha;
       ctx.value.beginPath();
       ctx.value.arc(p.x, p.y, p.radius, 0, 2 * Math.PI, true);
@@ -123,14 +159,17 @@ if (process.client) {
     };
     return p;
   }
-  function renderParticule(anim) {
+  function renderParticule(anim: anime.AnimeInstance) {
     for (let i = 0; i < anim.animatables.length; i++) {
-      anim.animatables[i].target.draw();
+      const animatable = anim.animatables[i];
+      if (animatable && 'draw' in (animatable.target as unknown as object)) {
+        (animatable.target as unknown as Particule | Circle).draw();
+      }
     }
   }
-  function animateParticules(x, y) {
+  function animateParticules(x: number, y: number) {
     const circle = createCircle(x, y);
-    const particules: any[] = [];
+    const particules: Particule[] = [];
     for (let i = 0; i < numberOfParticules; i++) {
       particules.push(createParticule(x, y));
     }
@@ -138,10 +177,10 @@ if (process.client) {
       .timeline()
       .add({
         targets: particules,
-        x: function (p) {
+        x: function (p: Particule) {
           return p.endPos.x;
         },
-        y: function (p) {
+        y: function (p: Particule) {
           return p.endPos.y;
         },
         radius: 0.1,
@@ -176,7 +215,9 @@ if (process.client) {
     const render = anime({
       duration: Infinity,
       update: function () {
-        ctx.value.clearRect(0, 0, canvasEl.value.width, canvasEl.value.height);
+        if (ctx.value && canvasEl.value) {
+          ctx.value.clearRect(0, 0, canvasEl.value.width, canvasEl.value.height);
+        }
       },
     });
 

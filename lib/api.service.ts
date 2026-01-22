@@ -1,7 +1,7 @@
 import type { FetchError } from "ofetch";
 
 export const apiService = {
-  async get<Result>(endpoint: string, order?: string): Promise<Result> {
+  async get<Result>(endpoint: string): Promise<Result> {
     return await $fetch<Result>(`${useRuntimeConfig().public.apiBase}${endpoint}`);
   },
 

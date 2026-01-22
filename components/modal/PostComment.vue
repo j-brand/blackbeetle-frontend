@@ -82,7 +82,14 @@ function toggleEmojiPicker() {
   showEmojiPicker.value = !showEmojiPicker.value;
 }
 
-function onSelectEmoji(emoji) {
+interface EmojiData {
+  i: string;
+  n: string[];
+  r: string;
+  u: string;
+}
+
+function onSelectEmoji(emoji: EmojiData) {
   fields.content += emoji.i;
 }
 
@@ -96,7 +103,7 @@ async function sendComment() {
       name: fields.name,
       content: fields.content,
     };
-    const res = await apiService
+    await apiService
       .post<IComment>("/comment", payload)
       .then((comment) => {
         emit("new", comment);
@@ -104,7 +111,7 @@ async function sendComment() {
         emit("close");
       })
       .catch((err) => {
-        console.log(err);
+        console.error(err);
       });
   }
 }

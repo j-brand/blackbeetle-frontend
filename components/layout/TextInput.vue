@@ -15,21 +15,23 @@
 </template>
 
 <script setup lang="ts">
-
-const props = defineProps({
-  modelValue: { type: String, required: true, defaul: "" },
-  type: { type: String, required: false, default: "text" },
-  label: { type: String, required: false, default: "" },
+const props = withDefaults(defineProps<{
+  modelValue: string;
+  type?: string;
+  label?: string;
+}>(), {
+  type: "text",
+  label: "",
 });
 
 const { validateTextField, validateEmailField, errors } = useFormValidation();
 const { slugify } = useHelper();
 
-const validateInput = () => {
+const validateInput = (): void => {
   if (props.type === "email") {
-    validateEmailField(props.label, props.modelValue);
+    validateEmailField(props.label ?? "", props.modelValue);
   } else {
-    validateTextField(props.label, props.modelValue);
+    validateTextField(props.label ?? "", props.modelValue);
   }
 };
 </script>

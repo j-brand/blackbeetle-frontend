@@ -16,10 +16,8 @@
 </template>
 
 <script setup lang="ts">
+import { toast } from "vue-sonner";
 import { apiService } from "~~/lib/api.service";
-import { useToast } from "vue-toastification/dist/index.mjs";
-
-const toast = useToast();
 
 const fields = reactive({ email: "" });
 
@@ -33,16 +31,15 @@ async function onSubmit() {
   const payload = { email: fields.email };
   fields.email = "";
 
-    const res = await apiService
-    .post<any>("/resend-verification", payload)
+  await apiService
+    .post<{ message: string }>("/resend-verification", payload)
     .then((response) => {
       fields.email = "";
-      toast(response.message);
-
+      toast.success(response.message);
       isLoading.value = false;
     })
     .catch((err) => {
-      console.log(err);
+      console.error(err);
       isLoading.value = false;
     });
 }

@@ -30,18 +30,18 @@
 </template>
 
 <script setup lang="ts">
+import { toast } from "vue-sonner";
 import { apiService } from "~~/lib/api.service";
-import { useToast } from "vue-toastification/dist/index.mjs";
 
-const toast = useToast();
+const props = defineProps<{
+  storyID?: number;
+}>();
 
-const props = defineProps({
-  storyID: { type: Number },
-});
+const emit = defineEmits<{
+  close: [value?: boolean];
+}>();
 
-const emit = defineEmits(["close"]);
-
-const bot = ref(null);
+const bot = ref<string | null>(null);
 const isLoading = ref(false);
 const fields = reactive({ name: "", email: "", checkbox: false });
 
@@ -59,10 +59,10 @@ async function sendSubscription() {
     email: fields.email,
     option: "S" + props.storyID,
   };
-  const res = await apiService
-    .post<any>("/newsletter", payload)
+  await apiService
+    .post<{ message: string }>("/newsletter", payload)
     .then((response) => {
-      toast(response.message, { timeout: 10000 });
+      toast.success(response.message, { duration: 10000 });
       isLoading.value = false;
       emit("close");
     })

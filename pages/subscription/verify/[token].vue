@@ -16,14 +16,13 @@ onMounted(() => {
 });
 
 function getToken() {
-  const token = route.params.token.toString();
-  return token;
+  return 'token' in route.params ? String(route.params.token) : '';
 }
 
 async function verify() {
   const payload = { token: getToken() };
-  const res = await apiService
-    .post<any>("/verify-email", payload)
+  await apiService
+    .post<{ message: string }>("/verify-email", payload)
     .then((response) => {
       message.value = `Super ${response.message}! Deine E-Mail-Adresse wurde verifiziert. Ab jetzt wirst du benachrichtigt, sobald es etwas Neues gibt.`;
     })

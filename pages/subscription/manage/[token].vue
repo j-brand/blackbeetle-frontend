@@ -18,8 +18,8 @@
 </template>
 
 <script setup lang="ts">
+import { toast } from "vue-sonner";
 import { apiService } from "~~/lib/api.service";
-import { useToast } from "vue-toastification/dist/index.mjs";
 
 interface BBSub {
   title: string;
@@ -28,22 +28,21 @@ interface BBSub {
 }
 
 const route = useRoute();
-const toast = useToast();
 const { data: subscriptions } = await useAsyncData("album", () => apiService.get<BBSub[]>(`/subscriptions/${getToken()}`));
 
 function getToken() {
-  const token = route.params.token.toString();
-  return token;
+  return 'token' in route.params ? String(route.params.token) : '';
 }
 
-async function updateSubscription(change) {
-  const payload = { option: `S${change.srcElement.id}`, value: change.target.checked, token: getToken() };
+async function updateSubscription(change: Event) {
+  const target = change.target as HTMLInputElement;
+  const payload = { option: `S${target.id}`, value: target.checked, token: getToken() };
   await apiService
-    .post<any>("/subscription", payload)
+    .post<{ message: string }>("/subscription", payload)
     .then((response) => {
-      toast(response.message);
+      toast.success(response.message);
     })
-    .catch((err) => {
+    .catch(() => {
       toast.error("Leider ist etwas schief gelaufen.");
     });
 }

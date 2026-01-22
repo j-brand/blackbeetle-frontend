@@ -13,15 +13,11 @@
 </template>
 
 <script setup lang="ts">
-import type { PropType } from "vue";
 import type { IPost } from "@/types";
 
-const props = defineProps({
-  post: {
-    type: Object as PropType<IPost>,
-    required: true,
-  },
-});
+const props = defineProps<{
+  post: IPost;
+}>();
 
 const content = computed(() => {
   return JSON.parse(props.post.content);

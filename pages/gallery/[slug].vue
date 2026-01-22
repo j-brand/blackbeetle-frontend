@@ -37,25 +37,28 @@ import "lightgallery/scss/lg-fullscreen.scss";
 import type { IAlbum } from "~~/types";
 import { apiService } from "~~/lib/api.service";
 
-const gallery = ref(null);
+const gallery = ref<HTMLElement | null>(null);
 
 const route = useRoute();
+const slug = 'slug' in route.params ? String(route.params.slug) : '';
 
 const { formatDate, getImgPath } = useHelper();
 
-const { data: album } = await useAsyncData(`album-${route.params.slug}`, () => apiService.getBySlug<IAlbum>("/album", route.params.slug as string));
+const { data: album } = await useAsyncData(`album-${slug}`, () => apiService.getBySlug<IAlbum>("/album", slug));
 
 useHead({
-  title: album.value.title,
+  title: album.value?.title ?? "",
   meta: [
-    { name: "description", content: album.value.description },
-    { name: "og:title", content: `Blackbeetle - ${album.value.title}` },
-    { name: "og:description", content: album.value.description },
-    { name: "og:image", content: getImgPath(album.value.title_image, "_aslider") },
+    { name: "description", content: album.value?.description ?? "" },
+    { name: "og:title", content: `Blackbeetle - ${album.value?.title ?? ""}` },
+    { name: "og:description", content: album.value?.description ?? "" },
+    { name: "og:image", content: album.value?.title_image ? getImgPath(album.value.title_image, "_aslider") : "" },
   ],
 });
 
 function initGallery() {
+  if (!gallery.value) return;
+  
   lightGallery(gallery.value, {
     exThumbImage: "data-thumb",
     plugins: [lgZoom, lgThumbnail, lgFullscreen],

@@ -22,9 +22,10 @@ const emit = defineEmits(["update:modelValue"]);
 const { validateCheckbox, errors } = useFormValidation();
 const { slugify } = useHelper();
 
-function onChange(event) {
-  validateInput(event.target.checked);
-  emit("update:modelValue", (event.target as HTMLInputElement).checked);
+function onChange(event: Event) {
+  const target = event.target as HTMLInputElement;
+  validateInput(target.checked);
+  emit("update:modelValue", target.checked);
 }
 
 const validateInput = (checked: boolean) => {

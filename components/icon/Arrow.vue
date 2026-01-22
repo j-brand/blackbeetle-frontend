@@ -5,5 +5,9 @@
 </template>
 
 <script setup lang="ts">
-const props = defineProps(["fill"]);
+withDefaults(defineProps<{
+  fill?: string;
+}>(), {
+  fill: "none",
+});
 </script>

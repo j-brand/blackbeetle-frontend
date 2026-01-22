@@ -1,5 +1,7 @@
-import Toast, { POSITION } from "vue-toastification/dist/index.mjs";
+// This plugin file is no longer needed - vue-sonner is used directly via imports
+// The Toaster component is added to app.vue
+// Keep this file empty or delete it
 
-export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(Toast, { position: POSITION.RIGHT_TOP, containerClassName: "bb-toast" });
+export default defineNuxtPlugin(() => {
+  // No-op - vue-sonner toast is imported directly in components
 });

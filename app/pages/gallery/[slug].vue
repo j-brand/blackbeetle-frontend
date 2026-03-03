@@ -41,6 +41,7 @@ const gallery = ref<HTMLElement | null>(null);
 
 const route = useRoute();
 const slug = 'slug' in route.params ? String(route.params.slug) : '';
+const { lgLicenseKey } = useRuntimeConfig().public;
 
 const { formatDate, getMediaUrl } = useHelper();
 
@@ -62,7 +63,7 @@ function initGallery() {
   lightGallery(gallery.value, {
     exThumbImage: "data-thumb",
     plugins: [lgZoom, lgThumbnail, lgFullscreen],
-    licenseKey: useRuntimeConfig().public.lgLicenseKey,
+    licenseKey: lgLicenseKey,
   });
 }
 

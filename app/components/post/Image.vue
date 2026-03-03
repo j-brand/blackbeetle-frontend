@@ -37,6 +37,7 @@ import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 
 const { getMediaUrl } = useHelper();
+const { lgLicenseKey } = useRuntimeConfig().public;
 
 const galleryEle = ref<HTMLElement | null>(null);
 const swiperEle = ref<HTMLElement | null>(null);
@@ -64,7 +65,7 @@ function initGallery() {
     dynamic: true,
     plugins: [lgZoom, lgThumbnail, lgAutoplay, lgFullscreen],
     dynamicEl,
-    licenseKey: useRuntimeConfig().public.lgLicenseKey,
+    licenseKey: lgLicenseKey,
   });
 
   [...galleryEle.value.getElementsByClassName("swiper-slide")].forEach((slide, index) => {

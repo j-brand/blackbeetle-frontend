@@ -1,13 +1,15 @@
 <template>
   <ClientOnly>
     <MapContainer class="w-full h-112" :zoom="content.zoomlevel" v-slot="{ map }">
-      <MapMarker
-        v-for="(marker, index) in content.coordinates"
-        :key="index"
-        :position="marker.position"
-        :label="marker.info"
-      />
-      <MapBounds :coordinates="content.coordinates" :map="map" />
+      <template v-if="content.coordinates?.length">
+        <MapMarker
+          v-for="(marker, index) in content.coordinates"
+          :key="index"
+          :position="marker.position"
+          :label="marker.info"
+        />
+        <MapBounds :coordinates="content.coordinates" :map="map" />
+      </template>
     </MapContainer>
   </ClientOnly>
 </template>

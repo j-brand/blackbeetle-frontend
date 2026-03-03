@@ -12,7 +12,7 @@ export default defineVitestConfig({
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],
-      include: ["composables/**", "lib/**", "components/**"],
+      include: ["app/composables/**", "app/lib/**", "app/components/**"],
       exclude: ["node_modules", ".nuxt", "tests"],
     },
   },

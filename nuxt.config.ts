@@ -15,11 +15,10 @@ export default defineNuxtConfig({
     classSuffix: "",
   },
   runtimeConfig: {
-    publicUrl: "",
     public: {
-      apiBase: "",
-      backendUrl: "",
-      lgLicenseKey: "",
+      apiBase: '',
+      backendUrl: '',
+      lgLicenseKey: '',
     },
   },
   tailwindcss: {
@@ -29,7 +28,19 @@ export default defineNuxtConfig({
     server: false,
     client: false,
   },
+  vite: {
+    server: {
+      allowedHosts: ['bb-frontend.blacknectar.de'],
+      hmr: {
+        protocol: 'wss',
+        host: 'bb-frontend.blacknectar.de',
+      },
+    },
+  },
   devtools: { enabled: true },
+  devServer: {
+    host: '0.0.0.0',
+  },
   app: {
     head: {
       charset: "utf-8",

@@ -40,12 +40,6 @@
             git
           ];
 
-          env = {
-            NUXT_PUBLIC_API_BASE = "";
-            NUXT_PUBLIC_BACKEND_URL = "";
-            NUXT_PUBLIC_LG_LICENSE_KEY = "";
-          };
-
           enterShell = ''
             echo "🪲 BlackBeetle Frontend Development Environment"
             echo "Node.js: $(node --version)"

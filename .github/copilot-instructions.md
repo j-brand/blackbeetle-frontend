@@ -21,12 +21,13 @@
 - Prefer `useFetch` or `useAsyncData` for data fetching
 - Use `$fetch` for client-side API calls (not axios)
 - Define page metadata using `definePageMeta`
-- Use `@/` or `~/` aliases for imports from project root
+- `@/` and `~/` aliases resolve to the `app/` directory; use `~~/` for project root
 - Component names should be PascalCase
 - Use scoped styles with `<style scoped>` when possible
+- Use `import.meta.client` / `import.meta.server` instead of `process.client` / `process.server`
 
 ### Tailwind CSS v4
-- Theme is defined in `assets/css/main.css` using `@theme` directive
+- Theme is defined in `app/assets/css/main.css` using `@theme` directive
 - Use CSS variables: `var(--color-bb-white)`, `var(--color-bb-charcoal)`, etc.
 - Custom utilities use `@utility` directive (not `@layer components`)
 - For `@apply` in Vue `<style>` blocks, add `@reference "@/assets/css/main.css";`
@@ -34,7 +35,7 @@
 - Prefer Tailwind utility classes over custom CSS when possible
 
 ### TypeScript
-- Define interfaces in `types/index.ts`
+- Define interfaces in `app/types/index.ts`
 - Use `import type { ... }` for type imports
 - Avoid using `PropType` from Vue - prefer type inference from `defineProps`
 - Use strict null checks
@@ -61,7 +62,7 @@
 | Swiper | 12.0+ | Touch slider/carousel |
 | LightGallery | 2.8+ | Image gallery lightbox |
 | vue3-emoji-picker | 1.1+ | Emoji picker component |
-| vue-toastification | 2.0+ | Toast notifications |
+| vue-sonner | 2.0+ | Toast notifications |
 
 ### Maps
 | Technology | Version | Purpose |
@@ -73,7 +74,7 @@
 | Technology | Version | Purpose |
 |------------|---------|---------|
 | GSAP | 3.12+ | Animation library |
-| Anime.js | 3.2+ | Animation library |
+| Anime.js | 4.3+ | Animation library |
 
 ### Development
 | Technology | Purpose |
@@ -85,25 +86,30 @@
 ## Project Structure
 
 ```
-├── assets/
-│   ├── css/           # Tailwind CSS v4 stylesheets
-│   │   ├── main.css   # Entry point with @theme
-│   │   └── *.css      # Feature-specific styles
-│   └── fonts/         # Custom web fonts
-├── components/
-│   ├── icon/          # SVG icon components
-│   ├── layout/        # Layout components (Button, Input, etc.)
-│   ├── modal/         # Modal dialog components
-│   ├── post/          # Blog post components
-│   └── *.vue          # Shared components
-├── composables/       # Vue composables
-├── layouts/           # Nuxt layouts
-├── lib/               # Utility libraries (API service)
-├── middleware/        # Route middleware
-├── pages/             # File-based routing
-├── plugins/           # Nuxt plugins
-├── public/            # Static assets
-└── types/             # TypeScript type definitions
+├── app/
+│   ├── app.vue            # Root app component
+│   ├── assets/
+│   │   ├── css/           # Tailwind CSS v4 stylesheets
+│   │   │   ├── main.css   # Entry point with @theme
+│   │   │   └── *.css      # Feature-specific styles
+│   │   └── fonts/         # Custom web fonts
+│   ├── components/
+│   │   ├── common/        # Shared components (Loader, Pagination, etc.)
+│   │   ├── icon/          # SVG icon components
+│   │   ├── layout/        # Layout components (Navigation, Footer, LazyImage)
+│   │   ├── map/           # Map components
+│   │   ├── modal/         # Modal dialog components
+│   │   ├── post/          # Blog post components
+│   │   ├── ui/            # UI primitives (Button, Input, Checkbox, Textarea)
+│   │   └── *.vue          # Feature components
+│   ├── composables/       # Vue composables
+│   ├── layouts/           # Nuxt layouts
+│   ├── lib/               # Utility libraries (API service)
+│   ├── middleware/         # Route middleware
+│   ├── pages/             # File-based routing
+│   └── types/             # TypeScript type definitions
+├── public/                # Static assets
+└── tests/                 # Unit tests
 ```
 
 ## MCP (Model Context Protocol) Servers

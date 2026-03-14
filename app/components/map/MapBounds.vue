@@ -7,7 +7,7 @@ interface MapBoundsProps {
   // Accept any object since Vue's scoped slots don't preserve exact types
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   map: any;
-  coordinates?: Array<{ position: { lat: number; lng: number } }>;
+  coordinates?: Array<{ position: { lat: number; lng: number }; id?: string }>;
 }
 
 const props = defineProps<MapBoundsProps>();
@@ -17,7 +17,9 @@ function fitBounds(mapInstance: LeafletMap, coords: typeof props.coordinates) {
     const bounds: LatLngBoundsExpression = coords.map(
       (marker) => [marker.position.lat, marker.position.lng] as [number, number]
     );
-    mapInstance.fitBounds(bounds, { padding: [50, 50] });
+    nextTick(() => {
+      mapInstance.fitBounds(bounds, { padding: [50, 50] });
+    });
   }
 }
 

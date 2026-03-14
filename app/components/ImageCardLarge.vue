@@ -21,8 +21,9 @@
       <span class="text-lg text-shadow-lg hidden md:block lg:w-2/5" v-html="getExcerpt(resource.description, 150)"></span>
     </div>
     <layout-lazy-image
+      v-if="resource.title_image"
       class="vignette"
-      :src="getMediaUrl(resource.title_image, 'preview')"
+      :src="getBestMediaUrl(resource.title_image, 'large')"
       :width="resource.title_image.custom_properties?.width"
       :height="resource.title_image.custom_properties?.height"
       :blur="true"
@@ -39,7 +40,7 @@ const props = defineProps<{
   type: "album" | "story";
 }>();
 
-const { formatDate, getMediaUrl, getExcerpt } = useHelper();
+const { formatDate, getBestMediaUrl, getExcerpt } = useHelper();
 
 const albumResource = computed(() => props.resource as IAlbum);
 const storyResource = computed(() => props.resource as IStory);

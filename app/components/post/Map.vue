@@ -1,15 +1,12 @@
 <template>
   <ClientOnly>
-    <MapContainer class="w-full h-112" :zoom="content.zoomlevel" v-slot="{ map }">
-      <template v-if="content.coordinates?.length">
-        <MapMarker
-          v-for="(marker, index) in content.coordinates"
-          :key="index"
-          :position="marker.position"
-          :label="marker.info"
-        />
-        <MapBounds :coordinates="content.coordinates" :map="map" />
-      </template>
+    <MapContainer
+      class="w-full h-112"
+      :zoom="content.zoomlevel"
+      :coordinates="content.coordinates"
+      v-slot="{ map }"
+    >
+      <MapBounds v-if="content.coordinates?.length" :coordinates="content.coordinates" :map="map" />
     </MapContainer>
   </ClientOnly>
 </template>
@@ -23,9 +20,9 @@ const props = defineProps<{
 
 const content = computed(() => {
   // Handle both string (old API) and object (new API) formats
-  if (typeof props.post.content === 'string') {
-    return JSON.parse(props.post.content);
-  }
-  return props.post.content;
+  const parsed = typeof props.post.content === 'string'
+    ? JSON.parse(props.post.content)
+    : props.post.content;
+  return parsed;
 });
 </script>

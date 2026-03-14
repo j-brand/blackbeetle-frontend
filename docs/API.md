@@ -420,7 +420,7 @@ interface IPost {
 | `html` | HTML string |
 | `image` | Not used (images in `images` array) |
 | `video` | JSON: `{ "path": "youtube", "filename": "video_id" }` |
-| `map` | JSON: `{ "zoomlevel": number, "coordinates": [...] }` |
+| `map` | JSON: `{ "zoomlevel": number, "coordinates": [{ "id": string, "position": { "lat": number, "lng": number } }], "connection": boolean }` |
 
 ### AlbumResource
 

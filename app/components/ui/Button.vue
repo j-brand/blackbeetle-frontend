@@ -25,7 +25,7 @@ defineProps<{
   @apply bg-bb-charcoal text-bb-light border-bb-light hover:bg-bb-light hover:text-bb-charcoal-dark disabled:bg-gray-200 disabled:text-gray-500;
 }
 .btn-light {
-  @apply border-bb-charcoal hover:bg-bb-charcoal hover:text-bb-light dark:border-bb-light dark:bg-bb-charcoal dark:text-bb-light dark:hover:bg-bb-light dark:hover:text-bb-charcoal disabled:bg-gray-200 disabled:text-gray-500 dark:disabled:border-gray-500 dark:disabled:bg-bb-charcoal;
+  @apply text-bb-charcoal border-bb-charcoal hover:bg-bb-charcoal hover:text-bb-light dark:border-bb-light dark:bg-bb-charcoal dark:text-bb-light dark:hover:bg-bb-light dark:hover:text-bb-charcoal disabled:bg-gray-200 disabled:text-gray-500 dark:disabled:border-gray-500 dark:disabled:bg-bb-charcoal;
 }
 
 @keyframes spinner {

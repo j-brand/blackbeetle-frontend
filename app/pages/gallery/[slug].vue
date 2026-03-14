@@ -14,8 +14,8 @@
 
     <div class="max-w-screen-lg mx-auto">
       <div class="md:columns-3 lg:columns-4 gap-5" ref="gallery" v-if="album">
-        <a class="mb-5 block" v-for="(img, index) in album.images" :key="index" :href="getMediaUrl(img, 'original')" :data-thumb="getMediaUrl(img, 'thumb')" :data-sub-html="img.custom_properties?.description || img.name">
-          <layout-lazy-image class="lg:rounded-md" :src="getMediaUrl(img, 'thumb')" :width="img.custom_properties?.width" :height="img.custom_properties?.height" :blur="true" :alt="img.name" />
+        <a class="mb-5 block" v-for="(img, index) in album.images" :key="index" :href="getBestMediaUrl(img, 'large')" :data-thumb="getBestMediaUrl(img, 'large')" :data-sub-html="img.custom_properties?.description || img.name">
+          <layout-lazy-image class="lg:rounded-md" :src="getBestMediaUrl(img, 'large')" :width="img.custom_properties?.width" :height="img.custom_properties?.height" :blur="true" :alt="img.name" />
         </a>
       </div>
     </div>
@@ -43,7 +43,7 @@ const route = useRoute();
 const slug = 'slug' in route.params ? String(route.params.slug) : '';
 const { lgLicenseKey } = useRuntimeConfig().public;
 
-const { formatDate, getMediaUrl } = useHelper();
+const { formatDate, getBestMediaUrl } = useHelper();
 
 const { data: album } = await useAsyncData(`album-${slug}`, () => apiService.getBySlug<IAlbum>("/albums", slug));
 
@@ -53,7 +53,7 @@ useHead({
     { name: "description", content: album.value?.description ?? "" },
     { name: "og:title", content: `Blackbeetle - ${album.value?.title ?? ""}` },
     { name: "og:description", content: album.value?.description ?? "" },
-    { name: "og:image", content: album.value?.title_image ? getMediaUrl(album.value.title_image, "preview") : "" },
+    { name: "og:image", content: album.value?.title_image ? getBestMediaUrl(album.value.title_image, 'large') : "" },
   ],
 });
 
@@ -64,6 +64,8 @@ function initGallery() {
     exThumbImage: "data-thumb",
     plugins: [lgZoom, lgThumbnail, lgFullscreen],
     licenseKey: lgLicenseKey,
+    preload: 1,
+    download: false,
   });
 }
 

@@ -198,3 +198,66 @@ color: var(--color-bb-charcoal);
 /* Tailwind approach */
 @apply dark:bg-bb-charcoal dark:text-bb-light;
 ```
+
+## Null Safety
+
+API responses may contain null/undefined fields. Always guard against null data:
+
+```typescript
+// BAD - crashes when media is null
+function getMediaUrl(media: IMedia): string {
+  return media.urls.original;
+}
+
+// GOOD - null-safe with fallback
+function getMediaUrl(media: IMedia | null | undefined): string {
+  if (!media?.urls) return "";
+  return media.urls.original;
+}
+```
+
+Common fields that may be null from the API:
+- `resource.title_image` — albums/stories may have no title image
+- `post.images` / `post.videos` — posts may have no media
+- `album.description` / `story.description` — descriptions are nullable
+- `post.title` / `post.date` — post metadata is nullable
+
+## Testing
+
+### Guidelines
+- **All composables and utilities must have tests** — target ≥95% coverage
+- **Test null/undefined edge cases** — API data may be incomplete
+- **Use Vitest** with `@nuxt/test-utils` for the Nuxt environment
+- **Mock only at boundaries** — mock `$fetch`, not internal functions
+- **German locale** — validation messages are in German, match exact strings
+- **Run tests before committing** — `npm run test:run`
+
+### Commands
+```bash
+npm test              # Watch mode
+npm run test:run      # Run once
+npm run test:coverage # Coverage report
+```
+
+### Test File Structure
+```
+tests/
+├── composables/          # One test file per composable
+│   ├── useButtonState.test.ts
+│   ├── useDetectOutsideClick.test.ts
+│   ├── useFormValidation.test.ts
+│   ├── useHelpers.test.ts
+│   └── useValidators.test.ts
+└── lib/
+    └── api.service.test.ts
+```
+
+### Writing API Service Tests
+```typescript
+const mockFetch = vi.fn();
+vi.stubGlobal("$fetch", mockFetch);
+import { apiService } from "~/lib/api.service";
+
+// apiBase is empty in test env, so URLs start with /api/v1
+expect(mockFetch).toHaveBeenCalledWith("/api/v1/stories");
+```

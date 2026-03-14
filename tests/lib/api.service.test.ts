@@ -7,80 +7,178 @@ vi.stubGlobal("$fetch", mockFetch);
 // Import after mocking
 import { apiService } from "~/lib/api.service";
 
+// In the Nuxt test environment, useRuntimeConfig().public.apiBase is empty string
+const API_PREFIX = "/api/v1";
+
 describe("apiService", () => {
   beforeEach(() => {
     mockFetch.mockReset();
   });
 
   describe("get", () => {
-    it("should make GET request to the correct endpoint", async () => {
-      const mockData = { id: 1, title: "Test" };
-      mockFetch.mockResolvedValueOnce(mockData);
+    it("should make GET request and unwrap data", async () => {
+      const mockData = [{ id: 1, title: "Story 1" }];
+      mockFetch.mockResolvedValueOnce({ data: mockData });
 
-      const result = await apiService.get<typeof mockData>("/posts");
+      const result = await apiService.get<typeof mockData>("/stories");
 
-      // Note: In test environment, apiBase is empty so just endpoint is passed
-      expect(mockFetch).toHaveBeenCalledWith("/posts");
+      expect(mockFetch).toHaveBeenCalledWith(`${API_PREFIX}/stories`);
       expect(result).toEqual(mockData);
+    });
+  });
+
+  describe("getPaginated", () => {
+    it("should make GET request with pagination params", async () => {
+      const mockResponse = {
+        data: [{ id: 1 }],
+        links: { first: null, last: null, prev: null, next: null },
+        meta: { current_page: 2, per_page: 10, total: 50 },
+      };
+      mockFetch.mockResolvedValueOnce(mockResponse);
+
+      const result = await apiService.getPaginated("/albums", { page: 2, per_page: 10 });
+
+      expect(mockFetch).toHaveBeenCalledWith(`${API_PREFIX}/albums?page=2&per_page=10`);
+      expect(result).toEqual(mockResponse);
+    });
+
+    it("should make GET request without params", async () => {
+      const mockResponse = { data: [], links: {}, meta: {} };
+      mockFetch.mockResolvedValueOnce(mockResponse);
+
+      await apiService.getPaginated("/albums");
+
+      expect(mockFetch).toHaveBeenCalledWith(`${API_PREFIX}/albums`);
+    });
+
+    it("should include order params when provided", async () => {
+      mockFetch.mockResolvedValueOnce({ data: [], links: {}, meta: {} });
+
+      await apiService.getPaginated("/albums", { order: "desc", order_by: "date" });
+
+      expect(mockFetch).toHaveBeenCalledWith(`${API_PREFIX}/albums?order=desc&order_by=date`);
     });
   });
 
   describe("getBySlug", () => {
-    it("should make GET request with slug", async () => {
-      const mockData = { slug: "test-post", content: "Hello" };
-      mockFetch.mockResolvedValueOnce(mockData);
+    it("should make GET request with slug and unwrap data", async () => {
+      const mockData = { slug: "test-album", title: "Test" };
+      mockFetch.mockResolvedValueOnce({ data: mockData });
 
-      const result = await apiService.getBySlug<typeof mockData>("/posts", "test-post");
+      const result = await apiService.getBySlug<typeof mockData>("/albums", "test-album");
 
-      expect(mockFetch).toHaveBeenCalledWith("/posts/test-post");
+      expect(mockFetch).toHaveBeenCalledWith(`${API_PREFIX}/albums/test-album`);
       expect(result).toEqual(mockData);
     });
   });
 
-  describe("getStoryBySlug", () => {
-    it("should build correct URL with pagination", async () => {
-      const mockData = { data: [], meta: { page: 2 } };
-      mockFetch.mockResolvedValueOnce(mockData);
+  describe("getStory", () => {
+    it("should make GET request for story by slug", async () => {
+      const mockData = { id: 1, title: "Journey", slug: "journey" };
+      mockFetch.mockResolvedValueOnce({ data: mockData });
 
-      const result = await apiService.getStoryBySlug<typeof mockData>("/stories", "my-story", "newest", 2);
+      const result = await apiService.getStory<typeof mockData>("journey");
 
-      expect(mockFetch).toHaveBeenCalledWith("/stories/my-story/newest?page=2");
+      expect(mockFetch).toHaveBeenCalledWith(`${API_PREFIX}/stories/journey`);
       expect(result).toEqual(mockData);
     });
 
-    it("should work without pagination", async () => {
-      const mockData = { data: [] };
-      mockFetch.mockResolvedValueOnce(mockData);
+    it("should include ordering options", async () => {
+      mockFetch.mockResolvedValueOnce({ data: {} });
 
-      await apiService.getStoryBySlug<typeof mockData>("/stories", "my-story", "newest");
+      await apiService.getStory("journey", { order: "desc", order_by: "date" });
 
-      expect(mockFetch).toHaveBeenCalledWith("/stories/my-story/newest");
+      expect(mockFetch).toHaveBeenCalledWith(
+        `${API_PREFIX}/stories/journey?order=desc&order_by=date`
+      );
+    });
+  });
+
+  describe("getStoryById", () => {
+    it("should make GET request for story by ID", async () => {
+      const mockData = { id: 42, title: "Journey" };
+      mockFetch.mockResolvedValueOnce({ data: mockData });
+
+      const result = await apiService.getStoryById<typeof mockData>(42);
+
+      expect(mockFetch).toHaveBeenCalledWith(`${API_PREFIX}/stories/id/42`);
+      expect(result).toEqual(mockData);
+    });
+
+    it("should include ordering options", async () => {
+      mockFetch.mockResolvedValueOnce({ data: {} });
+
+      await apiService.getStoryById(42, { order: "asc", order_by: "position" });
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        `${API_PREFIX}/stories/id/42?order=asc&order_by=position`
+      );
+    });
+  });
+
+  describe("getStoryPosts", () => {
+    it("should make GET request for story posts", async () => {
+      const mockResponse = { data: [{ id: 1, type: "html" }], links: {}, meta: {} };
+      mockFetch.mockResolvedValueOnce(mockResponse);
+
+      const result = await apiService.getStoryPosts("journey");
+
+      expect(mockFetch).toHaveBeenCalledWith(`${API_PREFIX}/stories/journey/posts`);
+      expect(result).toEqual(mockResponse);
+    });
+
+    it("should include pagination and ordering params", async () => {
+      mockFetch.mockResolvedValueOnce({ data: [], links: {}, meta: {} });
+
+      await apiService.getStoryPosts("journey", {
+        page: 3,
+        per_page: 5,
+        order: "desc",
+        order_by: "date",
+      });
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        `${API_PREFIX}/stories/journey/posts?page=3&per_page=5&order=desc&order_by=date`
+      );
     });
   });
 
   describe("post", () => {
     it("should make POST request with payload", async () => {
-      const payload = { name: "Test", email: "test@test.com" };
-      const mockResponse = { success: true, message: "Created" };
+      const payload = { name: "Test", content: "Hello" };
+      const mockResponse = { success: true };
       mockFetch.mockResolvedValueOnce(mockResponse);
 
-      const result = await apiService.post<typeof mockResponse>("/subscribe", payload);
+      const result = await apiService.post<typeof mockResponse>("/comments", payload);
 
-      expect(mockFetch).toHaveBeenCalledWith("/subscribe", {
+      expect(mockFetch).toHaveBeenCalledWith(`${API_PREFIX}/comments`, {
         method: "POST",
         body: payload,
       });
       expect(result).toEqual(mockResponse);
     });
 
-    it("should handle errors with proper rejection", async () => {
+    it("should handle fetch errors with proper rejection format", async () => {
       const fetchError = {
-        data: { message: "Validation failed" },
+        data: {
+          message: "Validation failed",
+          errors: { name: ["Name is required"] },
+        },
       };
       mockFetch.mockRejectedValueOnce(fetchError);
 
-      await expect(apiService.post("/subscribe", {})).rejects.toEqual({
-        data: "Validation failed",
+      await expect(apiService.post("/comments", {})).rejects.toEqual({
+        message: "Validation failed",
+        errors: { name: ["Name is required"] },
+      });
+    });
+
+    it("should handle errors without data gracefully", async () => {
+      mockFetch.mockRejectedValueOnce(new Error("Network error"));
+
+      await expect(apiService.post("/comments", {})).rejects.toEqual({
+        message: undefined,
+        errors: undefined,
       });
     });
   });

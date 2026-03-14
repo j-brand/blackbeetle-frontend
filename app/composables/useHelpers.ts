@@ -38,7 +38,8 @@ export function useHelper() {
   /**
    * Get image object for lazy loading with new MediaResource structure
    */
-  function getMediaObj(media: IMedia, variant: "thumb" | "preview" | "original" = "preview") {
+  function getMediaObj(media: IMedia | null | undefined, variant: string = "preview") {
+    if (!media?.urls) return { src: "", loading: "" };
     return {
       src: media.urls[variant] ?? media.urls.original,
       loading: media.urls.thumb ?? media.urls.original,
@@ -48,9 +49,22 @@ export function useHelper() {
   /**
    * Get URL for a specific media variant
    */
-  function getMediaUrl(media: IMedia, variant: "thumb" | "preview" | "original" = "original"): string {
+  function getMediaUrl(media: IMedia | null | undefined, variant: string = "original"): string {
+    if (!media?.urls) return "";
     return media.urls[variant] ?? media.urls.original;
   }
 
-  return { slugify, formatDate, getExcerpt, getMediaObj, getMediaUrl };
+  /**
+   * Get the best available media URL from a list of preferred variants
+   */
+  function getBestMediaUrl(media: IMedia | null | undefined, ...variants: string[]): string {
+    if (!media?.urls) return "";
+    for (const variant of variants) {
+      if (media.urls[variant]) return media.urls[variant]!;
+    }
+    // never fall back to original JPG — use largest available webp variant
+    return media.urls.large ?? media.urls.medium ?? media.urls.original;
+  }
+
+  return { slugify, formatDate, getExcerpt, getMediaObj, getMediaUrl, getBestMediaUrl };
 }

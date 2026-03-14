@@ -37,7 +37,7 @@ const locationContent = computed(() => {
   
   try {
     // Parse the JSON string from API
-    const coords = JSON.parse(location.value.value) as { lat: number; lng: number };
+    const coords = JSON.parse(location.value.value).position as { lat: number; lng: number };
     return { 
       position: coords, 
       info: "Berlin" // Default label since API doesn't provide it

@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Use class-based dark mode (for @nuxtjs/color-mode) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Custom theme configuration (migrated from tailwind.config.js) */
 @theme {
   /* Colors */

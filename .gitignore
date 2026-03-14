@@ -7,3 +7,4 @@ nuxt.d.ts
 .env.dev
 .env.prod
 .direnv
+coverage

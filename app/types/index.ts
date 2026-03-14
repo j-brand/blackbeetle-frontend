@@ -6,6 +6,9 @@ export interface IMediaUrls {
   original: string;
   thumb?: string;
   preview?: string;
+  medium?: string;
+  large?: string;
+  webp?: string;
   [key: string]: string | undefined;
 }
 
@@ -63,7 +66,7 @@ export interface IPost {
   id: number;
   story_id: number;
   title: string | null;
-  content: string;
+  content: string | Record<string, unknown>;
   type: "html" | "image" | "video" | "map";
   position: number;
   date: string | null;

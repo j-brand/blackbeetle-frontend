@@ -1,18 +1,5 @@
 /*LIGHT GALLERY CHANGES*/
 
-.lg-next:before,
-.lg-prev:after {
-  font-family: swiper-icons !important;
-  content: "next" !important;
-  font-size: xx-large;
-}
-.lg-next:before {
-  content: "next" !important;
-}
-.lg-prev:after {
-  content: "prev" !important;
-}
-
 .lg-prev,
 .lg-next {
   background-color: transparent !important;
@@ -28,6 +15,12 @@
 .lg-sub-html {
   color: var(--color-bb-light) !important;
   font-family: SuperGroteskWeb !important;
+}
+
+/* Keep lg icon font for navigation arrows */
+.lg-prev::after,
+.lg-next::before {
+  font-family: 'lg' !important;
 }
 
 .lg-backdrop,

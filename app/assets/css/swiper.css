@@ -4,7 +4,11 @@
 @import "swiper/css/pagination";
 
 :root {
-  --swiper-navigation-size: 2rem;
+  --swiper-navigation-size: 1.5rem;
+  --swiper-navigation-top-offset: 50%;
+  --swiper-navigation-sides-offset: 8px;
+  --swiper-navigation-color: var(--color-bb-lighter);
+  --swiper-theme-color: var(--color-bb-lighter);
 }
 
 .swiper-pagination-bullet {

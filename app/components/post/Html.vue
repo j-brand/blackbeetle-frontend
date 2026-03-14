@@ -4,7 +4,7 @@
       <p class="text-right md:text-md">{{ formatDate(post.date) }}</p>
       <h2 class="text-2xl font-semibold">{{ post.title }}</h2>
     </div>
-    <article v-html="post.content" class="text-lg md:text-xl html-post"></article>
+    <article v-html="htmlContent" class="text-lg md:text-xl html-post"></article>
     <PostComments v-if="post.comments && post.comments.length > 0" :comments="post.comments" @open-Modal="commentModal = true" />
     <transition name="fade">
       <ModalPostComment v-if="commentModal" :post_id="post.id" @new="addNewComment" @close="commentModal = false" />
@@ -21,6 +21,13 @@ const props = defineProps<{
 
 const commentModal = ref<boolean>(false);
 const { formatDate } = useHelper();
+
+const htmlContent = computed(() => {
+  if (typeof props.post.content === 'object' && props.post.content !== null && 'html' in props.post.content) {
+    return (props.post.content as Record<string, string>).html;
+  }
+  return String(props.post.content);
+});
 
 function addNewComment(comment: IComment) {
   if (props.post.comments) {

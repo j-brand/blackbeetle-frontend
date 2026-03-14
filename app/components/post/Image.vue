@@ -3,9 +3,13 @@
     <div class="swiper-wrapper" ref="galleryEle">
       <div class="swiper-slide w-full" v-for="(image, index) in post.images">
         <div class="flex justify-center bg-bb-charcoal bg-opacity-40 max-h-[576px]">
-          <img class="object-contain" :data-large="getMediaUrl(image, 'original')" :src="getMediaUrl(image, 'preview')" loading="lazy" :height="(image.custom_properties?.height as number) || undefined" :width="(image.custom_properties?.width as number) || undefined" />
+          <img class="object-contain"
+            :data-src="getBestMediaUrl(image, 'large')"
+            :data-large="getBestMediaUrl(image, 'large')"
+            :data-thumb="getBestMediaUrl(image, 'large')"
+            :height="(image.custom_properties?.height as number) || undefined"
+            :width="(image.custom_properties?.width as number) || undefined" />
           <span class="hidden" :id="'caption_' + index">{{ (image.custom_properties?.description as string) || image.name }}</span>
-          <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
         </div>
       </div>
     </div>
@@ -36,7 +40,7 @@ import "lightgallery/scss/lg-fullscreen.scss";
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper/modules";
 
-const { getMediaUrl } = useHelper();
+const { getBestMediaUrl } = useHelper();
 const { lgLicenseKey } = useRuntimeConfig().public;
 
 const galleryEle = ref<HTMLElement | null>(null);
@@ -49,6 +53,9 @@ const props = defineProps<{
   post: IPost;
 }>();
 
+const isVisible = ref(false);
+let observer: IntersectionObserver | null = null;
+
 function initGallery() {
   if (!galleryEle.value) return;
   
@@ -57,7 +64,7 @@ function initGallery() {
     const span = slide.getElementsByTagName("span")[0];
     return {
       src: img?.getAttribute("data-large") || "",
-      thumb: img?.src || "",
+      thumb: img?.getAttribute("data-thumb") || img?.src || "",
       subHtml: span?.innerText || "",
     };
   });
@@ -66,6 +73,8 @@ function initGallery() {
     plugins: [lgZoom, lgThumbnail, lgAutoplay, lgFullscreen],
     dynamicEl,
     licenseKey: lgLicenseKey,
+    preload: 1,
+    download: false,
   });
 
   [...galleryEle.value.getElementsByClassName("swiper-slide")].forEach((slide, index) => {
@@ -92,54 +101,80 @@ function destroyGallery() {
   gallery.value?.destroy();
 }
 
+function loadSlidesAt(swiper: Swiper, indices: number[]) {
+  indices.forEach(i => {
+    const slide = swiper.slides[i];
+    if (!slide) return;
+    const img = slide.querySelector('img[data-src]') as HTMLImageElement | null;
+    if (img?.dataset.src) {
+      img.src = img.dataset.src;
+      img.removeAttribute('data-src');
+    }
+  });
+}
+
 function initSwiper() {
   if (!swiperEle.value) return;
-  
-  swiperRef.value = new Swiper(swiperEle.value, {
+
+  const container = swiperEle.value;
+  swiperRef.value = new Swiper(container, {
     modules: [Navigation, Pagination],
     autoHeight: true,
     watchSlidesProgress: true,
     slidesPerView: 1,
     initialSlide: 0,
     pagination: {
-      el: ".swiper-pagination",
+      el: container.querySelector('.swiper-pagination') as HTMLElement,
       dynamicBullets: true,
       clickable: true,
     },
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
+      nextEl: container.querySelector('.swiper-button-next') as HTMLElement,
+      prevEl: container.querySelector('.swiper-button-prev') as HTMLElement,
+    },
+    on: {
+      init(swiper) {
+        loadSlidesAt(swiper, [0, 1]);
+      },
+      slideChange(swiper) {
+        const i = swiper.activeIndex;
+        loadSlidesAt(swiper, [i - 1, i, i + 1]);
+      },
     },
   });
 }
 
 onMounted(() => {
-  initSwiper();
-  initGallery();
+  if (!swiperEle.value) return;
+
+  observer = new IntersectionObserver(
+    (entries) => {
+      if (entries[0]?.isIntersecting && !isVisible.value) {
+        isVisible.value = true;
+        initSwiper();
+        initGallery();
+        observer?.disconnect();
+        observer = null;
+      }
+    },
+    { rootMargin: '200px' },
+  );
+  observer.observe(swiperEle.value);
 });
 
 onUnmounted(() => {
+  observer?.disconnect();
   destroyGallery();
 });
 </script>
 
-<style>
-.swiper-button-next,
-.swiper-button-prev {
-  height: 100%;
-  top: 1.5rem;
-  width: 50px;
+<style scoped>
+.swiper-container :deep(.swiper-button-next),
+.swiper-container :deep(.swiper-button-prev) {
+  color: var(--color-bb-lighter);
 }
-.swiper-button-next:focus,
-.swiper-button-prev:focus {
+.swiper-container :deep(.swiper-button-next):focus,
+.swiper-container :deep(.swiper-button-prev):focus {
   outline: none;
-}
-
-.swiper-button-next {
-  right: 0;
-}
-
-.swiper-button-prev {
-  left: 0;
 }
 </style>

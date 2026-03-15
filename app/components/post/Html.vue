@@ -21,12 +21,16 @@ const props = defineProps<{
 
 const commentModal = ref<boolean>(false);
 const { formatDate } = useHelper();
+const { sanitizeHtml } = useSanitize();
 
 const htmlContent = computed(() => {
+  let raw: string;
   if (typeof props.post.content === 'object' && props.post.content !== null && 'html' in props.post.content) {
-    return (props.post.content as Record<string, string>).html;
+    raw = (props.post.content as Record<string, string>).html;
+  } else {
+    raw = String(props.post.content);
   }
-  return String(props.post.content);
+  return sanitizeHtml(raw);
 });
 
 function addNewComment(comment: IComment) {

@@ -1,14 +1,10 @@
 <template>
   <main class="relative h-full min-h-screen overflow-hidden">
-    <Head>
-      <Meta name="description" content="Ein Spiel für jeden der drauf sinnt, wie er seiner Welt entrinnt." />
-      <Link v-if="preferDark" rel="icon" type="image/png" href="/img/fav/favicon-light.ico" />
-      <Link v-if="!preferDark" rel="icon" type="image/png" href="/img/fav/favicon-dark.ico" />
-    </Head>
+    <a href="#main-content" class="skip-to-content">Zum Inhalt springen</a>
     <LayoutNavigationDefault />
     <div class="pattern-bg absolute w-full h-full"></div>
 
-    <div class="pt-32 pb-48 px-3 md:pt-36 lg:px-0">
+    <div id="main-content" class="pt-32 pb-48 px-3 md:pt-36 lg:px-0">
       <slot />
     </div>
     <LayoutFooterDefault />
@@ -22,8 +18,8 @@
 const cookieAccept = useCookie("cAccept");
 const preferDark = ref(false);
 
-if (process.client) {
-  preferDark.value = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+if (import.meta.client) {
+  preferDark.value = window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
 }
 
 useHead({
@@ -33,5 +29,15 @@ useHead({
   htmlAttrs: {
     lang: "de",
   },
+  meta: [
+    { name: "description", content: "Ein Spiel für jeden der drauf sinnt, wie er seiner Welt entrinnt." },
+  ],
+  link: computed(() => [
+    {
+      rel: "icon",
+      type: "image/png",
+      href: preferDark.value ? "/img/fav/favicon-light.ico" : "/img/fav/favicon-dark.ico",
+    },
+  ]),
 });
 </script>

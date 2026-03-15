@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-if="album" class="max-w-screen-lg mx-auto mb-16 px-5 md:px-0 lg:px-0 flex flex-col justify-between">
+    <div v-if="errorAlbum" class="text-center py-20 max-w-screen-lg mx-auto">
+      <p class="text-xl">Das Album konnte nicht geladen werden. Bitte versuche es später erneut.</p>
+    </div>
+    <div v-else-if="album" class="max-w-screen-lg mx-auto mb-16 px-5 md:px-0 lg:px-0 flex flex-col justify-between">
       <span class="text-lg flex justify-end mb-2 md:mb-0 dark:text-bb-light">
         {{ formatDate(album.start_date, true) }} -
         {{ formatDate(album.end_date, true) }}
@@ -8,7 +11,7 @@
 
       <div class="max-w-screen-lg">
         <h2 class="text-3xl mb-3">{{ album.title }}</h2>
-        <p class="text-lg">{{ album.description }}</p>
+        <p class="text-lg" v-html="album.description"></p>
       </div>
     </div>
 
@@ -45,15 +48,15 @@ const { lgLicenseKey } = useRuntimeConfig().public;
 
 const { formatDate, getBestMediaUrl } = useHelper();
 
-const { data: album } = await useAsyncData(`album-${slug}`, () => apiService.getBySlug<IAlbum>("/albums", slug));
+const { data: album, error: errorAlbum } = await useAsyncData(`album-${slug}`, () => apiService.getBySlug<IAlbum>("/albums", slug));
 
 useHead({
   title: album.value?.title ?? "",
   meta: [
     { name: "description", content: album.value?.description ?? "" },
-    { name: "og:title", content: `Blackbeetle - ${album.value?.title ?? ""}` },
-    { name: "og:description", content: album.value?.description ?? "" },
-    { name: "og:image", content: album.value?.title_image ? getBestMediaUrl(album.value.title_image, 'large') : "" },
+    { property: "og:title", content: `Blackbeetle - ${album.value?.title ?? ""}` },
+    { property: "og:description", content: album.value?.description ?? "" },
+    { property: "og:image", content: album.value?.title_image ? getBestMediaUrl(album.value.title_image, 'large') : "" },
   ],
 });
 

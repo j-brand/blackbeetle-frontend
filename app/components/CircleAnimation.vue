@@ -1,7 +1,7 @@
 <template>
   <svg id="svg" xmlns="http://www.w3.org/2000/svg" :width="width" :height="height" :viewBox="'0 0 ' + width + ' ' + height">
     <g fill="none" fill-rule="evenodd" stroke="#3678AC" transform="translate(1 1)">
-      <Circle v-for="c in circles()" :key="c" :radius="c" class="anime-circle" :centerX="width / 2" :centerY="height / 2" :color="getColor()" />
+      <Circle v-for="c in circleRadii" :key="c" :radius="c" class="anime-circle" :centerX="width / 2" :centerY="height / 2" :color="getColor()" />
     </g>
   </svg>
   <button @click="animation?.restart()">click me</button>
@@ -18,7 +18,7 @@ const progressLogEl = ref(0);
 const updateLogEl = ref(0);
 
 
-const circles = () => {
+const circleRadii = computed(() => {
   let space = 0;
   const rList = [];
   for (let i = 40; i >= 0; i--) {
@@ -26,7 +26,7 @@ const circles = () => {
     rList.push(space);
   }
   return rList;
-};
+});
 
 
 let colorCount = -1;
@@ -38,8 +38,13 @@ const getColor = () => {
   return colors[colorCount];
 };
 
-const width = screen.width / 2;
-const height = screen.height / 2 - 84;
+const width = ref(800);
+const height = ref(400);
+
+onMounted(() => {
+  width.value = window.innerWidth / 2;
+  height.value = window.innerHeight / 2 - 84;
+});
 
 onMounted(() => {
   animation.value = animate(".anime-circle", {

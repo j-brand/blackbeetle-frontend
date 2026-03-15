@@ -4,6 +4,7 @@
       v-if="showPlaceholder"
       :src="placeholderSrc"
       class="lazy-placeholder"
+      :alt="alt"
       aria-hidden="true"
     />
     <img
@@ -11,7 +12,9 @@
       loading="lazy"
       class="lazy-image"
       :class="{ loaded: isLoaded }"
+      :alt="alt"
       @load="onLoad"
+      @error="onError"
     />
   </div>
 </template>
@@ -21,9 +24,11 @@ const props = defineProps({
   src: { type: String, required: true, default: "" },
   blur: { type: Boolean, required: false, default: true },
   lowsrc: { type: String, required: false, default: "" },
+  alt: { type: String, required: false, default: "" },
 });
 
 const isLoaded = ref(false);
+const hasError = ref(false);
 const showPlaceholder = computed(() => props.blur && !isLoaded.value);
 
 const placeholderSrc = computed(() => {
@@ -39,6 +44,11 @@ const placeholderSrc = computed(() => {
 });
 
 function onLoad() {
+  isLoaded.value = true;
+}
+
+function onError() {
+  hasError.value = true;
   isLoaded.value = true;
 }
 </script>

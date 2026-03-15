@@ -1,6 +1,6 @@
 <template>
-  <label :for="label">
-    <span class="dark:text-bb-light text-sm">{{ label }}</span><span class="text-bb-light-red text-sm" v-if="errors[label]">{{ errors[label] }}</span>
+  <label :for="slugify(label)">
+    <span class="dark:text-bb-light text-sm">{{ label }}</span><span :id="slugify(label) + '-error'" class="text-bb-light-red text-sm" v-if="errors[label]">{{ errors[label] }}</span>
     <textarea
       :id="slugify(label)"
       :value="modelValue"
@@ -10,6 +10,9 @@
       autocomplete="off"
       :cols="cols"
       :rows="rows"
+      :maxlength="maxlength"
+      :aria-describedby="errors[label] ? slugify(label) + '-error' : undefined"
+      :aria-invalid="errors[label] ? true : undefined"
     ></textarea>
   </label>
 </template>
@@ -21,11 +24,13 @@ const props = withDefaults(defineProps<{
   label?: string;
   rows?: string;
   cols?: string;
+  maxlength?: number;
 }>(), {
   type: "text",
   label: "",
   rows: "5",
   cols: "30",
+  maxlength: 5000,
 });
 
 const { validateTextField, errors } = useFormValidation();

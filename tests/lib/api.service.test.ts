@@ -182,4 +182,61 @@ describe("apiService", () => {
       });
     });
   });
+
+  // =========================================================================
+  // Error handling across GET methods
+  // =========================================================================
+  describe("error handling", () => {
+    it("get should propagate network errors", async () => {
+      mockFetch.mockRejectedValueOnce(new Error("Network error"));
+      await expect(apiService.get("/stories")).rejects.toThrow("Network error");
+    });
+
+    it("getPaginated should propagate network errors", async () => {
+      mockFetch.mockRejectedValueOnce(new Error("Network error"));
+      await expect(apiService.getPaginated("/albums")).rejects.toThrow("Network error");
+    });
+
+    it("getBySlug should propagate network errors", async () => {
+      mockFetch.mockRejectedValueOnce(new Error("Network error"));
+      await expect(apiService.getBySlug("/albums", "test")).rejects.toThrow("Network error");
+    });
+
+    it("getStory should propagate network errors", async () => {
+      mockFetch.mockRejectedValueOnce(new Error("Network error"));
+      await expect(apiService.getStory("journey")).rejects.toThrow("Network error");
+    });
+
+    it("getStoryById should propagate network errors", async () => {
+      mockFetch.mockRejectedValueOnce(new Error("Network error"));
+      await expect(apiService.getStoryById(42)).rejects.toThrow("Network error");
+    });
+
+    it("getStoryPosts should propagate network errors", async () => {
+      mockFetch.mockRejectedValueOnce(new Error("Network error"));
+      await expect(apiService.getStoryPosts("journey")).rejects.toThrow("Network error");
+    });
+
+    it("get should handle null data response", async () => {
+      mockFetch.mockResolvedValueOnce({ data: null });
+      const result = await apiService.get("/stories");
+      expect(result).toBeNull();
+    });
+
+    it("get should handle undefined data response", async () => {
+      mockFetch.mockResolvedValueOnce({ data: undefined });
+      const result = await apiService.get("/stories");
+      expect(result).toBeUndefined();
+    });
+
+    it("post should handle error where fetchError.data is undefined", async () => {
+      const err = { data: undefined, message: "Server Error" };
+      mockFetch.mockRejectedValueOnce(err);
+
+      await expect(apiService.post("/comments", {})).rejects.toEqual({
+        message: undefined,
+        errors: undefined,
+      });
+    });
+  });
 });

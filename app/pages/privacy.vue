@@ -29,7 +29,7 @@
       Als Betroffener steht Ihnen im Falle eines datenschutzrechtlichen Verstoßes ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde bezüglich
       datenschutzrechtlicher Fragen ist der Landesdatenschutzbeauftragte des Bundeslandes, in dem sich der Sitz unseres Unternehmens befindet. Der folgende Link stellt eine Liste der
       Datenschutzbeauftragten sowie deren Kontaktdaten bereit:
-      <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" target="_blank">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a
+      <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" target="_blank" rel="noopener noreferrer">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a
       >.
     </p>
 
@@ -135,7 +135,7 @@
       <a href="https://policies.google.com/privacy/partners?hl=de">https://policies.google.com/privacy/partners?hl=de</a>
     </p>
     <p>
-      <small>Quelle: Datenschutz-Konfigurator von <a href="http://www.mein-datenschutzbeauftragter.de" target="_blank">mein-datenschutzbeauftragter.de</a></small>
+      <small>Quelle: Datenschutz-Konfigurator von <a href="http://www.mein-datenschutzbeauftragter.de" target="_blank" rel="noopener noreferrer">mein-datenschutzbeauftragter.de</a></small>
     </p>
   </div>
 </template>
@@ -143,6 +143,10 @@
 <script setup lang="ts">
   useHead({
     title: 'Datenschutz',
-    
+    meta: [
+      { name: 'description', content: 'Datenschutzerklärung und Informationen zum Umgang mit Ihren Daten auf Blackbeetle.' },
+      { property: 'og:title', content: 'Blackbeetle - Datenschutz' },
+      { property: 'og:description', content: 'Datenschutzerklärung und Informationen zum Umgang mit Ihren Daten auf Blackbeetle.' },
+    ],
   })
 </script>

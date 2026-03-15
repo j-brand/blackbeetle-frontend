@@ -5,7 +5,7 @@
       <div class="container flex items-center justify-between flex-col md:flex-row py-3 px-5 mx-auto">
         <div class="flex flex-row">
           <div class="flex flex-col items-center md:items-start py-1">
-            <span class="text-base font-sans-secondary h-7 leading-7">© 2024 BLACKBEETLE</span>
+            <span class="text-base font-sans-secondary h-7 leading-7">&copy; {{ currentYear }} BLACKBEETLE</span>
             <span class="h-7 leading-7"
               >Made with &#128150; and interest by
               <span class="text-bb-red h-7  leading-7">Johannes Brand</span>
@@ -18,12 +18,16 @@
           <NuxtLink to="/imprint" class="ml-4 opacity-70 hover:opacity-100 decoration-bb-lighter hover:underline">Impressum</NuxtLink>
         </div>
         <div class="flex flex-row gap-3">
-          <NuxtLink to="mailto:contact@blackbeetle.de" class="opacity-70 hover:opacity-100 text-bb-lighter" aria-label="schreib mir eine Nachricht"><IconMail fill="currentColor" /></NuxtLink>
-          <NuxtLink to="https://github.com/j-brand" target="_blank" class="opacity-70 hover:opacity-100 text-bb-lighter" aria-label="Github Profil"><IconGithub fill="currentColor" /></NuxtLink>
-          <NuxtLink to="https://www.linkedin.com/in/j-brand-a82a46210/" target="_blank" class="opacity-70 hover:opacity-100 text-bb-lighter" aria-label="LinkedIn Profil"><IconLinkedIn fill="currentColor" /></NuxtLink>
+          <a href="mailto:contact@blackbeetle.de" class="opacity-70 hover:opacity-100 text-bb-lighter" aria-label="schreib mir eine Nachricht"><IconMail fill="currentColor" /></a>
+          <a href="https://github.com/j-brand" target="_blank" rel="noopener noreferrer" class="opacity-70 hover:opacity-100 text-bb-lighter" aria-label="Github Profil"><IconGithub fill="currentColor" /></a>
+          <a href="https://www.linkedin.com/in/j-brand-a82a46210/" target="_blank" rel="noopener noreferrer" class="opacity-70 hover:opacity-100 text-bb-lighter" aria-label="LinkedIn Profil"><IconLinkedIn fill="currentColor" /></a>
         </div>
       </div>
     </div>
   </footer>
 </template>
+
+<script setup lang="ts">
+const currentYear = new Date().getFullYear();
+</script>
 

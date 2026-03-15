@@ -1,5 +1,8 @@
 <template>
-  <div v-if="stories" class="flex flex-col justify-center items-center gap-2 max-w-screen-md mx-auto overflow-y-hidden">
+  <div v-if="errorStories" class="text-center py-20 max-w-screen-md mx-auto">
+    <p class="text-xl">Die Geschichten konnten nicht geladen werden. Bitte versuche es später erneut.</p>
+  </div>
+  <div v-else-if="stories" class="flex flex-col justify-center items-center gap-2 max-w-screen-md mx-auto overflow-y-hidden">
     <NuxtLink :to="`/blog/${story.slug}`" v-for="story in stories" :key="story.id" class="mb-6">
       <ImageCardLarge :resource="story" :type="'story'" />
     </NuxtLink>
@@ -10,10 +13,14 @@
 import { apiService } from "@/lib/api.service";
 import type { IStory } from "@/types";
 
-const { data: stories } = await useAsyncData("stories", () => apiService.get<IStory[]>("/stories"));
+const { data: stories, error: errorStories } = await useAsyncData("stories", () => apiService.get<IStory[]>("/stories"));
 
 useHead({
   title: "Geschichten",
-  meta: [{ name:"description", content: "Storytelling is not something we do. Storytelling is who we are. - Carmine Gallo" }],
+  meta: [
+    { name:"description", content: "Storytelling is not something we do. Storytelling is who we are. - Carmine Gallo" },
+    { property: "og:title", content: "Blackbeetle - Geschichten" },
+    { property: "og:description", content: "Storytelling is not something we do. Storytelling is who we are. - Carmine Gallo" },
+  ],
 });
 </script>

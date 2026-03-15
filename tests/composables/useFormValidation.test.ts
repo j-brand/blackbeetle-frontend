@@ -53,4 +53,45 @@ describe("useFormValidation", () => {
     validateCheckbox("terms", true);
     expect(errors.terms).toBe("");
   });
+
+  // =========================================================================
+  // XSS payload handling
+  // =========================================================================
+  it("should accept XSS payloads as valid text (sanitization is output-side)", () => {
+    const { errors, validateTextField } = useFormValidation();
+
+    validateTextField("name", '<script>alert("xss")</script>');
+    expect(errors.name).toBe("");
+  });
+
+  it("should accept XSS payloads in email field when format is valid email", () => {
+    const { errors, validateEmailField } = useFormValidation();
+
+    validateEmailField("email", "valid@example.com");
+    expect(errors.email).toBe("");
+  });
+
+  it("should reject XSS payloads that are not valid emails", () => {
+    const { errors, validateEmailField } = useFormValidation();
+
+    validateEmailField("email", '<script>alert("xss")</script>');
+    expect(errors.email).toBe(" - Die Eingabe ist keine gültige E-Mail-Adresse");
+  });
+
+  it("should reject event handler payloads in email field", () => {
+    const { errors, validateEmailField } = useFormValidation();
+
+    validateEmailField("email", '" onmouseover="alert(1)"');
+    expect(errors.email).toBe(" - Die Eingabe ist keine gültige E-Mail-Adresse");
+  });
+
+  // =========================================================================
+  // Whitespace-only input
+  // =========================================================================
+  it("should accept whitespace-only text as non-empty (truthy string)", () => {
+    const { errors, validateTextField } = useFormValidation();
+
+    validateTextField("name", "   ");
+    expect(errors.name).toBe("");
+  });
 });

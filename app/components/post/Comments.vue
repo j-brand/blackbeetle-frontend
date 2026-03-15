@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col rounded-lg pt-4 pr-5">
     <div class="relative flex justify-end">
-      <button type="button" class="dark:color-bb-lighter">
+      <button type="button" class="dark:color-bb-lighter" aria-label="Kommentar schreiben">
         <IconPen class="cursor-pointer mb-5 w-6 h-6 mr-3 dark:fill-bb-light" @click="emit('openModal')" />
       </button>
-      <button>
+      <button type="button" aria-label="Kommentare anzeigen">
         <IconComment @click="toggleComments" class="cursor-pointer mb-5 w-6 h-6 dark:fill-bb-light" v-if="comments.length > 0" />
         <span
           class="absolute top-[-10px] right-[-14px] px-[6px] pb-[0px] pt-[1px] text-[0.7rem] font-mono rounded-full border dark:text-bb-light border-bb-charcoal dark:border-bb-light bg-bb-white dark:bg-bb-charcoal"

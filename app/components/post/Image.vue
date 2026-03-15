@@ -1,14 +1,15 @@
 <template>
   <div class="swiper-container w-full h-auto overflow-hidden relative cursor-pointer" ref="swiperEle">
     <div class="swiper-wrapper" ref="galleryEle">
-      <div class="swiper-slide w-full" v-for="(image, index) in post.images">
+      <div class="swiper-slide w-full" v-for="(image, index) in post.images" :key="image.id ?? index">
         <div class="flex justify-center bg-bb-charcoal bg-opacity-40 max-h-[576px]">
           <img class="object-contain"
             :data-src="getBestMediaUrl(image, 'large')"
             :data-large="getBestMediaUrl(image, 'large')"
             :data-thumb="getBestMediaUrl(image, 'large')"
             :height="(image.custom_properties?.height as number) || undefined"
-            :width="(image.custom_properties?.width as number) || undefined" />
+            :width="(image.custom_properties?.width as number) || undefined"
+            :alt="(image.custom_properties?.description as string) || image.name || 'Bild'" />
           <span class="hidden" :id="'caption_' + index">{{ (image.custom_properties?.description as string) || image.name }}</span>
         </div>
       </div>

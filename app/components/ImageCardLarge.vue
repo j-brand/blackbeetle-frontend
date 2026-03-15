@@ -17,8 +17,8 @@
       </div>
     </template>
     <div class="absolute bottom-0 w-full p-5 md:px-10 z-10 card-content">
-      <h1 class="text-2xl md:text-3xl font-bold uppercase text-shadow-lg" v-html="resource.title"></h1>
-      <span class="text-lg text-shadow-lg hidden md:block lg:w-2/5" v-html="getExcerpt(resource.description, 150)"></span>
+      <h1 class="text-2xl md:text-3xl font-bold uppercase text-shadow-lg">{{ resource.title }}</h1>
+      <span class="text-lg text-shadow-lg hidden md:block lg:w-2/5">{{ getExcerpt(resource.description, 150) }}</span>
     </div>
     <layout-lazy-image
       v-if="resource.title_image"

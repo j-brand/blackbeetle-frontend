@@ -66,4 +66,38 @@ describe("useDetectOutsideClick", () => {
 
     expect(callback).toHaveBeenCalled();
   });
+
+  it("should return listener even when element ref value is null (ref itself is truthy)", () => {
+    const element = ref(null);
+    const callback = vi.fn();
+
+    const result = useDetectOutsideClick(element, callback);
+
+    // ref(null) is a truthy object, so useDetectOutsideClick returns a listener
+    expect(result).toBeDefined();
+    expect(result!.listener).toBeTypeOf("function");
+  });
+
+  it("should handle element ref that becomes null after mount", () => {
+    const el = document.createElement("div");
+    const element = ref<HTMLElement | null>(el);
+    const callback = vi.fn();
+
+    const result = useDetectOutsideClick(element, callback);
+
+    // Set element to null after setup
+    element.value = null;
+
+    // Simulate outside click — composedPath won't include null
+    const outsideEvent = {
+      target: document.createElement("span"),
+      composedPath: () => [] as EventTarget[],
+    } as unknown as MouseEvent;
+
+    result!.listener(outsideEvent);
+
+    // Should still call callback since target !== element.value (null)
+    // and composedPath doesn't include null
+    expect(callback).toHaveBeenCalled();
+  });
 });

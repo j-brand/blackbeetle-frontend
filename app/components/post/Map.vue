@@ -19,10 +19,13 @@ const props = defineProps<{
 }>();
 
 const content = computed(() => {
-  // Handle both string (old API) and object (new API) formats
-  const parsed = typeof props.post.content === 'string'
-    ? JSON.parse(props.post.content)
-    : props.post.content;
-  return parsed;
+  try {
+    const parsed = typeof props.post.content === 'string'
+      ? JSON.parse(props.post.content)
+      : props.post.content;
+    return parsed;
+  } catch {
+    return { zoomlevel: 5, coordinates: [] };
+  }
 });
 </script>

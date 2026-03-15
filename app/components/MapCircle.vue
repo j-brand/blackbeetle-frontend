@@ -48,7 +48,7 @@ const locationContent = computed(() => {
 });
 </script>
 
-<style>
+<style scoped>
 .spin {
   animation: 15s linear 0s infinite spin_cw;
 }

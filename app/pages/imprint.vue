@@ -44,6 +44,10 @@
 <script setup lang="ts">
   useHead({
     title: 'Impressum',
-    
+    meta: [
+      { name: 'description', content: 'Impressum und rechtliche Angaben von Blackbeetle.' },
+      { property: 'og:title', content: 'Blackbeetle - Impressum' },
+      { property: 'og:description', content: 'Impressum und rechtliche Angaben von Blackbeetle.' },
+    ],
   })
 </script>

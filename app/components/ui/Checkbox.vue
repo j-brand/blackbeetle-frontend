@@ -1,10 +1,13 @@
 <template>
   <div :class="classes">
     <div class="pl-7" v-if="errors.checkbox">
-      <small class="text-bb-light-red text-sm">{{ errors.checkbox }}</small>
+      <small :id="label ? slugify(label) + '-error' : 'checkbox-error'" class="text-bb-light-red text-sm">{{ errors.checkbox }}</small>
     </div>
-    <input type="checkbox" :id="slugify(label ?? '')" class="" @change="onChange" :checked="modelValue" />
-    <label :for="label">
+    <input type="checkbox" :id="label ? slugify(label) : undefined" class="" @change="onChange" :checked="modelValue"
+      :aria-describedby="errors.checkbox ? (label ? slugify(label) + '-error' : 'checkbox-error') : undefined"
+      :aria-invalid="errors.checkbox ? true : undefined"
+    />
+    <label :for="label ? slugify(label) : undefined">
       <slot />
     </label>
   </div>

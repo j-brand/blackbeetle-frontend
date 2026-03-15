@@ -278,4 +278,44 @@ describe("useHelper", () => {
       expect(getBestMediaUrl(undefined, "large")).toBe("");
     });
   });
+
+  // =========================================================================
+  // Edge cases — Unicode/emoji
+  // =========================================================================
+  describe("getExcerpt - Unicode/emoji", () => {
+    it("should truncate text with emoji characters", () => {
+      const text = "Hello 🌍🌎🌏 World";
+      const result = getExcerpt(text, 10);
+      expect(result).toContain("...");
+      expect(result.length).toBeGreaterThan(0);
+    });
+
+    it("should handle text that is entirely emoji", () => {
+      const text = "🎉🎊🎈🎁🎀";
+      const result = getExcerpt(text, 3);
+      expect(result).toContain("...");
+    });
+
+    it("should handle German umlauts", () => {
+      const text = "Über die Straße gehen wir nach Hause";
+      const result = getExcerpt(text, 10);
+      expect(result).toBe("Über die S...");
+    });
+
+    it("should handle CJK characters", () => {
+      const text = "你好世界测试文本";
+      const result = getExcerpt(text, 4);
+      expect(result).toBe("你好世界...");
+    });
+  });
+
+  // =========================================================================
+  // Edge cases — media with missing urls.original
+  // =========================================================================
+  describe("getMediaUrl - edge cases", () => {
+    it("should handle media with missing urls property", () => {
+      const media = { id: 1, name: "test.jpg", file_name: "test.jpg", mime_type: "image/jpeg", size: 1024, order: 0, custom_properties: {} } as unknown as IMedia;
+      expect(getMediaUrl(media)).toBe("");
+    });
+  });
 });

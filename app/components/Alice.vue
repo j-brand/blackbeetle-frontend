@@ -58,7 +58,7 @@
 defineOptions({ name: "BeetleAlice" });
 </script>
 
-<style>
+<style scoped>
 #alice {
   backface-visibility: hidden;
   perspective: 1000px;
@@ -114,7 +114,7 @@ defineOptions({ name: "BeetleAlice" });
   font-family: "Helvetica Neue", Arial;
   font-weight: bold;
 }
-.dark #circles g text {
+:global(.dark) #circles g text {
   color: var(--color-bb-light);
 }
 #c1 + g text {

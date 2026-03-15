@@ -80,4 +80,50 @@ describe("useValidators", () => {
       expect(isRequired("terms", true)).toBe("");
     });
   });
+
+  // =========================================================================
+  // Unicode edge cases
+  // =========================================================================
+  describe("isEmail - Unicode edge cases", () => {
+    it("should accept email with Unicode local part (regex limitation)", () => {
+      // Current regex accepts Unicode chars — this documents the behavior
+      expect(isEmail("email", "üser@example.com")).toBe("");
+    });
+
+    it("should reject email with Unicode domain", () => {
+      expect(isEmail("email", "user@exämple.com")).toBe(
+        " - Die Eingabe ist keine gültige E-Mail-Adresse"
+      );
+    });
+
+    it("should accept email with emoji in local part (regex limitation)", () => {
+      // Current regex accepts emoji — this documents the behavior
+      expect(isEmail("email", "user🎉@example.com")).toBe("");
+    });
+
+    it("should accept email with hyphens in domain", () => {
+      expect(isEmail("email", "user@my-domain.com")).toBe("");
+    });
+
+    it("should accept email with numbers in domain", () => {
+      expect(isEmail("email", "user@123domain.com")).toBe("");
+    });
+  });
+
+  // =========================================================================
+  // isEmpty edge cases
+  // =========================================================================
+  describe("isEmpty - edge cases", () => {
+    it("should treat whitespace-only as non-empty (truthy)", () => {
+      expect(isEmpty("name", "   ")).toBe("");
+    });
+
+    it("should treat tab character as non-empty", () => {
+      expect(isEmpty("name", "\t")).toBe("");
+    });
+
+    it("should treat newline as non-empty", () => {
+      expect(isEmpty("name", "\n")).toBe("");
+    });
+  });
 });

@@ -45,10 +45,30 @@ export default defineNuxtConfig({
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
+      meta: [
+        { name: "robots", content: "noindex, nofollow, noarchive, nosnippet, noimageindex" },
+        { property: "og:site_name", content: "Blackbeetle" },
+        { property: "og:type", content: "website" },
+        { property: "og:locale", content: "de_DE" },
+        { name: "twitter:card", content: "summary_large_image" },
+      ],
     },
   },
   nitro: {
     compressPublicAssets: true,
+    routeRules: {
+      "/**": {
+        headers: {
+          "X-Content-Type-Options": "nosniff",
+          "X-Frame-Options": "DENY",
+          "Referrer-Policy": "strict-origin-when-cross-origin",
+          "Permissions-Policy": "camera=(), microphone=(), geolocation=()",
+          "X-XSS-Protection": "1; mode=block",
+          "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; frame-src https://www.youtube-nocookie.com; connect-src 'self' https:;",
+          "X-Robots-Tag": "noindex, nofollow, noarchive, nosnippet, noimageindex",
+        },
+      },
+    },
   },
   experimental: {
     typedPages: true,

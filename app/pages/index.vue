@@ -11,7 +11,12 @@
 
 <script setup lang="ts">
 useHead({
-  title: "",
+  title: "Startseite",
+  meta: [
+    { name: "description", content: "Ein Spiel für jeden der drauf sinnt, wie er seiner Welt entrinnt." },
+    { property: "og:title", content: "Blackbeetle - Startseite" },
+    { property: "og:description", content: "Ein Spiel für jeden der drauf sinnt, wie er seiner Welt entrinnt." },
+  ],
 });
 
 const colorMode = useColorMode();

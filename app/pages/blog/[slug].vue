@@ -3,7 +3,10 @@
     <transition name="fade">
       <CommonLoader v-if="isLoading" />
     </transition>
-    <template v-if="story && !isLoading">
+    <div v-if="errorStory || errorPosts" class="text-center py-20">
+      <p class="text-xl">Die Daten konnten nicht geladen werden. Bitte versuche es später erneut.</p>
+    </div>
+    <template v-if="story && !isLoading && !errorStory">
     <div class="mb-5">
       <CommonPagination v-if="posts && posts.meta.last_page > 1 && posts.meta.current_page > 1" :offset="3" :pagination="posts.meta" @paginate="changePage" class="my-14 relative flex justify-center" />
       <div v-if="currentPage == 1" class="flex flex-col justify-center min-h-1/2-screen mx-5 lg:mx-0">
@@ -51,12 +54,14 @@ const orderCookie = useCookie(slug);
 const {
   data: story,
   pending: pendingStory,
+  error: errorStory,
 } = await useAsyncData(`story-${slug}`, () => apiService.getStory<IStory>(slug));
 
 // Fetch paginated posts
 const {
   data: posts,
   pending: pendingPosts,
+  error: errorPosts,
   refresh: refreshPosts,
 } = await useAsyncData(
   `story-${slug}-posts`,
@@ -76,9 +81,9 @@ useHead({
   title: story.value?.title ?? "",
   meta: [
     { name: "description", content: story.value?.description ?? "" },
-    { name: "og:title", content: `Blackbeetle - ${story.value?.title ?? ""}` },
-    { name: "og:description", content: story.value?.description ?? "" },
-    { name: "og:image", content: story.value?.title_image ? getBestMediaUrl(story.value.title_image, 'large') : "" },
+    { property: "og:title", content: `Blackbeetle - ${story.value?.title ?? ""}` },
+    { property: "og:description", content: story.value?.description ?? "" },
+    { property: "og:image", content: story.value?.title_image ? getBestMediaUrl(story.value.title_image, 'large') : "" },
   ],
 });
 

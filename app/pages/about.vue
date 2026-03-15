@@ -3,7 +3,7 @@
     <div>
       <h1 class="uppercase text-4xl anaglyph font-semibold mb-4">Blackbeetle</h1>
       <h2 class="font-medium md:text-2xl mb-4">Wenn Großstadtkinder das Weite suchen.</h2>
-      <p class="md:text-2xl">
+      <div class="md:text-2xl">
         Keine waschechten Berliner zwar, aber lang genug im Großstadtdschungel gefangen gewesen, um nach ein paar Jahren für eine Weile das Weite zu suchen.
         <br /><br />
 
@@ -15,7 +15,7 @@
         - es gilt, so viel wie möglich zu entdecken. Auf unserem Blog nehmen wir dich mit ans andere Ende der Welt und laden dich ein, an unseren Abenteuern teilzuhaben. <br /><br /><b
           >Johannes & Isabell</b
         >
-      </p>
+      </div>
     </div>
   </div>
 </template>
@@ -23,6 +23,10 @@
 <script setup lang="ts">
 useHead({
   title: "Über",
-  meta: [{ name:"description", content: "Ich bin nicht verrückt. Meine Realität ist einfach anders als Deine.  - Der Hutmacher" }],
+  meta: [
+    { name:"description", content: "Ich bin nicht verrückt. Meine Realität ist einfach anders als Deine.  - Der Hutmacher" },
+    { property: "og:title", content: "Blackbeetle - Über" },
+    { property: "og:description", content: "Ich bin nicht verrückt. Meine Realität ist einfach anders als Deine.  - Der Hutmacher" },
+  ],
 });
 </script>

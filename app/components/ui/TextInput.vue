@@ -1,6 +1,6 @@
 <template>
-  <label :for="label">
-    <small class="dark:text-bb-light text-sm">{{ label }}</small> <span class="text-bb-light-red text-sm" v-if="errors[label]">{{ errors[label] }}</span>
+  <label :for="slugify(label)">
+    <small class="dark:text-bb-light text-sm">{{ label }}</small> <span :id="slugify(label) + '-error'" class="text-bb-light-red text-sm" v-if="errors[label]">{{ errors[label] }}</span>
     <input
       :type="type"
       :id="slugify(label)"
@@ -10,14 +10,19 @@
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
       :value="modelValue"
       :autocomplete="type === 'email' ? 'email' : 'off'"
+      :aria-describedby="errors[label] ? slugify(label) + '-error' : undefined"
+      :aria-invalid="errors[label] ? true : undefined"
     />
   </label>
 </template>
 
 <script setup lang="ts">
+const VALID_INPUT_TYPES = ['text', 'email', 'password', 'number', 'tel', 'url', 'search'] as const;
+type InputType = typeof VALID_INPUT_TYPES[number];
+
 const props = withDefaults(defineProps<{
   modelValue: string;
-  type?: string;
+  type?: InputType;
   label?: string;
 }>(), {
   type: "text",

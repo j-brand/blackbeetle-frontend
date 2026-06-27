@@ -41,7 +41,7 @@
     "gsap": "^3.12.7",
     "leaflet": "^1.9.4",
     "lightgallery": "^2.8.2",
-    "swiper": "^12.2.0",
+    "swiper": "^14.0.0",
     "vue-sonner": "^2.0.9",
     "vue3-emoji-picker": "^1.1.8"
   }

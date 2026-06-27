@@ -85,6 +85,9 @@ export default defineNuxtConfig({
       referrerPolicy: "strict-origin-when-cross-origin",
       crossOriginEmbedderPolicy: "unsafe-none",
     },
+    corsHandler: {
+      origin: "https://api.blackbeetle.de",
+    },
   },
   nitro: {
     compressPublicAssets: true,

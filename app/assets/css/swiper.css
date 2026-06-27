@@ -49,23 +49,33 @@
   border: none;
   border-radius: 0;
   background: rgba(255, 255, 255, 0.6);
-  opacity: 1;
   clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
-  transition: width 0.3s ease, background 0.3s ease;
+  transition: width 0.3s ease, background 0.3s ease, opacity 0.3s ease;
 }
 .swiper-pagination-bullet-active {
   width: 24px;
   background: var(--color-accent);
 }
 
-/* Dynamic bullet styles */
+/* Dynamic bullets: show prev/next at same size as main, hide the rest */
 .swiper-pagination-bullet-active-main {
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  width: 9px;
+}
+.swiper-pagination-bullet-active-main.swiper-pagination-bullet-active {
   width: 24px;
 }
-
 .swiper-pagination-bullet-active-prev,
 .swiper-pagination-bullet-active-next {
-  width: 14px;
+  opacity: 1 !important;
+  transform: scale(1) !important;
+  width: 9px;
+}
+.swiper-pagination-bullet-active-prev-prev,
+.swiper-pagination-bullet-active-next-next {
+  opacity: 0 !important;
+  transform: scale(0) !important;
 }
 
 /* Slide counter badge — top-right */

@@ -148,6 +148,7 @@ function initSwiper() {
       el: container.querySelector('.swiper-pagination') as HTMLElement,
       clickable: true,
       dynamicBullets: true,
+      dynamicMainBullets: 2,
     },
     navigation: {
       nextEl: container.querySelector('.swiper-button-next') as HTMLElement,

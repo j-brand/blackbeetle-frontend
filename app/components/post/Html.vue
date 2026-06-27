@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col px-2 lg:p-0">
     <div class="flex flex-col justify-between mb-2">
-      <p class="bb-page-meta text-right">{{ formatDate(post.date) }}</p>
+      <p class="bb-page-meta text-xs mb-3">{{ formatDate(post.date) }}</p>
       <h2 class="bb-page-section-title">{{ post.title }}</h2>
     </div>
     <article v-html="htmlContent" class="bb-page-copy html-post"></article>

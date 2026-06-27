@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="max-w-full lg:max-w-[600px] mx-auto">
     <Card eyebrow="Standort" title="Wo sind die Räuber?" variant="primary">
       <MapEmbed />
       <template #actions>

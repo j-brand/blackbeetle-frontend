@@ -1,20 +1,21 @@
 <template>
   <nav role="navigation" aria-label="Seitennavigation">
-    <div class="flex flex-row justify-center font-sans-secondary">
+    <div class="flex flex-row justify-center">
       <button type="button" class="px-2 mx-1" :disabled="pagination.current_page <= 1" aria-label="Erste Seite" @click="changePage(1)">
-        <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" class="text-bb-charcoal dark:text-bb-light" aria-hidden="true" focusable="false">
+        <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" class="text-fg" aria-hidden="true" focusable="false">
           <path fill="currentColor" d="M18.41,7.41L17,6L11,12L17,18L18.41,16.59L13.83,12L18.41,7.41M12.41,7.41L11,6L5,12L11,18L12.41,16.59L7.83,12L12.41,7.41Z" />
         </svg>
       </button>
       <button type="button" class="px-2 mx-1" :disabled="pagination.current_page <= 1" aria-label="Vorherige Seite" @click="changePage(pagination.current_page - 1)">
-        <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" class="text-bb-charcoal dark:text-bb-light" aria-hidden="true" focusable="false">
+        <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" class="text-fg" aria-hidden="true" focusable="false">
           <path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
         </svg>
       </button>
       <div v-for="(page, index) in pages" :key="index" class="px-2 mx-1">
         <button
           type="button"
-          :class="isCurrentPage(page) ? 'bg-bb-charcoal dark:bg-bb-light bg-opacity-75 rounded-md px-page py-1 text-bb-lighter dark:text-bb-charcoal font-bold' : 'text-bb-charcoal hover:underline dark:text-bb-light'"
+          :class="isCurrentPage(page) ? 'chamfer-quad bg-primary px-page py-1 text-primary-fg font-bold' : 'text-fg hover:underline'"
+          :style="isCurrentPage(page) ? { '--c': '6px' } : {}"
           :aria-current="isCurrentPage(page) ? 'page' : undefined"
           @click="changePage(page)"
         >
@@ -22,12 +23,12 @@
         </button>
       </div>
       <button type="button" class="px-2 mx-1" :disabled="pagination.current_page >= pagination.last_page" aria-label="Nächste Seite" @click="changePage(pagination.current_page + 1)">
-        <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" class="text-bb-charcoal dark:text-bb-light" aria-hidden="true" focusable="false">
+        <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" class="text-fg" aria-hidden="true" focusable="false">
           <path fill="currentColor" d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z" />
         </svg>
       </button>
       <button type="button" class="px-2 mx-1" :disabled="pagination.current_page >= pagination.last_page" aria-label="Letzte Seite" @click="changePage(pagination.last_page)">
-        <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" class="text-bb-charcoal dark:text-bb-light" aria-hidden="true" focusable="false">
+        <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" class="text-fg" aria-hidden="true" focusable="false">
           <path fill="currentColor" d="M5.59,7.41L7,6L13,12L7,18L5.59,16.59L10.17,12L5.59,7.41M11.59,7.41L13,6L19,12L13,18L11.59,16.59L16.17,12L11.59,7.41Z" />
         </svg>
       </button>
@@ -90,6 +91,3 @@ async function navigate(page: number) {
   });
 }
 </script>
-
-<style scoped>
-</style>

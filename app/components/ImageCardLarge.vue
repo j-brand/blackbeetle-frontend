@@ -1,29 +1,29 @@
 <template>
-  <div class="relative text-bb-lighter overflow-hidden rounded-md zoom-in vignette">
-    <template v-if="type == 'album'">
-      <div class="absolute flex justify-between top-0 w-full p-5 text-shadow-lg z-10">
-        <span>{{ formatDate(albumResource.start_date, true) }} - {{ formatDate(albumResource.end_date, true) }}</span>
-        <div class="flex">
-          <IconImages fill="#EAE7DC" /><span class="ml-2 leading-none">{{ albumResource.images_count ?? albumResource.images?.length ?? 0 }}</span>
+  <div class="relative overflow-hidden chamfer-xl bb-tile zoom-in lift">
+    <template v-if="type === 'album'">
+      <div class="absolute flex justify-between items-center top-0 w-full p-6 text-shadow-lg z-10 text-white">
+        <span class="font-mono">{{ formatDate(albumResource.start_date, true) }} - {{ formatDate(albumResource.end_date, true) }}</span>
+        <div class="flex items-center">
+          <IconImages fill="currentColor" /><span class="ml-2 leading-none">{{ albumResource.images_count ?? albumResource.images?.length ?? 0 }}</span>
         </div>
       </div>
     </template>
-    <template v-else-if="type == 'story'">
-      <div class="absolute flex justify-end top-0 w-full p-5 text-shadow-lg z-10">
-        <div class="flex">
-          <IconPosts fill="#EAE7DC" />
+    <template v-else-if="type === 'story'">
+      <div class="absolute flex justify-end items-center top-0 w-full p-6 text-shadow-lg z-10 text-white">
+        <div class="flex items-center">
+          <IconPosts fill="currentColor" />
           <span class="ml-2 leading-none">{{ storyResource.posts_count }}</span>
         </div>
       </div>
     </template>
-    <div class="absolute bottom-0 w-full p-5 md:px-10 z-10 card-content">
-      <h1 class="text-2xl md:text-3xl font-bold uppercase text-shadow-lg">{{ resource.title }}</h1>
-      <span class="text-lg text-shadow-lg hidden md:block lg:w-2/5">{{ getExcerpt(resource.description, 150) }}</span>
+    <div class="absolute bottom-0 w-full p-6 md:px-12 z-10 card-content text-white">
+      <h1 class="bb-card-title uppercase text-shadow-lg">{{ resource.title }}</h1>
+      <span class="bb-card-copy text-shadow-lg hidden md:block lg:w-2/5">{{ getExcerpt(resource.description, 150) }}</span>
     </div>
     <layout-lazy-image
       v-if="resource.title_image"
       class="vignette"
-      :src="getBestMediaUrl(resource.title_image, 'medium')"
+      :src="getBestMediaUrl(resource.title_image, 'large')"
       :lowsrc="resource.title_image.urls?.lazy ?? ''"
       :width="resource.title_image.custom_properties?.width"
       :height="resource.title_image.custom_properties?.height"
@@ -43,8 +43,8 @@ const props = defineProps<{
 
 const { formatDate, getBestMediaUrl, getExcerpt } = useHelper();
 
-const albumResource = computed(() => props.resource as IAlbum);
-const storyResource = computed(() => props.resource as IStory);
+const albumResource = props.resource as IAlbum;
+const storyResource = props.resource as IStory;
 </script>
 
 <style scoped>
@@ -56,6 +56,10 @@ const storyResource = computed(() => props.resource as IStory);
 }
 .card-content {
   background: linear-gradient(hsl(0 0% 0% / 0), hsl(0 0% 10% / 1));
+}
+.card-content .bb-card-title,
+.card-content .bb-card-copy {
+  color: #ffffff;
 }
 .vignette {
   -webkit-box-shadow: inset 0px 0px 85px rgba(0, 0, 0, 0.4);

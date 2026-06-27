@@ -1,17 +1,19 @@
-/* Dark mode overrides */
-.dark body {
-  background-color: var(--color-bb-charcoal);
+/* Dark mode — forest-tinted overrides for semantic tokens */
+.dark {
+  --color-bg: #0B130E;
+  --color-sunken: #080D0A;
+  --color-card: #121C16;
+  --color-fg: #E8EDE7;
+  --color-fg-muted: #9EACA1;
+  --color-fg-subtle: #6C7B70;
+  --color-primary: #3A7150;
+  --color-primary-fg: #F2F8F4;
+  --color-secondary: #C25366;
+  --color-accent: #E8C24E;
+  --color-line: #24332A;
+  --color-line-strong: #324A3A;
 }
 
-.dark article,
-.dark td,
-.dark th,
-.dark p,
-.dark h1,
-.dark h2,
-.dark h3,
-.dark h4,
-.dark h5,
-.dark h6 {
-  color: var(--color-bb-light);
+.dark body {
+  background-color: var(--color-bg);
 }

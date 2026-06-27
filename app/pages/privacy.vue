@@ -1,8 +1,9 @@
 <template>
   <div class="container mx-auto max-w-screen-md break-words overflow-x-hidden md:overflow-x-visible ">
-    <h1 class="text-4xl anaglyph font-semibold mb-5 uppercase">Datenschutzerklärung</h1>
+    <h1 class="bb-page-title anaglyph mb-6 uppercase">Datenschutzerklärung</h1>
 
-    <p class="mb-3 mt-5 text-lg">
+    <div class="bb-page-copy">
+    <p class="mb-3 mt-6">
       <strong>Benennung der verantwortlichen Stelle</strong>
     </p>
     <p>
@@ -12,9 +13,9 @@
       <br />
       <span id="s3-t-ansprechpartner">Johannes Brand</span><br />
     </p>
-    <p>E-Mail: <a class="text-bb-light-red underline" href="mailto:postbox@blackbeetle.de">postbox@blackbeetle.de</a></p>
+    <p>E-Mail: <a class="text-secondary underline" href="mailto:postbox@blackbeetle.de">postbox@blackbeetle.de</a></p>
 
-    <p class="mb-1 mt-5 text-lg">
+    <p class="mb-1 mt-6">
       <strong>Widerruf Ihrer Einwilligung zur Datenverarbeitung</strong>
     </p>
     <p>
@@ -22,7 +23,7 @@
       eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.
     </p>
 
-    <p class="mb-1 mt-5 text-lg">
+    <p class="mb-1 mt-6">
       <strong>Recht auf Beschwerde bei der zuständigen Aufsichtsbehörde</strong>
     </p>
     <p>
@@ -33,7 +34,7 @@
       >.
     </p>
 
-    <p class="mb-1 mt-5 text-lg">
+    <p class="mb-1 mt-6">
       <strong>Recht auf Datenübertragbarkeit</strong>
     </p>
     <p>
@@ -42,7 +43,7 @@
       ist.
     </p>
 
-    <p class="mb-1 mt-5 text-lg">
+    <p class="mb-1 mt-6">
       <strong>Recht auf Auskunft, Berichtigung, Sperrung, Löschung</strong>
     </p>
     <p>
@@ -51,7 +52,7 @@
       Sie sich jederzeit über die im Impressum aufgeführten Kontaktmöglichkeiten an uns wenden.
     </p>
 
-    <p class="mb-1 mt-5 text-lg">
+    <p class="mb-1 mt-6">
       <strong>SSL- bzw. TLS-Verschlüsselung</strong>
     </p>
     <p>
@@ -60,7 +61,7 @@
       Browserzeile.
     </p>
 
-    <p class="mb-1 mt-5 text-lg">
+    <p class="mb-1 mt-6">
       <strong>Speicherdauer von Beiträgen und Kommentaren</strong>
     </p>
     <p>
@@ -72,7 +73,7 @@
       den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit bereits erfolgter Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt.
     </p>
 
-    <p class="mb-1 mt-5 text-lg"><strong>Cookies</strong></p>
+    <p class="mb-1 mt-6"><strong>Cookies</strong></p>
     <p>
       Unsere Website verwendet Cookies. Das sind kleine Textdateien, die Ihr Webbrowser auf Ihrem Endgerät speichert. Cookies helfen uns dabei, unser Angebot nutzerfreundlicher, effektiver und
       sicherer zu machen.
@@ -91,7 +92,7 @@
       Bereitstellung unserer Dienste. Sofern die Setzung anderer Cookies (z.B. für Analyse-Funktionen) erfolgt, werden diese in dieser Datenschutzerklärung separat behandelt.
     </p>
 
-    <h3 class="text-2xl font-medium mt-4 mb-2">Cookies Liste</h3>
+    <h3 class="bb-page-section-title mt-4 mb-2">Cookies Liste</h3>
     <table class="table-auto">
       <thead>
         <tr>
@@ -114,7 +115,7 @@
       </tbody>
     </table>
 
-    <p class="mb-1 mt-5 text-lg"><strong>Google Web Fonts</strong></p>
+    <p class="mb-1 mt-6"><strong>Google Web Fonts</strong></p>
     <p>
       Unsere Website verwendet Web Fonts von Google. Anbieter ist die Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA.
     </p>
@@ -137,6 +138,7 @@
     <p>
       <small>Quelle: Datenschutz-Konfigurator von <a href="http://www.mein-datenschutzbeauftragter.de" target="_blank" rel="noopener noreferrer">mein-datenschutzbeauftragter.de</a></small>
     </p>
+    </div>
   </div>
 </template>
 

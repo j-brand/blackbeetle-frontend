@@ -1,24 +1,117 @@
-/* Swiper 12 CSS imports */
+/* Swiper 14 CSS imports */
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
 
 :root {
-  --swiper-navigation-size: 1.5rem;
+  --swiper-navigation-size: 1.25rem;
   --swiper-navigation-top-offset: 50%;
-  --swiper-navigation-sides-offset: 8px;
-  --swiper-navigation-color: var(--color-bb-lighter);
-  --swiper-theme-color: var(--color-bb-lighter);
+  --swiper-navigation-sides-offset: 12px;
+  --swiper-navigation-color: #fff;
+  --swiper-theme-color: var(--color-accent);
 }
 
-.swiper-pagination-bullet {
-  border: 2px solid var(--color-bb-charcoal);
-  background: var(--color-bb-lighter);
-  width: 13px;
-  height: 13px;
+/* Chamfered arrow buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  width: 32px !important;
+  height: 32px !important;
+  background: color-mix(in oklab, #0B130E 45%, transparent);
+  clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
+  transition: transform 0.15s ease;
+  z-index: 10;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  transform: scale(1.05);
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 0.65rem !important;
+  font-weight: 700;
+}
+.swiper-button-prev > svg,
+.swiper-button-next > svg {
+  width: 0.75rem !important;
+  height: 0.75rem !important;
 }
 
 .swiper-button-prev.swiper-button-disabled,
 .swiper-button-next.swiper-button-disabled {
   pointer-events: visible;
+  opacity: 0.35;
+}
+
+/* Chamfered pagination dots */
+.swiper-pagination-bullet {
+  width: 9px;
+  height: 9px;
+  border: none;
+  border-radius: 0;
+  background: var(--color-line-strong);
+  opacity: 1;
+  clip-path: polygon(2px 0, calc(100% - 2px) 0, 100% 2px, 100% calc(100% - 2px), calc(100% - 2px) 100%, 2px 100%, 0 calc(100% - 2px), 0 2px);
+  transition: width 0.3s ease, background 0.3s ease;
+}
+.swiper-pagination-bullet-active {
+  width: 24px;
+  background: var(--color-accent);
+}
+
+/* Dynamic bullet styles */
+.swiper-pagination-bullet-active-main {
+  width: 24px;
+}
+
+.swiper-pagination-bullet-active-prev,
+.swiper-pagination-bullet-active-next {
+  width: 14px;
+}
+
+/* Slide counter badge — top-right */
+.slider-counter {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 10;
+  padding: 4px 12px;
+  background: color-mix(in oklab, #0B130E 55%, transparent);
+  color: #fff;
+  clip-path: polygon(5px 0, calc(100% - 5px) 0, 100% 5px, 100% calc(100% - 5px), calc(100% - 5px) 100%, 5px 100%, 0 calc(100% - 5px), 0 5px);
+}
+
+/* Bottom gradient caption overlay — sits above the pagination area */
+.slider-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 41px;
+  z-index: 10;
+  padding: 48px 24px 16px;
+  background: linear-gradient(transparent, color-mix(in oklab, #0B130E 78%, transparent));
+  pointer-events: none;
+}
+
+/* Position pagination below the image, inside the card */
+.swiper-container {
+  --_pag-h: 41px;
+  padding-bottom: var(--_pag-h);
+  position: relative;
+}
+.swiper-container .swiper-button-prev,
+.swiper-container .swiper-button-next {
+  top: calc((100% - var(--_pag-h)) / 2) !important;
+}
+.swiper-container > .swiper-pagination {
+  bottom: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 0;
+}
+
+/* Image fills full width */
+.swiper-wrapper {
+  width: 100%;
 }

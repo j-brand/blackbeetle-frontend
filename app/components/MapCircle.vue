@@ -1,24 +1,30 @@
 <template>
   <div class="flex flex-col justify-center items-center 2xl:mt-[5vh]">
-    <svg viewBox="0 0 250 50" width="300" class="translate-y-6">
-      <path id="curve" class="fill-transparent" d="m 20 90 a 15 10 0 0 1 210 0" />
-      <text class="dark:fill-bb-light fill-bb-charcoal transform text-xl" width="300">
-        <textPath xlink:href="#curve" startOffset="60">Wo sind die Räuber?</textPath>
-      </text>
-    </svg>
-    <div class="relative z-0 h-96 w-96 rounded-full overflow-hidden border-5 border-bb-charcoal">
-      <ClientOnly>
-        <MapContainer v-if="location" class="w-full h-112" :zoom="5" :max-zoom="6" v-slot="{ map }">
-          <MapMarker :position="locationContent.position" :label="locationContent.info" />
-          <MapBounds :coordinates="[locationContent]" :map="map" />
-        </MapContainer>
-      </ClientOnly>
+    <div class="cut-frame   chamfer-lg lift w-full max-w-[1400px]" style="--bd: var(--color-line); outline: 2px dashed rgba(220,38,38,0.5);">
+      <div class="cut-inner chamfer-lg bg-primary p-6 md:p-8" style="--sf: var(--color-card); background: var(--color-card)">
+        <div class="mb-6 flex flex-col gap-3">
+          <span class="font-mono text-[11px] uppercase tracking-[0.16em]" style="color: var(--color-accent)">Standort</span>
+          <h2 class="bb-card-title">Wo sind die Räuber?</h2>
+        </div>
+
+        <div class="relative h-96 w-full lg:min-w-[500px] overflow-hidden rounded-[1rem] border" style="border-color: var(--color-line-strong); background: var(--color-sunken)">
+          <ClientOnly>
+            <MapContainer class="w-full h-full" :zoom="5" :max-zoom="6" :coordinates="locationContent" v-slot="{ map }">
+              <MapBounds :coordinates="locationContent" :map="map" />
+            </MapContainer>
+          </ClientOnly>
+        </div>
+        <NuxtLink to="/blog/back-again" class="mt-6">
+          <UiButton class="mt-4" variant="accent" size="sm" iconPosition="end">
+            SCHAU ES DIR AN
+
+            <template #icon>
+              <IconArrow />
+            </template>
+          </UiButton>
+        </NuxtLink>
+      </div>
     </div>
-    <NuxtLink to="/blog/back-again" class="-translate-y-9 relative z-10">
-      <UiButton class="btn-dark py-2"
-        ><span class="flex flex-row">SCHAU ES DIR AN <IconArrow /></span>
-      </UiButton>
-    </NuxtLink>
   </div>
 </template>
 
@@ -26,52 +32,46 @@
 import { apiService } from "@/lib/api.service";
 import type { IOption } from "@/types";
 
-// API returns value as JSON string with { lat, lng }
-// Fetch single option directly
-const { data: location } = await useAsyncData("my_location", () =>
-  apiService.getBySlug<IOption<string>>("/options", "my_location")
-);
+interface LocationPoint {
+  id: string;
+  position: { lat: number; lng: number };
+  info: string;
+}
 
-const locationContent = computed(() => {
-  if (!location.value?.value) return { position: { lat: 0, lng: 0 }, info: "" };
-  
-  try {
-    // Parse the JSON string from API
-    const coords = JSON.parse(location.value.value).position as { lat: number; lng: number };
-    return { 
-      position: coords, 
-      info: "Berlin" // Default label since API doesn't provide it
-    };
-  } catch {
-    return { position: { lat: 0, lng: 0 }, info: "" };
+const fallbackCoordinate: LocationPoint = {
+  id: "fallback-berlin",
+  position: { lat: 52.5208, lng: 13.4094 },
+  info: "Berlin",
+};
+
+const { data: location } = await useAsyncData("my_location", () => apiService.getBySlug<IOption<string>>("/options", "my_location"));
+
+const locationContent = computed<LocationPoint[]>(() => {
+  if (!location.value?.value) {
+    return [fallbackCoordinate];
   }
+
+  try {
+    const parsed = JSON.parse(location.value.value) as {
+      position?: { lat: number; lng: number };
+      info?: string;
+      label?: string;
+      id?: string;
+    };
+
+    if (parsed?.position?.lat != null && parsed.position.lng != null) {
+      return [
+        {
+          id: parsed.id ?? "api-location",
+          position: parsed.position,
+          info: parsed.info ?? parsed.label ?? "Berlin",
+        },
+      ];
+    }
+  } catch {
+    // Ignore invalid backend data and fall back to dummy coordinates.
+  }
+
+  return [fallbackCoordinate];
 });
 </script>
-
-<style scoped>
-.spin {
-  animation: 15s linear 0s infinite spin_cw;
-}
-
-.spin2 {
-  animation: 18s linear 0s infinite spin_ccw;
-}
-
-@keyframes spin_cw {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes spin_ccw {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
-}
-</style>

@@ -1,17 +1,16 @@
 <template>
-  <main class="relative h-full min-h-screen overflow-hidden">
+  <div class="min-h-screen flex flex-col" style="background:var(--color-bg); color:var(--color-fg);">
     <a href="#main-content" class="skip-to-content">Zum Inhalt springen</a>
     <LayoutNavigationDefault />
-    <div class="pattern-bg absolute w-full h-full"></div>
 
-    <div id="main-content" class="pt-32 pb-48 px-3 md:pt-36 lg:px-0">
+    <main id="main-content" class="flex-1 mx-auto max-w-none px-6 lg:px-12 pt-12 pb-48">
       <slot />
-    </div>
+    </main>
     <LayoutFooterDefault />
     <transition name="fade">
       <CommonCookieNotice v-if="!cookieAccept" />
     </transition>
-  </main>
+  </div>
 </template>
 
 <script setup lang="ts">

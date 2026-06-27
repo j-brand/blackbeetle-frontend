@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="$attrs" class="leaflet-map-container">
+  <div v-bind="$attrs" class="leaflet-map-container  w-min-[400px]">
     <LMap
       ref="mapRef"
       :center="center"

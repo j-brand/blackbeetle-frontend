@@ -1,13 +1,14 @@
 <template>
   <div class="container mx-auto max-w-screen-md min-h-full">
-    <h1 class="text-4xl anaglyph font-semibold mb-5 uppercase">Impressum</h1>
+    <h1 class="bb-page-title anaglyph mb-6 uppercase">Impressum</h1>
 
+    <div class="bb-page-copy">
     <p>Diese Seite wird betrieben von Johannes Brand<br /></p>
 
-    <h2 class="mb-1 mt-5 text-lg font-medium">Kontakt</h2>
-    <p>E-Mail: <a class="text-bb-light-red underline" href="mailto:postbox@blackbeetle.de">postbox@blackbeetle.de</a></p>
+    <h2 class="bb-page-section-title mb-1 mt-6">Kontakt</h2>
+    <p>E-Mail: <a class="text-secondary underline" href="mailto:postbox@blackbeetle.de">postbox@blackbeetle.de</a></p>
 
-    <h3 class="mb-1 mt-5 text-lg font-medium">Haftung für Inhalte</h3>
+    <h3 class="bb-page-section-title mb-1 mt-6">Haftung für Inhalte</h3>
     <p>
       Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht
       verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
@@ -17,7 +18,7 @@
       der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
     </p>
 
-    <h3 class="mb-1 mt-5 text-lg font-medium">Haftung für Links</h3>
+    <h3 class="bb-page-section-title mb-1 mt-6">Haftung für Links</h3>
     <p>
       Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte
       der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft.
@@ -28,7 +29,7 @@
       derartige Links umgehend entfernen.
     </p>
 
-    <h3 class="mb-1 mt-5 text-lg font-medium">Urheberrecht</h3>
+    <h3 class="bb-page-section-title mb-1 mt-6">Urheberrecht</h3>
     <p>
       Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung
       außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht
@@ -38,6 +39,7 @@
       Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie
       trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
     </p>
+    </div>
   </div>
 </template>
 

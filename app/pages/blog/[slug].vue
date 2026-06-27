@@ -3,45 +3,49 @@
     <transition name="fade">
       <CommonLoader v-if="isLoading" />
     </transition>
-    <div v-if="errorStory || errorPosts" class="text-center py-20">
+    <div v-if="errorStory || errorPosts" class="text-center py-24">
       <p class="text-xl">Die Daten konnten nicht geladen werden. Bitte versuche es später erneut.</p>
     </div>
     <template v-if="story && !isLoading && !errorStory">
-    <div class="mb-5">
-      <CommonPagination v-if="posts && posts.meta.last_page > 1 && posts.meta.current_page > 1" :offset="3" :pagination="posts.meta" @paginate="changePage" class="my-14 relative flex justify-center" />
-      <div v-if="currentPage == 1" class="flex flex-col justify-center min-h-1/2-screen mx-5 lg:mx-0">
-        <h1 class="text-4xl text-center uppercase tracking-widest font-semibold">{{ story.title }}</h1>
-        <p class="text-2xl text-center mt-10" v-html="story.description"></p>
+    <div class="mb-6">
+      <CommonPagination v-if="posts && posts.meta.last_page > 1 && posts.meta.current_page > 1" :offset="3" :pagination="posts.meta" @paginate="changePage" class="my-12 relative flex justify-center" />
+      <div v-if="currentPage == 1" class="flex flex-col justify-center min-h-1/2-screen mx-6 lg:mx-0">
+        <h1 class="bb-page-title text-center">{{ story.title }}</h1>
+        <p class="bb-page-copy text-center mt-8" v-html="story.description"></p>
         <StoryImage :storySlug="story.slug" />
       </div>
-      <div v-if="currentPage == 1" class="flex flex-row justify-end">
-        <button
+      <div v-if="currentPage == 1" class="flex flex-row justify-end my-10">
+        <UiButton
           type="button"
           @click="toggleOrder()"
           aria-label="reverse post order"
-          class="text-bb-charcoal hover:bg-bb-charcoal dark:hover:bg-bb-light hover:text-bb-lighter dark:hover:text-bb-charcoal dark:text-bb-light rounded-lg border border-solid border-bb-charcoal dark:border-bb-light px-4 py-3 text-lg transition duration-200 flex flex-row"
+          variant="primary"
+          size="sm"
           id="toggle-order"
         >
-          <IconHistory class="transition duration-200 mr-2 mt-[2px] leading-none" />
+          <template #icon>
+            <IconHistory/>
+          </template>
           Sortierung umkehren
-        </button>
+        </UiButton>
       </div>
     </div>
 
     <template v-for="(post, index) in posts?.data" :key="post.id">
-      <hr class="w-1/4 my-10 mx-auto border-bb-charcoal dark:border-bb-light h-px" v-if="posts && index != posts.data.length && index != 0" />
+      <hr class="w-1/4 my-12 mx-auto border-line h-px" v-if="posts && index != posts.data.length && index != 0" />
       <PostHtml v-if="post.type === 'html'" :post="post" />
-      <PostImage v-if="post.type == 'image'" :post="post" class="md:rounded-md" />
-      <PostMap v-if="post.type == 'map'" :post="post" class="rounded-md" />
-      <PostVideo v-if="post.type == 'video'" :post="post" class="rounded-md" />
+      <PostImage v-if="post.type == 'image'" :post="post" class="md:chamfer-md" />
+      <PostMap v-if="post.type == 'map'" :post="post" class="chamfer-md" />
+      <PostVideo v-if="post.type == 'video'" :post="post" class="chamfer-md" />
     </template>
-    <CommonPagination v-if="posts && posts.meta.last_page > 1" :offset="3" :pagination="posts.meta" @paginate="changePage" class="my-14 relative flex justify-center" />
+    <CommonPagination v-if="posts && posts.meta.last_page > 1" :offset="3" :pagination="posts.meta" @paginate="changePage" class="my-12 relative flex justify-center" />
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import { apiService } from "@/lib/api.service";
+import Button from "@/components/ui/Button.vue";
 import type { IStory, IPost } from "@/types";
 
 const currentPage = ref(1);
@@ -115,18 +119,3 @@ onMounted(() => {
   }, 2000);
 });
 </script>
-
-<style>
-.dark #toggle-order svg {
-  fill: var(--color-bb-light);
-}
-.dark #toggle-order:hover svg {
-  fill: var(--color-bb-charcoal);
-}
-#toggle-order svg {
-  fill: var(--color-bb-charcoal);
-}
-#toggle-order:hover svg {
-  fill: var(--color-bb-lighter);
-}
-</style>

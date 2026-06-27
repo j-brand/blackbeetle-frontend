@@ -8,24 +8,25 @@
     @keydown.escape="$emit('close')"
     @keydown="trapFocus"
   >
-    <div @click="$emit('close')" class="fixed top-0 w-full h-full bg-bb-charcoal blur-md opacity-40" aria-hidden="true"></div>
-    <div class="bg-bb-charcoal p-10 max-w-screen-md rounded-lg dark:border dark:border-bb-light md:mx-auto mx-5 relative">
+    <div @click="$emit('close')" class="fixed top-0 w-full h-full bg-bg blur-md opacity-55" aria-hidden="true"></div>
+    <div class="cut-frame chamfer-lg lift max-w-screen-md md:mx-auto mx-6 relative" style="--bd: var(--color-line)">
+      <div class="cut-inner chamfer-lg p-12" style="--sf: var(--color-card)">
       <client-only>
-        <h4 id="comment-dialog-title" class="font-bold mt-3 mb-1 text-bb-light">Schreib uns gerne einen Kommentar.</h4>
+        <h4 id="comment-dialog-title" class="font-display font-bold mt-3 mb-1 text-fg">Schreib uns gerne einen Kommentar.</h4>
         <form @submit.prevent="sendComment" novalidate>
           <div class="text-sm">
-            <UiTextInput class="text-bb-light" label="Name" type="text" v-model="fields.name" />
+            <UiTextInput class="text-fg" label="Name" type="text" v-model="fields.name" />
           </div>
 
           <div class="flex hidden">
             <label for="subject">
               Subject
-              <input type="text" id="subject" v-model="bot" class="border border-bb-charcoal rounded-md w-full mb-2 py-1 pl-2" placeholder="Name" />
+              <input type="text" id="subject" v-model="bot" class="border border-line-strong w-full mb-2 py-1 pl-2 bg-card text-fg" placeholder="Name" />
             </label>
           </div>
           <div class="relative text-sm">
-            <UiTextarea class="text-bb-light" label="Nachricht" v-model="fields.content" />
-            <div class="absolute bottom-12 right-10" ref="picker">
+            <UiTextarea class="text-fg" label="Nachricht" v-model="fields.content" />
+            <div class="absolute bottom-12 right-12" ref="picker">
               <button @click="toggleEmojiPicker" class="cursor-pointer absolute" type="button" aria-label="Emoji auswählen">
                 <IconEmoji class="bb-icon" aria-hidden="true" />
               </button>
@@ -40,14 +41,15 @@
             </div>
           </div>
           <div class="mb-3">
-            <UiCheckbox v-model="privacyAccepted" label="Datenschutz" :required="true" classes="text-bb-light text-sm">
-              <span class="text-bb-light text-sm">Ich habe die <NuxtLink to="/privacy" class="underline hover:text-bb-red" target="_blank">Datenschutzerklärung</NuxtLink> gelesen und stimme der Verarbeitung meiner Daten zu.</span>
+            <UiCheckbox v-model="privacyAccepted" label="Datenschutz" :required="true" classes="text-fg text-sm">
+              <span class="text-fg text-sm">Ich habe die <NuxtLink to="/privacy" class="underline hover:text-accent" target="_blank">Datenschutzerklärung</NuxtLink> gelesen und stimme der Verarbeitung meiner Daten zu.</span>
             </UiCheckbox>
           </div>
-          <UiButton type="submit" classes="btn-dark" :loading="isLoading" :disabled="isDisabled || !privacyAccepted">abschicken</UiButton>
+          <UiButton type="submit" variant="primary" :loading="isLoading" :disabled="isDisabled || !privacyAccepted">abschicken</UiButton>
         </form>
       </client-only>
-      <button @click="$emit('close', true)" class="top-4 right-4 absolute text-bb-lighter" aria-label="Dialog schließen"><IconClose fill="currentColor" aria-hidden="true" /></button>
+      <button @click="$emit('close', true)" class="top-4 right-4 absolute text-fg-subtle" aria-label="Dialog schließen"><IconClose fill="currentColor" aria-hidden="true" /></button>
+      </div>
     </div>
   </div>
 </template>

@@ -1,8 +1,8 @@
 <template>
-  <div v-if="errorAlbums" class="text-center py-20 max-w-screen-md mx-auto">
+  <div v-if="errorAlbums" class="text-center py-24 mx-auto">
     <p class="text-xl">Die Alben konnten nicht geladen werden. Bitte versuche es später erneut.</p>
   </div>
-  <div v-else-if="albums" class="flex flex-col items-center gap-3 max-w-screen-md mx-auto">
+  <div v-else-if="albums" class="flex flex-col items-center gap-3 mx-auto">
     <NuxtLink :to="`/gallery/${album.slug}`" v-for="album in albums" :key="album.id" class="mb-6">
       <ImageCardLarge :resource="album" :type="'album'" />
     </NuxtLink>

@@ -1,17 +1,17 @@
 <template>
   <div v-show="visible" role="alertdialog" aria-label="Cookiehinweis" class="w-full h-4/5 fixed bottom-0 gradient z-50">
-    <div class="mx-auto max-w-screen-md flex flex-col justify-end h-full pb-10 px-5">
-      <h2 class="text-lg text-bb-light underline">Cookiehinweis</h2>
-      <span class="text-bb-light"
+    <div class="mx-auto max-w-screen-md flex flex-col justify-end h-full pb-12 px-6">
+      <h2 class="text-lg text-primary-fg underline">Cookiehinweis</h2>
+      <span class="text-primary-fg"
         >Diese Seite verwendet Cookies, um Ihnen (dem Benutzer) ein besseres Nutzererlebnis bieten zu können, bzw. die korrekte Funktionsweise der Seite zu garantieren. Welche Informationen in diesen
         Cookies gespeichert werden und was es überhaupt mit diesen "Cookies" auf sich hat, können Sie in meiner
-        <NuxtLink to="/privacy" class="underline hover:text-bb-red">Datenschutzerklärung</NuxtLink> nachlesen.</span
+        <NuxtLink to="/privacy" class="underline hover:text-accent">Datenschutzerklärung</NuxtLink> nachlesen.</span
       >
       <div class="flex gap-3 mt-2">
-        <button @click="accept()" class="border bg-bb-charcoal border-bb-light text-bb-light block transition duration-300 ease-in-out hover:bg-bb-light hover:text-bb-charcoal w-max py-1 px-3">
+        <button @click="accept()" class="chamfer-quad px-3 py-1 text-sm font-semibold transition duration-300 ease-in-out bg-primary text-primary-fg hover:bg-accent hover:text-[#232118]" style="--c: 7px">
           Akzeptieren
         </button>
-        <button @click="reject()" class="border border-bb-light text-bb-light block transition duration-300 ease-in-out hover:bg-bb-light hover:text-bb-charcoal w-max py-1 px-3">
+        <button @click="reject()" class="chamfer-quad px-3 py-1 text-sm font-semibold transition duration-300 ease-in-out bg-transparent text-primary-fg hover:bg-accent hover:text-[#232118]" style="--c: 7px; box-shadow: inset 0 0 0 1px var(--color-line-strong)">
           Nur notwendige
         </button>
       </div>
@@ -37,6 +37,6 @@ function reject() {
 
 <style scoped>
 .gradient {
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.4), rgba(26, 26, 26, 0.8), #1a1a1a);
+  background: linear-gradient(transparent, color-mix(in oklab, var(--color-bg) 40%, transparent), color-mix(in oklab, var(--color-bg) 80%, transparent), var(--color-primary));
 }
 </style>

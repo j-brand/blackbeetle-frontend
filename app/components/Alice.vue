@@ -1,7 +1,7 @@
 <template>
   <div id="alice" class="relative overflow-hidden">
     <img id="img_center" class="top-0 left-0 right-0 bottom-0 absolute h-72 md:h-116 m-auto" src="/img/Mandala_01.png" alt="Alice im Wunderland und Flamingo" />
-    <svg id="circles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
+    <svg id="circles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" class="text-fg">
       <defs>
         <path id="ci1" d="M0,300a300,300 0 1,0 600,0a300,300 0 1,0 -600,0" />
         <path id="ci2" d="M50,300a250,250 0 1,0 500,0a250,250 0 1,0 -500,0" />
@@ -13,7 +13,7 @@
       <use xlink:href="#ci1" fill="none" />
       <circle id="c1" cx="300" cy="300" r="300" fill="#000" fill-opacity="0" />
       <g>
-        <text fill="#000">
+        <text fill="currentColor">
           <textPath xlink:href="#ci1">Aber ich möchte nicht unter Verrückte kommen.</textPath>
         </text>
       </g>
@@ -21,7 +21,7 @@
       <use xlink:href="#ci2" fill="none" />
       <circle id="c2" cx="300" cy="300" r="250" fill="#000" fill-opacity="0" />
       <g>
-        <text fill="#000">
+        <text fill="currentColor">
           <textPath xlink:href="#ci2">Oh, das kannst du wohl kaum verhindern. Wir sind hier nämlich alle verrückt. Ich bin verrückt. Du bist verrückt.</textPath>
         </text>
       </g>
@@ -29,7 +29,7 @@
       <use xlink:href="#ci3" fill="none" />
       <circle id="c3" cx="300" cy="300" r="200" fill="#000" fill-opacity="0" />
       <g>
-        <text fill="#000">
+        <text fill="currentColor">
           <textPath xlink:href="#ci3">Woher willst du wissen, dass ich verrückt bin?</textPath>
         </text>
       </g>
@@ -37,7 +37,7 @@
       <use xlink:href="#ci4" fill="none" />
       <circle id="c4" cx="300" cy="300" r="150" fill="#000" fill-opacity="0" />
       <g>
-        <text fill="#000">
+        <text fill="currentColor">
           <textPath xlink:href="#ci4">Wenn du es nicht wärest, stellte die Grinsekatze fest, dann wärest du nicht hier.</textPath>
         </text>
       </g>
@@ -45,7 +45,7 @@
       <use xlink:href="#ci5" fill="none" />
       <circle id="c5" cx="300" cy="300" r="100" fill="#000" fill-opacity="0" />
       <g>
-        <text fill="#000">
+        <text fill="currentColor">
           <textPath xlink:href="#ci5">&ndash; Lewis Carroll</textPath>
         </text>
       </g>
@@ -113,9 +113,6 @@ defineOptions({ name: "BeetleAlice" });
   transform-origin: center;
   font-family: "Helvetica Neue", Arial;
   font-weight: bold;
-}
-:global(.dark) #circles g text {
-  color: var(--color-bb-light);
 }
 #c1 + g text {
   animation-duration: 8s;

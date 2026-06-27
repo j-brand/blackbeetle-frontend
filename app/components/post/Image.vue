@@ -1,25 +1,37 @@
 <template>
-  <div class="swiper-container w-full h-auto overflow-hidden relative cursor-pointer" ref="swiperEle">
-    <div class="swiper-wrapper" ref="galleryEle">
-      <div class="swiper-slide w-full" v-for="(image, index) in post.images" :key="image.id ?? index">
-        <div class="flex justify-center bg-bb-charcoal bg-opacity-40 max-h-[576px]">
-          <img class="object-contain"
-            :src="image.urls?.lazy ?? ''"
-            :data-src="getBestMediaUrl(image, 'medium')"
-            :data-large="getBestMediaUrl(image, 'large')"
-            :data-thumb="getBestMediaUrl(image, 'small', 'medium')"
-            :height="(image.custom_properties?.height as number) || undefined"
-            :width="(image.custom_properties?.width as number) || undefined"
-            :alt="(image.custom_properties?.description as string) || image.name || 'Bild'" />
-          <span class="hidden" :id="'caption_' + index">{{ (image.custom_properties?.description as string) || image.name }}</span>
+  <div class="cut-frame chamfer-lg lift" style="--bd:var(--color-line)">
+    <div class="cut-inner chamfer-lg overflow-hidden" style="--sf:var(--color-card)">
+      <div class="swiper-container w-full h-auto overflow-hidden relative cursor-pointer" ref="swiperEle">
+        <div class="swiper-wrapper" ref="galleryEle">
+          <div class="swiper-slide w-full" v-for="(image, index) in post.images" :key="image.id ?? index">
+            <div class="flex justify-center bg-sunken max-h-[576px]">
+              <img class="object-contain"
+                :src="image.urls?.lazy ?? ''"
+                :data-src="getBestMediaUrl(image, 'medium')"
+                :data-large="getBestMediaUrl(image, 'large')"
+                :data-thumb="getBestMediaUrl(image, 'small', 'medium')"
+                :height="(image.custom_properties?.height as number) || undefined"
+                :width="(image.custom_properties?.width as number) || undefined"
+                :alt="(image.custom_properties?.description as string) || image.name || 'Bild'" />
+              <span class="hidden" :id="'caption_' + index">{{ (image.custom_properties?.description as string) || image.name }}</span>
+            </div>
+          </div>
         </div>
+
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+
+        <div v-if="(post.images?.length ?? 0) > 1" class="slider-counter">
+          <span class="font-mono text-[11px]">{{ String(activeIndex + 1).padStart(2, '0') }} / {{ String(post.images?.length ?? 0).padStart(2, '0') }}</span>
+        </div>
+
+        <div v-if="activeCaption" class="slider-caption">
+          <p class="font-display font-semibold text-sm md:text-base tracking-tight text-white">{{ activeCaption }}</p>
+        </div>
+
+        <div class="swiper-pagination"></div>
       </div>
     </div>
-
-    <div class="swiper-pagination"></div>
-
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
   </div>
 </template>
 
@@ -54,6 +66,12 @@ const gallery = ref<ReturnType<typeof lightGallery> | null>(null);
 const props = defineProps<{
   post: IPost;
 }>();
+
+const activeIndex = ref(0);
+const activeCaption = computed(() => {
+  const img = props.post.images?.[activeIndex.value];
+  return (img?.custom_properties?.description as string) || '';
+});
 
 const isVisible = ref(false);
 let observer: IntersectionObserver | null = null;
@@ -127,8 +145,8 @@ function initSwiper() {
     initialSlide: 0,
     pagination: {
       el: container.querySelector('.swiper-pagination') as HTMLElement,
-      dynamicBullets: true,
       clickable: true,
+      dynamicBullets: true,
     },
     navigation: {
       nextEl: container.querySelector('.swiper-button-next') as HTMLElement,
@@ -140,6 +158,7 @@ function initSwiper() {
       },
       slideChange(swiper) {
         const i = swiper.activeIndex;
+        activeIndex.value = i;
         loadSlidesAt(swiper, [i - 1, i, i + 1]);
       },
     },
@@ -170,13 +189,3 @@ onUnmounted(() => {
 });
 </script>
 
-<style scoped>
-.swiper-container :deep(.swiper-button-next),
-.swiper-container :deep(.swiper-button-prev) {
-  color: var(--color-bb-lighter);
-}
-.swiper-container :deep(.swiper-button-next):focus,
-.swiper-container :deep(.swiper-button-prev):focus {
-  outline: none;
-}
-</style>

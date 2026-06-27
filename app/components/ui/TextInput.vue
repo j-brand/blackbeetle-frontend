@@ -1,18 +1,21 @@
 <template>
   <label :for="slugify(label)">
-    <small class="dark:text-bb-light text-sm">{{ label }}</small> <span :id="slugify(label) + '-error'" class="text-bb-light-red text-sm" v-if="errors[label]">{{ errors[label] }}</span>
-    <input
-      :type="type"
-      :id="slugify(label)"
-      class="border border-bb-charcoal rounded-md w-full mb-2 py-1 pl-2 text-bb-charcoal bg-bb-white dark:bg-bb-charcoal dark:border-bb-light dark:text-bb-light"
-      @keyup="validateInput"
-      @blur="validateInput"
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
-      :value="modelValue"
-      :autocomplete="type === 'email' ? 'email' : 'off'"
-      :aria-describedby="errors[label] ? slugify(label) + '-error' : undefined"
-      :aria-invalid="errors[label] ? true : undefined"
-    />
+    <small class="text-fg text-sm">{{ label }}</small> <span :id="slugify(label) + '-error'" class="text-secondary text-sm" v-if="errors[label]">{{ errors[label] }}</span>
+    <span class="cut-frame chamfer-quad block mb-2" :style="{ '--c': '8px', '--bd': errors[label] ? 'var(--color-secondary)' : 'var(--color-line-strong)' }">
+      <input
+        :type="type"
+        :id="slugify(label)"
+        class="cut-inner chamfer-quad px-4 py-3 text-sm w-full outline-none block text-fg"
+        style="--c: 8px; --sf: var(--color-card)"
+        @keyup="validateInput"
+        @blur="validateInput"
+        @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
+        :value="modelValue"
+        :autocomplete="type === 'email' ? 'email' : 'off'"
+        :aria-describedby="errors[label] ? slugify(label) + '-error' : undefined"
+        :aria-invalid="errors[label] ? true : undefined"
+      />
+    </span>
   </label>
 </template>
 

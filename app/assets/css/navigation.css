@@ -1,197 +1,54 @@
-/* Main navigation */
-nav.main-nav {
-  width: 100%;
-  padding-top: 3.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  background-color: var(--color-bb-lighter);
-}
-.dark nav.main-nav {
-  background-color: var(--color-bb-charcoal-dark);
-}
-@media (width >= 1024px) {
-  nav.main-nav {
-    position: absolute;
-    padding-top: 0.25rem;
-    right: 0;
-    bottom: 0;
-    justify-content: flex-end;
-    flex-direction: row;
-    z-index: 10;
-    margin-right: 2.5rem;
-    background-color: transparent;
-  }
-  .dark nav.main-nav {
-    background-color: transparent;
-  }
-}
-
-nav.main-nav .nav-item {
-  display: block;
-  padding: 1rem 1.25rem;
-  font-size: 1.25rem;
-  text-transform: uppercase;
-  font-weight: 500;
-  letter-spacing: 0.025em;
-  color: var(--color-bb-charcoal);
-}
-.dark nav.main-nav .nav-item {
-  color: var(--color-bb-light);
-}
-@media (width >= 1024px) {
-  nav.main-nav .nav-item {
-    padding: 0.75rem 1.25rem;
-    font-size: 1rem;
-  }
-}
-nav.main-nav .nav-item.router-link-active {
-  border: none;
-  color: var(--color-bb-lighter);
-  text-shadow: -1px -1px 0 var(--color-bb-charcoal), 1px 1px 0 var(--color-bb-charcoal);
-}
-nav.main-nav .nav-item.router-link-active.nest {
-  text-shadow: -1px -1px 0 var(--color-bb-charcoal-darker), 1px 1px 0 var(--color-bb-charcoal-darker), -1px 1px 0 var(--color-bb-charcoal-darker),
-    1px -1px 0 var(--color-bb-charcoal-darker);
-  background: url("/img/nest.svg") no-repeat center;
-  background-size: auto 90%;
-  color: var(--color-bb-lighter);
-}
-@media (width >= 1024px) {
-  nav.main-nav .nav-item.router-link-active.nest {
-    background-size: 80%;
-  }
-}
-
-.dark nav.main-nav .router-link-active {
-  color: var(--color-bb-charcoal-darker);
-  text-shadow: -1px -1px 0 var(--color-bb-light), 1px 1px 0 var(--color-bb-light);
-}
-.dark nav.main-nav .router-link-active.nest {
-  background: url("/img/nest_light.svg") no-repeat center;
-  background-size: auto 90%;
-  text-shadow: -1px -1px 0 var(--color-bb-light), 1px 1px 0 var(--color-bb-light), -1px 1px 0 var(--color-bb-light), 1px -1px 0 var(--color-bb-light);
-  color: var(--color-bb-charcoal);
-}
-@media (width >= 1024px) {
-  .dark nav.main-nav .router-link-active.nest {
-    background-size: 80%;
-  }
-}
-
-/* Logo wrapper */
-#logo-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  min-height: 125px;
-  filter: drop-shadow(0px 9px 5px rgba(0, 0, 0, 0.1));
-}
-#logo-wrapper::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  min-height: 125px;
-  background-color: var(--color-bb-lighter);
-  --mask: linear-gradient(to left top, red, red) 0 -60px / 100% no-repeat, radial-gradient(50px at 50% 10%, #000 99%, #0000 100%) bottom/150px 70px no-repeat;
-  mask: var(--mask);
-}
-.dark #logo-wrapper::before {
-  background-color: var(--color-bb-charcoal-dark);
-}
-
-.nav-mobile {
-  transition: transform 500ms cubic-bezier(0.39, 0.575, 0.565, 1);
-  transform: translateY(-300px);
-}
-@media (width >= 1024px) {
-  .nav-mobile {
-    transform: none;
-  }
-}
-.nav-mobile.nav-open {
-  transform: none;
-}
-
-/* BURGER MENU */
-
-.hamburger {
-  padding: 15px 15px;
-  display: inline-block;
-  cursor: pointer;
-  transition-property: opacity, filter;
-  transition-duration: 0.15s;
-  transition-timing-function: linear;
-  font: inherit;
-  color: inherit;
-  text-transform: none;
-  background-color: transparent;
-  border: 0;
-  margin: 0;
-  overflow: visible;
-}
-.hamburger .hamburger-box {
-  width: 30px;
-  height: 24px;
-  display: inline-block;
+/* Desktop nav links */
+.bb-nav-link {
   position: relative;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-fg-muted);
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  text-decoration: none;
 }
-.hamburger-inner {
-  display: block;
-  top: 50%;
-  margin-top: -2px;
+.bb-nav-link:hover {
+  opacity: 0.7;
 }
-.hamburger-inner,
-.hamburger-inner::before,
-.hamburger-inner::after {
-  width: 30px;
-  height: 3px;
-  background-color: var(--color-bb-charcoal);
-  border-radius: 4px;
-  position: absolute;
-  transition-property: transform;
-  transition-duration: 0.15s;
-  transition-timing-function: ease;
+.bb-nav-link.bb-nav-active {
+  font-weight: 600;
+  color: var(--color-fg);
 }
-.dark .hamburger-inner,
-.dark .hamburger-inner::before,
-.dark .hamburger-inner::after {
-  background-color: var(--color-bb-light);
-}
-.hamburger-inner::before,
-.hamburger-inner::after {
+.bb-nav-link.bb-nav-active::after {
   content: "";
-  display: block;
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.5rem;
+  height: 2px;
+  background: var(--color-accent);
 }
-.hamburger-inner::before {
-  top: -10px;
+
+/* Mobile drawer links */
+.bb-drawer-link {
+  padding: 0.75rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-fg);
+  clip-path: polygon(6px 0, calc(100% - 6px) 0, 100% 6px, 100% calc(100% - 6px), calc(100% - 6px) 100%, 6px 100%, 0 calc(100% - 6px), 0 6px);
 }
-.hamburger-inner::after {
-  bottom: -10px;
+.bb-drawer-link.bb-drawer-active {
+  font-weight: 600;
+  color: var(--color-primary);
+  background: color-mix(in oklab, var(--color-primary) 13%, var(--color-card));
 }
-.hamburger--spin .hamburger-inner {
-  transition-duration: 0.22s;
-  transition-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+
+/* Drawer transition */
+.drawer-enter-active,
+.drawer-leave-active {
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+  max-height: 400px;
+  overflow: hidden;
 }
-.hamburger--spin .hamburger-inner::before {
-  transition: top 0.1s 0.25s ease-in, opacity 0.1s ease-in;
-}
-.hamburger--spin .hamburger-inner::after {
-  transition: bottom 0.1s 0.25s ease-in, transform 0.22s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-}
-.hamburger--spin.is-active .hamburger-inner {
-  transform: rotate(225deg);
-  transition-delay: 0.12s;
-  transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-.hamburger--spin.is-active .hamburger-inner::before {
-  top: 0;
+.drawer-enter-from,
+.drawer-leave-to {
+  max-height: 0;
   opacity: 0;
-  transition: top 0.1s ease-out, opacity 0.1s 0.12s ease-out;
-}
-.hamburger--spin.is-active .hamburger-inner::after {
-  bottom: 0;
-  transform: rotate(-90deg);
-  transition: bottom 0.1s ease-out, transform 0.22s 0.12s cubic-bezier(0.215, 0.61, 0.355, 1);
 }

@@ -1,7 +1,7 @@
 <template>
   <div :class="classes">
-    <div class="pl-7" v-if="errors.checkbox">
-      <small :id="label ? slugify(label) + '-error' : 'checkbox-error'" class="text-bb-light-red text-sm">{{ errors.checkbox }}</small>
+    <div class="pl-8" v-if="errors.checkbox">
+      <small :id="label ? slugify(label) + '-error' : 'checkbox-error'" class="text-secondary text-sm">{{ errors.checkbox }}</small>
     </div>
     <input type="checkbox" :id="label ? slugify(label) : undefined" class="" @change="onChange" :checked="modelValue"
       :aria-describedby="errors.checkbox ? (label ? slugify(label) + '-error' : 'checkbox-error') : undefined"

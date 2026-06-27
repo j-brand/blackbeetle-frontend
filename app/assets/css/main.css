@@ -3,23 +3,32 @@
 /* Use class-based dark mode (for @nuxtjs/color-mode) */
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Custom theme configuration (migrated from tailwind.config.js) */
 @theme {
-  /* Colors */
-  --color-bb-white: #EAE7E3;
-  --color-bb-lighter: #EAE7DC;
-  --color-bb-light: #D8C3A5;
-  --color-bb-black: #8E8D8A;
-  --color-bb-charcoal: #373737;
-  --color-bb-charcoal-dark: #2F2F2F;
-  --color-bb-charcoal-darker: #292929;
-  --color-bb-light-red: #E98074;
-  --color-bb-red: #E85A4F;
+  /* Semantic color tokens — light values.
+     Dark values are redefined under .dark in dark.css. */
+  --color-bg: #FAF8F2;
+  --color-sunken: #F2EEE6;
+  --color-card: #FFFFFF;
+  --color-fg: #232118;
+  --color-fg-muted: #57534A;
+  --color-fg-subtle: #938D80;
+  --color-primary: #234430;
+  --color-primary-fg: #FFFFFF;
+  --color-secondary: #A33347;
+  --color-accent: #D9A521;
+  --color-line: #E5E0D6;
+  --color-line-strong: #D2CCC0;
 
   /* Font families */
-  --font-sans: "SuperGroteskWeb", "Helvetica Neue", "Arial", "Roboto", sans-serif;
-  --font-sans-secondary: "Roboto", "Helvetica Neue", "Arial", sans-serif;
-  --font-mono: "Roboto";
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-sans: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Chamfer corner sizes */
+  --chamfer-sm: 5px;
+  --chamfer-md: 9px;
+  --chamfer-lg: 14px;
+  --chamfer-xl: 22px;
 
   /* Custom spacing */
   --spacing-page: 0.55rem;
@@ -30,7 +39,80 @@
   --spacing-125: 31.25rem;
 }
 
-/* Custom CSS imports - processed by PostCSS/Tailwind */
+/* Chamfer corner utilities */
+@utility chamfer-sm {
+  clip-path: polygon(var(--chamfer-sm) 0, 100% 0, 100% calc(100% - var(--chamfer-sm)), calc(100% - var(--chamfer-sm)) 100%, 0 100%, 0 var(--chamfer-sm));
+}
+@utility chamfer-md {
+  clip-path: polygon(var(--chamfer-md) 0, 100% 0, 100% calc(100% - var(--chamfer-md)), calc(100% - var(--chamfer-md)) 100%, 0 100%, 0 var(--chamfer-md));
+}
+@utility chamfer-lg {
+  clip-path: polygon(var(--chamfer-lg) 0, 100% 0, 100% calc(100% - var(--chamfer-lg)), calc(100% - var(--chamfer-lg)) 100%, 0 100%, 0 var(--chamfer-lg));
+}
+@utility chamfer-xl {
+  clip-path: polygon(var(--chamfer-xl) 0, 100% 0, 100% calc(100% - var(--chamfer-xl)), calc(100% - var(--chamfer-xl)) 100%, 0 100%, 0 var(--chamfer-xl));
+}
+@utility chamfer-tr {
+  clip-path: polygon(0 0, calc(100% - var(--c, 8px)) 0, 100% var(--c, 8px), 100% 100%, 0 100%);
+}
+@utility chamfer-quad {
+  clip-path: polygon(var(--c, 9px) 0, calc(100% - var(--c, 9px)) 0, 100% var(--c, 9px), 100% calc(100% - var(--c, 9px)), calc(100% - var(--c, 9px)) 100%, var(--c, 9px) 100%, 0 calc(100% - var(--c, 9px)), 0 var(--c, 9px));
+}
+@utility lift {
+  filter: drop-shadow(0 1px 2px rgba(35,33,24,.05)) drop-shadow(0 10px 22px rgba(35,33,24,.09));
+}
+
+@utility bb-eyebrow {
+  @apply font-mono text-[0.7rem] uppercase tracking-[0.18em] leading-[1.2];
+  color: var(--color-accent);
+}
+
+@utility bb-page-title {
+  @apply font-display font-bold leading-[1.05] tracking-[-0.02em];
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: var(--color-fg);
+}
+
+@utility bb-page-section-title {
+  @apply font-display font-semibold leading-[1.2] tracking-[-0.01em];
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  color: var(--color-fg);
+}
+
+@utility bb-page-copy {
+  @apply text-base leading-[1.7];
+  color: var(--color-fg-muted);
+}
+
+@utility bb-page-meta {
+  @apply font-mono text-[0.75rem] uppercase tracking-[0.14em];
+  color: var(--color-fg-subtle);
+}
+
+@utility bb-card-title {
+  @apply font-display font-semibold leading-[1.2] tracking-[-0.01em];
+  font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+  color: var(--color-fg);
+}
+
+@utility bb-card-copy {
+  @apply text-[0.95rem] leading-[1.6];
+  color: var(--color-fg-muted);
+}
+
+.dark .lift {
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,.45)) drop-shadow(0 12px 26px rgba(0,0,0,.55));
+}
+
+.cut-frame {
+  padding: 1px;
+  background: var(--bd, var(--color-line));
+}
+.cut-inner {
+  background: var(--sf, var(--color-card));
+}
+
+/* Custom CSS imports */
 @import "./dark.css";
 @import "./swiper.css";
 @import "./light-gallery.css";

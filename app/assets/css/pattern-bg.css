@@ -42,14 +42,14 @@
   background-position: 0 0, 30px 30px;
   opacity: 0.05;
 
-  box-shadow: inset 2rem 0 10rem -4rem var(--color-bb-lighter), inset -2rem 0 10rem -4rem var(--color-bb-lighter), inset 0 10rem 10rem -4rem var(--color-bb-lighter),
-    inset 0 -16rem 10rem -5rem var(--color-bb-lighter);
+  box-shadow: inset 2rem 0 10rem -4rem var(--color-bg), inset -2rem 0 10rem -4rem var(--color-bg), inset 0 10rem 10rem -4rem var(--color-bg),
+    inset 0 -16rem 10rem -5rem var(--color-bg);
   z-index: -1;
 }
 @media (width >= 1024px) {
   .pattern-bg {
-    box-shadow: inset 8rem 0 10rem -5rem var(--color-bb-lighter), inset -8rem 0 10rem -5rem var(--color-bb-lighter), inset 0 12rem 10rem -5rem var(--color-bb-lighter),
-      inset 0 -16rem 10rem -5rem var(--color-bb-lighter);
+    box-shadow: inset 8rem 0 10rem -5rem var(--color-bg), inset -8rem 0 10rem -5rem var(--color-bg), inset 0 12rem 10rem -5rem var(--color-bg),
+      inset 0 -16rem 10rem -5rem var(--color-bg);
     background-size: 110px 110px;
     background-position: 0 0, 55px 55px;
   }
@@ -57,12 +57,12 @@
 
 .dark .pattern-bg {
   opacity: 0.035;
-  box-shadow: inset 2rem 0 10rem -4rem var(--color-bb-charcoal), inset -2rem 0 10rem -4rem var(--color-bb-charcoal), inset 0 10rem 10rem -4rem var(--color-bb-charcoal),
-    inset 0 -16rem 10rem -5rem var(--color-bb-charcoal);
+  box-shadow: inset 2rem 0 10rem -4rem var(--color-bg), inset -2rem 0 10rem -4rem var(--color-bg), inset 0 10rem 10rem -4rem var(--color-bg),
+    inset 0 -16rem 10rem -5rem var(--color-bg);
 }
 @media (width >= 1024px) {
   .dark .pattern-bg {
-    box-shadow: inset 8rem 0 10rem -5rem var(--color-bb-charcoal), inset -8rem 0 10rem -5rem var(--color-bb-charcoal), inset 0 12rem 10rem -5rem var(--color-bb-charcoal),
-      inset 0 -16rem 10rem -5rem var(--color-bb-charcoal);
+    box-shadow: inset 8rem 0 10rem -5rem var(--color-bg), inset -8rem 0 10rem -5rem var(--color-bg), inset 0 12rem 10rem -5rem var(--color-bg),
+      inset 0 -16rem 10rem -5rem var(--color-bg);
   }
 }

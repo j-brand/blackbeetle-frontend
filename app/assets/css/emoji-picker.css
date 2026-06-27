@@ -299,34 +299,34 @@
 
 /* Dark mode support */
 .dark .v3-emoji-picker {
-  background: var(--color-bb-charcoal);
-  color: var(--color-bb-light);
+  background: var(--color-card);
+  color: var(--color-fg);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
 }
 .dark .v3-emoji-picker .v3-header {
-  border-bottom-color: var(--color-bb-charcoal-dark);
+  border-bottom-color: var(--color-line);
 }
 .dark .v3-emoji-picker .v3-search input {
-  background: var(--color-bb-charcoal-dark);
-  border-color: var(--color-bb-charcoal-dark);
-  color: var(--color-bb-light);
+  background: var(--color-sunken);
+  border-color: var(--color-line);
+  color: var(--color-fg);
 }
 .dark .v3-emoji-picker .v3-search input:focus {
-  border-color: var(--color-bb-light);
+  border-color: var(--color-primary);
 }
 .dark .v3-emoji-picker .v3-body .v3-body-inner .v3-group h5 {
-  background: var(--color-bb-charcoal);
-  color: var(--color-bb-light);
+  background: var(--color-card);
+  color: var(--color-fg);
 }
 .dark .v3-emoji-picker .v3-body .v3-body-inner .v3-group .v3-emojis button:hover {
-  background: var(--color-bb-charcoal-dark);
+  background: var(--color-sunken);
 }
 .dark .v3-emoji-picker .v3-footer {
-  border-top-color: var(--color-bb-charcoal-dark);
+  border-top-color: var(--color-line);
 }
 .dark .v3-skin-tones {
-  background: var(--color-bb-charcoal);
+  background: var(--color-card);
 }
 .dark .v3-body-inner {
-  scrollbar-color: var(--color-bb-charcoal-dark) rgba(255, 255, 255, 0.1);
+  scrollbar-color: var(--color-line-strong) rgba(255, 255, 255, 0.1);
 }

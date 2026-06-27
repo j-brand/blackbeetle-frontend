@@ -7,14 +7,29 @@ body {
 }
 
 body {
-  background-color: var(--color-bb-white);
+  background-color: var(--color-bg);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-fg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--color-fg);
 }
 
 a {
-  text-decoration-color: var(--color-bb-charcoal);
-}
-.dark a {
-  text-decoration-color: var(--color-bb-light);
+  text-decoration-color: var(--color-fg);
 }
 
 button:focus-visible,
@@ -24,17 +39,8 @@ input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid var(--color-bb-charcoal);
+  outline: 2px solid var(--color-primary);
   outline-offset: 2px;
-}
-.dark button:focus-visible,
-.dark video:focus-visible,
-.dark a:focus-visible,
-.dark input:focus-visible,
-.dark textarea:focus-visible,
-.dark select:focus-visible,
-.dark [tabindex]:focus-visible {
-  outline-color: var(--color-bb-light);
 }
 
 .html-post img {
@@ -45,7 +51,7 @@ select:focus-visible,
 .anaglyph {
   box-sizing: content-box;
   border: none;
-  color: var(--color-bb-charcoal);
+  color: var(--color-fg);
   text-overflow: clip;
   letter-spacing: 3px;
   text-shadow: 0.5px -0.5px 1px #c6b091, 1px -1px 1px #b49f81, 1.5px -1.5px 1px #a28f73, 2px -2px 1px #918169, 2.5px -2.5px 1px #7f7362, 3px -3px 1px #70675b;
@@ -77,22 +83,18 @@ img[lazy="loaded"] {
 }
 
 /* CUSTOM SCROLLBAR */
-/* width */
 ::-webkit-scrollbar {
   width: 12px;
 }
 
-/* Track */
 ::-webkit-scrollbar-track {
-  background-color: var(--color-bb-charcoal);
+  background-color: var(--color-bg);
   border-radius: 0px;
 }
 
-/* Handle */
 ::-webkit-scrollbar-thumb {
-  background: var(--color-bb-lighter);
-  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
-  border-radius: 5px;
+  background: var(--color-line-strong);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 @utility text-shadow {
@@ -133,17 +135,14 @@ img[lazy="loaded"] {
   margin-top: -10px;
   margin-left: -10px;
   border-radius: 50%;
-  border: 2px solid var(--color-bb-white);
+  border: 2px solid var(--color-primary-fg);
   border-top-color: transparent;
   animation: spinner 0.8s linear infinite;
 }
 
 /* Icon styles */
 .bb-icon {
-  fill: var(--color-bb-charcoal);
-}
-.dark .bb-icon {
-  fill: var(--color-bb-light);
+  fill: var(--color-fg);
 }
 
 /* Reduced motion */
@@ -165,8 +164,8 @@ img[lazy="loaded"] {
   top: 0;
   z-index: 9999;
   padding: 0.5rem 1rem;
-  background: var(--color-bb-charcoal);
-  color: var(--color-bb-light);
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
   text-decoration: none;
 }
 .skip-to-content:focus {

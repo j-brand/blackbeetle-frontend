@@ -1,8 +1,8 @@
 <template>
-  <div v-if="errorStories" class="text-center py-20 max-w-screen-md mx-auto">
+  <div v-if="errorStories" class="text-center py-24 w-full mx-auto">
     <p class="text-xl">Die Geschichten konnten nicht geladen werden. Bitte versuche es später erneut.</p>
   </div>
-  <div v-else-if="stories" class="flex flex-col justify-center items-center gap-2 max-w-screen-md mx-auto overflow-y-hidden">
+  <div v-else-if="stories" class="flex flex-col justify-center items-center gap-2 w-full mx-auto overflow-y-hidden">
     <NuxtLink :to="`/blog/${story.slug}`" v-for="story in stories" :key="story.id" class="mb-6">
       <ImageCardLarge :resource="story" :type="'story'" />
     </NuxtLink>

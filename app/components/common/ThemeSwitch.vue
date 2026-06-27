@@ -1,5 +1,5 @@
 <template>
-  <button aria-label="Toggle Color Theme" @click="toggleDarkMode" class="text-bb-charcoal dark:text-bb-light">
+  <button aria-label="Toggle Color Theme" @click="toggleDarkMode" class="text-fg">
     <IconThemeDark v-if="colorMode.value == 'light'" />
     <IconThemeLight v-if="colorMode.value == 'dark'" />
   </button>

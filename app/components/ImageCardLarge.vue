@@ -1,5 +1,5 @@
 <template>
-  <div class="relative overflow-hidden chamfer-xl bb-tile zoom-in lift">
+  <div class="relative overflow-hidden chamfer-xl bb-tile zoom-in lift max-h-125">
     <template v-if="type === 'album'">
       <div class="absolute flex justify-between items-center top-0 w-full p-6 text-shadow-lg z-10 text-white">
         <span class="font-mono">{{ formatDate(albumResource.start_date, true) }} - {{ formatDate(albumResource.end_date, true) }}</span>
@@ -18,7 +18,7 @@
     </template>
     <div class="absolute bottom-0 w-full p-6 md:px-12 z-10 card-content text-white">
       <h1 class="bb-card-title uppercase text-shadow-lg">{{ resource.title }}</h1>
-      <span class="bb-card-copy text-shadow-lg hidden md:block lg:w-2/5">{{ getExcerpt(resource.description, 150) }}</span>
+      <span class="bb-card-copy text-shadow-lg hidden md:block lg:w-2/5" v-html="getExcerpt(resource.description, 150)" />
     </div>
     <layout-lazy-image
       v-if="resource.title_image"

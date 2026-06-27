@@ -3,13 +3,11 @@
     <a href="#main-content" class="skip-to-content">Zum Inhalt springen</a>
     <LayoutNavigationDefault />
 
-    <main id="main-content" class="flex-1 mx-auto max-w-none px-6 lg:px-12 pt-12 pb-48">
+    <main id="main-content" class="flex-1 w-full max-w-none px-6 lg:px-12 pt-12 pb-48">
       <slot />
     </main>
     <LayoutFooterDefault />
-    <transition name="fade">
-      <CommonCookieNotice v-if="!cookieAccept" />
-    </transition>
+    <CommonCookieNotice v-if="!cookieAccept" />
   </div>
 </template>
 

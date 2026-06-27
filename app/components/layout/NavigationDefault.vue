@@ -25,16 +25,18 @@
 
       <div class="flex items-center gap-2">
         <ClientOnly>
-          <span class="hidden sm:inline font-mono text-[11px]" style="color:var(--color-fg-subtle)">light</span>
-          <button @click="toggleDarkMode" aria-label="Farbmodus wechseln"
-            class="chamfer-quad relative h-8 w-[58px] transition-colors"
-            style="--c:6px; background:var(--color-line-strong);">
-            <span class="chamfer-quad absolute top-1 left-1 size-6 grid place-items-center transition-transform duration-300"
-              :style="`--c:5px; background:var(--color-card); transform:${colorMode.value === 'dark' ? 'translateX(26px)' : 'translateX(0)'}`">
-              <span class="font-mono text-[11px]" style="color:var(--color-fg)">{{ colorMode.value === 'dark' ? '☾' : '☀' }}</span>
-            </span>
-          </button>
-          <span class="hidden sm:inline font-mono text-[11px]" style="color:var(--color-fg-subtle)">dark</span>
+          <div class="hidden md:flex items-center gap-2">
+            <span class="font-mono text-[11px]" style="color:var(--color-fg-subtle)">light</span>
+            <button @click="toggleDarkMode" aria-label="Farbmodus wechseln"
+              class="chamfer-quad relative h-8 w-[58px] transition-colors"
+              style="--c:6px; background:var(--color-line-strong);">
+              <span class="chamfer-quad absolute top-1 left-1 size-6 grid place-items-center transition-transform duration-300"
+                :style="`--c:5px; background:var(--color-card); transform:${colorMode.value === 'dark' ? 'translateX(26px)' : 'translateX(0)'}`">
+                <span class="font-mono text-[11px]" style="color:var(--color-fg)">{{ colorMode.value === 'dark' ? '☾' : '☀' }}</span>
+              </span>
+            </button>
+            <span class="font-mono text-[11px]" style="color:var(--color-fg-subtle)">dark</span>
+          </div>
         </ClientOnly>
 
         <button @click="toggleNav" aria-label="Menü" :aria-expanded="navOpen"
@@ -51,7 +53,8 @@
     </div>
 
     <Transition name="drawer">
-      <div v-if="navOpen" class="md:hidden border-t" style="border-color:var(--color-line); background:var(--color-card);">
+      <div v-if="navOpen" class="md:hidden absolute inset-x-0 top-16 z-40 border-t"
+        style="border-color:var(--color-line); background:var(--color-card);">
         <nav class="p-3 flex flex-col gap-1">
           <NuxtLink @click="closeNav" to="/" exact
             class="bb-drawer-link" active-class="bb-drawer-active">
@@ -69,6 +72,20 @@
             class="bb-drawer-link" active-class="bb-drawer-active">
             Galerie
           </NuxtLink>
+          <ClientOnly>
+            <div class="flex items-center gap-2 px-3 py-2 mt-1">
+              <span class="font-mono text-[11px]" style="color:var(--color-fg-subtle)">light</span>
+              <button @click="toggleDarkMode" aria-label="Farbmodus wechseln"
+                class="chamfer-quad relative h-8 w-[58px] transition-colors"
+                style="--c:6px; background:var(--color-line-strong);">
+                <span class="chamfer-quad absolute top-1 left-1 size-6 grid place-items-center transition-transform duration-300"
+                  :style="`--c:5px; background:var(--color-card); transform:${colorMode.value === 'dark' ? 'translateX(26px)' : 'translateX(0)'}`">
+                  <span class="font-mono text-[11px]" style="color:var(--color-fg)">{{ colorMode.value === 'dark' ? '☾' : '☀' }}</span>
+                </span>
+              </button>
+              <span class="font-mono text-[11px]" style="color:var(--color-fg-subtle)">dark</span>
+            </div>
+          </ClientOnly>
         </nav>
       </div>
     </Transition>

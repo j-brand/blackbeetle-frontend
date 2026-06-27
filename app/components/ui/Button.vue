@@ -46,7 +46,7 @@ const variantClass = computed(() => {
     case 'primary': return 'bg-primary text-primary-fg';
     case 'destructive': return 'bg-secondary text-white';
     case 'accent': return 'bg-accent text-[#232118]';
-    case 'outline': return 'bg-card text-primary outline-btn';
+    case 'outline': return 'text-primary outline-btn';
     case 'ghost': return 'bg-transparent text-fg-muted';
     default: return 'bg-primary text-primary-fg';
   }
@@ -79,7 +79,15 @@ const chamferSize = computed(() => {
 @reference "@/assets/css/main.css";
 
 .outline-btn {
-  box-shadow: inset 0 0 0 1px var(--color-line-strong);
+  background: var(--color-line-strong);
+}
+
+.outline-btn::before {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: var(--color-card);
+  clip-path: polygon(var(--c, 9px) 0, calc(100% - var(--c, 9px)) 0, 100% var(--c, 9px), 100% calc(100% - var(--c, 9px)), calc(100% - var(--c, 9px)) 100%, var(--c, 9px) 100%, 0 calc(100% - var(--c, 9px)), 0 var(--c, 9px));
 }
 
 button svg {
@@ -89,6 +97,8 @@ button svg {
 }
 
 .button-content {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
@@ -126,10 +136,11 @@ button svg {
   }
 }
 
-.spinner::before {
+.spinner::after {
   content: "";
   box-sizing: border-box;
   position: absolute;
+  z-index: 2;
   top: 50%;
   left: 50%;
   width: 20px;

@@ -1,8 +1,8 @@
 <template>
   <div class="max-w-screen-md mx-auto flex flex-col justify-between">
-    <transition name="fade">
+    <ClientOnly>
       <CommonLoader v-if="isLoading" />
-    </transition>
+    </ClientOnly>
     <div v-if="errorStory || errorPosts" class="text-center py-24">
       <p class="text-xl">Die Daten konnten nicht geladen werden. Bitte versuche es später erneut.</p>
     </div>
@@ -19,7 +19,7 @@
           type="button"
           @click="toggleOrder()"
           aria-label="reverse post order"
-          variant="primary"
+          variant="outline"
           size="sm"
           id="toggle-order"
         >

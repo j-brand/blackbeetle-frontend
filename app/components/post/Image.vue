@@ -3,9 +3,9 @@
     <div class="cut-inner chamfer-lg overflow-hidden" style="--sf:var(--color-card)">
       <div class="swiper-container w-full h-auto overflow-hidden relative cursor-pointer" ref="swiperEle">
         <div class="swiper-wrapper" ref="galleryEle">
-          <div class="swiper-slide w-full" v-for="(image, index) in post.images" :key="image.id ?? index">
-            <div class="flex justify-center bg-sunken max-h-[576px]">
-              <img class="object-contain"
+          <div class="swiper-slide w-full min-w-0" v-for="(image, index) in post.images" :key="image.id ?? index">
+            <div class="flex justify-center bg-sunken max-h-[576px] overflow-hidden">
+              <img class="w-full max-w-full object-cover"
                 :src="image.urls?.lazy ?? ''"
                 :data-src="getBestMediaUrl(image, 'medium')"
                 :data-large="getBestMediaUrl(image, 'large')"

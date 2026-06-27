@@ -114,11 +114,8 @@
 
 /* Custom CSS imports */
 @import "./dark.css";
-@import "./swiper.css";
-@import "./light-gallery.css";
 @import "./fonts.css";
 @import "./inputs.css";
 @import "./pattern-bg.css";
 @import "./navigation.css";
 @import "./custom.css";
-@import "./emoji-picker.css";

@@ -37,8 +37,9 @@
 
 <script setup lang="ts">
 import type { IPost } from "@/types";
+import "@/assets/css/swiper.css";
+import "@/assets/css/light-gallery.css";
 
-//Lightgallery Imports
 import lightGallery from "lightgallery";
 import lgThumbnail from "lightgallery/plugins/thumbnail/lg-thumbnail.umd.js";
 import lgZoom from "lightgallery/plugins/zoom/lg-zoom.umd.js";

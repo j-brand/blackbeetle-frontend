@@ -3,7 +3,6 @@
     <Card eyebrow="Standort" title="Wo sind die Räuber?" variant="primary">
       <MapEmbed />
       <template #actions>
-        <MapCta />
       </template>
     </Card>
   </div>
@@ -12,7 +11,6 @@
 <script setup lang="ts">
 import Card from '@/components/ui/Card.vue'
 import MapEmbed from '@/components/MapEmbed.vue'
-import MapCta from '@/components/ui/MapCta.vue'
 useHead({
   title: "Startseite",
   meta: [

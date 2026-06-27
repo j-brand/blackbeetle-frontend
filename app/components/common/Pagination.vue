@@ -11,10 +11,10 @@
           <path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
         </svg>
       </button>
-      <div v-for="(page, index) in pages" :key="index" class="px-2 mx-1">
+      <div v-for="(page, index) in pages" :key="index" class="px-2 mx-1 flex items-center">
         <button
           type="button"
-          :class="isCurrentPage(page) ? 'chamfer-quad bg-primary px-page py-1 text-primary-fg font-bold' : 'text-fg hover:underline'"
+          :class="isCurrentPage(page) ? 'chamfer-quad bg-primary px-page py-1 text-primary-fg font-bold' : 'py-1 text-fg hover:underline'"
           :style="isCurrentPage(page) ? { '--c': '6px' } : {}"
           :aria-current="isCurrentPage(page) ? 'page' : undefined"
           @click="changePage(page)"

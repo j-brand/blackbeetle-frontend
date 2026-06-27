@@ -3,13 +3,20 @@
     <div class="mx-auto max-w-[1200px] px-6 lg:px-12 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <NuxtLink to="/" aria-label="Startseite" class="flex items-center gap-3">
-          <ClientOnly>
-            <img
-              class="h-8 w-8"
-              :src="colorMode.value === 'dark' ? '/img/bb-logo_light.png' : '/img/bb-logo.png'"
-              alt="Blackbeetle Logo"
-            />
-          </ClientOnly>
+          <img
+            class="h-8 w-8 dark:hidden"
+            src="/img/bb-logo.webp"
+            alt="Blackbeetle Logo"
+            width="32"
+            height="32"
+          />
+          <img
+            class="h-8 w-8 hidden dark:block"
+            src="/img/bb-logo_light.webp"
+            alt="Blackbeetle Logo"
+            width="32"
+            height="32"
+          />
           <div class="leading-tight">
             <div class="font-display font-bold tracking-tight text-[15px]" style="color:var(--color-fg)">Blackbeetle</div>
           </div>

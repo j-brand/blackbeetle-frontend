@@ -45,7 +45,8 @@
 </template>
 
 <script setup lang="ts">
-//Lighgallery Imports (Style, Plugins)
+import "@/assets/css/light-gallery.css";
+
 import lightGallery from "lightgallery";
 import lgThumbnail from "lightgallery/plugins/thumbnail/lg-thumbnail.umd.js";
 import lgZoom from "lightgallery/plugins/zoom/lg-zoom.umd.js";

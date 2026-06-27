@@ -18,7 +18,7 @@
         v-for="(marker, index) in coordinates"
         :key="index"
         :lat-lng="[marker.position.lat, marker.position.lng]"
-        @ready="(leafletMarker: L.Marker) => onMarkerReady(leafletMarker, marker.id)"
+        @ready="(leafletMarker: L.Marker) => onMarkerReady(leafletMarker, marker.info ?? marker.id)"
       >
         <LIcon
           icon-url="/img/leaflet/marker-icon.png"
@@ -45,7 +45,7 @@ const props = defineProps({
   zoom: { type: Number, default: 4 },
   maxZoom: { type: Number, default: 18 },
   coordinates: {
-    type: Array as unknown as () => Array<{ position: { lat: number; lng: number }; id?: string }>,
+    type: Array as unknown as () => Array<{ position: { lat: number; lng: number }; id?: string; info?: string }>,
     default: () => [],
   },
 });
@@ -56,9 +56,9 @@ function onMapReady(mapInstance: LeafletMap) {
   map.value = mapInstance;
 }
 
-function onMarkerReady(leafletMarker: Marker, id?: string) {
-  if (id) {
-    leafletMarker.bindTooltip(id, { permanent: true, direction: "top", offset: [0, -30] });
+function onMarkerReady(leafletMarker: Marker, label?: string) {
+  if (label) {
+    leafletMarker.bindTooltip(label, { permanent: true, direction: "top", offset: [0, -30] });
   }
 }
 

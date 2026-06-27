@@ -1,9 +1,9 @@
 <template>
   <div class="relative h-96 w-full lg:min-w-[500px] overflow-hidden rounded-[1rem] border" style="border-color: var(--color-line-strong); background: var(--color-sunken)">
     <ClientOnly>
-      <MapContainer class="w-full h-full" :zoom="5" :max-zoom="6" :coordinates="locationContent" v-slot="{ map }">
+      <LazyMapContainer class="w-full h-full" :zoom="5" :max-zoom="6" :coordinates="locationContent" v-slot="{ map }">
         <MapBounds :coordinates="locationContent" :map="map" />
-      </MapContainer>
+      </LazyMapContainer>
     </ClientOnly>
   </div>
 </template>
@@ -11,6 +11,8 @@
 <script setup lang="ts">
 import { apiService } from "@/lib/api.service";
 import type { IOption } from "@/types";
+
+const LazyMapContainer = defineAsyncComponent(() => import("@/components/map/MapContainer.vue"));
 
 interface LocationPoint {
   id: string;

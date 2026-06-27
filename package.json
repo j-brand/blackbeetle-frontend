@@ -34,13 +34,13 @@
     "vue-tsc": "^3.2.2"
   },
   "dependencies": {
-    "@nuxt/fonts": "^0.14.0",
     "@nuxt/image": "^2.0.0",
     "@vue-leaflet/vue-leaflet": "^0.10.1",
     "animejs": "^4.3.6",
     "gsap": "^3.12.7",
     "leaflet": "^1.9.4",
     "lightgallery": "^2.8.2",
+    "nuxt-security": "^2.5.1",
     "swiper": "^14.0.0",
     "vue-sonner": "^2.0.9",
     "vue3-emoji-picker": "^1.1.8"

@@ -18,7 +18,7 @@ function fitBounds(mapInstance: LeafletMap, coords: typeof props.coordinates) {
       (marker) => [marker.position.lat, marker.position.lng] as [number, number]
     );
     nextTick(() => {
-      mapInstance.fitBounds(bounds, { padding: [50, 50] });
+      mapInstance.fitBounds(bounds, { padding: [50, 50], maxZoom: mapInstance.getMaxZoom() });
     });
   }
 }

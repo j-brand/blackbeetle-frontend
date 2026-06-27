@@ -38,6 +38,7 @@
           packages = with pkgs; [
             nodePackages.npm
             git
+            lftp
           ];
 
           enterShell = ''

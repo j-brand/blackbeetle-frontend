@@ -42,7 +42,7 @@ export function useHelper() {
     if (!media?.urls) return { src: "", loading: "" };
     return {
       src: media.urls[variant] ?? media.urls.original,
-      loading: media.urls.thumb ?? media.urls.original,
+      loading: media.urls.lazy ?? media.urls.thumb ?? media.urls.original,
     };
   }
 
@@ -62,8 +62,8 @@ export function useHelper() {
     for (const variant of variants) {
       if (media.urls[variant]) return media.urls[variant]!;
     }
-    // never fall back to original JPG — use largest available webp variant
-    return media.urls.large ?? media.urls.medium ?? media.urls.original;
+    // never fall back to original JPG — use largest available variant
+    return media.urls.large ?? media.urls.medium ?? media.urls.small ?? media.urls.original;
   }
 
   return { slugify, formatDate, getExcerpt, getMediaObj, getMediaUrl, getBestMediaUrl };

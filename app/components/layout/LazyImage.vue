@@ -31,17 +31,7 @@ const isLoaded = ref(false);
 const hasError = ref(false);
 const showPlaceholder = computed(() => props.blur && !isLoaded.value);
 
-const placeholderSrc = computed(() => {
-  if (props.lowsrc) {
-    return props.lowsrc;
-  }
-  const split = props.src.split(".");
-  if (split.length >= 2) {
-    const idx = split.length - 2;
-    split[idx] = (split[idx] ?? "") + "_lazy";
-  }
-  return split.join(".");
-});
+const placeholderSrc = computed(() => props.lowsrc || props.src);
 
 function onLoad() {
   isLoaded.value = true;

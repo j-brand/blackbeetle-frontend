@@ -4,9 +4,10 @@
       <div class="swiper-slide w-full" v-for="(image, index) in post.images" :key="image.id ?? index">
         <div class="flex justify-center bg-bb-charcoal bg-opacity-40 max-h-[576px]">
           <img class="object-contain"
-            :data-src="getBestMediaUrl(image, 'large')"
+            :src="image.urls?.lazy ?? ''"
+            :data-src="getBestMediaUrl(image, 'medium')"
             :data-large="getBestMediaUrl(image, 'large')"
-            :data-thumb="getBestMediaUrl(image, 'large')"
+            :data-thumb="getBestMediaUrl(image, 'small', 'medium')"
             :height="(image.custom_properties?.height as number) || undefined"
             :width="(image.custom_properties?.width as number) || undefined"
             :alt="(image.custom_properties?.description as string) || image.name || 'Bild'" />
@@ -135,7 +136,7 @@ function initSwiper() {
     },
     on: {
       init(swiper) {
-        loadSlidesAt(swiper, [0, 1]);
+        loadSlidesAt(swiper, [0]);
       },
       slideChange(swiper) {
         const i = swiper.activeIndex;

@@ -161,10 +161,6 @@ Configure in `.env` files (not tracked in git):
 - `NUXT_PUBLIC_BACKEND_URL` - Backend URL for assets
 - `NUXT_PUBLIC_LG_LICENSE_KEY` - LightGallery license key
 
-## Deployment
-
-The project is configured for Vercel deployment with Node.js server preset.
-
 ## Common Patterns
 
 ### Data Fetching

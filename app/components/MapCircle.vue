@@ -6,15 +6,15 @@
         <textPath xlink:href="#curve" startOffset="60">Wo sind die Räuber?</textPath>
       </text>
     </svg>
-    <div class="h-96 w-96 rounded-full overflow-hidden border-5 border-bb-charcoal">
+    <div class="relative z-0 h-96 w-96 rounded-full overflow-hidden border-5 border-bb-charcoal">
       <ClientOnly>
-        <MapContainer v-if="location" class="w-full h-112" :zoom="4" v-slot="{ map }">
+        <MapContainer v-if="location" class="w-full h-112" :zoom="5" :max-zoom="6" v-slot="{ map }">
           <MapMarker :position="locationContent.position" :label="locationContent.info" />
           <MapBounds :coordinates="[locationContent]" :map="map" />
         </MapContainer>
       </ClientOnly>
     </div>
-    <NuxtLink to="/blog/back-again" class="-translate-y-9">
+    <NuxtLink to="/blog/back-again" class="-translate-y-9 relative z-10">
       <UiButton class="btn-dark py-2"
         ><span class="flex flex-row">SCHAU ES DIR AN <IconArrow /></span>
       </UiButton>

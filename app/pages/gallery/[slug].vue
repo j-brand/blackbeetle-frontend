@@ -17,8 +17,8 @@
 
     <div class="max-w-screen-lg mx-auto">
       <div class="md:columns-3 lg:columns-4 gap-5" ref="gallery" v-if="album">
-        <a class="mb-5 block" v-for="(img, index) in album.images" :key="index" :href="getBestMediaUrl(img, 'large')" :data-thumb="getBestMediaUrl(img, 'large')" :data-sub-html="img.custom_properties?.description || img.name">
-          <layout-lazy-image class="lg:rounded-md" :src="getBestMediaUrl(img, 'large')" :width="img.custom_properties?.width" :height="img.custom_properties?.height" :blur="true" :alt="img.name" />
+        <a class="mb-5 block" v-for="(img, index) in album.images" :key="index" :href="getBestMediaUrl(img, 'large')" :data-thumb="getBestMediaUrl(img, 'small')" :data-sub-html="img.custom_properties?.description || img.name">
+          <layout-lazy-image class="lg:rounded-md" :src="getBestMediaUrl(img, 'small')" :lowsrc="img.urls?.lazy ?? ''" :width="img.custom_properties?.width" :height="img.custom_properties?.height" :blur="true" :alt="img.name" />
         </a>
       </div>
     </div>

@@ -3,7 +3,7 @@
     <div>
       <h1 class="uppercase text-4xl anaglyph font-semibold mb-4">Blackbeetle</h1>
       <h2 class="font-medium md:text-2xl mb-4">Wenn Großstadtkinder das Weite suchen.</h2>
-      <div class="md:text-2xl">
+      <div class="md:text-2xl dark:text-bb-light">
         Keine waschechten Berliner zwar, aber lang genug im Großstadtdschungel gefangen gewesen, um nach ein paar Jahren für eine Weile das Weite zu suchen.
         <br /><br />
 

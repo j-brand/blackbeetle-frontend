@@ -6,9 +6,11 @@ export interface IMediaUrls {
   original: string;
   thumb?: string;
   preview?: string;
+  small?: string;
   medium?: string;
   large?: string;
   webp?: string;
+  lazy?: string;
   [key: string]: string | undefined;
 }
 

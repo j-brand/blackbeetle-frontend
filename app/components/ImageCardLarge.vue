@@ -23,7 +23,8 @@
     <layout-lazy-image
       v-if="resource.title_image"
       class="vignette"
-      :src="getBestMediaUrl(resource.title_image, 'large')"
+      :src="getBestMediaUrl(resource.title_image, 'medium')"
+      :lowsrc="resource.title_image.urls?.lazy ?? ''"
       :width="resource.title_image.custom_properties?.width"
       :height="resource.title_image.custom_properties?.height"
       :blur="true"

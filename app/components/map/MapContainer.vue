@@ -4,14 +4,15 @@
       ref="mapRef"
       :center="center"
       :zoom="zoom"
+      :max-zoom="maxZoom"
       :use-global-leaflet="false"
       @ready="onMapReady"
     >
       <LTileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
         layer-type="base"
-        name="OpenStreetMap"
+        name="CartoDB Positron"
       />
       <LMarker
         v-for="(marker, index) in coordinates"
@@ -42,6 +43,7 @@ import type { Map as LeafletMap, Marker } from "leaflet";
 const props = defineProps({
   center: { type: Array as unknown as () => [number, number], default: () => [0, 0] },
   zoom: { type: Number, default: 4 },
+  maxZoom: { type: Number, default: 18 },
   coordinates: {
     type: Array as unknown as () => Array<{ position: { lat: number; lng: number }; id?: string }>,
     default: () => [],

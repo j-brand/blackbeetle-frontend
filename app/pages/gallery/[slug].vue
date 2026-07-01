@@ -93,7 +93,7 @@ function initGallery() {
 }
 
 function getGalleryTileClass(index: number) {
-  const pattern = index % 7;
+  const pattern = index % 8;
   switch (pattern) {
     case 0:
       return "sm:col-span-2 lg:col-span-2 lg:row-span-2";
@@ -101,6 +101,8 @@ function getGalleryTileClass(index: number) {
       return "sm:col-span-2 lg:col-span-2";
     case 5:
       return "lg:row-span-2";
+    case 6:
+      return "lg:col-span-2";
     default:
       return "";
   }

@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen-md mx-auto flex flex-col justify-between">
+  <div class="max-w-screen-md mx-auto flex flex-col justify-between py-26">
     <ClientOnly>
       <CommonLoader v-if="isLoading" />
     </ClientOnly>
@@ -7,7 +7,7 @@
       <p class="text-xl">Die Daten konnten nicht geladen werden. Bitte versuche es später erneut.</p>
     </div>
     <template v-if="story && !isLoading && !errorStory">
-    <div class="mb-6">
+    <div class="mb-10">
       <CommonPagination v-if="posts && posts.meta.last_page > 1 && posts.meta.current_page > 1" :offset="3" :pagination="posts.meta" @paginate="changePage" class="my-12 relative flex justify-center" />
       <div v-if="currentPage == 1" class="flex flex-col justify-center min-h-1/2-screen mx-6 lg:mx-0">
         <h1 class="bb-page-title text-center">{{ story.title }}</h1>

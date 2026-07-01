@@ -29,6 +29,8 @@
   --chamfer-md: 9px;
   --chamfer-lg: 14px;
   --chamfer-xl: 22px;
+  --chamfer-2xl: 30px;
+  --chamfer-3xl: 40px;
 
   /* Custom spacing */
   --spacing-page: 0.55rem;

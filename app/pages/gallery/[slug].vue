@@ -35,7 +35,7 @@
             :alt="img.name"
           />
           <span class="cap">
-            <span class="eb">Foto</span>
+            <span class="eb">{{ album.title }}</span>
             <span class="ti">{{ (img.custom_properties?.description as string) || img.name }}</span>
           </span>
         </a>

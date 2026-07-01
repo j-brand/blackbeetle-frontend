@@ -27,7 +27,7 @@
         >
           <layout-lazy-image
             class="w-full h-full"
-            :src="getBestMediaUrl(img, 'small')"
+            :src="getBestMediaUrl(img, 'large')"
             :lowsrc="img.urls?.lazy ?? ''"
             :width="img.custom_properties?.width"
             :height="img.custom_properties?.height"

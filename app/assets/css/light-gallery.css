@@ -74,6 +74,12 @@
   opacity: 0;
   transition: opacity 0.25s ease;
 }
+
+/* Show caption on hover or keyboard focus */
+.bb-tile:hover .cap,
+.bb-tile:focus-within .cap {
+  opacity: 1;
+}
 .bb-tile .eb {
   font-family: var(--font-mono);
   font-size: 10px;

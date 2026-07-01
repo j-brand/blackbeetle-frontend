@@ -114,6 +114,15 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  /* prevent bullets from shrinking when there are many slides */
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Prevent flex items (bullets) from shrinking when container is constrained */
+.swiper-pagination-bullet {
+  flex: 0 0 auto;
+  min-width: 9px;
 }
 
 /* Image fills full width */

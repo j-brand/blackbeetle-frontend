@@ -148,7 +148,8 @@ function initSwiper() {
       el: container.querySelector('.swiper-pagination') as HTMLElement,
       clickable: true,
       dynamicBullets: true,
-      dynamicMainBullets: 2,
+      // show up to 4 bullets visible at once (centered); first/last will be smaller
+      dynamicMainBullets: 4,
     },
     navigation: {
       nextEl: container.querySelector('.swiper-button-next') as HTMLElement,

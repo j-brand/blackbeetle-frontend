@@ -1,44 +1,26 @@
 .pattern-bg {
-  background-image: radial-gradient(
-      closest-side,
-      transparent 0%,
-      transparent 75%,
-      #ede8e0 76%,
-      #7f7362 85%,
-      #e0d4c3 86%,
-      #d8c3a5 94%,
-      #ffffff 95%,
-      #ffffff 103%,
-      #a28f73 104%,
-      #c6b091 112%,
-      #a28f73 113%,
-      #b49f81 121%,
-      #ffffff 122%,
-      #ffffff 130%,
-      #e0ead7 131%,
-      #e0ead7 140%
-    ),
-    radial-gradient(
-      closest-side,
-      transparent 0%,
-      transparent 75%,
-      #ede8e0 76%,
-      #7f7362 85%,
-      #e0d4c3 86%,
-      #d8c3a5 94%,
-      #ffffff 95%,
-      #ffffff 103%,
-      #a28f73 104%,
-      #c6b091 112%,
-      #a28f73 113%,
-      #b49f81 121%,
-      #ffffff 122%,
-      #ffffff 130%,
-      #e0ead7 131%,
-      #e0ead7 140%
-    );
+  --pattern-gradient: radial-gradient(
+    closest-side,
+    transparent 0%,
+    transparent 75%,
+    var(--color-pattern-1) 76%,
+    var(--color-pattern-2) 85%,
+    var(--color-pattern-3) 86%,
+    var(--color-pattern-4) 94%,
+    var(--color-pattern-5) 95%,
+    var(--color-pattern-5) 103%,
+    var(--color-pattern-6) 104%,
+    var(--color-pattern-7) 112%,
+    var(--color-pattern-6) 113%,
+    var(--color-pattern-8) 121%,
+    var(--color-pattern-5) 122%,
+    var(--color-pattern-5) 130%,
+    var(--color-pattern-9) 131%,
+    var(--color-pattern-9) 140%
+  );
+  background-image: var(--pattern-gradient), var(--pattern-gradient);
   background-size: 60px 60px;
-  background-color: #d8c3a5;
+  background-color: var(--color-pattern-4);
   background-position: 0 0, 30px 30px;
   opacity: 0.05;
 

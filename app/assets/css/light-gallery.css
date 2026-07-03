@@ -1,38 +1,34 @@
 /*LIGHT GALLERY CHANGES*/
+/* This file must be imported AFTER lightgallery's own scss so these rules win
+   the cascade at matching specificity, without needing !important. */
 
 .lg-prev,
 .lg-next {
-  background-color: transparent !important;
-}
-@media (width >= 1024px) {
-  .lg-prev,
-  .lg-next {
-    background-color: transparent !important;
-  }
+  background-color: transparent;
 }
 
 .lg-icon,
+.lg-toolbar .lg-icon {
+  color: var(--color-fg-muted);
+}
+
 .lg-sub-html {
-  color: var(--color-fg-muted) !important;
-  font-family: 'Hanken Grotesk', system-ui, sans-serif !important;
+  color: var(--color-fg-muted);
+  font-family: 'Hanken Grotesk', system-ui, sans-serif;
 }
 
-/* Keep lg icon font for navigation arrows */
-.lg-prev::after,
-.lg-next::before {
-  font-family: 'lg' !important;
+.lg-backdrop {
+  background-color: var(--color-bg);
+}
+.lg-outer .lg-thumb-outer {
+  background-color: var(--color-bg);
 }
 
-.lg-backdrop,
-.lg-thumb-outer {
-  background-color: var(--color-bg) !important;
+.lg-outer .lg-thumb-item {
+  border-color: var(--color-line-strong);
 }
-
-.lg-thumb-item {
-  border-color: var(--color-line-strong) !important;
-}
-.lg-thumb-item.active {
-  border-color: var(--color-primary) !important;
+.lg-outer .lg-thumb-item.active {
+  border-color: var(--color-primary);
 }
 
 /* Gallery tiles — chamfered image grid with hover lift + caption */

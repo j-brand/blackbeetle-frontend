@@ -5,7 +5,7 @@
  */
 export function useSanitize() {
   const SCRIPT_CONTENT = /<\s*script\b[^>]*>[\s\S]*?<\s*\/\s*script\s*>/gi;
-  const DANGEROUS_TAGS = /(<\s*\/?\s*)(script|iframe|object|embed|form|input|button|link|meta|base|applet)([\s>\/])/gi;
+  const DANGEROUS_TAGS = /(<\s*\/?\s*)(script|iframe|object|embed|form|input|button|link|meta|base|applet)([\s>/])/gi;
   const EVENT_HANDLERS = /\s+on\w+\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+)/gi;
   const JAVASCRIPT_URLS = /(href|src|action)\s*=\s*(?:"javascript:[^"]*"|'javascript:[^']*')/gi;
   const DATA_URLS = /(href|src|action)\s*=\s*(?:"data:[^"]*"|'data:[^']*')/gi;

@@ -18,7 +18,7 @@
     </template>
     <div class="absolute bottom-0 w-full p-6 md:px-12 z-10 card-content text-white">
       <h1 class="bb-card-title uppercase text-shadow-lg">{{ resource.title }}</h1>
-      <span class="bb-card-copy text-shadow-lg hidden md:block lg:w-2/5" v-html="getExcerpt(resource.description, 150)" />
+      <span class="bb-card-copy text-shadow-lg hidden md:block lg:w-2/5" v-html="excerpt" />
     </div>
     <layout-lazy-image
       v-if="resource.title_image"
@@ -42,9 +42,11 @@ const props = defineProps<{
 }>();
 
 const { formatDate, getBestMediaUrl, getExcerpt } = useHelper();
+const { sanitizeHtml } = useSanitize();
 
 const albumResource = props.resource as IAlbum;
 const storyResource = props.resource as IStory;
+const excerpt = computed(() => getExcerpt(sanitizeHtml(props.resource.description), 150));
 </script>
 
 <style scoped>

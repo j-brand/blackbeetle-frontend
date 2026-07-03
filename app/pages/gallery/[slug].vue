@@ -11,7 +11,7 @@
 
       <div class="max-w-screen-lg">
         <h2 class="bb-page-section-title mb-3">{{ album.title }}</h2>
-        <p class="bb-page-copy" v-html="album.description" />
+        <p class="bb-page-copy" v-html="albumDescription" />
       </div>
     </div>
 
@@ -24,6 +24,7 @@
           :href="getBestMediaUrl(img, 'large')"
           :data-thumb="getBestMediaUrl(img, 'small')"
           :data-sub-html="img.custom_properties?.description || img.name"
+          :aria-label="(img.custom_properties?.description as string) || img.name"
         >
           <layout-lazy-image
             class="w-full h-full"
@@ -45,8 +46,6 @@
 </template>
 
 <script setup lang="ts">
-import "@/assets/css/light-gallery.css";
-
 import lightGallery from "lightgallery";
 import lgThumbnail from "lightgallery/plugins/thumbnail/lg-thumbnail.umd.js";
 import lgZoom from "lightgallery/plugins/zoom/lg-zoom.umd.js";
@@ -56,6 +55,7 @@ import "lightgallery/scss/lightgallery.scss";
 import "lightgallery/scss/lg-thumbnail.scss";
 import "lightgallery/scss/lg-zoom.scss";
 import "lightgallery/scss/lg-fullscreen.scss";
+import "@/assets/css/light-gallery.css";
 
 import type { IAlbum } from "@/types";
 import { apiService } from "@/lib/api.service";
@@ -67,8 +67,11 @@ const slug = 'slug' in route.params ? String(route.params.slug) : '';
 const { lgLicenseKey } = useRuntimeConfig().public;
 
 const { formatDate, getBestMediaUrl } = useHelper();
+const { sanitizeHtml } = useSanitize();
 
 const { data: album, error: errorAlbum } = await useAsyncData(`album-${slug}`, () => apiService.getBySlug<IAlbum>("/albums", slug));
+
+const albumDescription = computed(() => sanitizeHtml(album.value?.description));
 
 useHead({
   title: album.value?.title ?? "",

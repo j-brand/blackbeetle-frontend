@@ -11,7 +11,7 @@
     anonymous
   ></iframe>
 
-  <video v-else-if="content?.path !== 'youtube'" preload="none" controls>
+  <video v-else-if="content?.path !== 'youtube'" preload="none" controls :aria-label="`Video: ${post.title}`">
     <source :src="path" type="video/mp4" />
     Your browser does not support the video tag.
   </video>

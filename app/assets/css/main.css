@@ -19,6 +19,25 @@
   --color-line: #E5E0D6;
   --color-line-strong: #D2CCC0;
 
+  /* Decorative pattern-bg gradient tones */
+  --color-pattern-1: #EDE8E0;
+  --color-pattern-2: #7F7362;
+  --color-pattern-3: #E0D4C3;
+  --color-pattern-4: #D8C3A5;
+  --color-pattern-5: #FFFFFF;
+  --color-pattern-6: #A28F73;
+  --color-pattern-7: #C6B091;
+  --color-pattern-8: #B49F81;
+  --color-pattern-9: #E0EAD7;
+
+  /* Anaglyph text-shadow tones (light → dark step gradient) */
+  --color-anaglyph-1: #C6B091;
+  --color-anaglyph-2: #B49F81;
+  --color-anaglyph-3: #A28F73;
+  --color-anaglyph-4: #918169;
+  --color-anaglyph-5: #7F7362;
+  --color-anaglyph-6: #70675B;
+
   /* Font families */
   --font-display: 'Space Grotesk', system-ui, sans-serif;
   --font-sans: 'Hanken Grotesk', system-ui, sans-serif;
@@ -75,10 +94,14 @@
   color: var(--color-fg);
 }
 
-@utility bb-page-section-title {
+@utility bb-heading-base {
   @apply font-display font-semibold leading-[1.2] tracking-[-0.01em];
-  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
   color: var(--color-fg);
+}
+
+@utility bb-page-section-title {
+  @apply bb-heading-base;
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
 }
 
 @utility bb-page-copy {
@@ -92,9 +115,8 @@
 }
 
 @utility bb-card-title {
-  @apply font-display font-semibold leading-[1.2] tracking-[-0.01em];
+  @apply bb-heading-base;
   font-size: clamp(1.25rem, 1.8vw, 1.5rem);
-  color: var(--color-fg);
 }
 
 @utility bb-card-copy {

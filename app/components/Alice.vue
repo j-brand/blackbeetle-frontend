@@ -1,7 +1,7 @@
 <template>
   <div id="alice" class="relative overflow-hidden">
-    <img id="img_center" class="top-0 left-0 right-0 bottom-0 absolute h-72 md:h-116 m-auto" src="/img/Mandala_01.png" alt="Alice im Wunderland und Flamingo" />
-    <svg id="circles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" class="text-fg">
+    <img id="img_center" class="top-0 left-0 right-0 bottom-0 absolute h-72 md:h-116 m-auto" src="/img/Mandala_01.png" alt="Mandala" />
+    <svg id="circles" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" class="text-fg" role="img" aria-label="Zitat von Lewis Carroll aus Alice im Wunderland, angeordnet auf rotierenden Kreisen">
       <defs>
         <path id="ci1" d="M0,300a300,300 0 1,0 600,0a300,300 0 1,0 -600,0" />
         <path id="ci2" d="M50,300a250,250 0 1,0 500,0a250,250 0 1,0 -500,0" />
@@ -50,7 +50,7 @@
         </text>
       </g>
     </svg>
-    <img id="alice-image" class="top-0 left-0 right-0 bottom-0 absolute h-16 md:h-28 m-auto" src="/img/alice_flamingo.svg" alt="Alice im Wunderland und Flamingo" />
+    <img id="alice-image" class="top-0 left-0 right-0 bottom-0 absolute h-16 md:h-28 m-auto" src="/img/alice_flamingo.svg" alt="Alice mit einem Flamingo" />
   </div>
 </template>
 
@@ -111,7 +111,7 @@ defineOptions({ name: "BeetleAlice" });
   animation-timing-function: linear;
   margin: auto;
   transform-origin: center;
-  font-family: "Helvetica Neue", Arial;
+  font-family: var(--font-sans);
   font-weight: bold;
 }
 #c1 + g text {

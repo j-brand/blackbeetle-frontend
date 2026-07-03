@@ -1,11 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { apiService } from "~/lib/api.service";
 
 // Mock $fetch
+// (ES module imports are hoisted, so this stub is in place before apiService runs)
 const mockFetch = vi.fn();
 vi.stubGlobal("$fetch", mockFetch);
-
-// Import after mocking
-import { apiService } from "~/lib/api.service";
 
 // In the Nuxt test environment, useRuntimeConfig().public.apiBase is empty string
 const API_PREFIX = "/api/v1";

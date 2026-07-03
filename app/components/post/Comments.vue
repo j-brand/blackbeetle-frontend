@@ -40,7 +40,7 @@ const props = defineProps<{
   comments: IComment[];
 }>();
 
-let height = ref();
+const height = ref();
 
 function toggleComments() {
   commentsOpen.value = !commentsOpen.value;

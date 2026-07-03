@@ -1,5 +1,5 @@
 <template>
-  <nav role="navigation" aria-label="Seitennavigation">
+  <nav role="navigation" :aria-label="label">
     <div class="flex flex-row justify-center">
       <button type="button" class="px-2 mx-1" :disabled="pagination.current_page <= 1" aria-label="Erste Seite" @click="changePage(1)">
         <svg style="width: 24px; height: 24px" viewBox="0 0 24 24" class="text-fg" aria-hidden="true" focusable="false">
@@ -11,7 +11,7 @@
           <path fill="currentColor" d="M15.41,16.58L10.83,12L15.41,7.41L14,6L8,12L14,18L15.41,16.58Z" />
         </svg>
       </button>
-      <div v-for="(page, index) in pages" :key="index" class="px-2 mx-1 flex items-center">
+      <div v-for="page in pages" :key="page" class="px-2 mx-1 flex items-center">
         <button
           type="button"
           :class="isCurrentPage(page) ? 'chamfer-quad bg-primary px-page py-1 text-primary-fg font-bold' : 'py-1 text-fg hover:underline'"
@@ -38,10 +38,13 @@
 <script setup lang="ts">
 import type { IPaginationMeta } from "@/types";
 
-const props = defineProps<{
+const props = withDefaults(defineProps<{
   offset: number;
   pagination: IPaginationMeta;
-}>();
+  label?: string;
+}>(), {
+  label: "Seitennavigation",
+});
 const emit = defineEmits<{
   paginate: [page: number];
 }>();

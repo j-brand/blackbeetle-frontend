@@ -115,25 +115,10 @@
       </tbody>
     </table>
 
-    <p class="mb-1 mt-6"><strong>Google Web Fonts</strong></p>
+    <p class="mb-1 mt-6"><strong>Web Fonts</strong></p>
     <p>
-      Unsere Website verwendet Web Fonts von Google. Anbieter ist die Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA.
-    </p>
-    <p>
-      Durch den Einsatz dieser Web Fonts wird es möglich Ihnen die von uns gewünschte Darstellung unserer Website zu präsentieren, unabhängig davon welche Schriften Ihnen lokal zur Verfügung stehen.
-      Dies erfolgt über den Abruf der Google Web Fonts von einem Server von Google in den USA und der damit verbundenen Weitergabe Ihre Daten an Google. Dabei handelt es sich um Ihre IP-Adresse und
-      welche Seite Sie bei uns besucht haben. Der Einsatz von Google Web Fonts erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Als Betreiber dieser Website haben wir ein berechtigtes Interesse
-      an der optimalen Darstellung und Übertragung unseres Webauftritts.
-    </p>
-    <p>
-      Das Unternehmen Google ist für das us-europäische Datenschutzübereinkommen "Privacy Shield" zertifiziert. Dieses Datenschutzübereinkommen soll die Einhaltung des in der EU geltenden
-      Datenschutzniveaus gewährleisten.
-    </p>
-    <p>
-      Einzelheiten über Google Web Fonts finden Sie unter:
-      <a href="https://www.google.com/fonts#AboutPlace:about">https://www.google.com/fonts#AboutPlace:about</a>
-      und weitere Informationen in den Datenschutzbestimmungen von Google:
-      <a href="https://policies.google.com/privacy/partners?hl=de">https://policies.google.com/privacy/partners?hl=de</a>
+      Unsere Website verwendet Web Fonts, die lokal auf unserem Server gehostet werden (sogenanntes Self-Hosting). Es findet dabei keine Verbindung zu Servern Dritter (z. B. Google) statt und es werden keine
+      Daten wie Ihre IP-Adresse an externe Anbieter übertragen.
     </p>
     <p>
       <small>Quelle: Datenschutz-Konfigurator von <a href="http://www.mein-datenschutzbeauftragter.de" target="_blank" rel="noopener noreferrer">mein-datenschutzbeauftragter.de</a></small>

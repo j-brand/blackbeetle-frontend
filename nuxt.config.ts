@@ -6,7 +6,6 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
-    "@nuxt/image",
     "@nuxt/eslint",
     "nuxt-security",
   ],
@@ -116,9 +115,5 @@ export default defineNuxtConfig({
   },
   experimental: {
     typedPages: true,
-  },
-  image: {
-    quality: 80,
-    format: ["webp", "avif"],
   },
 });

@@ -79,9 +79,8 @@ useHead({
 });
 
 if (import.meta.client) {
-  const fireworksEl = document.getElementById("fireworks") as HTMLCanvasElement | null;
-  const centerX = ref(fireworksEl?.width ?? window.innerWidth);
-  const centerY = ref(fireworksEl?.height ?? window.innerHeight);
+  const centerX = ref(window.innerWidth / 2);
+  const centerY = ref(window.innerHeight / 2);
   const numberOfParticules = 30;
   const colors = ["#FF1461", "#18FF92", "#5A87FF", "#FBF38C"];
   const pointerX = ref(0);
@@ -100,7 +99,8 @@ if (import.meta.client) {
     canvasEl.value.style.width = document.body.offsetWidth + "px";
     canvasEl.value.style.height = document.body.scrollHeight + "px";
 
-    canvasEl.value.getContext("2d")?.scale(2, 2);
+    centerX.value = canvasEl.value.width / 2;
+    centerY.value = canvasEl.value.height / 2;
   }
 
   function updateCoords(e: MouseEvent | TouchEvent) {
@@ -199,7 +199,13 @@ if (import.meta.client) {
     }, 0);
   }
 
+  let stopped = false;
+  let tapListener: ((e: MouseEvent | TouchEvent) => void) | null = null;
+  let fireworkAnimation: ReturnType<typeof animate> | null = null;
+  let startFireworkTimeout: ReturnType<typeof setTimeout> | null = null;
+
   function autoClick() {
+    if (stopped) return;
     animateParticules(random(centerX.value - 200, centerX.value + 200), random(centerY.value - 400, centerY.value + 400));
     createTimer({ duration: 200, onComplete: autoClick });
   }
@@ -207,7 +213,7 @@ if (import.meta.client) {
   function startFirework() {
     const tap = "ontouchstart" in window || navigator.maxTouchPoints ? "touchstart" : "mousedown";
 
-    animate(canvasEl.value!, {
+    fireworkAnimation = animate(canvasEl.value!, {
       duration: Infinity,
       loop: true,
       onUpdate: () => {
@@ -217,14 +223,11 @@ if (import.meta.client) {
       },
     });
 
-    document.addEventListener(
-      tap,
-      function (e) {
-        updateCoords(e);
-        animateParticules(pointerX.value, pointerY.value);
-      },
-      false,
-    );
+    tapListener = function (e) {
+      updateCoords(e);
+      animateParticules(pointerX.value, pointerY.value);
+    };
+    document.addEventListener(tap, tapListener, false);
 
     autoClick();
     setCanvasSize();
@@ -238,19 +241,29 @@ if (import.meta.client) {
     if (logoWrapper) {
       logoWrapper.insertAdjacentHTML(
         "beforeend",
-        `<div id="logo-present" class="z-10"><svg class="mt-6 p-3 text-bb-charcoal dark:text-bb-light" style="width:85px;height:85px" viewBox="-3.5 -3 30 30">
+        `<div id="logo-present" class="z-10"><svg class="text-bb-charcoal dark:text-bb-light" style="width:32px;height:32px" viewBox="-3.5 -3 30 30">
         <path fill="currentColor" d="M22,12V20A2,2 0 0,1 20,22H4A2,2 0 0,1 2,20V12A1,1 0 0,1 1,11V8A2,2 0 0,1 3,6H6.17C6.06,5.69 6,5.35 6,5A3,3 0 0,1 9,2C10,2 10.88,2.5 11.43,3.24V3.23L12,4L12.57,3.23V3.24C13.12,2.5 14,2 15,2A3,3 0 0,1 18,5C18,5.35 17.94,5.69 17.83,6H21A2,2 0 0,1 23,8V11A1,1 0 0,1 22,12M4,20H11V12H4V20M20,20V12H13V20H20M9,4A1,1 0 0,0 8,5A1,1 0 0,0 9,6A1,1 0 0,0 10,5A1,1 0 0,0 9,4M15,4A1,1 0 0,0 14,5A1,1 0 0,0 15,6A1,1 0 0,0 16,5A1,1 0 0,0 15,4M3,8V10H11V8H3M13,8V10H21V8H13Z" />
     </svg></div>`,
       );
     }
-    setTimeout(function () {
+    startFireworkTimeout = setTimeout(function () {
       startFirework();
     }, 21000);
   });
 
   onBeforeUnmount(() => {
-    document.getElementById("st-link")?.classList.remove("hidden");
+    document.getElementById("bb-logo-link")?.classList.remove("hidden");
     document.getElementById("logo-present")?.remove();
+
+    stopped = true;
+    if (startFireworkTimeout) clearTimeout(startFireworkTimeout);
+    fireworkAnimation?.pause();
+
+    if (tapListener) {
+      const tap = "ontouchstart" in window || navigator.maxTouchPoints ? "touchstart" : "mousedown";
+      document.removeEventListener(tap, tapListener, false);
+    }
+    window.removeEventListener("resize", setCanvasSize, false);
   });
 }
 </script>

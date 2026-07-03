@@ -42,8 +42,6 @@ export interface IAlbum {
   images_count?: number;
 }
 
-export type IAlbums = Array<IAlbum>;
-
 // =============================================================================
 // Story
 // =============================================================================
@@ -57,8 +55,6 @@ export interface IStory {
   posts?: IPost[];
   posts_count: number;
 }
-
-export type IStories = Array<IStory>;
 
 // =============================================================================
 // Post

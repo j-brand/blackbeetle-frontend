@@ -13,10 +13,11 @@
         :cols="cols"
         :rows="rows"
         :maxlength="maxlength"
-        :aria-describedby="errors[label] ? slugify(label) + '-error' : undefined"
+        :aria-describedby="describedBy"
         :aria-invalid="errors[label] ? true : undefined"
       ></textarea>
     </span>
+    <span :id="slugify(label) + '-counter'" class="text-fg-subtle text-xs" aria-live="polite">{{ modelValue.length }} / {{ maxlength }}</span>
   </label>
 </template>
 
@@ -38,6 +39,12 @@ const props = withDefaults(defineProps<{
 
 const { validateTextField, errors } = useFormValidation();
 const { slugify } = useHelper();
+
+const describedBy = computed(() => {
+  const ids = [slugify(props.label) + "-counter"];
+  if (errors[props.label]) ids.unshift(slugify(props.label) + "-error");
+  return ids.join(" ");
+});
 
 const validateInput = (): void => {
   validateTextField(props.label, props.modelValue);

@@ -14,15 +14,7 @@
             </MapContainer>
           </ClientOnly>
         </div>
-        <NuxtLink to="/blog/back-again" class="mt-6">
-          <UiButton class="mt-4" variant="accent" size="sm" iconPosition="end">
-            SCHAU ES DIR AN
-
-            <template #icon>
-              <IconArrow />
-            </template>
-          </UiButton>
-        </NuxtLink>
+        <UiMapCta />
       </div>
     </div>
   </div>

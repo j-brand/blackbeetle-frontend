@@ -1,5 +1,5 @@
 <template>
-  <div v-bind="$attrs" class="leaflet-map-container  w-min-[400px]">
+  <div v-bind="$attrs" class="leaflet-map-container  w-min-[400px]" aria-label="Interaktive Karte" aria-roledescription="Karte">
     <LMap
       ref="mapRef"
       :center="center"

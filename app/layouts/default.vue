@@ -19,6 +19,10 @@ if (import.meta.client) {
   preferDark.value = window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
 }
 
+const route = useRoute();
+const requestUrl = useRequestURL();
+const canonicalUrl = computed(() => `${requestUrl.origin}${route.path}`);
+
 useHead({
   titleTemplate: (titleChunk) => {
     return titleChunk ? `Blackbeetle - ${titleChunk}` : "Blackbeetle";
@@ -34,6 +38,10 @@ useHead({
       rel: "icon",
       type: "image/png",
       href: preferDark.value ? "/img/fav/favicon-light.ico" : "/img/fav/favicon-dark.ico",
+    },
+    {
+      rel: "canonical",
+      href: canonicalUrl.value,
     },
   ]),
 });

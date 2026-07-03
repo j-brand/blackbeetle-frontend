@@ -48,7 +48,7 @@
           <UiButton type="submit" variant="primary" :loading="isLoading" :disabled="isDisabled || !privacyAccepted">abschicken</UiButton>
         </form>
       </client-only>
-      <button @click="$emit('close', true)" class="top-4 right-4 absolute text-fg-subtle" aria-label="Dialog schließen"><IconClose fill="currentColor" aria-hidden="true" /></button>
+      <button @click="$emit('close', true)" class="top-4 right-4 absolute text-fg-subtle size-6 grid place-items-center" aria-label="Dialog schließen"><IconClose fill="currentColor" aria-hidden="true" /></button>
       </div>
     </div>
   </div>

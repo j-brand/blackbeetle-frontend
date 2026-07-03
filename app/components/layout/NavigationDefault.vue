@@ -1,8 +1,8 @@
 <template>
   <header class="sticky top-0 z-30 backdrop-blur-md" style="background:color-mix(in oklab, var(--color-bg) 80%, transparent); border-bottom:1px solid var(--color-line);">
     <div class="mx-auto max-w-[1200px] px-6 lg:px-12 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <NuxtLink to="/" aria-label="Startseite" class="flex items-center gap-3">
+      <div id="logo-wrapper" class="flex items-center gap-3">
+        <NuxtLink id="bb-logo-link" to="/" aria-label="Startseite" class="flex items-center gap-3">
           <img
             class="h-8 w-8 dark:hidden"
             src="/img/bb-logo.webp"
@@ -103,21 +103,17 @@
 const navOpen = useState("navOpen", () => false);
 const colorMode = useColorMode();
 
+useBodyOverflow(navOpen);
+
 function toggleDarkMode() {
   colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
 }
 
 function toggleNav() {
   navOpen.value = !navOpen.value;
-  if (navOpen.value) {
-    document.body.style.overflowY = "hidden";
-  } else {
-    document.body.style.overflowY = "scroll";
-  }
 }
 
 function closeNav() {
   navOpen.value = false;
-  document.body.style.overflowY = "scroll";
 }
 </script>

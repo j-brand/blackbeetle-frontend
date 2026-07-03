@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node /tmp/claude-1000/-home-toymaker-projects-blackbeetle-frontend/d9cec7e1-c595-466f-81c3-11b7a61f476f/scratchpad/check_cookie.mjs)"
+    ]
+  }
+}

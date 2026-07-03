@@ -12,7 +12,8 @@
                 :data-thumb="getBestMediaUrl(image, 'small', 'medium')"
                 :height="(image.custom_properties?.height as number) || undefined"
                 :width="(image.custom_properties?.width as number) || undefined"
-                :alt="(image.custom_properties?.description as string) || image.name || 'Bild'" />
+                :alt="(image.custom_properties?.description as string) || image.name || 'Bild'"
+                :aria-describedby="'caption_' + index" />
               <span class="hidden" :id="'caption_' + index">{{ (image.custom_properties?.description as string) || image.name }}</span>
             </div>
           </div>
@@ -38,7 +39,6 @@
 <script setup lang="ts">
 import type { IPost } from "@/types";
 import "@/assets/css/swiper.css";
-import "@/assets/css/light-gallery.css";
 
 import lightGallery from "lightgallery";
 import lgThumbnail from "lightgallery/plugins/thumbnail/lg-thumbnail.umd.js";
@@ -50,6 +50,7 @@ import "lightgallery/scss/lg-thumbnail.scss";
 import "lightgallery/scss/lg-autoplay.scss";
 import "lightgallery/scss/lg-zoom.scss";
 import "lightgallery/scss/lg-fullscreen.scss";
+import "@/assets/css/light-gallery.css";
 
 // Swiper Js Imports
 import Swiper from "swiper";
@@ -61,7 +62,6 @@ const { lgLicenseKey } = useRuntimeConfig().public;
 const galleryEle = ref<HTMLElement | null>(null);
 const swiperEle = ref<HTMLElement | null>(null);
 const swiperRef = ref<Swiper | null>(null);
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const gallery = ref<ReturnType<typeof lightGallery> | null>(null);
 
 const props = defineProps<{

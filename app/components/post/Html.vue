@@ -19,6 +19,10 @@ const props = defineProps<{
   post: IPost;
 }>();
 
+const emit = defineEmits<{
+  commentAdded: [postId: number, comment: IComment];
+}>();
+
 const commentModal = ref<boolean>(false);
 const { formatDate } = useHelper();
 const { sanitizeHtml } = useSanitize();
@@ -34,9 +38,7 @@ const htmlContent = computed(() => {
 });
 
 function addNewComment(comment: IComment) {
-  if (props.post.comments) {
-    props.post.comments.push(comment);
-  }
+  emit("commentAdded", props.post.id, comment);
 }
 </script>
 

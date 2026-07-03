@@ -3,7 +3,7 @@
     <p class="text-xl">Die Alben konnten nicht geladen werden. Bitte versuche es später erneut.</p>
   </div>
   <div v-else-if="albums" class="flex flex-col items-center gap-3 max-w-4xl mx-auto">
-    <NuxtLink :to="`/gallery/${album.slug}`" v-for="album in albums" :key="album.id" class="mb-6">
+    <NuxtLink :to="`/gallery/${album.slug}`" v-for="album in albums" :key="album.id" class="mb-6 block w-full">
       <ImageCardLarge :resource="album" :type="'album'" />
     </NuxtLink>
   </div>

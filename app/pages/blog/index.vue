@@ -6,7 +6,7 @@
     <p class="text-xl">Die Geschichten konnten nicht geladen werden. Bitte versuche es später erneut.</p>
   </div>
   <div v-else-if="stories" class="flex flex-col justify-center items-center gap-2 w-full max-w-4xl mx-auto overflow-y-hidden">
-    <NuxtLink :to="`/blog/${story.slug}`" v-for="story in stories" :key="story.id" class="mb-6" @click="navigating = true">
+    <NuxtLink :to="`/blog/${story.slug}`" v-for="story in stories" :key="story.id" class="mb-6 block w-full" @click="navigating = true">
       <ImageCardLarge :resource="story" :type="'story'" />
     </NuxtLink>
   </div>

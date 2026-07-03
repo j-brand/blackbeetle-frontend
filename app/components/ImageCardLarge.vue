@@ -1,5 +1,5 @@
 <template>
-  <div class="relative overflow-hidden chamfer-xl bb-tile zoom-in lift max-h-125">
+  <div class="relative overflow-hidden chamfer-xl bb-tile zoom-in lift w-full h-96 md:h-125">
     <template v-if="type === 'album'">
       <div class="absolute flex justify-between items-center top-0 w-full p-6 text-shadow-lg z-10 text-white">
         <span class="font-mono">{{ formatDate(albumResource.start_date, true) }} - {{ formatDate(albumResource.end_date, true) }}</span>
@@ -22,7 +22,7 @@
     </div>
     <layout-lazy-image
       v-if="resource.title_image"
-      class="vignette"
+      class="vignette absolute inset-0 w-full h-full"
       :src="getBestMediaUrl(resource.title_image, 'large')"
       :srcset="getMediaSrcset(resource.title_image)"
       sizes="(min-width: 768px) 66vw, 100vw"
@@ -71,7 +71,6 @@ const excerpt = computed(() => getExcerpt(sanitizeHtml(props.resource.descriptio
   -moz-box-shadow: inset 0px 0px 85px rgba(0, 0, 0, 0.4);
   box-shadow: inset 0px 0px 85px rgba(0, 0, 0, 0.4);
   line-height: 0; /* ensure no space between bottom */
-  display: inline-block; /* don't go wider than image */
 }
 .vignette img {
   position: relative;

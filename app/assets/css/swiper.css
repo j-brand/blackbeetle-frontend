@@ -110,19 +110,14 @@
 .swiper-container > .swiper-pagination {
   bottom: 12px !important;
   z-index: 11;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  /* prevent bullets from shrinking when there are many slides */
-  overflow: hidden;
-  white-space: nowrap;
 }
 
-/* Prevent flex items (bullets) from shrinking when container is constrained */
+/* Keep the native Swiper dynamic-bullet layout (inline-block bullets whose
+   spacing comes from horizontal margins). Swiper computes the sliding window
+   from bullet width + margins only — a flex container with `gap` throws off
+   that math and breaks the dynamic bullets on narrow/mobile widths. */
 .swiper-pagination-bullet {
-  flex: 0 0 auto;
-  min-width: 9px;
+  margin: 0 4px;
 }
 
 /* Image fills full width */

@@ -24,10 +24,13 @@
       v-if="resource.title_image"
       class="vignette"
       :src="getBestMediaUrl(resource.title_image, 'large')"
+      :srcset="getMediaSrcset(resource.title_image)"
+      sizes="(min-width: 768px) 66vw, 100vw"
       :lowsrc="resource.title_image.urls?.lazy ?? ''"
-      :width="resource.title_image.custom_properties?.width"
-      :height="resource.title_image.custom_properties?.height"
+      :width="(resource.title_image.custom_properties?.width as number) || undefined"
+      :height="(resource.title_image.custom_properties?.height as number) || undefined"
       :blur="true"
+      :eager="true"
       :alt="resource.title"
     />
   </div>
@@ -41,7 +44,7 @@ const props = defineProps<{
   type: "album" | "story";
 }>();
 
-const { formatDate, getBestMediaUrl, getExcerpt } = useHelper();
+const { formatDate, getBestMediaUrl, getMediaSrcset, getExcerpt } = useHelper();
 const { sanitizeHtml } = useSanitize();
 
 const albumResource = props.resource as IAlbum;

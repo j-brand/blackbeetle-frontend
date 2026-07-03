@@ -29,9 +29,11 @@
           <layout-lazy-image
             class="w-full h-full"
             :src="getBestMediaUrl(img, 'large')"
+            :srcset="getMediaSrcset(img)"
+            sizes="(min-width: 768px) 50vw, 100vw"
             :lowsrc="img.urls?.lazy ?? ''"
-            :width="img.custom_properties?.width"
-            :height="img.custom_properties?.height"
+            :width="(img.custom_properties?.width as number) || undefined"
+            :height="(img.custom_properties?.height as number) || undefined"
             :blur="true"
             :alt="img.name"
           />
@@ -66,7 +68,7 @@ const route = useRoute();
 const slug = 'slug' in route.params ? String(route.params.slug) : '';
 const { lgLicenseKey } = useRuntimeConfig().public;
 
-const { formatDate, getBestMediaUrl } = useHelper();
+const { formatDate, getBestMediaUrl, getMediaSrcset } = useHelper();
 const { sanitizeHtml } = useSanitize();
 
 const { data: album, error: errorAlbum } = await useAsyncData(`album-${slug}`, () => apiService.getBySlug<IAlbum>("/albums", slug));

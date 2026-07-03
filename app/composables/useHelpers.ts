@@ -35,15 +35,30 @@ export function useHelper() {
     return excerpt;
   }
 
+  // Approximate pixel widths of the backend (Spatie) size conversions.
+  // These must match the backend conversion widths — adjust if they differ.
+  const VARIANT_WIDTHS: Record<string, number> = {
+    small: 640,
+    medium: 1280,
+    large: 1920,
+  };
+
   /**
-   * Get image object for lazy loading with new MediaResource structure
+   * Build a responsive srcset string from the available size variants.
+   * Prefers webp URLs when present, clamps descriptors to the original width,
+   * and returns "" when no sized variants are available.
    */
-  function getMediaObj(media: IMedia | null | undefined, variant: string = "preview") {
-    if (!media?.urls) return { src: "", loading: "" };
-    return {
-      src: media.urls[variant] ?? media.urls.original,
-      loading: media.urls.lazy ?? media.urls.thumb ?? media.urls.original,
-    };
+  function getMediaSrcset(media: IMedia | null | undefined): string {
+    if (!media?.urls) return "";
+    const originalWidth = Number(media.custom_properties?.width) || Infinity;
+    const entries: string[] = [];
+    for (const [variant, width] of Object.entries(VARIANT_WIDTHS)) {
+      const url = media.urls[variant];
+      if (!url) continue;
+      const w = Math.min(width, originalWidth);
+      entries.push(`${url} ${w}w`);
+    }
+    return entries.join(", ");
   }
 
   /**
@@ -66,5 +81,5 @@ export function useHelper() {
     return media.urls.large ?? media.urls.medium ?? media.urls.small ?? media.urls.original;
   }
 
-  return { slugify, formatDate, getExcerpt, getMediaObj, getMediaUrl, getBestMediaUrl };
+  return { slugify, formatDate, getExcerpt, getMediaSrcset, getMediaUrl, getBestMediaUrl };
 }

@@ -20,7 +20,7 @@ function createMockMedia(urls: Record<string, string> = {}): IMedia {
 }
 
 describe("useHelper", () => {
-  const { slugify, formatDate, getExcerpt, getMediaObj, getMediaUrl, getBestMediaUrl } = useHelper();
+  const { slugify, formatDate, getExcerpt, getMediaSrcset, getMediaUrl, getBestMediaUrl } = useHelper();
 
   // =========================================================================
   // slugify
@@ -148,52 +148,49 @@ describe("useHelper", () => {
   });
 
   // =========================================================================
-  // getMediaObj
+  // getMediaSrcset
   // =========================================================================
-  describe("getMediaObj", () => {
-    it("should return preview src and thumb loading by default", () => {
+  describe("getMediaSrcset", () => {
+    it("should build a srcset from the available size variants", () => {
       const media = createMockMedia({
-        preview: "https://cdn.test.com/preview.webp",
-        thumb: "https://cdn.test.com/thumb.webp",
+        small: "https://cdn.test.com/small.webp",
+        medium: "https://cdn.test.com/medium.webp",
+        large: "https://cdn.test.com/large.webp",
       });
 
-      const result = getMediaObj(media);
-
-      expect(result.src).toBe("https://cdn.test.com/preview.webp");
-      expect(result.loading).toBe("https://cdn.test.com/thumb.webp");
+      expect(getMediaSrcset(media)).toBe(
+        "https://cdn.test.com/small.webp 640w, https://cdn.test.com/medium.webp 1280w, https://cdn.test.com/large.webp 1920w",
+      );
     });
 
-    it("should fall back to original when variant is missing", () => {
-      const media = createMockMedia();
-
-      const result = getMediaObj(media, "large");
-
-      expect(result.src).toBe("https://cdn.test.com/original.jpg");
-      expect(result.loading).toBe("https://cdn.test.com/original.jpg");
-    });
-
-    it("should use specified variant", () => {
+    it("should skip variants that are not present", () => {
       const media = createMockMedia({
         medium: "https://cdn.test.com/medium.webp",
       });
 
-      const result = getMediaObj(media, "medium");
-
-      expect(result.src).toBe("https://cdn.test.com/medium.webp");
+      expect(getMediaSrcset(media)).toBe("https://cdn.test.com/medium.webp 1280w");
     });
 
-    it("should return empty strings for null media", () => {
-      const result = getMediaObj(null);
+    it("should clamp descriptors to the original width", () => {
+      const media = createMockMedia({
+        small: "https://cdn.test.com/small.webp",
+        medium: "https://cdn.test.com/medium.webp",
+        large: "https://cdn.test.com/large.webp",
+      });
+      media.custom_properties = { width: 1000 };
 
-      expect(result.src).toBe("");
-      expect(result.loading).toBe("");
+      expect(getMediaSrcset(media)).toBe(
+        "https://cdn.test.com/small.webp 640w, https://cdn.test.com/medium.webp 1000w, https://cdn.test.com/large.webp 1000w",
+      );
     });
 
-    it("should return empty strings for undefined media", () => {
-      const result = getMediaObj(undefined);
+    it("should return an empty string when no sized variants exist", () => {
+      expect(getMediaSrcset(createMockMedia())).toBe("");
+    });
 
-      expect(result.src).toBe("");
-      expect(result.loading).toBe("");
+    it("should return an empty string for null/undefined media", () => {
+      expect(getMediaSrcset(null)).toBe("");
+      expect(getMediaSrcset(undefined)).toBe("");
     });
   });
 

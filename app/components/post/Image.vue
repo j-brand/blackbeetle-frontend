@@ -127,10 +127,21 @@ function loadSlidesAt(swiper: Swiper, indices: number[]) {
     const slide = swiper.slides[i];
     if (!slide) return;
     const img = slide.querySelector('img[data-src]') as HTMLImageElement | null;
-    if (img?.dataset.src) {
-      img.src = img.dataset.src;
-      img.removeAttribute('data-src');
-    }
+    const full = img?.dataset.src;
+    if (!img || !full) return;
+    img.removeAttribute('data-src');
+    // Decode the full image before swapping so it never paints partially,
+    // then de-blur it in for a smooth sharpen instead of a hard pop.
+    const preload = new Image();
+    preload.onload = () => {
+      img.src = full;
+      img.classList.add('img-loaded');
+    };
+    preload.onerror = () => {
+      img.src = full;
+      img.classList.add('img-loaded');
+    };
+    preload.src = full;
   });
 }
 
@@ -191,4 +202,17 @@ onUnmounted(() => {
   destroyGallery();
 });
 </script>
+
+<style scoped>
+/* Blur-up: the tiny lazy image is kept blurred until the full (medium)
+   image is decoded and swapped in, then it de-blurs for a smooth sharpen. */
+.swiper-slide img {
+  filter: blur(12px);
+  transition: filter 400ms ease-in-out;
+}
+
+.swiper-slide img.img-loaded {
+  filter: blur(0);
+}
+</style>
 

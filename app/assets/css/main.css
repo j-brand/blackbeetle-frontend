@@ -101,18 +101,17 @@
     inset: calc(-1 * var(--bb-feather));
     z-index: -1;
     pointer-events: none;
+    /* Nur Standard-Properties schreiben – die -webkit-Präfixe fügt der Build
+       (Lightning CSS) selbst hinzu. Handgeschriebene Präfixe führten dazu, dass
+       das unpräfixierte backdrop-filter beim Minifizieren wegfiel → kein Blur
+       in Firefox. */
     backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
     /* Weiche Kante an allen vier Seiten: fester Auslauf, unabhängig vom
        Seitenverhältnis. Zwei lineare Verläufe werden verschnitten (intersect). */
     mask-image:
       linear-gradient(to right, transparent, #000 var(--bb-feather), #000 calc(100% - var(--bb-feather)), transparent),
       linear-gradient(to bottom, transparent, #000 var(--bb-feather), #000 calc(100% - var(--bb-feather)), transparent);
     mask-composite: intersect;
-    -webkit-mask-image:
-      linear-gradient(to right, transparent, #000 var(--bb-feather), #000 calc(100% - var(--bb-feather)), transparent),
-      linear-gradient(to bottom, transparent, #000 var(--bb-feather), #000 calc(100% - var(--bb-feather)), transparent);
-    -webkit-mask-composite: source-in;
   }
 }
 

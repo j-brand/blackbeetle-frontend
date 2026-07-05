@@ -1,9 +1,9 @@
 <template>
   <div class="container mx-auto max-w-screen-md">
     <div class="space-y-4">
-      <h1 class="bb-page-title anaglyph mb-4">Blackbeetle</h1>
-      <h2 class="bb-page-section-title mb-4">Wenn Großstadtkinder das Weite suchen.</h2>
-      <div class="bb-page-copy space-y-4">
+      <h1 class="bb-page-title anaglyph mb-4  bb-blur-behind">Blackbeetle</h1>
+      <h2 class="bb-page-section-title mb-4  bb-blur-behind">Wenn Großstadtkinder das Weite suchen.</h2>
+      <div class="bb-page-copy space-y-4 bb-blur-behind">
         Keine waschechten Berliner zwar, aber lang genug im Großstadtdschungel gefangen gewesen, um nach ein paar Jahren für eine Weile das Weite zu suchen.
         <br /><br />
 

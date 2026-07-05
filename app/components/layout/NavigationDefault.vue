@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 z-30 backdrop-blur-md" style="background:color-mix(in oklab, var(--color-bg) 80%, transparent); border-bottom:1px solid var(--color-line);">
+  <header class="sticky top-0 z-30 backdrop-blur-md" style="background:color-mix(in oklab, var(--color-bg) 40%, transparent); border-bottom:1px solid var(--color-line);">
     <div class="mx-auto max-w-[1200px] px-6 lg:px-12 h-16 flex items-center justify-between">
       <div id="logo-wrapper" class="flex items-center gap-3">
         <NuxtLink id="bb-logo-link" to="/" aria-label="Startseite" class="flex items-center gap-3">

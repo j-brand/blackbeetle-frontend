@@ -1,17 +1,17 @@
 <template>
   <div>
     <div v-if="errorAlbum" class="text-center py-24 max-w-screen-lg mx-auto">
-      <p class="text-xl">Das Album konnte nicht geladen werden. Bitte versuche es später erneut.</p>
+      <p class="text-xl bb-blur-behind">Das Album konnte nicht geladen werden. Bitte versuche es später erneut.</p>
     </div>
     <div v-else-if="album" class="max-w-screen-lg mx-auto mb-16 px-6 md:px-0 lg:px-0 flex flex-col justify-between">
-      <span class="bb-page-meta flex justify-end mb-2 md:mb-0">
+      <span class="bb-page-meta flex justify-end mb-2 md:mb-0 bb-blur-behind">
         {{ formatDate(album.start_date, true) }} -
         {{ formatDate(album.end_date, true) }}
       </span>
 
       <div class="max-w-screen-lg">
-        <h2 class="bb-page-section-title mb-3">{{ album.title }}</h2>
-        <p class="bb-page-copy" v-html="albumDescription" />
+        <h2 class="bb-page-section-title mb-3 bb-blur-behind">{{ album.title }}</h2>
+        <p class="bb-page-copy bb-blur-behind" v-html="albumDescription" />
       </div>
     </div>
 

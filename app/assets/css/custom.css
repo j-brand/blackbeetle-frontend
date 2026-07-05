@@ -60,6 +60,22 @@ select:focus-visible,
   text-shadow: 0.5px -0.5px 1px var(--color-anaglyph-6), 1px -1px 1px var(--color-anaglyph-5), 1.5px -1.5px 1px var(--color-anaglyph-4), 2px -2px 1px var(--color-anaglyph-3), 2.5px -2.5px 1px var(--color-anaglyph-2), 3px -3px 1px var(--color-anaglyph-1);
 }
 
+/* Crawling beetles — Farben global, damit `.dark` zuverlässig greift.
+   .beetle-layer svg          = Strichzeichnung (Umriss, Details, Beine)
+   .beetle-layer [data-body-fill] = hinterlegte, gefüllte Silhouette (Körper) */
+.beetle-layer svg {
+  fill: #000;
+}
+.beetle-layer [data-body-fill] {
+  fill: var(--color-bg);
+}
+.dark .beetle-layer svg {
+  fill: var(--color-fg-subtle);
+}
+.dark .beetle-layer [data-body-fill] {
+  fill: var(--color-card);
+}
+
 /* LAZYLOAD IMAGE BLUR */
 img[lazy="loading"] {
   filter: blur(25px);

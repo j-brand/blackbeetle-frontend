@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-screen-md break-words overflow-x-hidden md:overflow-x-visible ">
+  <div class="container mx-auto max-w-screen-md break-words overflow-x-hidden md:overflow-x-visible bb-blur-behind">
     <h1 class="bb-page-title anaglyph mb-6 uppercase">Datenschutzerklärung</h1>
 
     <div class="bb-page-copy">

@@ -11,6 +11,7 @@
 <script setup lang="ts">
 import Card from '@/components/ui/Card.vue'
 import MapEmbed from '@/components/MapEmbed.vue'
+
 useHead({
   title: "Startseite",
   meta: [

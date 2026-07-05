@@ -4,14 +4,14 @@
       <CommonLoader v-if="isLoading" />
     </ClientOnly>
     <div v-if="errorStory || errorPosts" class="text-center py-24">
-      <p class="text-xl">Die Daten konnten nicht geladen werden. Bitte versuche es später erneut.</p>
+      <p class="text-xl bb-blur-behind">Die Daten konnten nicht geladen werden. Bitte versuche es später erneut.</p>
     </div>
     <template v-if="story && !isLoading && !errorStory">
     <div class="mb-10">
       <CommonPagination v-if="posts && posts.meta.last_page > 1 && posts.meta.current_page > 1" :offset="3" :pagination="posts.meta" @paginate="changePage" label="Seitennavigation Beiträge (oben)" class="my-12 relative flex justify-center" />
       <div v-if="currentPage == 1" class="flex flex-col justify-center min-h-1/2-screen mx-6 lg:mx-0">
-        <h1 class="bb-page-title text-center">{{ story.title }}</h1>
-        <p class="bb-page-copy text-center mt-8" v-html="storyDescription"></p>
+        <h1 class="bb-page-title text-center bb-blur-behind">{{ story.title }}</h1>
+        <p class="bb-page-copy text-center mt-8 bb-blur-behind" v-html="storyDescription"></p>
         <StoryImage :storySlug="story.slug" />
       </div>
       <div v-if="currentPage == 1" class="flex flex-row justify-end my-10">

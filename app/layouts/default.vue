@@ -1,5 +1,6 @@
 <template>
-  <div class="min-h-screen flex flex-col" style="background:var(--color-bg); color:var(--color-fg);">
+  <div class="min-h-screen flex flex-col relative isolate" style="background:var(--color-bg); color:var(--color-fg);">
+    <CrawlingBeetles :enabled="beetlesEnabled" />
     <a href="#main-content" class="skip-to-content">Zum Inhalt springen</a>
     <LayoutNavigationDefault />
 
@@ -14,12 +15,16 @@
 <script setup lang="ts">
 const cookieAccept = useCookie("cAccept");
 const preferDark = ref(false);
+const route = useRoute();
+
+// Krabbelnde Käfer: standardmäßig auf allen Seiten aktiv.
+// Pro Seite abschaltbar mit definePageMeta({ beetles: false }).
+const beetlesEnabled = computed(() => route.meta.beetles !== false);
 
 if (import.meta.client) {
   preferDark.value = window.matchMedia?.("(prefers-color-scheme: dark)").matches ?? false;
 }
 
-const route = useRoute();
 const requestUrl = useRequestURL();
 const canonicalUrl = computed(() => `${requestUrl.origin}${route.path}`);
 

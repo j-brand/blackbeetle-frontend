@@ -83,6 +83,39 @@
   filter: drop-shadow(0 1px 2px rgba(35,33,24,.05)) drop-shadow(0 10px 22px rgba(35,33,24,.09));
 }
 
+/* Weichzeichnet die krabbelnden Käfer (Hintergrund-Layer, z-index:-1), sobald sie
+   hinter dieses Element krabbeln – wirkt "weit weg". Auf beliebige Textblöcke/
+   Sektionen anwendbar; Header & Footer nutzen dafür backdrop-blur-md.
+   Der Weichzeichner liegt auf einem ::before hinter dem Text und wird über eine
+   Maske zum Rand hin ausgeblendet – kein harter Kasten, der Text bleibt scharf. */
+@utility bb-blur-behind {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    /* Feather-Distanz: so weit läuft der Blur über den Textkasten hinaus aus. */
+    --bb-feather: 48px;
+    /* Blur-Layer nach außen vergrößern, damit der volle Blur den ganzen Kasten
+       abdeckt und die weiche Kante erst außerhalb des Textes beginnt. */
+    inset: calc(-1 * var(--bb-feather));
+    z-index: -1;
+    pointer-events: none;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    /* Weiche Kante an allen vier Seiten: fester Auslauf, unabhängig vom
+       Seitenverhältnis. Zwei lineare Verläufe werden verschnitten (intersect). */
+    mask-image:
+      linear-gradient(to right, transparent, #000 var(--bb-feather), #000 calc(100% - var(--bb-feather)), transparent),
+      linear-gradient(to bottom, transparent, #000 var(--bb-feather), #000 calc(100% - var(--bb-feather)), transparent);
+    mask-composite: intersect;
+    -webkit-mask-image:
+      linear-gradient(to right, transparent, #000 var(--bb-feather), #000 calc(100% - var(--bb-feather)), transparent),
+      linear-gradient(to bottom, transparent, #000 var(--bb-feather), #000 calc(100% - var(--bb-feather)), transparent);
+    -webkit-mask-composite: source-in;
+  }
+}
+
 @utility bb-eyebrow {
   @apply font-mono text-[0.7rem] uppercase tracking-[0.18em] leading-[1.2];
   color: var(--color-accent);

@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-screen-md min-h-full">
+  <div class="container mx-auto max-w-screen-md min-h-full bb-blur-behind">
     <h1 class="bb-page-title anaglyph mb-6 uppercase">Impressum</h1>
 
     <div class="bb-page-copy">

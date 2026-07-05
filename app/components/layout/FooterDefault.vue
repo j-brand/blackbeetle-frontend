@@ -1,5 +1,5 @@
 <template>
-  <footer class="border-t" style="border-color:var(--color-line);">
+  <footer class="border-t backdrop-blur-md" style="border-color:var(--color-line);">
     <div class="mx-auto max-w-[1200px] px-6 lg:px-12 py-12 flex items-center justify-between flex-wrap gap-4">
       <div class="flex flex-col gap-1">
         <span class="font-mono text-[11px] tracking-wide uppercase" style="color:var(--color-fg-subtle)">&copy; {{ currentYear }} Black Beetle</span>

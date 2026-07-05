@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col px-2 lg:p-0">
-    <div class="flex flex-col justify-between mb-2">
+    <div class="flex flex-col justify-between mb-2 bb-blur-behind">
       <p class="bb-page-meta text-xs mb-3">{{ formatDate(post.date) }}</p>
       <h2 class="bb-page-section-title">{{ post.title }}</h2>
     </div>
-    <article v-html="htmlContent" class="bb-page-copy html-post"></article>
+    <article v-html="htmlContent" class="bb-page-copy html-post bb-blur-behind"></article>
     <PostComments v-if="post.comments && post.comments.length > 0" :comments="post.comments" @open-Modal="commentModal = true" />
     <transition name="fade">
       <ModalPostComment v-if="commentModal" :post_id="post.id" @new="addNewComment" @close="commentModal = false" />

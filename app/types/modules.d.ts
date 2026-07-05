@@ -1,5 +1,12 @@
 // Type declarations for modules without TypeScript definitions
 
+// Erlaubt definePageMeta({ beetles: false }) zum Deaktivieren des Käfer-Effekts.
+declare module "vue-router" {
+  interface RouteMeta {
+    beetles?: boolean;
+  }
+}
+
 declare module "lightgallery/plugins/thumbnail/lg-thumbnail.umd.js" {
   import lgThumbnail from "lightgallery/plugins/thumbnail";
   export default lgThumbnail;

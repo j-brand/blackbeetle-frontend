@@ -1,45 +1,45 @@
 <template>
   <div id="poem" class="h-full flex justify-center mb-10">
     <div class="poem inline-block ml-8 md:ml-20">
-      <h3 class="text-xl md:text-2xl anaglyph leading-none">für</h3>
-      <h2 class="text-3xl md:text-4xl bold anaglyph mb-6 uppercase leading-none">Isabell</h2>
+      <h3 class="text-xl md:text-2xl anaglyph leading-none bb-blur-behind">für</h3>
+      <h2 class="text-3xl md:text-4xl bold anaglyph mb-6 uppercase leading-none bb-blur-behind">Isabell</h2>
 
-      <p class="opacity-0 mb-4">
+      <p class="opacity-0 mb-4 bb-blur-behind">
         An einem Morgen ging er los,<br />
         von seinem bergig Heimatschoß.
       </p>
 
-      <p class="opacity-0 mb-4">
+      <p class="opacity-0 mb-4 bb-blur-behind">
         Sein Weg ging über ebnes Land,<br />
         ihm jedoch gänzlich unbekannt.
       </p>
 
-      <p class="opacity-0 mb-4">
+      <p class="opacity-0 mb-4 bb-blur-behind">
         Er kam zur Ruh in fremdem Heim,<br />
         da fand er es, das Glück zu zwein.
       </p>
 
-      <p class="opacity-0 mb-4">
+      <p class="opacity-0 mb-4 bb-blur-behind">
         Doch eines Tages zog er fort,<br />
         mit Ihr an einen andren Ort.
       </p>
 
-      <p class="opacity-0 mb-4">
+      <p class="opacity-0 mb-4 bb-blur-behind">
         Schwangen sich auf zu neuen Höhen,<br />
         wollten die Welt von oben sehen.
       </p>
 
-      <p class="opacity-0 mb-4">
+      <p class="opacity-0 mb-4 bb-blur-behind">
         Sie flogen um die ganze Welt,<br />
         um zu erleben, was gefällt.
       </p>
 
-      <p class="opacity-0 mb-6">
+      <p class="opacity-0 mb-6 bb-blur-behind">
         Wo sie nun weilen bleibt geheim,<br />
         doch wo Sie ist, wird er auch sein.
       </p>
 
-      <p class="opacity-0 text-xl bold">Alles Gute zum Geburtstag. 🎁</p>
+      <p class="opacity-0 text-xl bold bb-blur-behind">Alles Gute zum Geburtstag. 🎁</p>
     </div>
     <canvas ref="canvasEl" id="fireworks" class="fireworks absolute w-full top-0 mx-auto max-w-full"> </canvas>
   </div>

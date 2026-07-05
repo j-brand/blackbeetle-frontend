@@ -1,7 +1,7 @@
 <template>
   <iframe
     v-if="content?.path === 'youtube' && isValidVideoId"
-    class="w-100 min-h-[280px] md:min-h-[435px]"
+    class="w-100 min-h-[280px] md:min-h-[435px] bb-blur-behind"
     :src="`https://www.youtube-nocookie.com/embed/${content.filename}?rel=0&showinfo=0&controls=2`"
     title="YouTube video player"
     frameborder="0"

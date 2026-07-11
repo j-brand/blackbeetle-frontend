@@ -35,12 +35,13 @@ export function useHelper() {
     return excerpt;
   }
 
-  // Approximate pixel widths of the backend (Spatie) size conversions.
-  // These must match the backend conversion widths — adjust if they differ.
+  // Pixel widths of the backend (Spatie) size conversions. These MUST match the
+  // backend conversion widths, otherwise the srcset descriptors lie and the
+  // browser up-/down-selects the wrong file. Keep in sync with the backend.
   const VARIANT_WIDTHS: Record<string, number> = {
-    small: 640,
-    medium: 1280,
-    large: 1920,
+    medium: 650,
+    large: 1400,
+    webp: 1920,
   };
 
   /**
@@ -78,7 +79,7 @@ export function useHelper() {
       if (media.urls[variant]) return media.urls[variant]!;
     }
     // never fall back to original JPG — use largest available variant
-    return media.urls.large ?? media.urls.medium ?? media.urls.small ?? media.urls.original;
+    return media.urls.webp ?? media.urls.large ?? media.urls.medium ?? media.urls.thumb ?? media.urls.original;
   }
 
   return { slugify, formatDate, getExcerpt, getMediaSrcset, getMediaUrl, getBestMediaUrl };

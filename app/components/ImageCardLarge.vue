@@ -23,9 +23,9 @@
     <layout-lazy-image
       v-if="resource.title_image"
       class="vignette absolute inset-0 w-full h-full"
-      :src="getBestMediaUrl(resource.title_image, 'large')"
+      :src="getBestMediaUrl(resource.title_image, 'webp', 'large')"
       :srcset="getMediaSrcset(resource.title_image)"
-      sizes="(min-width: 768px) 66vw, 100vw"
+      sizes="(min-width: 896px) 896px, 100vw"
       :lowsrc="resource.title_image.urls?.lazy ?? ''"
       :width="(resource.title_image.custom_properties?.width as number) || undefined"
       :height="(resource.title_image.custom_properties?.height as number) || undefined"

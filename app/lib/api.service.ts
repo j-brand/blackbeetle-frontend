@@ -3,14 +3,22 @@ import type { IApiResponse, IPaginatedResponse } from "@/types";
 
 const API_PREFIX = "/api/v1";
 
+/**
+ * SSR laeuft im Container und erreicht das Backend nicht ueber localhost —
+ * dafuer gibt es NUXT_API_BASE_INTERNAL. Im Browser gilt immer die public Base.
+ */
+function apiUrl(path: string): string {
+  const config = useRuntimeConfig();
+  const base = (import.meta.server && config.apiBaseInternal) || config.public.apiBase;
+  return `${base}${API_PREFIX}${path}`;
+}
+
 export const apiService = {
   /**
    * GET request - returns unwrapped data from { data: ... } response
    */
   async get<Result>(endpoint: string): Promise<Result> {
-    const response = await $fetch<IApiResponse<Result>>(
-      `${useRuntimeConfig().public.apiBase}${API_PREFIX}${endpoint}`
-    );
+    const response = await $fetch<IApiResponse<Result>>(apiUrl(endpoint));
     return response.data;
   },
 
@@ -28,18 +36,14 @@ export const apiService = {
     if (params?.order_by) query.set("order_by", params.order_by);
 
     const queryString = query.toString() ? `?${query.toString()}` : "";
-    return await $fetch<IPaginatedResponse<Result>>(
-      `${useRuntimeConfig().public.apiBase}${API_PREFIX}${endpoint}${queryString}`
-    );
+    return await $fetch<IPaginatedResponse<Result>>(apiUrl(`${endpoint}${queryString}`));
   },
 
   /**
    * GET single resource by slug - returns unwrapped data
    */
   async getBySlug<Result>(endpoint: string, slug: string): Promise<Result> {
-    const response = await $fetch<IApiResponse<Result>>(
-      `${useRuntimeConfig().public.apiBase}${API_PREFIX}${endpoint}/${slug}`
-    );
+    const response = await $fetch<IApiResponse<Result>>(apiUrl(`${endpoint}/${slug}`));
     return response.data;
   },
 
@@ -56,7 +60,7 @@ export const apiService = {
 
     const queryString = query.toString() ? `?${query.toString()}` : "";
     const response = await $fetch<IApiResponse<Result>>(
-      `${useRuntimeConfig().public.apiBase}${API_PREFIX}/stories/${slug}${queryString}`
+      apiUrl(`/stories/${slug}${queryString}`)
     );
     return response.data;
   },
@@ -74,7 +78,7 @@ export const apiService = {
 
     const queryString = query.toString() ? `?${query.toString()}` : "";
     const response = await $fetch<IApiResponse<Result>>(
-      `${useRuntimeConfig().public.apiBase}${API_PREFIX}/stories/id/${id}${queryString}`
+      apiUrl(`/stories/id/${id}${queryString}`)
     );
     return response.data;
   },
@@ -94,7 +98,7 @@ export const apiService = {
 
     const queryString = query.toString() ? `?${query.toString()}` : "";
     return await $fetch<IPaginatedResponse<Result>>(
-      `${useRuntimeConfig().public.apiBase}${API_PREFIX}/stories/${slug}/posts${queryString}`
+      apiUrl(`/stories/${slug}/posts${queryString}`)
     );
   },
 
@@ -103,13 +107,10 @@ export const apiService = {
    */
   async post<Resource>(endpoint: string, payload: Record<string, unknown>): Promise<Resource> {
     try {
-      return await $fetch<Resource>(
-        `${useRuntimeConfig().public.apiBase}${API_PREFIX}${endpoint}`,
-        {
-          method: "POST",
-          body: payload,
-        }
-      );
+      return await $fetch<Resource>(apiUrl(endpoint), {
+        method: "POST",
+        body: payload,
+      });
     } catch (err) {
       const fetchError = err as FetchError;
       return Promise.reject({

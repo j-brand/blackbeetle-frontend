@@ -79,9 +79,17 @@
 ### Development
 | Technology | Purpose |
 |------------|---------|
-| NixOS Flake + devenv | Development environment |
-| direnv | Auto-load dev environment |
+| Docker Compose | Development environment (`docker compose up -d`) |
+| node:22-bookworm-slim | Container image, shares `node_modules` with the host |
 | Node.js 22 | JavaScript runtime |
+
+The dev server runs at <http://localhost:3021>, the Laravel API (bb-backend) at
+<http://localhost:3020>. Run project commands either on the host or via
+`docker compose exec app <command>` — `node_modules` is shared between both.
+
+`flake.nix`, `flake.lock`, `.envrc`, `devenv.root` and `.devcontainer/` are
+leftovers from the previous Nix / devcontainer environment and are no longer
+used.
 
 ## Project Structure
 
@@ -157,9 +165,14 @@ const { data } = await useAsyncData("key", () =>
 ## Environment Variables
 
 Configure in `.env` files (not tracked in git):
-- `NUXT_PUBLIC_API_BASE` - API base URL
+- `NUXT_PUBLIC_API_BASE` - API base URL used in the browser
+- `NUXT_API_BASE_INTERNAL` - API base URL used during SSR; inside the dev
+  container `localhost` points at the container itself, so this is set to
+  `http://host.docker.internal:3020`. `apiService` picks it via `import.meta.server`.
 - `NUXT_PUBLIC_BACKEND_URL` - Backend URL for assets
 - `NUXT_PUBLIC_LG_LICENSE_KEY` - LightGallery license key
+- `NUXT_DEV_HOST` - optional reverse-proxy host; enables `allowedHosts` and
+  `wss` HMR in `nuxt.config.ts`
 
 ## Common Patterns
 

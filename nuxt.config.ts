@@ -1,3 +1,14 @@
+// Optionaler Reverse-Proxy-Host fuer den Dev-Server; leer = rein lokal ueber localhost.
+const devHost = process.env.NUXT_DEV_HOST;
+
+// Absolute API-Origin, falls die API NICHT ueber dieselbe Origin laeuft. Leer
+// heisst: relative /api/v1/... auf der eigenen Origin, dann deckt 'self' alles ab.
+const devApiOrigin = process.env.NUXT_PUBLIC_API_BASE || "";
+const devCspOrigins = devApiOrigin ? [devApiOrigin] : [];
+
+// Serverseitige API-Adresse; dient auch dem Dev-Proxy weiter unten.
+const internalApi = process.env.NUXT_API_BASE_INTERNAL || "";
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-01-22",
   future: {
@@ -14,6 +25,9 @@ export default defineNuxtConfig({
     classSuffix: "",
   },
   runtimeConfig: {
+    // Nur serverseitig: laeuft der Dev-Server im Container, zeigt localhost
+    // dort auf den Container selbst und nicht auf das Backend.
+    apiBaseInternal: '',
     public: {
       apiBase: '',
       backendUrl: '',
@@ -28,13 +42,16 @@ export default defineNuxtConfig({
     client: false,
   },
   vite: {
-    server: {
-      allowedHosts: ['bb-frontend.blacknectar.de'],
-      hmr: {
-        protocol: 'wss',
-        host: 'bb-frontend.blacknectar.de',
-      },
-    },
+    server: devHost
+      ? {
+          allowedHosts: [devHost],
+          hmr: {
+            protocol: 'wss',
+            host: devHost,
+            clientPort: 443,
+          },
+        }
+      : {},
   },
   devtools: { enabled: true },
   devServer: {
@@ -89,6 +106,15 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
+    // Ueber die Domain routet Caddy /api und /storage ans Backend. Ohne Caddy
+    // davor (http://localhost:3021) uebernimmt das dieser Proxy, damit beide
+    // Zugangswege dieselben relativen URLs benutzen koennen.
+    devProxy: internalApi
+      ? {
+          "/api": { target: `${internalApi}/api`, changeOrigin: true },
+          "/storage": { target: `${internalApi}/storage`, changeOrigin: true },
+        }
+      : {},
     compressPublicAssets: true,
     routeRules: {
       "/**": {
@@ -115,5 +141,19 @@ export default defineNuxtConfig({
   },
   experimental: {
     typedPages: true,
+  },
+  // Im Dev-Modus liefert das lokale Backend API, Bilder und Videos ueber http,
+  // was die Produktions-CSP ('self' + https:) sonst blockiert. Die Listen
+  // werden an die Basis-Direktiven oben angehaengt, nicht ersetzt.
+  $development: {
+    security: {
+      headers: {
+        contentSecurityPolicy: {
+          "connect-src": devCspOrigins,
+          "img-src": devCspOrigins,
+          "media-src": ["'self'", ...devCspOrigins],
+        },
+      },
+    },
   },
 });

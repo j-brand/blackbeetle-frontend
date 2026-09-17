@@ -14,6 +14,32 @@ export interface IMediaUrls {
   [key: string]: string | undefined;
 }
 
+/** Editorial tile size for one gallery image. */
+export type TileVariant = "normal" | "wide" | "tall" | "large";
+
+/**
+ * Per-image layout resolved by the backend. `tile` is typed as string because
+ * the wire format is not type-safe — `useGalleryLayout` narrows it.
+ */
+export interface IMediaLayout {
+  tile?: string | null;
+  focal_point?: string | null;
+  aspect_ratio?: number | null;
+}
+
+/** Normalised, render-ready tile description. */
+export interface IGalleryTile {
+  variant: TileVariant;
+  /** Tailwind span classes — literal strings, never composed at runtime. */
+  class: string;
+  /** Inline custom properties, currently only `--tile-focal`; undefined when
+   *  the focal point is the default. Vue still renders an empty `style=""`
+   *  either way — harmless, the CSS falls back via `var(…, center)`. */
+  style?: Record<string, string>;
+  /** `sizes` matching the rendered tile width. */
+  sizes: string;
+}
+
 export interface IMedia {
   id: number;
   name: string;
@@ -22,6 +48,8 @@ export interface IMedia {
   size: number;
   order: number;
   custom_properties: Record<string, unknown>;
+  /** Absent for non-image media (video, PDF). */
+  layout?: IMediaLayout | null;
   urls: IMediaUrls;
 }
 

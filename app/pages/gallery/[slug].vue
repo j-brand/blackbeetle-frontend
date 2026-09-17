@@ -15,31 +15,32 @@
       </div>
     </div>
 
-    <div class="max-w-screen-lg mx-auto">
+    <div class="gallery-shell max-w-screen-lg mx-auto">
       <div ref="gallery" v-if="album" class="gallery-grid grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         <a
-          v-for="(img, index) in album.images"
-          :key="index"
-          :class="['bb-tile chamfer-lg group overflow-hidden', getGalleryTileClass(index)]"
-          :href="getBestMediaUrl(img, 'webp', 'large')"
-          :data-thumb="getBestMediaUrl(img, 'thumb', 'medium')"
-          :data-sub-html="img.custom_properties?.description || img.name"
-          :aria-label="(img.custom_properties?.description as string) || img.name"
+          v-for="{ image, tile, caption } in tiles"
+          :key="image.id"
+          :class="['bb-tile chamfer-lg group overflow-hidden', tile.class]"
+          :style="tile.style"
+          :href="getBestMediaUrl(image, 'webp', 'large')"
+          :data-thumb="getBestMediaUrl(image, 'thumb', 'medium')"
+          :data-sub-html="caption"
+          :aria-label="caption"
         >
           <layout-lazy-image
             class="w-full h-full"
-            :src="getBestMediaUrl(img, 'large')"
-            :srcset="getMediaSrcset(img)"
-            sizes="(min-width: 1024px) 256px, (min-width: 640px) 33vw, 50vw"
-            :lowsrc="img.urls?.lazy ?? ''"
-            :width="(img.custom_properties?.width as number) || undefined"
-            :height="(img.custom_properties?.height as number) || undefined"
+            :src="getBestMediaUrl(image, 'large')"
+            :srcset="getMediaSrcset(image)"
+            :sizes="tile.sizes"
+            :lowsrc="image.urls?.lazy ?? ''"
+            :width="(image.custom_properties?.width as number) || undefined"
+            :height="(image.custom_properties?.height as number) || undefined"
             :blur="true"
-            :alt="img.name"
+            :alt="getAltText(image)"
           />
           <span class="cap">
             <span class="eb">{{ album.title }}</span>
-            <span class="ti">{{ (img.custom_properties?.description as string) || img.name }}</span>
+            <span class="ti">{{ caption }}</span>
           </span>
         </a>
       </div>
@@ -70,10 +71,21 @@ const { lgLicenseKey } = useRuntimeConfig().public;
 
 const { formatDate, getBestMediaUrl, getMediaSrcset } = useHelper();
 const { sanitizeHtml } = useSanitize();
+const { getTile, getCaption, getAltText } = useGalleryLayout();
 
 const { data: album, error: errorAlbum } = await useAsyncData(`album-${slug}`, () => apiService.getBySlug<IAlbum>("/albums", slug));
 
 const albumDescription = computed(() => sanitizeHtml(album.value?.description));
+
+// Resolve each tile once instead of calling the composable repeatedly from the
+// template; keeps SSR and client output identical.
+const tiles = computed(() =>
+  (album.value?.images ?? []).map((image) => ({
+    image,
+    tile: getTile(image),
+    caption: getCaption(image),
+  })),
+);
 
 useHead({
   title: album.value?.title ?? "",
@@ -95,22 +107,6 @@ function initGallery() {
     preload: 1,
     download: false,
   });
-}
-
-function getGalleryTileClass(index: number) {
-  const pattern = index % 8;
-  switch (pattern) {
-    case 0:
-      return "sm:col-span-2 lg:col-span-2 lg:row-span-2";
-    case 3:
-      return "sm:col-span-2 lg:col-span-2";
-    case 5:
-      return "lg:row-span-2";
-    case 6:
-      return "lg:col-span-2";
-    default:
-      return "";
-  }
 }
 
 onMounted(() => {

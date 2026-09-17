@@ -153,14 +153,23 @@ describe("useHelper", () => {
   describe("getMediaSrcset", () => {
     it("should build a srcset from the available size variants", () => {
       const media = createMockMedia({
-        small: "https://cdn.test.com/small.webp",
         medium: "https://cdn.test.com/medium.webp",
         large: "https://cdn.test.com/large.webp",
+        webp: "https://cdn.test.com/full.webp",
       });
 
       expect(getMediaSrcset(media)).toBe(
-        "https://cdn.test.com/small.webp 640w, https://cdn.test.com/medium.webp 1280w, https://cdn.test.com/large.webp 1920w",
+        "https://cdn.test.com/medium.webp 650w, https://cdn.test.com/large.webp 1400w, https://cdn.test.com/full.webp 1920w",
       );
+    });
+
+    it("should ignore variants outside the conversion table", () => {
+      const media = createMockMedia({
+        small: "https://cdn.test.com/small.webp",
+        medium: "https://cdn.test.com/medium.webp",
+      });
+
+      expect(getMediaSrcset(media)).toBe("https://cdn.test.com/medium.webp 650w");
     });
 
     it("should skip variants that are not present", () => {
@@ -168,19 +177,19 @@ describe("useHelper", () => {
         medium: "https://cdn.test.com/medium.webp",
       });
 
-      expect(getMediaSrcset(media)).toBe("https://cdn.test.com/medium.webp 1280w");
+      expect(getMediaSrcset(media)).toBe("https://cdn.test.com/medium.webp 650w");
     });
 
     it("should clamp descriptors to the original width", () => {
       const media = createMockMedia({
-        small: "https://cdn.test.com/small.webp",
         medium: "https://cdn.test.com/medium.webp",
         large: "https://cdn.test.com/large.webp",
+        webp: "https://cdn.test.com/full.webp",
       });
       media.custom_properties = { width: 1000 };
 
       expect(getMediaSrcset(media)).toBe(
-        "https://cdn.test.com/small.webp 640w, https://cdn.test.com/medium.webp 1000w, https://cdn.test.com/large.webp 1000w",
+        "https://cdn.test.com/medium.webp 650w, https://cdn.test.com/large.webp 1000w, https://cdn.test.com/full.webp 1000w",
       );
     });
 

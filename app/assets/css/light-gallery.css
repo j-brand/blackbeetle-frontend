@@ -37,7 +37,9 @@
   display: block;
   overflow: hidden;
   cursor: pointer;
-  min-height: 180px;
+  /* No min-height: every tile carries an explicit row span, so the grid gives
+     it a definite height. --tile-row is the fine row unit (~44px) now and would
+     be meaningless as a floor. */
   transition: transform 0.25s ease, filter 0.25s ease;
 }
 .bb-tile:hover {
@@ -53,10 +55,50 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Focal point arrives as an inline custom property on <a class="bb-tile">
+     and inherits down through LazyImage's wrapper. This also covers the blurred
+     placeholder, so the subject does not jump during the fade.
+     NOTE: LazyImage's scoped `.lazy-image.cover` (0,3,0) must not declare
+     object-position — it would win over this rule (0,1,1). */
+  object-position: var(--tile-focal, center);
   display: block;
 }
 .gallery-grid {
-  grid-auto-rows: 180px;
+  --tile-cols: 2;
+  --tile-gap: 1rem;
+  /* The one knob: aspect ratio of a normal tile. Everything else follows. */
+  --tile-ratio: 1.5;
+  --tile-col: calc((100cqw - (var(--tile-cols) - 1) * var(--tile-gap)) / var(--tile-cols));
+  /* A normal tile spans 3 rows and absorbs 2 gaps. The 3 here MUST match
+     `row-span-3` in useGalleryLayout's TILE_CLASSES. */
+  --tile-row: calc((var(--tile-col) / var(--tile-ratio) - 2 * var(--tile-gap)) / 3);
+  /* Fallback without container query units; tile ratios drift with the viewport
+     as they did before. */
+  grid-auto-rows: 44px;
+}
+@media (min-width: 40rem) {
+  .gallery-grid {
+    --tile-cols: 3;
+  }
+}
+@media (min-width: 64rem) {
+  .gallery-grid {
+    --tile-cols: 4;
+  }
+}
+
+/* Deriving the row height from the grid's own width keeps every tile's aspect
+   ratio identical at every viewport. cqw resolves against .gallery-shell,
+   because an element cannot query itself. Guarded by @supports because var()
+   substitution has no declaration fallback: an unsupported unit would drop
+   grid-auto-rows to `auto` rather than to the static value above. */
+@supports (container-type: inline-size) {
+  .gallery-shell {
+    container-type: inline-size;
+  }
+  .gallery-grid {
+    grid-auto-rows: var(--tile-row);
+  }
 }
 .bb-tile .cap {
   position: absolute;
